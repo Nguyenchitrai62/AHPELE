@@ -63,7 +63,8 @@ def _session_id(request: web.Request, body: dict) -> str:
     # Stable per conversation: hash of the first message / input item.
     first = None
     if isinstance(body.get("messages"), list) and body["messages"]:
-        first = body["messages"][0]
+        # system prompt + first user message (the system prompt alone is shared by tasks)
+        first = body["messages"][:2]
     elif isinstance(body.get("input"), list) and body["input"]:
         first = body["input"][0]
     elif isinstance(body.get("input"), str):
