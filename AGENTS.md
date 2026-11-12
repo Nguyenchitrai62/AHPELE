@@ -206,6 +206,8 @@ uv run python eval/run.py --artifacts /home/ttlab/src/AHPELE      # chấm lại
 uv run python eval/run.py --regrade runs/<name>-<time>            # chấm lại sau khi sửa judge
 ```
 
+Tổng quan mọi lượt chạy, gate và tài nguyên: `tools/progress.sh [số giờ]` (xem liên tục: `watch -n 60 tools/progress.sh`).
+
 Điểm từng task trong lúc lượt chạy chưa xong (Harbor ghi `result.json` ngay khi mỗi task được chấm; bảng tổng kết
 của `eval/run.py` chỉ in khi hết danh sách task):
 `uv run --project /home/ttlab/src/ple python tools/run_status.py /home/ttlab/src/ple/runs/<run>`
