@@ -356,6 +356,9 @@ async def solve(session: taskbridge.Session) -> str:
           "-na",
           "-e",
           str(HERE / "task-tools.ts"),
+          # AHPELE RC-0002: keep only recent images in each model request
+          "-e",
+          str(HERE / "context-guard.ts"),
           "--provider",
           name,
           "--model",
