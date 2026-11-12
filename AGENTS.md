@@ -212,9 +212,13 @@ Log của kit: `~/.cache/plebench/<name>/` (`build.log`, `serve.log`, `egress.lo
 
 ## 10. Tài nguyên máy (10.0.0.105)
 
-- 24 CPU, khoảng 58 GB RAM (thường chỉ khoảng 20 GB trống), ổ đĩa khoảng 80 GB trống.
+- 24 CPU, khoảng 58 GB RAM (thường khoảng 20–24 GB trống), ổ đĩa khoảng 24 GB trống (2026-11-12).
 - Docker đã được mở rộng dải mạng (`/etc/docker/daemon.json`: `10.210.0.0/16`, /24), nên kit tạo mạng được.
-- Mỗi task dev cần tới 6 CPU / 16.25 GB nên chạy tuần tự. Image task rubric khoảng 17 GB: dọn image khi đĩa đầy.
+- **Ổ đĩa là giới hạn chính.** Dựng một image world (6–16 GB) có thể tạm chiếm gấp 2–3 lần vì build cache. Trước khi
+  dựng image phải còn ≥ 40 GB trống; nếu ổ xuống dưới 15 GB thì dừng việc dựng và dọn ngay phần do mình tạo.
+- 12 task world dùng 7 image (danh sách nhóm trong sổ cái, bài học #13). Chạy task world theo từng nhóm image: dựng,
+  chạy, rồi xoá image + build cache của nhóm đó (`docker rmi`, `docker builder prune -f --filter id=<id>` cho từng
+  entry do mình tạo) trước khi sang nhóm khác. Không chạy `docker builder prune`/`docker system prune` toàn cục.
 - Sau khi reboot: chạy lại `tools/start_gate.sh`. Các container `bt-mongo`, `bt-mysql`, `bt-postgres`,
   `lh-admin-pg`, `rabbitmq` của người khác không tự bật lại; báo người dùng nếu thấy chúng dừng.
 
