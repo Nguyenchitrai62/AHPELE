@@ -133,6 +133,16 @@ async def proxy(request: web.Request) -> web.StreamResponse:
     session: ClientSession = request.app["client"]
     captured: list[str] = []
     status = 0
+    ttfb = None
+    params = {
+        "max_tokens": body.get("max_tokens") or body.get("max_output_tokens"),
+        "reasoning_effort": body.get("reasoning_effort") or (body.get("reasoning") or {}).get("effort"),
+        "thinking": (body.get("thinking") or {}).get("type") if isinstance(body.get("thinking"), dict) else None,
+        "n_messages": len(body.get("messages") or body.get("input") or []),
+        "n_tools": len(body.get("tools") or []),
+        "req_bytes": len(raw),
+    }
+    _log({"ts": round(started, 3), "event": "start", "model": model, "session": sid, **params})
     try:
         async with session.post(f"{UPSTREAM}/{endpoint}", data=raw, headers=headers) as upstream:
             status = upstream.status
@@ -142,6 +152,8 @@ async def proxy(request: web.Request) -> web.StreamResponse:
                     resp.headers[key] = value
             await resp.prepare(request)
             async for chunk in upstream.content.iter_any():
+                if ttfb is None:
+                    ttfb = round(time.time() - started, 2)
                 await resp.write(chunk)
                 captured.append(chunk.decode("utf-8", "replace"))
             await resp.write_eof()
@@ -153,9 +165,16 @@ async def proxy(request: web.Request) -> web.StreamResponse:
         text = "".join(captured)
         usage = _usage_from_text(text) or {}
         oc = usage.get("opencode", {}) if isinstance(usage, dict) else {}
+        details = usage.get("completion_tokens_details") or usage.get("output_tokens_details") or {}
         _log({
             "ts": round(started, 3),
+            "event": "end",
             "secs": round(time.time() - started, 2),
+            "ttfb": ttfb,
+            "resp_bytes": len(text),
+            "reasoning_tokens": details.get("reasoning_tokens"),
+            "cached_tokens": (usage.get("prompt_tokens_details") or usage.get("input_tokens_details") or {}).get("cached_tokens"),
+            **params,
             "model": model,
             "endpoint": endpoint,
             "session": sid,
