@@ -11,6 +11,11 @@ description: How to write an engineering memo, letter, reply, review response or
 - Gather the record: correspondence (emails, letters, RFIs), applications, studies, test reports, standards, contracts,
   tracking data in project applications. Build a dated timeline of relevant events in `/tmp/ahpele/timeline.md`.
 - For each potential issue, find the exact source (document, section, date) and what it requires.
+- When the request asks whether anything stands in the way (whether something can be approved, issued, energised,
+  accepted, paid...), do not stop at the first favourable reading. Build a checklist of every condition that applies
+  (agreements, studies, permits, tests, payments, insurance, notices, deadlines, sign-offs, open correspondence) and
+  check each one against the record as of the stated date. Only conclude that nothing stands in the way after every
+  condition has been checked and cited.
 
 ## Structure
 1. Header: To / From / Date (use the record's "as of" date unless told otherwise) / Subject / project identifiers.

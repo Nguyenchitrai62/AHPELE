@@ -32,6 +32,26 @@ const VERIFY =
 	"missing, incomplete or invalid, fix it now. If everything is in place, " +
 	"reply with your final summary of what you delivered and where.";
 
+// AHPELE RC-0011: agents often declare completion with much of their time left.
+// While more than REVIEW_MIN_LEFT of the time remains, a normal finish gets a
+// review pass first (at most MAX_REVIEWS). AHPELE_REVIEW=0 disables it.
+const REVIEW_ON = (process.env.AHPELE_REVIEW ?? "1") !== "0";
+const REVIEW_MIN_LEFT = 0.4;
+const MAX_REVIEWS = 2;
+const START_MS = Date.now();
+function review(minutesLeft: number, pctLeft: number): string {
+	return (
+		`[harness] You still have about ${minutesLeft} minutes (${pctLeft}% of your time). Use it before finishing: ` +
+		"do an independent review pass of your work. Re-read the instruction and your checklist line by line and confirm " +
+		"each item is satisfied in the files on disk. Re-check every hard requirement (limits, codes, permits, capacities, " +
+		"deadlines, document status) against your numbers with a script, and look for anything you have not examined: " +
+		"documents you skimmed, conditions you assumed were met, conflicts between documents, dates and deadlines, items " +
+		"that need someone to act. If the task asks whether anything stands in the way, check every requirement and every " +
+		"record for issues before concluding there are none. Fix what you find, improve the weakest part of the " +
+		"deliverable, re-run your checks, then give your final summary."
+	);
+}
+
 type Block = {type: string; text?: string};
 type Message = {role: string; content?: unknown; stopReason?: string};
 
@@ -52,19 +72,25 @@ function truncatedOrEmpty(m: Message | undefined): boolean {
 export default function (pi: ExtensionAPI) {
 	let nudges = 0;
 	let verified = false;
+	let reviews = 0;
 	pi.on("agent_before_settle", async (event) => {
 		if (event.outcome === "aborted" || nudges >= MAX_NUDGES) return undefined;
 		if (STOP_AT_MS && STOP_AT_MS - Date.now() < MIN_LEFT_SEC * 1000) return undefined;
 		const last = lastAssistant(event.context.contextMessages as unknown as Message[]);
 		let text: string | undefined;
+		const total = STOP_AT_MS > START_MS ? STOP_AT_MS - START_MS : 0;
+		const leftFrac = total ? (STOP_AT_MS - Date.now()) / total : 0;
 		if (truncatedOrEmpty(last)) text = CONTINUE;
-		else if (!verified && event.outcome === "completed") {
+		else if (event.outcome === "completed" && REVIEW_ON && reviews < MAX_REVIEWS && leftFrac > REVIEW_MIN_LEFT) {
+			reviews++;
+			text = review(Math.round((STOP_AT_MS - Date.now()) / 60000), Math.round(leftFrac * 100));
+		} else if (!verified && event.outcome === "completed") {
 			verified = true;
 			text = VERIFY;
 		}
 		if (!text) return undefined;
 		nudges++;
-		console.error(`ahpele: settle-guard nudge ${nudges}/${MAX_NUDGES}: ${text === CONTINUE ? "continue" : "verify"}`);
+		console.error(`ahpele: settle-guard nudge ${nudges}/${MAX_NUDGES}: ${text === CONTINUE ? "continue" : text === VERIFY ? "verify" : "review"}`);
 		return {
 			entries: [{type: "custom_message", customType: "ahpele-settle-guard", content: text, display: false}],
 			continue: true,
