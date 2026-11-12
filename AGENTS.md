@@ -2,85 +2,134 @@
 
 Repo này là **bài nộp (entry)** cho cuộc thi Kaggle
 [Google - Agent Harness on Physical-Engineering's Last Exam](https://www.kaggle.com/competitions/physical-engineerings-last-exam)
-(PLE). Mọi agent (Claude Code, OpenCode, …) làm việc ở đây phải tuân thủ toàn bộ các quy tắc dưới đây.
-Khi quy tắc ở đây mâu thuẫn với luật chính thức thì luật chính thức thắng; cập nhật lại file này.
+(PLE). Mọi agent (Claude Code, OpenCode, …) làm việc ở đây phải tuân thủ các quy tắc dưới đây.
 
-- Hạn chót: **2027-01-05 23:59:59 UTC** (Kaggle). Giải: $250K / $100K / $50K.
-- Luật chính thức: `docs/rules.md` trong kit, trang https://ple-bench.com/competition, tab Rules trên Kaggle.
-- Kit chính thức: https://github.com/google-research/ple, clone tại `/home/ttlab/src/ple` (**ngoài** repo này).
+**Thứ tự ưu tiên khi các nguồn mâu thuẫn:** trang Kaggle ([docs/kaggle-evaluation.md](docs/kaggle-evaluation.md))
+> hướng dẫn chính thức cho coding agent ([docs/official-agents-guide.md](docs/official-agents-guide.md))
+> `docs/rules.md` trong kit > file này. Phát hiện mâu thuẫn thì báo người dùng và cập nhật file này.
 
-## 1. Bài nộp là gì
+Kit chính thức: https://github.com/google-research/ple, clone tại `/home/ttlab/src/ple` (**ngoài** repo này;
+entry nằm trong kit thì `kit check` không bao giờ báo sẵn sàng).
 
-Một commit GitHub chứa:
+## 1. Cuộc thi tóm tắt
 
-1. `submission.yaml` (khai báo `model_api`, `install`, `serve`).
-2. Harness: WebSocket server (`serve.py` + file phụ) chạy trong container 2 CPU / 4 GB, nhận đề qua
-   WebSocket, gửi lệnh shell / đọc-ghi file / gọi MCP sang task container (không có mạng).
-3. `artifacts/`: kết quả chạy 29 task dev, **chỉ** được sinh bằng `uv run python eval/run.py <entry>` từ kit.
+- **Mốc thời gian (23:59 UTC):** 2027-01-05 hạn nộp Writeup + commit · 2027-01-19 xong Stage 1 (chọn Top 100) ·
+  2027-01-26 công bố kết quả Stage 2. Giải $250K / $100K / $50K. Đội tối đa 5 người, mỗi đội 1 bài nộp.
+- **Cách nộp:** một **Kaggle Writeup** (≤ 2.000 từ) ở tab Writeups, có link repo GitHub trong Project Links và
+  SHA commit 40 ký tự (`git rev-parse HEAD`) ở đầu bài. Được rút lại, sửa, nộp lại tới hạn chót.
+- **Stage 1 (cổng loại, 100 điểm chấm Writeup):** Insight & phân tích lỗi 25 · Lập luận kỹ thuật (so trajectory
+  của agent với quy trình kỹ sư thật trên 1 task dev) 25 · Tổng quát hoá qua ≥ 2 model 15 · Hiệu quả & scaling
+  (đồ thị điểm theo chi phí) 20 · Rõ ràng & hình ảnh 15. Bắt buộc có ảnh bìa và 3 hình: sơ đồ kiến trúc,
+  đồ thị điểm theo chi phí, phân loại lỗi trên 29 task dev. Top 100 vào Stage 2.
+- **Stage 2:** chạy harness trên 56 task ẩn × 3 lần, model do Google trả tiền. Trước đó họ chấm `artifacts/` và
+  **chạy lại live một mẫu ngẫu nhiên task dev**; bài không tái lập được hoặc hard-code thì bị loại. Giải trao cho
+  3 hệ thống điểm trung bình cao nhất **nằm trên Pareto frontier điểm–chi phí**, điểm tối thiểu 0.138.
+  Hoà thì xét điểm Writeup, rồi thời điểm nộp.
+- **Chấm mỗi task:** 0–1, bằng script và/hoặc LLM judge (Claude Opus 5.5). Task thiết kế: `s = 0.4·p + 0.6·G·O'`
+  (vi phạm bất kỳ ràng buộc an toàn/khả thi nào thì `G = 0`). Lỗi HTTP 400, crash, timeout đều tính điểm 0 cho task đó.
 
-Ban tổ chức chạy harness trên 56 task ẩn (6 giờ/task). Điểm mỗi task 0–1; task thiết kế:
-`s = 0.4·p + 0.6·G·O'` (vi phạm bất kỳ ràng buộc an toàn/khả thi nào thì `G = 0`).
+## 2. Repo phải có gì khi nộp
 
-## 2. Luật fair-play (vi phạm có thể bị loại)
+```
+submission.yaml   name, model_api (một trong 8 model google-cloud/<id>), install, serve
+serve.py          WebSocket server trên 0.0.0.0:$PORT
+harness.py        vòng lặp agent
+artifacts/        kết quả 29 task dev, chỉ sinh bằng eval/run.py, không sửa tay
+LICENSE           Apache-2.0 hoặc MIT
+README.md         cài đặt, kiến trúc, cách tái lập
+```
+
+Phải qua `uv run python -m kit check` (báo `ready to submit`) và `uv run python -m kit artifacts`.
+Nếu repo để private trong lúc thi: cài GitHub App `ple-submission` và chuyển public khi cuộc thi kết thúc.
+
+## 3. Quy trình đã thống nhất với người dùng
+
+1. Người dùng và agent cùng thảo luận, nghiên cứu, thiết kế harness.
+2. Chạy dev local bằng key **OpenCode** trên model rẻ **do người dùng chỉ định** (ví dụ `deepseek-v4.1-flash`,
+   `muse-spark-1.3`), khai báo kiểu local-only (`openai-compatible/<model>`). **Không** dùng OpenCode để gọi model
+   đắt tiền (Claude, Argon, …) khi chưa được người dùng cho phép rõ ràng.
+3. Khi đạt kết quả: đổi `model_api` sang model mạnh (`google-cloud/claude-opus-5-5` hoặc
+   `google-cloud/gemini-4-argon`), commit cùng `artifacts/` rồi nộp Writeup. Kaggle cho phép rõ: được sinh
+   `artifacts/` bằng model cá nhân rồi đổi `model_api` trước khi commit, không bị loại, miễn là Writeup ghi rõ
+   model và judge đã dùng. Ban tổ chức chấm lại `artifacts/` bằng judge chính thức.
+4. Lưu ý rủi ro, phải nhắc người dùng trước khi nộp:
+   - Harness chưa từng chạy trên model đích có thể dính HTTP 400 vì tham số riêng của model (mục 6).
+     Nên chạy ít nhất bước `model` của `kit check`, tốn vài cent, trên model đích.
+   - Stage 2 chạy lại live một số task dev bằng model đích, kết quả sẽ khác `artifacts/` sinh bằng model rẻ.
+5. **Hỏi người dùng trước** mọi lượt chạy tốn tiền, mọi lần dùng model ngoài danh sách đã duyệt, và trước khi nộp lên Kaggle.
+
+## 4. Ghi chép thí nghiệm (phục vụ Writeup)
+
+Writeup cần ablation ("thêm X thì điểm dev từ A lên B"), bảng so sánh ≥ 2 model, đồ thị điểm theo chi phí, và
+phân loại lỗi. Vì vậy **mọi lượt chạy dev** phải ghi một dòng vào `experiments/log.md` (sẽ tạo khi bắt đầu chạy):
+ngày, commit harness, model, judge, danh sách task, điểm từng task và trung bình, token/chi phí/thời gian, thay đổi
+so với lần trước, nhận xét lỗi. Giữ lại `runs/` cục bộ để phân tích, nhưng không commit nội dung task.
+
+## 5. Luật fair-play (vi phạm có thể bị loại)
 
 - KHÔNG hard-code đáp án, KHÔNG nhận diện task cụ thể để rẽ nhánh (kể cả task dev).
 - KHÔNG để harness đọc grader, file tham chiếu, `tests/`, hay `artifacts/` của chính nó (từ đĩa, git history, mạng).
-- KHÔNG sửa tay, tạo, hay ghép file trong `artifacts/`. Chỉ export bằng `eval/run.py` từ đúng harness và
-  đúng `model_api` đang commit. Được phép chạy lại từng task (`--tasks <id>`).
+- KHÔNG sửa tay hay tạo file trong `artifacts/`; chỉ export bằng `eval/run.py` từ đúng harness đang commit.
+  Được chạy lại từng task (`--tasks <id>`). Sửa harness thì phải chạy lại dev set và commit chung.
 - KHÔNG gọi host nào ngoài endpoint model (không web search, không tool do nhà cung cấp host, không API ngoài).
-- KHÔNG lưu, log, publish nội dung prompt/file của task test.
-- `model_api` trong `submission.yaml` phải khớp model harness thực sự gọi, và bài nộp phải dùng
-  `google-cloud/<id>`. Model khác (OpenCode, key riêng) chỉ dùng để thử local, không bao giờ để trong commit nộp.
+- KHÔNG lưu, log, publish nội dung prompt hay file của task test ẩn.
 
-## 3. Bảo mật và bí mật
+## 6. Kỹ thuật cần nhớ
 
-- Key nằm trong `.env` (đã `.gitignore`): `KAGGLE_API_TOKEN`, `HF_TOKEN`, và sau này `OPENCODE_API_KEY`, `GITHUB_TOKEN`, …
-- KHÔNG BAO GIỜ commit, in ra log, hay gửi key lên dịch vụ ngoài. Khi cần kiểm tra `.env` chỉ in tên biến:
-  `sed -E 's/=.*/=<hidden>/' .env`.
-- Trước mỗi commit: `git status` và kiểm tra không có key trong diff (`git diff --cached | grep -iE 'key|token|secret'`).
-- Harness đọc URL/key model từ biến môi trường (`MODEL_BASE_URL`, `MODEL_API_KEY`, `OPENAI_*`, `ANTHROPIC_*`, `GEMINI_*`), không bao giờ hard-code.
-
-## 4. Git
-
-- Remote: `origin = https://github.com/Nguyenchitrai62/AHPELE.git`, nhánh `main`.
-- **Luôn commit bằng tài khoản Nguyenchitrai62** (đã đặt trong `git config` local của repo):
-  `user.name = Nguyenchitrai62`, `user.email = 121591111+Nguyenchitrai62@users.noreply.github.com`.
-  Không đổi, không dùng identity global của máy (`thao_ttp`).
-- Commit nhỏ, message rõ ràng. Commit chứa `artifacts/` phải chứa luôn đúng harness đã sinh ra chúng
-  (`manifest.json` lưu hash harness).
-- Repo giới hạn 1 GiB tính cả `.git`; `artifacts/` ≤ 512 MiB. Squash lịch sử nếu nhiều lần chạy dev làm repo phình to.
-- Không force-push, không xoá lịch sử khi chưa được người dùng đồng ý.
-
-## 5. Quy trình làm việc
-
-1. Phát triển và debug harness bằng model rẻ (OpenCode, ví dụ DeepSeek) trên 1–3 task dev.
-2. Kiểm tra trên model nộp bài (`google-cloud/claude-opus-5-5` hoặc `google-cloud/gemini-4-argon`) với vài task
-   trước khi chạy đủ 29 task. Mỗi model có tham số API riêng: Opus 5.5 trả 400 nếu có `temperature`/`top_p`/
-   `tool_choice: required`/`budget_tokens`; Argon trả 400 nếu có `thinkingBudget`.
-3. Chạy đủ dev set bằng model nộp, rồi `kit check` phải báo `ready to submit`, commit, push.
-4. **Hỏi người dùng trước** mọi lượt chạy tốn tiền lớn (chạy đủ 29 task, model mạnh) và trước khi nộp bài lên Kaggle.
-
-Lệnh thường dùng (chạy từ `/home/ttlab/src/ple`, nạp env từ `/home/ttlab/src/AHPELE/.env`):
-
-```bash
-uv run python -m kit check /home/ttlab/src/AHPELE           # build + smoke test + kiểm tra sẵn sàng nộp
-uv run python eval/run.py --tasks <id> /home/ttlab/src/AHPELE  # chạy 1 task dev
-uv run python eval/run.py /home/ttlab/src/AHPELE            # chạy đủ dev set, export artifacts/
-uv run python eval/run.py --artifacts /home/ttlab/src/AHPELE  # chấm lại artifacts offline
-```
-
-## 6. Tài nguyên máy (10.0.0.105)
-
-- 24 CPU, khoảng 58 GB RAM (thường chỉ khoảng 20 GB trống), ổ đĩa khoảng 99 GB trống.
-- Mỗi task dev cần tới 6 CPU / 16.25 GB, nên chạy tuần tự. Image task rubric khoảng 17 GB: dọn `docker image prune` khi đĩa đầy.
-- Ghi file tạm vào thư mục scratch, không vào repo.
-
-## 7. Giới hạn kỹ thuật cần nhớ
+- Harness đọc URL/key model từ biến môi trường (`MODEL_NAME`, `MODEL_BASE_URL`, `MODEL_API_KEY`, `OPENAI_*`,
+  `ANTHROPIC_*`, `GEMINI_*`), không hard-code. Mọi kết nối ra ngoài phải đi qua `HTTPS_PROXY`.
+- **Claude Opus 5.5:** trả 400 nếu có `temperature`, `top_p`, `top_k`, `budget_tokens`, hoặc `tool_choice` bắt buộc.
+  Đặt `max_tokens` khoảng 32000. Gắn `cache_control: ephemeral` vào system prompt và message mới nhất, nếu không
+  chi phí tăng nhiều lần.
+- **Gemini 4 Argon:** `reasoning_effort` là low/medium/high; trả 400 nếu có `thinkingBudget`; `max_tokens` ≤ 65536.
+- Model mặc định nghĩ ở mức cao nhất; muốn mức khác thì truyền `reasoning_effort` rõ ràng.
+- Stream hoặc đặt timeout dài; retry 429/5xx/timeout với backoff; không retry 400.
+- Theo dõi `limits.agent_timeout_sec`; khi nhận `cancel` phải gửi `done` ngay với tóm tắt tốt nhất.
+- Luôn kết thúc bằng `done.final_message` tóm tắt đã làm gì và file nằm ở đâu (judge có đọc phần này).
+  Ghi deliverable sớm rồi tinh chỉnh dần. Đúng tên và đường dẫn file theo đề là quan trọng nhất.
 
 | Hạng mục | Giới hạn |
 |---|---|
 | Server khởi động | Nhận WebSocket trên `0.0.0.0:$PORT` trong 120 s |
-| Serve container | 2 CPU, 4 GB RAM, 512 process, `/tmp` và `$HOME` mỗi cái 1 GB, root FS read-only |
-| Build (`install`) | 30 phút, `/opt/harness` ≤ 2 GiB nén / 8 GiB giải nén |
-| Thời gian mỗi task | 6 giờ (đọc `limits.agent_timeout_sec`, kết thúc gọi model trước khi hết giờ) |
-| Kết nối model | Proxy đóng kết nối im lặng quá 30 phút; hãy stream và retry 429/5xx với backoff, không retry 400 |
+| Serve container | 2 CPU, 4 GB RAM, 512 process, `/tmp` và `$HOME` mỗi cái 1 GB, `/opt/harness` read-only |
+| Build (`install`) | `debian:bookworm`, 30 phút, `/opt/harness` ≤ 2 GiB nén / 8 GiB giải nén, repo kể cả `.git` ≤ 1 GiB |
+| Mỗi task | 6 giờ; mỗi lệnh `exec` ≤ 600 s; output ≤ 100 KB; tối đa 8 request song song |
+| `artifacts/` | ≤ 512 MiB, ≤ 10.000 file, không LFS, không symlink, mỗi file ≤ 95 MiB |
+
+## 7. Bảo mật và bí mật
+
+- Key nằm trong `.env` (đã `.gitignore`): `KAGGLE_API_TOKEN`, `HF_TOKEN`, `OPENCODE_API_KEY`, …
+- KHÔNG BAO GIỜ commit, in ra log, hay gửi key lên dịch vụ ngoài. Khi cần xem `.env` chỉ in tên biến:
+  `sed -E 's/=.*/=<hidden>/' .env`. Không đặt key trong `submission.yaml` (`env:` chỉ dành cho giá trị không bí mật).
+- Trước mỗi commit: `git status`, rồi kiểm tra diff không chứa key thật.
+
+## 8. Git
+
+- Remote: `origin = https://github.com/Nguyenchitrai62/AHPELE.git`, nhánh `main`. Push qua đăng nhập `gh` của
+  tài khoản Nguyenchitrai62, chỉ cấu hình trong `.git/config` của repo này.
+- **Luôn commit bằng tài khoản Nguyenchitrai62:** `user.name = Nguyenchitrai62`,
+  `user.email = 121591111+Nguyenchitrai62@users.noreply.github.com`. Không dùng identity global của máy (`thao_ttp`).
+- Commit nhỏ, message rõ ràng. Commit chứa `artifacts/` phải chứa đúng harness đã sinh ra chúng.
+- Mỗi phiên bản `artifacts/` đều nằm lại trong lịch sử git: squash khi repo phình to (giới hạn 1 GiB).
+- Không force-push, không xoá lịch sử khi chưa được người dùng đồng ý.
+
+## 9. Lệnh thường dùng
+
+Chạy từ `/home/ttlab/src/ple`, nạp biến từ `/home/ttlab/src/AHPELE/.env`:
+
+```bash
+uv run python -m kit check /home/ttlab/src/AHPELE                 # build, smoke test, kiểm tra sẵn sàng nộp
+uv run python eval/run.py --tasks <id> /home/ttlab/src/AHPELE     # chạy 1 task dev
+uv run python eval/run.py /home/ttlab/src/AHPELE                  # chạy đủ dev set, export artifacts/
+uv run python -m kit artifacts /home/ttlab/src/AHPELE             # kiểm tra artifacts theo luật
+uv run python eval/run.py --artifacts /home/ttlab/src/AHPELE      # chấm lại artifacts offline (chỉ gọi judge)
+uv run python eval/run.py --regrade runs/<name>-<time>            # chấm lại sau khi sửa judge
+```
+
+Log của kit: `~/.cache/plebench/<name>/` (`build.log`, `serve.log`, `egress.log`, `relay.log`, `check.json`).
+
+## 10. Tài nguyên máy (10.0.0.105)
+
+- 24 CPU, khoảng 58 GB RAM (thường chỉ khoảng 20 GB trống), ổ đĩa khoảng 99 GB trống.
+- Mỗi task dev cần tới 6 CPU / 16.25 GB nên chạy tuần tự. Image task rubric khoảng 17 GB: dọn image khi đĩa đầy.
+- File tạm ghi vào thư mục scratch, không vào repo.
