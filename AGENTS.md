@@ -55,8 +55,9 @@ và sổ cái (mục 11).
 14. Kit nằm ở `/home/ttlab/src/ple`, ngoài repo này. Không copy kit hay dữ liệu task vào phần được commit.
 15. File tạm, dữ liệu tải về và log chạy để ngoài repo (hoặc trong `research/` nếu cần giữ lại để phân tích).
 16. 🔒 Máy dùng chung: không xoá, dừng hay sửa container, image, network, volume hay tiến trình không do mình tạo;
-    không dùng `sudo`, không restart Docker. Mặc định chạy từng task một; được chạy tối đa 2 task song song khi RAM
-    trống (`free -g`, cột available) ≥ 20 GB. Đĩa đầy thì chỉ dọn image/run do mình tạo,
+    không dùng `sudo`, không restart Docker. Được chạy tối đa 4 task song song (`eval/run.py --trials N` hoặc nhiều lượt
+    cùng lúc): đo thực tế mỗi task chỉ dùng khoảng 200 MB (giới hạn 8–16 GB chỉ là trần). Kiểm tra `free -g` (cột
+    available) trước khi thêm task; nếu dưới 8 GB thì không thêm, dưới 4 GB thì dừng bớt task của mình. Đĩa đầy thì chỉ dọn image/run do mình tạo,
     hoặc báo người dùng.
 
 **Giao tiếp**
