@@ -13,43 +13,56 @@ entry nằm trong kit thì `kit check` không bao giờ báo sẵn sàng).
 
 ## 0. QUY TẮC BẮT BUỘC (đọc trước khi làm bất cứ việc gì)
 
-Vai trò: người dùng chỉ đạo, agent là người làm chính. Không chắc thì hỏi, không đoán.
+**Vai trò (từ 2026-11-12):** agent (Claude) là người nghiên cứu chính, có **gần như toàn quyền**: tự đặt giả
+thuyết, tự sửa harness, tự chạy thí nghiệm, tự commit/push, **không cần hỏi người dùng**. Người dùng giám sát và
+góp ý qua chat khi thấy đi sai hướng; góp ý đó luôn được ưu tiên. Ngoại lệ duy nhất là các **quy tắc cứng** đánh
+dấu 🔒 dưới đây: chỉ làm khi người dùng cho phép rõ ràng. Mọi việc nghiên cứu phải theo quy trình thẻ nghiên cứu
+và sổ cái (mục 11).
 
 **Model và chi phí**
-1. Khi test local chỉ được gọi **2 model** qua OpenCode Go: `deepseek-v4.1-flash` và `muse-spark-1.3-contributor`.
+1. 🔒 Khi test local chỉ được gọi **2 model** qua OpenCode Go: `deepseek-v4.1-flash` và `muse-spark-1.3-contributor`.
    Áp dụng cho mọi lần gọi: harness, judge, gọi thử một câu. Model khác chỉ được gọi khi người dùng cho phép rõ ràng.
-2. Không gọi Claude, Argon hay bất kỳ model đắt tiền nào để thử, kể cả qua OpenCode Zen, Vertex AI hay key khác.
+2. 🔒 Không gọi Claude, Argon hay bất kỳ model đắt tiền nào để thử, kể cả qua OpenCode Zen, Vertex AI hay key khác.
+   Không bật "Extra Usage" (trả tiền thêm) của OpenCode.
 3. Harness **phải tương thích** với model nộp bài (`google-cloud/claude-opus-5-5`, `google-cloud/gemini-4-argon`)
    bằng cách làm theo bài mẫu trong kit (mục 3, mục 6).
-4. Hỏi người dùng trước mọi lượt chạy dài hoặc tốn nhiều hạn mức, ví dụ chạy đủ 29 task dev.
+4. Được tự chạy thí nghiệm, kể cả đủ 29 task dev, trong hạn mức gói OpenCode Go. Theo dõi chi phí qua
+   `~/.cache/ahpele/gate-usage.jsonl`; chạm hạn mức 5 giờ hoặc tuần thì chờ, đổi sang model còn hạn mức, hoặc
+   làm việc không tốn model (phân tích, viết code). Không phung phí: thử trên 1–3 task trước khi chạy cả bộ.
 
 **Nộp bài**
-5. Không bao giờ tự nộp, rút lại hay sửa Writeup trên Kaggle. Chỉ người dùng làm, hoặc agent làm khi được yêu cầu rõ ràng.
+5. 🔒 Không bao giờ tự nộp, rút lại hay sửa Writeup trên Kaggle. Chỉ người dùng làm, hoặc agent làm khi được yêu cầu rõ ràng.
 6. Bài nộp phải đủ mọi yêu cầu ở mục 2, qua `kit check` và `kit artifacts`, và `model_api` là một model `google-cloud/<id>`.
-7. Mọi lượt chạy dev đều ghi vào `experiments/log.md` (mục 4), vì Writeup cần số liệu này.
+7. Mọi thí nghiệm đều có thẻ nghiên cứu và một dòng trong sổ cái `research/LEDGER.md` (mục 11). Trước khi bắt
+   đầu thí nghiệm mới phải đọc sổ cái, đặc biệt phần "Bài học", để không lặp lại sai lầm cũ.
 
 **Fair-play** (mục 5)
 8. Không hard-code đáp án, không nhận diện task, không đọc grader hay `artifacts/`, không sửa tay `artifacts/`,
    không gọi host ngoài endpoint model, không lưu nội dung task ẩn.
 
 **Bí mật**
-9. Không commit, in ra hay gửi ra ngoài bất kỳ key nào trong `.env`. Chỉ in tên biến. Kiểm tra diff trước mỗi commit.
+9. 🔒 Không commit, in ra hay gửi ra ngoài bất kỳ key nào trong `.env`. Chỉ in tên biến. Kiểm tra diff trước mỗi commit.
 
-**Git** (mục 8)
+**Git** (mục 8, mục 12)
 10. Luôn commit bằng `Nguyenchitrai62 <121591111+Nguyenchitrai62@users.noreply.github.com>` và push lên
     `origin main` (`https://github.com/Nguyenchitrai62/AHPELE.git`).
-11. Tài khoản GitHub này chỉ được cấu hình cho repo này. Không đổi cấu hình git global, không đổi identity.
-12. Không force-push, không xoá lịch sử, không đổi public/private của repo khi chưa được người dùng đồng ý.
+11. 🔒 Tài khoản GitHub này chỉ được cấu hình cho repo này. Không đổi cấu hình git global, không đổi identity.
+12. 🔒 Không force-push, không xoá lịch sử, không đổi public/private của repo khi chưa được người dùng đồng ý.
+13. Repo này là **link nộp Kaggle**: chỉ commit những gì thuộc bài nộp (mục 12). Tài liệu nghiên cứu (thẻ, sổ
+    cái, ghi chú, số liệu, hình nháp) nằm trong `research/`, đã `.gitignore`, **không bao giờ commit**.
 
 **Môi trường**
-13. Kit nằm ở `/home/ttlab/src/ple`, ngoài repo này. Không copy kit hay dữ liệu task vào repo.
-14. File tạm, dữ liệu tải về và log chạy để ngoài repo. Không đưa nội dung task (prompt, file đề) vào git.
-15. Máy dùng chung và RAM có hạn: chạy từng task một, dọn Docker image khi ổ đĩa đầy, không tắt container hay
-    tiến trình không phải do mình tạo.
+14. Kit nằm ở `/home/ttlab/src/ple`, ngoài repo này. Không copy kit hay dữ liệu task vào phần được commit.
+15. File tạm, dữ liệu tải về và log chạy để ngoài repo (hoặc trong `research/` nếu cần giữ lại để phân tích).
+16. 🔒 Máy dùng chung: không xoá, dừng hay sửa container, image, network, volume hay tiến trình không do mình tạo;
+    không dùng `sudo`, không restart Docker. Chạy từng task một. Đĩa đầy thì chỉ dọn image/run do mình tạo,
+    hoặc báo người dùng.
 
 **Giao tiếp**
-16. Trả lời người dùng bằng tiếng Việt, báo kết quả trung thực: lỗi thì nói lỗi, kèm log; việc bỏ qua thì nói rõ.
-17. Khi luật thay đổi hoặc người dùng thêm quy tắc mới thì cập nhật ngay file này, rồi commit và push.
+17. Trả lời người dùng bằng tiếng Việt, báo kết quả trung thực: lỗi thì nói lỗi, kèm log; việc bỏ qua thì nói rõ.
+    Không cần xin phép từng bước, nhưng sau mỗi mốc quan trọng (xong một thẻ, đổi hướng nghiên cứu) báo ngắn gọn
+    kết quả và việc tiếp theo.
+18. Khi luật thay đổi hoặc người dùng thêm quy tắc mới thì cập nhật ngay file này, rồi commit và push.
 
 ## 1. Cuộc thi tóm tắt
 
@@ -84,7 +97,7 @@ Nếu repo để private trong lúc thi: cài GitHub App `ple-submission` và ch
 
 ## 3. Quy trình đã thống nhất với người dùng
 
-1. Người dùng và agent cùng thảo luận, nghiên cứu, thiết kế harness.
+1. Agent tự nghiên cứu và thiết kế harness theo quy trình thẻ nghiên cứu (mục 11); người dùng giám sát, góp ý.
 2. Chạy dev local bằng key **OpenCode Go** (`OPENCODE_API_KEY`), khai báo kiểu local-only.
    **CHỈ được gọi 2 model:** `deepseek-v4.1-flash` (Chat Completions) và `muse-spark-1.3-contributor`
    (Responses API). Mọi model khác, kể cả judge, test nhanh hay "ping thử", đều bị cấm trừ khi người dùng
@@ -109,14 +122,14 @@ Nếu repo để private trong lúc thi: cài GitHub App `ple-submission` và ch
    - Harness chưa từng chạy trên model đích có thể dính HTTP 400 vì tham số riêng của model (mục 6).
      Nên chạy ít nhất bước `model` của `kit check`, tốn vài cent, trên model đích.
    - Stage 2 chạy lại live một số task dev bằng model đích, kết quả sẽ khác `artifacts/` sinh bằng model rẻ.
-5. **Hỏi người dùng trước** mọi lượt chạy tốn tiền, mọi lần dùng model ngoài danh sách đã duyệt, và trước khi nộp lên Kaggle.
+5. 🔒 Phải có người dùng cho phép trước khi dùng model ngoài danh sách đã duyệt và trước khi nộp lên Kaggle.
 
-## 4. Ghi chép thí nghiệm (phục vụ Writeup)
+## 4. Số liệu phục vụ Writeup
 
 Writeup cần ablation ("thêm X thì điểm dev từ A lên B"), bảng so sánh ≥ 2 model, đồ thị điểm theo chi phí, và
-phân loại lỗi. Vì vậy **mọi lượt chạy dev** phải ghi một dòng vào `experiments/log.md` (sẽ tạo khi bắt đầu chạy):
-ngày, commit harness, model, judge, danh sách task, điểm từng task và trung bình, token/chi phí/thời gian, thay đổi
-so với lần trước, nhận xét lỗi. Giữ lại `runs/` cục bộ để phân tích, nhưng không commit nội dung task.
+phân loại lỗi. Tất cả lấy từ thẻ nghiên cứu và sổ cái (mục 11), nên mỗi thẻ phải ghi đủ: commit harness, model,
+judge, danh sách task, điểm từng task và trung bình, token/chi phí/thời gian, và nhóm lỗi. Thư mục run của kit
+(`/home/ttlab/src/ple/runs/`) giữ lại để phân tích.
 
 ## 5. Luật fair-play (vi phạm có thể bị loại)
 
@@ -193,6 +206,50 @@ Log của kit: `~/.cache/plebench/<name>/` (`build.log`, `serve.log`, `egress.lo
 
 ## 10. Tài nguyên máy (10.0.0.105)
 
-- 24 CPU, khoảng 58 GB RAM (thường chỉ khoảng 20 GB trống), ổ đĩa khoảng 99 GB trống.
+- 24 CPU, khoảng 58 GB RAM (thường chỉ khoảng 20 GB trống), ổ đĩa khoảng 80 GB trống.
+- Docker đã được mở rộng dải mạng (`/etc/docker/daemon.json`: `10.210.0.0/16`, /24), nên kit tạo mạng được.
 - Mỗi task dev cần tới 6 CPU / 16.25 GB nên chạy tuần tự. Image task rubric khoảng 17 GB: dọn image khi đĩa đầy.
-- File tạm ghi vào thư mục scratch, không vào repo.
+- Sau khi reboot: chạy lại `tools/start_gate.sh`. Các container `bt-mongo`, `bt-mysql`, `bt-postgres`,
+  `lh-admin-pg`, `rabbitmq` của người khác không tự bật lại; báo người dùng nếu thấy chúng dừng.
+
+## 11. Quy trình nghiên cứu: thẻ nghiên cứu và sổ cái
+
+Mục tiêu: mọi thay đổi đều có lý do, có số đo, có kết luận; sai lầm đã gặp được ghi lại để không lặp lại; và toàn
+bộ số liệu dùng thẳng được cho Writeup (ablation, so sánh model, điểm theo chi phí, phân loại lỗi).
+
+**Vị trí** (tất cả trong `research/`, đã `.gitignore`):
+- `research/LEDGER.md`: **sổ cái**. Một dòng cho mỗi thẻ (ID, ngày, giả thuyết, trạng thái, kết quả chính,
+  commit), phần **Bài học / không lặp lại**, và phần **Hướng đang mở** (ý tưởng chờ làm, theo thứ tự ưu tiên).
+- `research/cards/RC-XXXX-<slug>.md`: **thẻ nghiên cứu**, theo mẫu `research/cards/TEMPLATE.md`.
+- `research/notes/`: ghi chú phân tích (ví dụ đọc trajectory, phân loại lỗi từng task dev).
+- `research/data/`: số liệu tổng hợp (CSV/JSON) và hình nháp cho Writeup.
+
+**Vòng làm việc cho mỗi thí nghiệm:**
+1. Đọc `research/LEDGER.md` (bài học, thẻ liên quan) trước khi bắt đầu.
+2. Tạo thẻ mới với **ID tăng dần**, điền phần trước khi chạy: giả thuyết, cơ sở/phân tích, thay đổi dự kiến,
+   **kỳ vọng định lượng** (ví dụ "điểm task X tăng từ 0.30 lên ≥ 0.45"), cách đo, tiêu chí thành công/thất bại,
+   chi phí dự kiến. **Không sửa phần này sau khi đã có kết quả.**
+3. Thêm thẻ vào sổ cái với trạng thái `đang chạy`.
+4. Làm: sửa harness (commit riêng, ghi SHA vào thẻ), chạy, thu số liệu.
+5. Điền phần sau khi chạy: kết quả thực tế (điểm từng task, token, chi phí, thời gian), so với kỳ vọng, phân tích
+   nguyên nhân, kết luận (`xác nhận` / `bác bỏ` / `chưa kết luận`), quyết định (giữ, bỏ, revert, làm tiếp), bài học.
+6. Cập nhật sổ cái: trạng thái, kết quả chính, bài học mới (nếu có), hướng mở mới.
+7. Thay đổi bị bác bỏ thì revert khỏi harness, nhưng thẻ vẫn giữ nguyên làm hồ sơ.
+
+**Nguyên tắc:** mỗi thẻ chỉ thay đổi một yếu tố chính (để ablation rõ ràng); so với baseline cùng model, cùng task;
+kết quả trên 1–3 task là tín hiệu sơ bộ, phải xác nhận trên nhiều task trước khi coi là kết luận; ghi cả thí nghiệm
+thất bại (Writeup chấm điểm cho "ý tưởng không hiệu quả"). Ghi chú về task dev chỉ dùng để phân tích; kiến thức
+đưa vào harness phải là kiến thức kỹ thuật chung, không chép chi tiết hay đáp án của task cụ thể (mục 5).
+
+## 12. Phần nộp bài và phần nghiên cứu
+
+Repo GitHub này sẽ là link nộp Kaggle, nên chỉ chứa phần nộp bài:
+- **Commit:** `submission.yaml`, `serve.py`, `harness.py`, `taskbridge.py`, `task-tools.ts`, `package*.json`,
+  `requirements.txt`, skill/prompt mà harness dùng, `artifacts/`, `LICENSE`, `README.md`, và `tools/` (công cụ
+  tái lập lượt chạy local).
+- **Không commit (`.gitignore`):** `research/`, `.env`, file tạm, log chạy, dữ liệu task.
+- File nội bộ `AGENTS.md`, `CLAUDE.md`, `docs/` hiện vẫn được commit để ghi nhớ quy tắc. Trước khi nộp sẽ xem
+  lại có nên gỡ khỏi repo (giữ bản local) hay không.
+- `research/` không nằm trong commit nên không lọt vào bundle của harness. Đây cũng là điều kiện fair-play: harness
+  không được đọc ghi chú về task dev.
+- `research/` chỉ có trên máy này. Không xoá thư mục này; cân nhắc sao lưu (xem đề xuất với người dùng).
