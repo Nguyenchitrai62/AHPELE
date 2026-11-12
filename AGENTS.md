@@ -236,6 +236,26 @@ bộ số liệu dùng thẳng được cho Writeup (ablation, so sánh model, �
 6. Cập nhật sổ cái: trạng thái, kết quả chính, bài học mới (nếu có), hướng mở mới.
 7. Thay đổi bị bác bỏ thì revert khỏi harness, nhưng thẻ vẫn giữ nguyên làm hồ sơ.
 
+**Vòng nghiên cứu (lặp lại liên tục, mỗi vòng ghi một mục "Vòng N" trong sổ cái):**
+1. **Đo:** có ít nhất một kết quả đánh giá (baseline hoặc vòng trước).
+2. **Phân tích:** điểm từng task, đọc trajectory/log của task điểm thấp, phân nhóm lỗi và điểm mạnh.
+3. **Xếp ưu tiên bằng số:** với mỗi nhóm lỗi, ước tính điểm lấy lại được = tổng `(1 − điểm)` của các task bị
+   ảnh hưởng × khả năng sửa được, chia cho công sức và chi phí. Làm trước các lỗi làm task về 0 (crash, thiếu
+   deliverable, sai đường dẫn, ô `TBD`) và các điểm yếu có nhiều không gian nâng cấp.
+4. **Lên kế hoạch:** mỗi điểm yếu ưu tiên thành một thẻ (giả thuyết, cách sửa bằng harness, kỳ vọng định lượng).
+5. **Nâng cấp và test lại**, rồi ghi kết quả vào thẻ và sổ cái. Quay lại bước 1.
+
+**Bộ task:**
+- **Bộ thăm dò** (5–6 task đại diện cả hai nhóm) cho từng vòng nhanh.
+- **Bộ đầy đủ** (29 task) sau vài vòng, để kiểm tra không làm hỏng chỗ khác và để sinh `artifacts/`.
+- **Bộ kiểm chứng** (khoảng 5 task): không đọc trajectory, không dùng để thiết kế; chỉ đo để phát hiện harness khớp
+  quá mức với dev set (bài nộp được chấm trên 56 task ẩn). Danh sách các bộ ghi trong sổ cái.
+
+**Độ tin cậy:** đo độ dao động bằng cách chạy lặp 2–3 lần trên vài task; chỉ coi là cải tiến khi mức tăng lớn hơn
+độ dao động. Điểm rubric do judge local (DeepSeek) chấm chỉ mang tính tương đối; khi quyết định, ưu tiên task chấm
+bằng script. Ưu tiên cải tiến không phụ thuộc model (quy trình, tự kiểm tra, đọc tài liệu, skill) để chuyển được sang
+Claude/Argon; cải tiến quan trọng phải được xác nhận trên cả DeepSeek và Muse Spark.
+
 **Nguyên tắc:** mỗi thẻ chỉ thay đổi một yếu tố chính (để ablation rõ ràng); so với baseline cùng model, cùng task;
 kết quả trên 1–3 task là tín hiệu sơ bộ, phải xác nhận trên nhiều task trước khi coi là kết luận; ghi cả thí nghiệm
 thất bại (Writeup chấm điểm cho "ý tưởng không hiệu quả"). Ghi chú về task dev chỉ dùng để phân tích; kiến thức
