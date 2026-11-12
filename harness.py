@@ -159,10 +159,70 @@ WORKFLOW = (
     " objective (cost, performance) only while all hard checks keep passing,"
     " and re-run the checks after every change."
 )
+# AHPELE H1: document toolbox. Before pi starts, toolbox/ahpele_index.py is
+# copied into the task container and run on the workdir; it writes a text
+# corpus, rendered scanned pages and an inventory under /tmp/ahpele. Set
+# AHPELE_TOOLBOX=0 to skip it (ablations).
+TOOLBOX_SRC = HERE / "toolbox" / "ahpele_index.py"
+TOOLBOX_DST = "/tmp/ahpele/bin/ahpele_index.py"
+TOOLBOX_BUDGET_SEC = 300
+INVENTORY_CHARS = 6000
+TOOLBOX_NOTE = (
+    "\n\nA document index was built before you started:\n"
+    "- /tmp/ahpele/inventory.md lists every project file with its type,"
+    " pages, scanned pages, revision, status words in its file name, and"
+    " possible revision families (the same document under several revisions)."
+    " Words found inside a document's text often refer to other documents.\n"
+    "- /tmp/ahpele/corpus/<path>.txt holds the extracted text of each file"
+    " (PDF pages, DOCX paragraphs and tables, XLSX cells with formulas, DXF"
+    " text, dimensions and blocks, emails). Search it with grep -ril.\n"
+    "- Scanned pages are already rendered as PNG under /tmp/ahpele/pages/;"
+    " read one only when you need what is on it.\n"
+    "- To re-run it on another folder: python3 " + TOOLBOX_DST + " --root"
+    " <dir> --out <dir>.\n"
+    "The index is a convenience: confirm every number you rely on against the"
+    " original file.\n"
+)
 TIME_NOTE = (
     " You have about {minutes} minutes in all; leave time to finish the"
     " deliverables."
 )
+
+
+async def build_index(session: taskbridge.Session) -> str:
+  """Runs the document toolbox in the task container (H1).
+
+  Returns the system-prompt text describing the index (with the start of the
+  inventory), or "" when the toolbox is disabled or anything fails. Never
+  raises: a failed index must not cost the task.
+  """
+  if os.environ.get("AHPELE_TOOLBOX", "1") == "0" or not TOOLBOX_SRC.exists():
+    return ""
+  try:
+    await session.write_file(TOOLBOX_DST, TOOLBOX_SRC.read_bytes())
+    workdir = session.workdir or "/"
+    res = await session.exec(
+        f"command -v python3 >/dev/null || exit 3; cd / && python3 {TOOLBOX_DST}"
+        f" --root '{workdir}' --out /tmp/ahpele --budget {TOOLBOX_BUDGET_SEC}"
+        " 2>&1 | tail -n 3",
+        timeout_sec=TOOLBOX_BUDGET_SEC + 60,
+    )
+    output = str(res.get("output", "")).strip()
+    await session.log(f"ahpele: toolbox exit={res.get('exit_code')} {output[-300:]}")
+    if res.get("exit_code") != 0 or "indexed" not in output:
+      return ""
+    inventory = (await session.read_file("/tmp/ahpele/inventory.md")).decode(
+        "utf-8", "replace"
+    )
+    if len(inventory) > INVENTORY_CHARS:
+      inventory = (
+          inventory[:INVENTORY_CHARS]
+          + "\n... (truncated: read /tmp/ahpele/inventory.md for the rest)\n"
+      )
+    return TOOLBOX_NOTE + "\nIndex summary: " + output.splitlines()[-1] + "\n\n" + inventory
+  except Exception as exc:  # noqa: BLE001  pylint: disable=broad-exception-caught
+    await session.log(f"ahpele: toolbox skipped: {type(exc).__name__}: {exc}")
+    return ""
 
 
 def note(session: taskbridge.Session) -> str:
@@ -360,6 +420,7 @@ async def solve(session: taskbridge.Session) -> str:
         else min(session.deadline, cap_deadline)
     )
     await session.log(f"ahpele: time-boxed probe, {cap_min} min budget")
+  index_note = await build_index(session)
   with tempfile.TemporaryDirectory(
       prefix="pi-",
       dir=os.environ.get("HOME") or None,
@@ -416,7 +477,7 @@ async def solve(session: taskbridge.Session) -> str:
           "--thinking",
           profile(model).get("thinking", THINKING),
           "--append-system-prompt",
-          note(session),
+          note(session) + index_note,
       ]
       run = Run(session, model)
       done = await taskbridge.run_process(
