@@ -45,10 +45,14 @@ Nếu repo để private trong lúc thi: cài GitHub App `ple-submission` và ch
 ## 3. Quy trình đã thống nhất với người dùng
 
 1. Người dùng và agent cùng thảo luận, nghiên cứu, thiết kế harness.
-2. Chạy dev local bằng key **OpenCode Go** (`OPENCODE_API_KEY`) trên model rẻ **do người dùng chỉ định** (ví dụ
-   `deepseek-v4.1-flash`, `muse-spark-1.3-contributor`), khai báo kiểu local-only (`openai-compatible/<model>`).
-   **Không** gọi model đắt tiền khi chưa được người dùng cho phép rõ ràng. Phần tương thích với Claude/Argon
-   được làm theo các bài mẫu trong kit (`pi-opus`, `hermes-opus`, `agy-gemini`), không chạy thử bằng tiền.
+2. Chạy dev local bằng key **OpenCode Go** (`OPENCODE_API_KEY`), khai báo kiểu local-only.
+   **CHỈ được gọi 2 model:** `deepseek-v4.1-flash` (Chat Completions) và `muse-spark-1.3-contributor`
+   (Responses API). Mọi model khác, kể cả judge, test nhanh hay "ping thử", đều bị cấm trừ khi người dùng
+   cho phép rõ ràng.
+   **Harness vẫn phải tương thích với model mạnh khi nộp** (`google-cloud/claude-opus-5-5`,
+   `google-cloud/gemini-4-argon`): theo đúng bài mẫu trong kit (`pi-opus`, `hermes-opus` cho Claude;
+   `agy-gemini` cho Gemini), tách phần gọi model thành lớp adapter theo `MODEL_NAME`, không gửi tham số mà model
+   đích từ chối (mục 6), có prompt caching cho Claude. Không chạy thử Claude/Argon bằng tiền.
    Thông số OpenCode Go:
    - Base `https://opencode.ai/inference/go`; danh sách model: `/v1/models`.
    - Chat Completions `/openai/v1/chat/completions` (DeepSeek, GLM, Kimi, …); Responses `/openai/v1/responses`
