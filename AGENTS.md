@@ -45,9 +45,18 @@ Nếu repo để private trong lúc thi: cài GitHub App `ple-submission` và ch
 ## 3. Quy trình đã thống nhất với người dùng
 
 1. Người dùng và agent cùng thảo luận, nghiên cứu, thiết kế harness.
-2. Chạy dev local bằng key **OpenCode** trên model rẻ **do người dùng chỉ định** (ví dụ `deepseek-v4.1-flash`,
-   `muse-spark-1.3`), khai báo kiểu local-only (`openai-compatible/<model>`). **Không** dùng OpenCode để gọi model
-   đắt tiền (Claude, Argon, …) khi chưa được người dùng cho phép rõ ràng.
+2. Chạy dev local bằng key **OpenCode Go** (`OPENCODE_API_KEY`) trên model rẻ **do người dùng chỉ định** (ví dụ
+   `deepseek-v4.1-flash`, `muse-spark-1.3-contributor`), khai báo kiểu local-only (`openai-compatible/<model>`).
+   **Không** gọi model đắt tiền khi chưa được người dùng cho phép rõ ràng. Phần tương thích với Claude/Argon
+   được làm theo các bài mẫu trong kit (`pi-opus`, `hermes-opus`, `agy-gemini`), không chạy thử bằng tiền.
+   Thông số OpenCode Go:
+   - Base `https://opencode.ai/inference/go`; danh sách model: `/v1/models`.
+   - Chat Completions `/openai/v1/chat/completions` (DeepSeek, GLM, Kimi, …); Responses `/openai/v1/responses`
+     (Muse Spark, GPT, Grok); Anthropic Messages `/anthropic/v1/messages`; Google `/google/v1beta/models/<id>`.
+   - Bắt buộc header `x-opencode-session: <id cố định cho mỗi hội thoại>` (thiếu là HTTP 400 `MissingSessionID`)
+     và `User-Agent` riêng (không dùng tên SDK chung chung). Harness nộp bài không được phụ thuộc header này:
+     thêm header bằng proxy cục bộ hoặc chỉ bật khi chạy local.
+   - Hạn mức tính bằng USD theo từng model: mỗi 5 giờ 20%, mỗi tuần 50%, mỗi tháng 100% hạn mức tháng.
 3. Khi đạt kết quả: đổi `model_api` sang model mạnh (`google-cloud/claude-opus-5-5` hoặc
    `google-cloud/gemini-4-argon`), commit cùng `artifacts/` rồi nộp Writeup. Kaggle cho phép rõ: được sinh
    `artifacts/` bằng model cá nhân rồi đổi `model_api` trước khi commit, không bị loại, miễn là Writeup ghi rõ
