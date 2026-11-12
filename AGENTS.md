@@ -252,6 +252,11 @@ bộ số liệu dùng thẳng được cho Writeup (ablation, so sánh model, �
 - **Bộ kiểm chứng** (khoảng 5 task): không đọc trajectory, không dùng để thiết kế; chỉ đo để phát hiện harness khớp
   quá mức với dev set (bài nộp được chấm trên 56 task ẩn). Danh sách các bộ ghi trong sổ cái.
 
+**Chạy thăm dò có giới hạn thời gian:** đặt `AHPELE_MAX_MINUTES` (ví dụ `"45"`) trong mục `env:` của `submission.yaml`
+**ở một worktree biến thể** (`/home/ttlab/src/ahpele-variants/<tên>`, tạo bằng `git worktree add --detach`), không
+bao giờ trong `submission.yaml` của repo chính. Harness rút hạn chót task về mức đó nên có điểm sau khoảng 1 giờ. Chỉ
+dùng để so sánh nhanh giữa các phiên bản (ghi rõ trong thẻ); đánh giá chính và `artifacts/` luôn chạy đủ thời gian.
+
 **Độ tin cậy:** đo độ dao động bằng cách chạy lặp 2–3 lần trên vài task; chỉ coi là cải tiến khi mức tăng lớn hơn
 độ dao động. Điểm rubric do judge local (DeepSeek) chấm chỉ mang tính tương đối; khi quyết định, ưu tiên task chấm
 bằng script. Ưu tiên cải tiến không phụ thuộc model (quy trình, tự kiểm tra, đọc tài liệu, skill) để chuyển được sang

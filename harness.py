@@ -39,6 +39,7 @@ import pathlib
 import shutil
 import subprocess
 import tempfile
+import time
 from typing import Any
 
 import taskbridge
@@ -320,6 +321,18 @@ async def solve(session: taskbridge.Session) -> str:
   Raises:
     RuntimeError: If Pi exits before the model produces any assistant reply.
   """
+  # AHPELE: local time-boxed probe runs. When AHPELE_MAX_MINUTES is set (only in
+  # local research configs, never in a submitted entry), pull the task deadline
+  # in so the agent is told the shorter budget and wraps up early.
+  cap_min = os.environ.get("AHPELE_MAX_MINUTES")
+  if cap_min:
+    cap_deadline = time.monotonic() + float(cap_min) * 60
+    session.deadline = (
+        cap_deadline
+        if session.deadline is None
+        else min(session.deadline, cap_deadline)
+    )
+    await session.log(f"ahpele: time-boxed probe, {cap_min} min budget")
   with tempfile.TemporaryDirectory(
       prefix="pi-",
       dir=os.environ.get("HOME") or None,
