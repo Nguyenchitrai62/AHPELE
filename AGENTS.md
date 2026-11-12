@@ -203,6 +203,10 @@ uv run python eval/run.py --artifacts /home/ttlab/src/AHPELE      # chấm lại
 uv run python eval/run.py --regrade runs/<name>-<time>            # chấm lại sau khi sửa judge
 ```
 
+Điểm từng task trong lúc lượt chạy chưa xong (Harbor ghi `result.json` ngay khi mỗi task được chấm; bảng tổng kết
+của `eval/run.py` chỉ in khi hết danh sách task):
+`uv run --project /home/ttlab/src/ple python tools/run_status.py /home/ttlab/src/ple/runs/<run>`
+
 Log của kit: `~/.cache/plebench/<name>/` (`build.log`, `serve.log`, `egress.log`, `relay.log`, `check.json`).
 
 ## 10. Tài nguyên máy (10.0.0.105)
