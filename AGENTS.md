@@ -11,6 +11,46 @@ Repo này là **bài nộp (entry)** cho cuộc thi Kaggle
 Kit chính thức: https://github.com/google-research/ple, clone tại `/home/ttlab/src/ple` (**ngoài** repo này;
 entry nằm trong kit thì `kit check` không bao giờ báo sẵn sàng).
 
+## 0. QUY TẮC BẮT BUỘC (đọc trước khi làm bất cứ việc gì)
+
+Vai trò: người dùng chỉ đạo, agent là người làm chính. Không chắc thì hỏi, không đoán.
+
+**Model và chi phí**
+1. Khi test local chỉ được gọi **2 model** qua OpenCode Go: `deepseek-v4.1-flash` và `muse-spark-1.3-contributor`.
+   Áp dụng cho mọi lần gọi: harness, judge, gọi thử một câu. Model khác chỉ được gọi khi người dùng cho phép rõ ràng.
+2. Không gọi Claude, Argon hay bất kỳ model đắt tiền nào để thử, kể cả qua OpenCode Zen, Vertex AI hay key khác.
+3. Harness **phải tương thích** với model nộp bài (`google-cloud/claude-opus-5-5`, `google-cloud/gemini-4-argon`)
+   bằng cách làm theo bài mẫu trong kit (mục 3, mục 6).
+4. Hỏi người dùng trước mọi lượt chạy dài hoặc tốn nhiều hạn mức, ví dụ chạy đủ 29 task dev.
+
+**Nộp bài**
+5. Không bao giờ tự nộp, rút lại hay sửa Writeup trên Kaggle. Chỉ người dùng làm, hoặc agent làm khi được yêu cầu rõ ràng.
+6. Bài nộp phải đủ mọi yêu cầu ở mục 2, qua `kit check` và `kit artifacts`, và `model_api` là một model `google-cloud/<id>`.
+7. Mọi lượt chạy dev đều ghi vào `experiments/log.md` (mục 4), vì Writeup cần số liệu này.
+
+**Fair-play** (mục 5)
+8. Không hard-code đáp án, không nhận diện task, không đọc grader hay `artifacts/`, không sửa tay `artifacts/`,
+   không gọi host ngoài endpoint model, không lưu nội dung task ẩn.
+
+**Bí mật**
+9. Không commit, in ra hay gửi ra ngoài bất kỳ key nào trong `.env`. Chỉ in tên biến. Kiểm tra diff trước mỗi commit.
+
+**Git** (mục 8)
+10. Luôn commit bằng `Nguyenchitrai62 <121591111+Nguyenchitrai62@users.noreply.github.com>` và push lên
+    `origin main` (`https://github.com/Nguyenchitrai62/AHPELE.git`).
+11. Tài khoản GitHub này chỉ được cấu hình cho repo này. Không đổi cấu hình git global, không đổi identity.
+12. Không force-push, không xoá lịch sử, không đổi public/private của repo khi chưa được người dùng đồng ý.
+
+**Môi trường**
+13. Kit nằm ở `/home/ttlab/src/ple`, ngoài repo này. Không copy kit hay dữ liệu task vào repo.
+14. File tạm, dữ liệu tải về và log chạy để ngoài repo. Không đưa nội dung task (prompt, file đề) vào git.
+15. Máy dùng chung và RAM có hạn: chạy từng task một, dọn Docker image khi ổ đĩa đầy, không tắt container hay
+    tiến trình không phải do mình tạo.
+
+**Giao tiếp**
+16. Trả lời người dùng bằng tiếng Việt, báo kết quả trung thực: lỗi thì nói lỗi, kèm log; việc bỏ qua thì nói rõ.
+17. Khi luật thay đổi hoặc người dùng thêm quy tắc mới thì cập nhật ngay file này, rồi commit và push.
+
 ## 1. Cuộc thi tóm tắt
 
 - **Mốc thời gian (23:59 UTC):** 2027-01-05 hạn nộp Writeup + commit · 2027-01-19 xong Stage 1 (chọn Top 100) ·
