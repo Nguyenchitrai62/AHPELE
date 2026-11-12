@@ -168,7 +168,17 @@ so với lần trước, nhận xét lỗi. Giữ lại `runs/` cục bộ để
 
 ## 9. Lệnh thường dùng
 
-Chạy từ `/home/ttlab/src/ple`, nạp biến từ `/home/ttlab/src/AHPELE/.env`:
+**Gate OpenCode (bắt buộc cho mọi lần gọi model khi chạy local):** `tools/start_gate.sh` khởi động
+`tools/opencode_gate.py` trên `0.0.0.0:8090`. Gate chỉ cho qua 2 model đã duyệt, tự thêm header
+`x-opencode-session`, và ghi token/chi phí từng lần gọi vào `~/.cache/ahpele/gate-usage.jsonl`.
+Lần chạy đầu, script tạo `/home/ttlab/src/ple/local.env` (nằm ngoài repo, chứa `MODEL_API_KEY` của gate và cấu hình
+`JUDGE_*`, judge = `deepseek-v4.1-flash`). Không bao giờ gọi thẳng OpenCode mà bỏ qua gate.
+
+Khi test local, entry khai báo `model_api: openai-compatible/deepseek-v4.1-flash` (hoặc `muse-spark-1.3-contributor`)
+với `model_base_url: https://llm.example.org/v1` làm placeholder. Đổi về `google-cloud/<id>` trước khi nộp.
+
+Chạy từ `/home/ttlab/src/ple`; mọi lệnh kit/eval đều thêm
+`--env-file local.env --model-base-url http://localhost:8090/v1`:
 
 ```bash
 uv run python -m kit check /home/ttlab/src/AHPELE                 # build, smoke test, kiểm tra sẵn sàng nộp
