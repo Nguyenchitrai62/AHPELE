@@ -36,6 +36,7 @@ import asyncio
 import json
 import os
 import pathlib
+import re
 import shutil
 import subprocess
 import tempfile
@@ -81,6 +82,9 @@ UNKNOWN_MODEL = {"input": ["text"], "contextWindow": 128000, "maxTokens": 16384}
 # replacing UNKNOWN_MODEL). Values for the local test models come from pi's own
 # opencode-go catalog; Gemini 4 Argon follows the kit's pi-opus README (no
 # `reasoning`, since pi would send a thinking budget that Argon rejects with 400).
+# H5: smaller images per request (pi resizes/re-encodes before sending).
+IMAGE_LIMITS = {"images": {"resize": {"maxWidth": 1568, "maxHeight": 1568,
+                                      "maxBytes": 1_500_000, "jpegQuality": 75}}}
 MODEL_PROFILES: dict[str, dict[str, Any]] = {
     # Local test model (OpenCode Go, Chat Completions). Not submittable.
     "deepseek-v4.1-flash": {
@@ -88,8 +92,10 @@ MODEL_PROFILES: dict[str, dict[str, Any]] = {
         "model": {
             "input": ["text", "image"],
             "contextWindow": 1_000_000,
-            "maxTokens": 32_000,
+            # H6: 32k let a max-effort turn end inside its reasoning (RC-0002)
+            "maxTokens": 64_000,
             "reasoning": True,
+            "inputLimits": IMAGE_LIMITS,
             "thinkingLevelMap": {"off": None, "minimal": None, "low": "low",
                                  "medium": None, "high": "high",
                                  "xhigh": None, "max": "max"},
@@ -109,6 +115,7 @@ MODEL_PROFILES: dict[str, dict[str, Any]] = {
             "contextWindow": 1_048_576,
             "maxTokens": 32_000,
             "reasoning": True,
+            "inputLimits": IMAGE_LIMITS,
             "thinkingLevelMap": {"off": None, "minimal": "minimal",
                                  "low": "low", "medium": "medium",
                                  "high": "high", "xhigh": "xhigh",
@@ -183,6 +190,85 @@ TOOLBOX_NOTE = (
     "The index is a convenience: confirm every number you rely on against the"
     " original file.\n"
 )
+# AHPELE H2: deliverable format checker copied next to the indexer.
+CHECKER_SRC = HERE / "toolbox" / "ahpele_check.py"
+CHECKER_DST = "/tmp/ahpele/bin/ahpele_check.py"
+CHECKER_NOTE = (
+    "\nA format checker is installed: python3 " + CHECKER_DST + " <file or"
+    " folder> ... re-opens deliverables like a grader's parser would (zip"
+    " members, CSV header and placeholder cells, JSON, XLSX, DOCX, IFC, Python)"
+    " and lists problems. Run it on every deliverable before you finish.\n"
+)
+# AHPELE S1-S5: skills copied into the task container (pi's own skill loader
+# reads through the task tools, which act on the task container, so the files
+# must live there). Advertised by name and description; read on demand.
+SKILLS_DIR = HERE / "skills"
+SKILLS_DST = "/tmp/ahpele/skills"
+# AHPELE H3: file paths named in the instruction, for phase-guard.ts.
+DELIVERABLE_RE = re.compile(
+    r"(?<![\w.\-/])(/(?:[\w.\-]+/)*[\w.\-]+\.(?:zip|docx|xlsx|xlsm|csv|json|md|ifc|py|pdf"
+    r"|txt|dxf|xml|html|pptx))(?![\w/])"
+)
+
+
+def flag(name: str) -> bool:
+  """True unless the AHPELE_<name> environment variable is set to 0."""
+  return os.environ.get(f"AHPELE_{name}", "1") != "0"
+
+
+def deliverable_paths(instruction: str) -> list[str]:
+  """Absolute file paths named in the instruction, in order, deduplicated."""
+  seen: list[str] = []
+  for p in DELIVERABLE_RE.findall(instruction or ""):
+    if p not in seen:
+      seen.append(p)
+  return seen[:40]
+
+
+def skill_index() -> list[tuple[str, str, str]]:
+  """(name, description, relative SKILL.md path) for each bundled skill."""
+  out = []
+  for md in sorted(SKILLS_DIR.glob("*/SKILL.md")):
+    text = md.read_text(encoding="utf-8")
+    name = re.search(r"^name:\s*(.+)$", text, re.M)
+    desc = re.search(r"^description:\s*(.+)$", text, re.M)
+    if name and desc:
+      out.append((name.group(1).strip(), desc.group(1).strip(), md.parent.name))
+  return out
+
+
+async def install_extras(session: taskbridge.Session) -> str:
+  """Copies the checker and skills into the task container (H2, skills).
+
+  Returns the system-prompt text describing them; never raises.
+  """
+  text = ""
+  try:
+    if flag("CHECKER") and CHECKER_SRC.exists():
+      await session.write_file(CHECKER_DST, CHECKER_SRC.read_bytes())
+      text += CHECKER_NOTE
+    if flag("SKILLS") and SKILLS_DIR.exists():
+      skills = skill_index()
+      for _, _, folder in skills:
+        for f in (SKILLS_DIR / folder).rglob("*"):
+          if f.is_file():
+            rel = f.relative_to(SKILLS_DIR)
+            await session.write_file(f"{SKILLS_DST}/{rel}", f.read_bytes())
+      if skills:
+        text += (
+            "\nSkills (expert guidance; read the SKILL.md with your read tool"
+            " when its description matches your task, before you start that"
+            " part of the work):\n"
+            + "".join(
+                f"- {n}: {SKILLS_DST}/{folder}/SKILL.md - {d}\n"
+                for n, d, folder in skills
+            )
+        )
+  except Exception as exc:  # noqa: BLE001  pylint: disable=broad-exception-caught
+    await session.log(f"ahpele: extras skipped: {type(exc).__name__}: {exc}")
+  return text
+
+
 TIME_NOTE = (
     " You have about {minutes} minutes in all; leave time to finish the"
     " deliverables."
@@ -421,6 +507,7 @@ async def solve(session: taskbridge.Session) -> str:
     )
     await session.log(f"ahpele: time-boxed probe, {cap_min} min budget")
   index_note = await build_index(session)
+  extras_note = await install_extras(session)
   with tempfile.TemporaryDirectory(
       prefix="pi-",
       dir=os.environ.get("HOME") or None,
@@ -448,9 +535,15 @@ async def solve(session: taskbridge.Session) -> str:
         env["AHPELE_STOP_AT_EPOCH"] = str(
             int(time.time() + max(left - STOP_BEFORE_SEC, 0))
         )
+      env["AHPELE_DELIVERABLES"] = json.dumps(
+          deliverable_paths(session.instruction)
+      )
       name, model = await asyncio.to_thread(
           configure, agent_dir, relay, session, env
       )
+      extensions = ["task-tools.ts", "context-guard.ts", "settle-guard.ts"]
+      if flag("PHASES"):
+        extensions.append("phase-guard.ts")  # AHPELE H3
       argv = [
           PI,
           "--print",
@@ -461,15 +554,10 @@ async def solve(session: taskbridge.Session) -> str:
           "-ns",
           "-np",
           "-na",
-          "-e",
-          str(HERE / "task-tools.ts"),
-          # AHPELE RC-0002: keep only recent images in each model request
-          "-e",
-          str(HERE / "context-guard.ts"),
-          # AHPELE RC-0005: do not let pi settle on a truncated/empty turn,
-          # and ask once for a deliverable check before finishing
-          "-e",
-          str(HERE / "settle-guard.ts"),
+          # task tools; AHPELE: context-guard (RC-0002, recent images only),
+          # settle-guard (RC-0005, no settling on truncated/empty turns),
+          # phase-guard (H3, time checks for missing deliverables)
+          *[a for ext in extensions for a in ("-e", str(HERE / ext))],
           "--provider",
           name,
           "--model",
@@ -477,7 +565,7 @@ async def solve(session: taskbridge.Session) -> str:
           "--thinking",
           profile(model).get("thinking", THINKING),
           "--append-system-prompt",
-          note(session) + index_note,
+          note(session) + index_note + extras_note,
       ]
       run = Run(session, model)
       done = await taskbridge.run_process(

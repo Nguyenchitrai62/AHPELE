@@ -28,7 +28,8 @@ const CONTINUE =
 const VERIFY =
 	"[harness] Before you finish: check that every deliverable file the instruction asks for exists at the exact " +
 	"path and in the exact format it specifies, and that it is complete (list the files and validate their contents " +
-	"with a quick script). If anything is missing, incomplete or invalid, fix it now. If everything is in place, " +
+	"with a quick script, and with python3 /tmp/ahpele/bin/ahpele_check.py <paths> when it exists). If anything is " +
+	"missing, incomplete or invalid, fix it now. If everything is in place, " +
 	"reply with your final summary of what you delivered and where.";
 
 type Block = {type: string; text?: string};
