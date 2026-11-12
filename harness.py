@@ -354,6 +354,12 @@ async def solve(session: taskbridge.Session) -> str:
           NODE_NO_WARNINGS="1",
           TASK_WORKDIR=session.workdir,
       )
+      left = session.time_left()
+      if left is not None:
+        # wall-clock time at which run_process stops pi (settle-guard.ts)
+        env["AHPELE_STOP_AT_EPOCH"] = str(
+            int(time.time() + max(left - STOP_BEFORE_SEC, 0))
+        )
       name, model = await asyncio.to_thread(
           configure, agent_dir, relay, session, env
       )
@@ -372,6 +378,10 @@ async def solve(session: taskbridge.Session) -> str:
           # AHPELE RC-0002: keep only recent images in each model request
           "-e",
           str(HERE / "context-guard.ts"),
+          # AHPELE RC-0005: do not let pi settle on a truncated/empty turn,
+          # and ask once for a deliverable check before finishing
+          "-e",
+          str(HERE / "settle-guard.ts"),
           "--provider",
           name,
           "--model",
