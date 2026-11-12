@@ -134,6 +134,31 @@ NOTE = (
     " check what you wrote. When you are done, reply with a short summary of"
     " what you delivered and where."
 )
+# AHPELE RC-0007: requirements-first working method (generic, never
+# task-specific). Set AHPELE_REQ_WORKFLOW=0 to leave it out (ablations).
+WORKFLOW = (
+    "\n\nWorking method:\n"
+    "1. Read the whole instruction first. Write the exact list of deliverables"
+    " (paths, file names, formats, required columns, fields and tokens) and"
+    " any scoring rules it states to /tmp/ahpele/checklist.md, and re-read"
+    " that file before you finish.\n"
+    "2. Inventory the project documents: note each one's revision and status."
+    " Identify superseded, cancelled, draft or non-adopted documents and the"
+    " RFIs, site instructions and correspondence that change requirements;"
+    " the governing specification usually says which documents apply. Never"
+    " cite or apply a superseded or cancelled document.\n"
+    "3. Before you design anything, extract every hard requirement (safety and"
+    " code limits, standard clauses, permit or authorisation limits,"
+    " capacities, schedule milestones, resource caps) with its document,"
+    " clause and numeric value into a requirements table at"
+    " /tmp/ahpele/requirements.csv. If the deliverable includes a constraint"
+    " or requirement register, build it from this table.\n"
+    "4. Write a check script that recomputes the key numbers from your own"
+    " deliverable and tests it against every row of the requirements table and"
+    " every schema rule in the checklist. Fix every failure. Improve the"
+    " objective (cost, performance) only while all hard checks keep passing,"
+    " and re-run the checks after every change."
+)
 TIME_NOTE = (
     " You have about {minutes} minutes in all; leave time to finish the"
     " deliverables."
@@ -154,6 +179,8 @@ def note(session: taskbridge.Session) -> str:
   """
   left = session.time_left()
   text = NOTE.format(workdir=session.workdir)
+  if os.environ.get("AHPELE_REQ_WORKFLOW", "1") != "0":
+    text += WORKFLOW
   if left is None:
     return text
   return text + TIME_NOTE.format(minutes=int(left // 60))
