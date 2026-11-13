@@ -28,7 +28,9 @@ const CONTINUE =
 const VERIFY =
 	"[harness] Before you finish: check that every deliverable file the instruction asks for exists at the exact " +
 	"path and in the exact format it specifies, and that it is complete (list the files and validate their contents " +
-	"with a quick script, and with python3 /tmp/ahpele/bin/ahpele_check.py <paths> when it exists). If anything is " +
+	"with a quick script, and with python3 /tmp/ahpele/bin/ahpele_check.py <paths> when it exists), and that every hard requirement is met " +
+	"(python3 /tmp/ahpele/bin/ahpele_reqscan.py --check, when it exists, lists requirement candidates you never " +
+	"reviewed). If anything is " +
 	"missing, incomplete or invalid, fix it now. If everything is in place, " +
 	"reply with your final summary of what you delivered and where.";
 
@@ -44,7 +46,8 @@ function review(minutesLeft: number, pctLeft: number): string {
 		`[harness] You still have about ${minutesLeft} minutes (${pctLeft}% of your time). Use it before finishing: ` +
 		"do an independent review pass of your work. Re-read the instruction and your checklist line by line and confirm " +
 		"each item is satisfied in the files on disk. Re-check every hard requirement (limits, codes, permits, capacities, " +
-		"deadlines, document status) against your numbers with a script, and look for anything you have not examined: " +
+		"deadlines, document status) against your numbers with a script; run python3 /tmp/ahpele/bin/ahpele_reqscan.py " +
+			"--check if it exists and resolve every unreviewed candidate; and look for anything you have not examined: " +
 		"documents you skimmed, conditions you assumed were met, conflicts between documents, dates and deadlines, items " +
 		"that need someone to act. If the task asks whether anything stands in the way, check every requirement and every " +
 		"record for issues before concluding there are none. Fix what you find, improve the weakest part of the " +

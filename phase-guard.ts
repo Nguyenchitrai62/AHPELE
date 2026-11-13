@@ -22,6 +22,17 @@ const PATHS: string[] = (() => {
 	}
 })();
 const MARKS = [0.3, 0.6, 0.85];
+// AHPELE RC-0015: constraint gate. If a deliverable is written before the
+// requirements table exists, remind once that constraints come first.
+const REQ_TABLE = "/tmp/ahpele/requirements.csv";
+const GATE_ON = (process.env.AHPELE_REQ_GATE ?? "1") !== "0";
+const GATE_EVERY_MS = 90_000;
+const GATE =
+	"[harness] A deliverable file already exists but there is no requirements table yet (" + REQ_TABLE + " is " +
+	"missing or nearly empty). Constraints come first: before you go further with the design, extract every hard " +
+	"requirement of the governing documents into that table (document, clause, value), review the candidates in " +
+	"/tmp/ahpele/req_candidates.md if it exists (python3 /tmp/ahpele/bin/ahpele_reqscan.py --check lists the " +
+	"unreviewed ones), then check the deliverable against every requirement and fix it.";
 
 function relayExec(command: string): Promise<{exit_code?: number; output?: string}> {
 	return new Promise((resolve) => {
@@ -59,11 +70,28 @@ async function missing(): Promise<string[]> {
 	return (r.output ?? "").split("\n").map((s) => s.trim()).filter(Boolean);
 }
 
+async function gateNeeded(): Promise<boolean> {
+	if (!PATHS.length) return false;
+	const any = PATHS.map((p) => `[ -s ${quote(p)} ]`).join(" || ");
+	const r = await relayExec(`if ${any}; then n=$(wc -l < ${REQ_TABLE} 2>/dev/null || echo 0); [ "$n" -lt 3 ] && echo GATE; fi; true`);
+	return (r.output ?? "").includes("GATE");
+}
+
 export default function (pi: ExtensionAPI) {
 	const start = Date.now();
 	const total = STOP_AT_MS > start ? STOP_AT_MS - start : 0;
 	let next = 0;
+	let gateSent = !GATE_ON;
+	let gateCheckedAt = 0;
 	pi.on("turn_end", async () => {
+		if (!gateSent && Date.now() - gateCheckedAt > GATE_EVERY_MS) {
+			gateCheckedAt = Date.now();
+			if (await gateNeeded()) {
+				gateSent = true;
+				console.error("ahpele: phase-guard constraint gate");
+				return {entries: [{type: "custom_message", customType: "ahpele-phase-guard", content: GATE, display: false}]};
+			}
+		}
 		if (!total || next >= MARKS.length) return undefined;
 		const frac = (Date.now() - start) / total;
 		if (frac < MARKS[next]) return undefined;

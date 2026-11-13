@@ -154,12 +154,16 @@ WORKFLOW = (
     " RFIs, site instructions and correspondence that change requirements;"
     " the governing specification usually says which documents apply. Never"
     " cite or apply a superseded or cancelled document.\n"
-    "3. Before you design anything, extract every hard requirement (safety and"
-    " code limits, standard clauses, permit or authorisation limits,"
-    " capacities, schedule milestones, resource caps) with its document,"
-    " clause and numeric value into a requirements table at"
-    " /tmp/ahpele/requirements.csv. If the deliverable includes a constraint"
-    " or requirement register, build it from this table.\n"
+    "3. Constraint discovery comes before any design, calculation or"
+    " drafting. Extract every hard requirement (safety and code limits,"
+    " standard clauses the project documents invoke, permit or authorisation"
+    " limits, capacities, schedule milestones, resource and constructability"
+    " caps, conditions that must be met) with its document, clause and"
+    " numeric value into a requirements table at /tmp/ahpele/requirements.csv."
+    " A single missed hard requirement usually makes the whole deliverable"
+    " fail, so aim for complete coverage of the governing documents, not a"
+    " sample. If the deliverable includes a constraint or requirement"
+    " register, build it from this table.\n"
     "4. Write a check script that recomputes the key numbers from your own"
     " deliverable and tests it against every row of the requirements table and"
     " every schema rule in the checklist. Fix every failure. Improve the"
@@ -189,6 +193,32 @@ TOOLBOX_NOTE = (
     " <dir> --out <dir>.\n"
     "The index is a convenience: confirm every number you rely on against the"
     " original file.\n"
+)
+# AHPELE RC-0015: requirement scanner. After the index is built it lists
+# requirement-like statements of every document with IDs, and --check reports
+# which ones the agent has neither adopted nor rejected (a recall check).
+# AHPELE_REQSCAN=0 disables it.
+REQSCAN_SRC = HERE / "toolbox" / "ahpele_reqscan.py"
+REQSCAN_DST = "/tmp/ahpele/bin/ahpele_reqscan.py"
+REQSCAN_NOTE = (
+    "\n\nRequirement scan (do this before any design or calculation):\n"
+    "- /tmp/ahpele/req_candidates.md lists requirement-like statements found"
+    " in every document (shall / must / limits with numbers), each with an ID"
+    " such as R0042, project documents first and reference folders (codes,"
+    " standards, catalogues) last. Many are not hard requirements; some hard"
+    " requirements are in tables, drawings or scanned pages the scan cannot"
+    " see, so read those too.\n"
+    "- Record each hard requirement in /tmp/ahpele/requirements.csv with a"
+    " column citing the candidate IDs it comes from. Record candidates you"
+    " decide against in /tmp/ahpele/rejected.csv as ID,reason (superseded"
+    " document, informative only, does not apply to this scope). Writing a"
+    " document's path there with a reason marks all its remaining candidates"
+    " as reviewed: use it for documents that do not govern, and, when a list"
+    " runs to hundreds, after you have adopted the requirements of that"
+    " document that bear on your deliverable.\n"
+    "- Run python3 " + REQSCAN_DST + " --check to see which candidates are"
+    " still unreviewed, and resolve them before you start designing. Run"
+    " --check again before you finish.\n"
 )
 # AHPELE H2: deliverable format checker copied next to the indexer.
 CHECKER_SRC = HERE / "toolbox" / "ahpele_check.py"
@@ -305,9 +335,29 @@ async def build_index(session: taskbridge.Session) -> str:
           inventory[:INVENTORY_CHARS]
           + "\n... (truncated: read /tmp/ahpele/inventory.md for the rest)\n"
       )
-    return TOOLBOX_NOTE + "\nIndex summary: " + output.splitlines()[-1] + "\n\n" + inventory
+    text = TOOLBOX_NOTE + "\nIndex summary: " + output.splitlines()[-1] + "\n\n" + inventory
+    return text + await requirement_scan(session)
   except Exception as exc:  # noqa: BLE001  pylint: disable=broad-exception-caught
     await session.log(f"ahpele: toolbox skipped: {type(exc).__name__}: {exc}")
+    return ""
+
+
+async def requirement_scan(session: taskbridge.Session) -> str:
+  """Runs the requirement scanner on the index (RC-0015); "" if off or failed."""
+  if not flag("REQSCAN") or not REQSCAN_SRC.exists():
+    return ""
+  try:
+    await session.write_file(REQSCAN_DST, REQSCAN_SRC.read_bytes())
+    res = await session.exec(
+        f"cd / && python3 {REQSCAN_DST} 2>&1 | tail -n 2", timeout_sec=180
+    )
+    output = str(res.get("output", "")).strip()
+    await session.log(f"ahpele: reqscan exit={res.get('exit_code')} {output[-300:]}")
+    if res.get("exit_code") != 0 or "requirement scan" not in output:
+      return ""
+    return REQSCAN_NOTE + "Scan summary: " + output.splitlines()[-1][:1500] + "\n"
+  except Exception as exc:  # noqa: BLE001  pylint: disable=broad-exception-caught
+    await session.log(f"ahpele: reqscan skipped: {type(exc).__name__}: {exc}")
     return ""
 
 
