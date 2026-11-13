@@ -146,6 +146,27 @@ def check_ifc(name, data, path=None):
         return
     m = re.search(r"FILE_SCHEMA\s*\(\s*\(\s*'([^']+)'", head)
     note(f"{name}: IFC schema {m.group(1) if m else '?'}")
+    # schema-level check without a BIM library (attribute counts, references, structure): ahpele_ifc.py
+    try:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        import ahpele_ifc
+        import tempfile
+        p = path
+        if p is None:
+            with tempfile.NamedTemporaryFile(suffix=".ifc", delete=False) as fh:
+                fh.write(data)
+                p = fh.name
+        ahpele_ifc.errors.clear(); ahpele_ifc.warnings.clear(); ahpele_ifc.notes.clear()
+        errs, warns, _ = ahpele_ifc.check(p)
+        for e in errs[:30]:
+            problem(f"{name}: IFC {e}")
+        for w in warns[:15]:
+            note(f"{name}: IFC warning: {w}")
+        if not errs:
+            note(f"{name}: IFC entities match the schema (python3 {os.path.dirname(os.path.abspath(__file__))}/ahpele_ifc.py "
+                 f"{name} prints the structure, property sets and footprints)")
+    except ImportError:
+        pass
     try:
         import ifcopenshell  # noqa: F401
     except ImportError:

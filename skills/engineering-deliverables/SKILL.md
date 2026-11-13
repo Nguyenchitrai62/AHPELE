@@ -50,6 +50,13 @@ description: Method for engineering design and calculation packages graded again
 - Run the format checker: `python3 /tmp/ahpele/bin/ahpele_check.py <deliverable paths>`.
 - For CAD/BIM outputs, re-open the file with the standard library you wrote it with and check the entities, property
   sets and attributes the instruction names.
+- IFC written by hand (no BIM library): generate it with a small script, not by typing STEP lines. Copy each entity
+  pattern from the example file the task provides (or from the schema), keep every attribute in order (use `$` for an
+  unset one; an IfcBuildingStorey has 10 attributes, an IfcPropertySet 5, an IfcRelDefinesByProperties 6), write reals
+  as `4.5` or `4.` but never `4.5.`, and double apostrophes inside strings. Run
+  `python3 /tmp/ahpele/bin/ahpele_ifc.py <file>` until it reports 0 errors, and compare its structure printout
+  (storeys and elevations, property sets, footprints, heights) with what the contract requires. A grader that cannot
+  read one entity usually scores the whole file 0.
 
 ## 7. Optimise last
 - Only after all hard checks pass: improve the objective (cost, performance) with a systematic search (enumerate

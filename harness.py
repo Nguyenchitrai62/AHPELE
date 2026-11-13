@@ -166,7 +166,11 @@ WORKFLOW = (
     " register, build it from this table.\n"
     "4. Write a check script that recomputes the key numbers from your own"
     " deliverable and tests it against every row of the requirements table and"
-    " every schema rule in the checklist. Fix every failure. Improve the"
+    " every schema rule in the checklist. When the task gives a format"
+    " contract or an example file, the check script must implement every rule"
+    " of the contract and must pass on the example file before you trust it"
+    " on yours; read your file back the way a grader would (parse it, do not"
+    " eyeball it). Fix every failure. Improve the"
     " objective (cost, performance) only while all hard checks keep passing,"
     " and re-run the checks after every change."
 )
@@ -228,7 +232,16 @@ CHECKER_NOTE = (
     " folder> ... re-opens deliverables like a grader's parser would (zip"
     " members, CSV header and placeholder cells, JSON, XLSX, DOCX, IFC, Python)"
     " and lists problems. Run it on every deliverable before you finish.\n"
+    "For IFC / STEP files written without a BIM library: python3 "
+    + "/tmp/ahpele/bin/ahpele_ifc.py <file.ifc> checks every entity against"
+    " the IFC2X3/IFC4/IFC4X3 schema (exact attribute count and order,"
+    " references, valid STEP numbers and strings) and prints the spatial"
+    " structure, storey elevations, property sets and footprint polygons."
+    " Graders that cannot read one entity usually score the whole file 0.\n"
 )
+# AHPELE RC-0017: schema-level IFC checker (standard library), next to the format checker.
+IFC_CHECKER_SRC = HERE / "toolbox" / "ahpele_ifc.py"
+IFC_CHECKER_DST = "/tmp/ahpele/bin/ahpele_ifc.py"
 # AHPELE S1-S5: skills copied into the task container (pi's own skill loader
 # reads through the task tools, which act on the task container, so the files
 # must live there). Advertised by name and description; read on demand.
@@ -276,6 +289,8 @@ async def install_extras(session: taskbridge.Session) -> str:
   try:
     if flag("CHECKER") and CHECKER_SRC.exists():
       await session.write_file(CHECKER_DST, CHECKER_SRC.read_bytes())
+      if IFC_CHECKER_SRC.exists():
+        await session.write_file(IFC_CHECKER_DST, IFC_CHECKER_SRC.read_bytes())
       text += CHECKER_NOTE
     if flag("SKILLS") and SKILLS_DIR.exists():
       skills = skill_index()
