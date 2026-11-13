@@ -46,6 +46,7 @@ STANDARD_NAME = re.compile(
     r"BS|ASTM|ASHRAE|ASME|AWS|AWWA|API|ANSI|UL|CSA|DIN|AS|NZS|TIA|FM|NEMA|OSHA|EPA|FEMA|AASHTO|MUTCD|ICC|NCHRP|"
     r"USACE|EM[ _-]\d|ETL|DoD|IS)[ _-]?\d", re.I)
 DATA_TYPES = {"csv", "json"}
+VOID_DIR = re.compile(r"(^|/)(archive[sd]?|superseded|obsolete|old|void|withdrawn|cancell?ed)(/|$)", re.I)
 
 
 def load_inventory():
@@ -193,8 +194,19 @@ def check(limit):
               "(one row per hard requirement, with the candidate IDs it comes from).")
     ids = set(re.findall(r"\bR\d{4}\b", adopted + "\n" + rejected))
     rejected_docs = {r["doc"] for r in rows if r["doc"] in rejected}
+    inv = load_inventory()
     key = [r for r in rows if must_review(r)]
-    open_rows = [r for r in key if r["id"] not in ids and r["doc"] not in rejected_docs]
+
+    def covered(r):
+        if r["id"] in ids:
+            return True
+        if r["doc"] not in rejected_docs:
+            return False
+        # rejecting a whole document covers its statements with a number only when the document is marked void
+        # (status word in its file name, or an archive / superseded folder); otherwise each one needs its own ID
+        return int(r["score"]) < 4 or bool(inv.get(r["doc"], {}).get("flags")) or bool(VOID_DIR.search(r["doc"]))
+
+    open_rows = [r for r in key if not covered(r)]
     open_rows.sort(key=lambda r: (-int(r["score"]), r["doc"], int(r["page"])))
     n = len(key)
     print(f"coverage: {n - len(open_rows)}/{n} strong project-document candidates reviewed "
@@ -206,7 +218,8 @@ def check(limit):
               "scanner does not fully cover.")
         return 0
     print("Unreviewed candidates, strongest first (add each hard requirement to requirements.csv citing its ID, or "
-          "list the ID with a reason in rejected.csv):")
+          "list the ID with a reason in rejected.csv; a statement with a number in a document that is not marked "
+          "void needs its own ID even if you rejected the document):")
     for r in open_rows[:limit]:
         print(f"- {r['id']} [{r['doc']} p{r['page']} s{r['score']}] {r['text'][:220]}")
     if len(open_rows) > limit:
