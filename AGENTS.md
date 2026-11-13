@@ -58,8 +58,9 @@ và sổ cái (mục 11).
     (2026-11-12) dọn **phần thừa** của mọi dự án khi cần chỗ: build cache không dùng (`docker builder prune -f --filter
     until=30m`, chừa cache đang build) và image dangling không container nào dùng (`docker image prune -f`). Image còn tag
     của dự án khác: liệt kê để người dùng chọn rồi mới xoá. **Không bao giờ xoá volume** (chứa dữ liệu).
-    Không dùng `sudo`, không restart Docker. Được chạy tối đa 16 task song song (`eval/run.py --trials N` hoặc nhiều lượt
-    cùng lúc): đo thực tế mỗi task chỉ dùng khoảng 200 MB (giới hạn 8–16 GB chỉ là trần). Kiểm tra `free -g` (cột
+    Không dùng `sudo`, không restart Docker. Được chạy tối đa 26 task song song (người dùng nâng từ 16, 2026-11-13;
+    `eval/run.py --trials N` hoặc nhiều lượt cùng lúc): đo thực tế mỗi task dùng khoảng 0,5–0,7 GB RAM (giới hạn 8–16 GB
+    chỉ là trần). Task world vẫn chạy theo nhóm image vì giới hạn ổ đĩa (mục 10). Kiểm tra `free -g` (cột
     available) trước khi thêm task; nếu dưới 8 GB thì không thêm, dưới 4 GB thì dừng bớt task của mình. Đĩa đầy thì dọn theo quy tắc trên, không đủ thì báo người dùng.
 
 **Giao tiếp**
