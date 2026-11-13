@@ -25,6 +25,10 @@ const CONTINUE =
 	"from where you were. Keep your reasoning brief and act through tools. If the deliverable files the instruction " +
 	"asks for do not exist yet, write a complete first version of them now, then keep improving them.";
 
+const CONTINUE_AFTER_ERROR =
+	"[harness] The model service returned an error and the harness waited before retrying. Continue the task from " +
+	"where you were; if the deliverable files do not exist yet, write a complete first version now.";
+
 const VERIFY =
 	"[harness] Before you finish: check that every deliverable file the instruction asks for exists at the exact " +
 	"path and in the exact format it specifies, and that it is complete (list the files and validate their contents " +
@@ -56,7 +60,15 @@ function review(minutesLeft: number, pctLeft: number): string {
 }
 
 type Block = {type: string; text?: string};
-type Message = {role: string; content?: unknown; stopReason?: string};
+type Message = {role: string; content?: unknown; stopReason?: string; errorMessage?: string};
+
+// AHPELE RC-0020: a turn that ended in a model/provider error (after pi's own
+// retries) is retried with a growing wait instead of an immediate nudge, so a
+// gateway that is overloaded for a few minutes does not end the task. These
+// retries have their own budget and stop when too little time is left.
+const ERROR_RETRIES = Number(process.env.AHPELE_ERROR_RETRIES ?? "12");
+const ERROR_WAIT_MS = (k: number) => Math.min(30_000 * 2 ** k, 300_000);
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 function lastAssistant(messages: Message[]): Message | undefined {
 	for (let i = messages.length - 1; i >= 0; i--) if (messages[i]?.role === "assistant") return messages[i];
@@ -76,10 +88,23 @@ export default function (pi: ExtensionAPI) {
 	let nudges = 0;
 	let verified = false;
 	let reviews = 0;
+	let errorRetries = 0;
 	pi.on("agent_before_settle", async (event) => {
-		if (event.outcome === "aborted" || nudges >= MAX_NUDGES) return undefined;
-		if (STOP_AT_MS && STOP_AT_MS - Date.now() < MIN_LEFT_SEC * 1000) return undefined;
+		if (event.outcome === "aborted") return undefined;
 		const last = lastAssistant(event.context.contextMessages as unknown as Message[]);
+		if (last?.stopReason === "error" && errorRetries < ERROR_RETRIES) {
+			const wait = ERROR_WAIT_MS(errorRetries);
+			if (STOP_AT_MS && STOP_AT_MS - Date.now() < wait + MIN_LEFT_SEC * 1000) return undefined;
+			errorRetries++;
+			console.error(`ahpele: settle-guard model error, retry ${errorRetries}/${ERROR_RETRIES} after ${Math.round(wait / 1000)} s: ${(last.errorMessage ?? "").slice(0, 120)}`);
+			await sleep(wait);
+			return {
+				entries: [{type: "custom_message", customType: "ahpele-settle-guard", content: CONTINUE_AFTER_ERROR, display: false}],
+				continue: true,
+			};
+		}
+		if (nudges >= MAX_NUDGES) return undefined;
+		if (STOP_AT_MS && STOP_AT_MS - Date.now() < MIN_LEFT_SEC * 1000) return undefined;
 		let text: string | undefined;
 		const total = STOP_AT_MS > START_MS ? STOP_AT_MS - START_MS : 0;
 		const leftFrac = total ? (STOP_AT_MS - Date.now()) / total : 0;
