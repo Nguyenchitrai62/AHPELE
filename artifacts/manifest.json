@@ -1,0 +1,60 @@
+{
+  "format": 1,
+  "dev_set": "85ad6d96fbf76ee64d9fb6339b3bf342b07128a2ebadc0a10f008c95dac01a48",
+  "created": "2026-11-13T08:48:56Z",
+  "harness": {
+    "name": "ahpele-rc0017",
+    "model_api": "openai-compatible/deepseek-v4.1-flash",
+    "tree": "be7cfc987db2aab54f95cfcee64fffb6f0ec4077c96da4bf6747c0f0b36d54f7",
+    "files": {
+      ".gitignore": "100644 a157223f47d5064412909d4a18a375d7802a5e35",
+      "AGENTS.md": "100644 9d3030ea9119bba599b8f5fc04dde7dea1d0f1c8",
+      "CLAUDE.md": "100644 43c994c2d3617f947bcb5adf1933e21dabe46bb5",
+      "LICENSE": "100644 261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+      "context-guard.ts": "100644 da1cc517d5127100e012d56dea28043b68631139",
+      "docs/kaggle-evaluation.md": "100644 3d3a019681c105e7a5ce17ce21a41709b7be0e1c",
+      "docs/official-agents-guide.md": "100644 edce743d3a4f93d6b4e7251e4f6cdb350e65d107",
+      "harness.py": "100644 e05fef9403697c61e2c44d44f23702483c4329b7",
+      "package-lock.json": "100644 5dba6d2880e4966fca650af70db1c7345d14d20b",
+      "package.json": "100644 701346d5e2e0f3fe4eee265d535319c0b8f634c5",
+      "phase-guard.ts": "100644 30a59a3f724709912a4bfb9ad3cb616d513b7632",
+      "requirements.txt": "100644 7bc03d775075fc452cc88d8aa6292087dd8eec65",
+      "serve.py": "100644 a0b209c2c38dc8204a48d1eb9e48b123f646707f",
+      "settle-guard.ts": "100644 16a79e2dfcfc91be11daebaf8b6c8e78464a2fdb",
+      "skills/document-reading/SKILL.md": "100644 521decba4e2158c0ca8e233faf0edbf14ecf7206",
+      "skills/engineering-deliverables/SKILL.md": "100644 b201592f227a9844dd0568531b591b5619fb3f66",
+      "skills/professional-memo/SKILL.md": "100644 4a56edcb1bc9113358620c4c264d92579870f8ab",
+      "skills/workplace-apps/SKILL.md": "100644 b9149aabeae982c4b47c9cd84a24be53e5e25903",
+      "submission.yaml": "100644 556596e6c519ca9987e08c57d7ca431d682e28f0",
+      "task-tools.ts": "100644 f0f8e7043d3d4c56e8c473b6af0686145706811b",
+      "taskbridge.py": "100644 26cc3d6cf8dbcaed859731ce9a6881f4ca8bfe40",
+      "toolbox/ahpele_check.py": "100644 1ffa6a1c79d59f9f2e0d9136e924660076824e18",
+      "toolbox/ahpele_ifc.py": "100644 9ee48fd11484b1960fc5b628c5fa888d545d9b81",
+      "toolbox/ahpele_index.py": "100644 e023066db9a540d6219744c39b6529d8e9b0978e",
+      "toolbox/ahpele_reqscan.py": "100644 f2590f6f03368b9a322cd92872189ecddec994d6",
+      "tools/opencode_gate.py": "100644 3c433499283149f10d36ca09806e1f882b0db96d",
+      "tools/progress.sh": "100755 818f36b6c81b20c0725ce2bca6b4e9442c2a2bd6",
+      "tools/run_status.py": "100644 c1df37e98d717055e85b720546068d138c1fdc64",
+      "tools/start_gate.sh": "100755 8df170dbdb6bd32bf46a0649f63108d8719d037c",
+      "tools/stop_gate.sh": "100755 23cb40fa98806d133d67272e63ce166d2c655538"
+    },
+    "commit": "1c7827915ad9ba47872fbd3bdf37093c7cfdfa74",
+    "dirty": true
+  },
+  "tasks": {
+    "data-center-site-model": {
+      "run": "ahpele-rc0017-site-a",
+      "trial": "data-center-site-model__rQhwsoJ",
+      "ended": "ok",
+      "reward": 0.0,
+      "tree": "be7cfc987db2aab54f95cfcee64fffb6f0ec4077c96da4bf6747c0f0b36d54f7",
+      "dev_set": "85ad6d96fbf76ee64d9fb6339b3bf342b07128a2ebadc0a10f008c95dac01a48",
+      "files": {
+        "app/files/frontier__DCBim__p6_002/submission/model.ifc": "5005dc4db5fc3bb5dc808364c7060f8f8e0188cb"
+      },
+      "final_message": "a750ff0a0576533250e089866885779aaaddbd59",
+      "deleted": [],
+      "skipped": []
+    }
+  }
+}

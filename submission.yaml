@@ -2,7 +2,7 @@
 # LOCAL TEST CONFIG: openai-compatible model through tools/opencode_gate.py.
 # Before submitting, set model_api to google-cloud/claude-opus-5-5 or
 # google-cloud/gemini-4-argon and remove model_base_url (see AGENTS.md).
-name: ahpele
+name: ahpele-rc0017
 model_api: openai-compatible/deepseek-v4.1-flash
 model_base_url: https://llm.example.org/v1
 install: >-
@@ -10,3 +10,5 @@ install: >-
   && uv venv --python 3.12 /opt/harness/venv
   && uv pip install --python /opt/harness/venv/bin/python -r {src}/requirements.txt
 serve: /opt/harness/venv/bin/python {src}/serve.py
+env:
+  AHPELE_MAX_MINUTES: "90"
