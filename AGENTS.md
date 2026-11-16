@@ -146,6 +146,10 @@ judge, danh sách task, điểm từng task và trung bình, token/chi phí/th�
   Được chạy lại từng task (`--tasks <id>`). Sửa harness thì phải chạy lại dev set và commit chung.
 - KHÔNG gọi host nào ngoài endpoint model (không web search, không tool do nhà cung cấp host, không API ngoài).
 - KHÔNG lưu, log, publish nội dung prompt hay file của task test ẩn.
+- **Giám khảo cách ly (người dùng cho phép, 2026-11-16):** để ước điểm theo judge chính thức (Claude Opus 5.5), một
+  subagent riêng được đọc rubric/prompt judge trong `tests/` của task dev và chấm deliverable đã sinh. Nó chỉ trả về số
+  (điểm, số tiêu chí đạt/tổng), ghi vào `research/data/opus-judge/`, không chép nội dung rubric ra ngoài. Agent nghiên cứu
+  chính và harness không bao giờ đọc rubric; không dùng kết quả từng tiêu chí để sửa harness.
 
 ## 6. Kỹ thuật cần nhớ
 
