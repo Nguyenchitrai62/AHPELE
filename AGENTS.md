@@ -281,6 +281,14 @@ kết quả trên 1–3 task là tín hiệu sơ bộ, phải xác nhận trên 
 thất bại (Writeup chấm điểm cho "ý tưởng không hiệu quả"). Ghi chú về task dev chỉ dùng để phân tích; kiến thức
 đưa vào harness phải là kiến thức kỹ thuật chung, không chép chi tiết hay đáp án của task cụ thể (mục 5).
 
+**Tổng quát và tri thức kỹ sư (người dùng, 2026-11-16):** tập test ẩn không biết trước, nên mọi rule, tool, prompt
+và skill phải dùng được cho task chưa từng thấy: không hard-code giá trị, tên file hay đáp án, không rẽ nhánh theo task.
+Ngược lại, **được và nên** đưa vào tri thức nghề nghiệp chung của kỹ sư để agent làm việc giống kỹ sư thật: quy ước
+đơn vị (bản vẽ xây dựng/MEP thường dùng mm, đơn vị trong file IFC theo đơn vị dự án), nguyên tắc thiết kế và lý do
+của chúng (vì sao đi ống/máng theo trục, thứ tự ưu tiên tuyến khi giao cắt, khoảng hở bảo trì), cách đọc bản vẽ và
+tiêu chuẩn, quy trình kiểm tra chéo mà kỹ sư hay làm. Phép thử: tri thức đó có đúng với mọi dự án cùng loại không,
+hay chỉ đúng với một task dev? Chỉ cái trước được vào harness.
+
 ## 12. Phần nộp bài và phần nghiên cứu
 
 Repo GitHub này sẽ là link nộp Kaggle, nên chỉ chứa phần nộp bài:
