@@ -29,6 +29,8 @@ và sổ cái (mục 11).
 4. Được tự chạy thí nghiệm, kể cả đủ 29 task dev, trong hạn mức gói OpenCode Go. Theo dõi chi phí qua
    `~/.cache/ahpele/gate-usage.jsonl`; chạm hạn mức 5 giờ hoặc tuần thì chờ, đổi sang model còn hạn mức, hoặc
    làm việc không tốn model (phân tích, viết code). Không phung phí: thử trên 1–3 task trước khi chạy cả bộ.
+   **Người dùng (2026-11-16):** được dùng thoải mái hạn mức OpenCode Go; hết thì người dùng cấp tài khoản khác (key mới
+   trong `.env`). Vẫn dừng mở task mới ngay trước hạn mức (khoảng $45/tuần theo gate) để task không bị cắt giữa chừng.
 
 **Nộp bài**
 5. 🔒 Không bao giờ tự nộp, rút lại hay sửa Writeup trên Kaggle. Chỉ người dùng làm, hoặc agent làm khi được yêu cầu rõ ràng.
