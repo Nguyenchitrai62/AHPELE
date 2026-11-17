@@ -21,8 +21,9 @@ penetrates the other by more than --tol. Elements meant to touch (segments meeti
 rack standing on the floor) do not count.
 
 Connectivity: routed elements (pipe / duct / cable-carrier / cable segments and fittings) are
-grouped by system (IfcRelAssignsToGroup) or else by class + ObjectType; inside each group, elements
-whose bounding boxes touch within --gap form one network. More than one network in a group means a
+grouped by system (IfcRelAssignsToGroup) or else by class + ObjectType; inside each group, runs are
+joined where their centerlines meet (end to end, a tee, or a run ending inside a fitting) within
+--gap; runs that merely touch side by side or cross mid-span are not joined. More than one network in a group means a
 break. Needs ifcopenshell (and numpy); knows nothing about any particular task.
 """
 import argparse
@@ -70,7 +71,66 @@ def load(path, threads):
     return f, tree, boxes
 
 
-def networks(f, boxes, gap):
+def _axis(lo, hi):
+    """Centerline of an elongated box (start, end) or None for a compact element (fitting, terminal)."""
+    d = hi - lo
+    k = int(np.argmax(d))
+    rest = sorted(np.delete(d, k))
+    if d[k] < 2.0 * max(rest[-1], 1e-6):
+        return None
+    c = (lo + hi) / 2.0
+    a, b = c.copy(), c.copy()
+    a[k], b[k] = lo[k], hi[k]
+    return a, b
+
+
+def _seg_closest(p1, q1, p2, q2):
+    """Closest points of two segments: (distance, s, t) with s, t in [0, 1]."""
+    d1, d2, r = q1 - p1, q2 - p2, p1 - p2
+    a, e, f = d1 @ d1, d2 @ d2, d2 @ r
+    if a < 1e-9 and e < 1e-9:
+        return float(np.linalg.norm(r)), 0.0, 0.0
+    if a < 1e-9:
+        s, t = 0.0, min(max(f / e, 0.0), 1.0)
+    else:
+        c = d1 @ r
+        if e < 1e-9:
+            t, s = 0.0, min(max(-c / a, 0.0), 1.0)
+        else:
+            b = d1 @ d2
+            den = a * e - b * b
+            s = min(max((b * f - c * e) / den, 0.0), 1.0) if den > 1e-9 else 0.0
+            t = (b * s + f) / e
+            if t < 0.0:
+                t, s = 0.0, min(max(-c / a, 0.0), 1.0)
+            elif t > 1.0:
+                t, s = 1.0, min(max((b - c) / a, 0.0), 1.0)
+    return float(np.linalg.norm((p1 + d1 * s) - (p2 + d2 * t))), s, t
+
+
+def _joined(bi, bj, tol):
+    """True when two routed elements join as an engineer (and most graders) would count it: centerlines meet end to
+    end or as a tee (an end on the other run), or a run ends inside a fitting. Runs that only touch side by side or
+    cross each other mid-span are not joined."""
+    ai, aj = _axis(*bi), _axis(*bj)
+    if ai is None and aj is None:  # two fittings: boxes overlapping or touching
+        return bool(np.all(bi[0] - tol <= bj[1]) and np.all(bj[0] - tol <= bi[1]))
+    if ai is None or aj is None:  # a run ends inside a fitting
+        fit, run = (bi, aj) if ai is None else (bj, ai)
+        return any(bool(np.all(fit[0] - tol <= e) and np.all(e <= fit[1] + tol)) for e in run)
+    dist, si, tj = _seg_closest(ai[0], ai[1], aj[0], aj[1])
+    if dist > tol:  # strict: the two centerlines must actually meet
+        return False
+    hi_ = 0.5 * float(sorted(bi[1] - bi[0])[1])
+    hj_ = 0.5 * float(sorted(bj[1] - bj[0])[1])
+    li, lj = np.linalg.norm(ai[1] - ai[0]), np.linalg.norm(aj[1] - aj[0])
+    # an end may run past the meeting point by about half the other run's width (overlap at the joint)
+    end_i = min(si, 1 - si) * li <= tol + hj_ + hi_
+    end_j = min(tj, 1 - tj) * lj <= tol + hi_ + hj_
+    return end_i or end_j  # both mid-span = a crossing, not a joint
+
+
+def networks(f, boxes, gap, mode="centerline"):
     group_of = {}
     for rel in f.by_type("IfcRelAssignsToGroup"):
         g = rel.RelatingGroup
@@ -95,7 +155,8 @@ def networks(f, boxes, gap):
         for i in range(len(ids)):
             touch = np.all((lo[i] <= hi[i + 1:]) & (lo[i + 1:] <= hi[i]), axis=1)
             for j in np.nonzero(touch)[0] + i + 1:
-                parent[root(i)] = root(int(j))
+                if mode == "touch" or _joined(boxes[ids[i]], boxes[ids[int(j)]], gap):
+                    parent[root(i)] = root(int(j))
         comps = collections.defaultdict(list)
         for i in range(len(ids)):
             comps[root(i)].append(ids[i])
@@ -244,12 +305,18 @@ def main():
         for d, g, x, y, p in sorted(soft, key=lambda r: r[0])[:a.limit]:
             print(f"  {d:7.1f} mm < {g:g} mm  {label(x)}  x  {label(y)}  near ({p[0]:.0f}, {p[1]:.0f}, {p[2]:.0f})")
     pts = [np.array([float(v) for v in s.split(",")]) for s in a.point]
-    print(f"\nnetworks (elements touching within {a.gap:g} mm, grouped by system or class+ObjectType):")
+    print(f"\nnetworks (runs joined at their centerlines: end to end, tee, or into a fitting, within {a.gap:g} mm;"
+          " runs that only touch side by side or cross mid-span are NOT joined; grouped by system or class+ObjectType):")
+    touch = networks(f, boxes, a.gap, mode="touch")
     broken = 0
     for g, comps in nets.items():
         comps.sort(key=len, reverse=True)
         n = sum(len(c) for c in comps)
-        print(f"  {g}: {n} elements in {len(comps)} network(s)" + ("" if len(comps) == 1 else "  <- BROKEN"))
+        hint = ""
+        if len(comps) > 1 and len(touch.get(g, [])) < len(comps):
+            hint = (f"  (touching boxes give {len(touch[g])}: runs stop at another run's surface; extend each run to the"
+                    " centerline of the run it joins so the runs overlap at every joint)")
+        print(f"  {g}: {n} elements in {len(comps)} network(s)" + ("" if len(comps) == 1 else "  <- BROKEN") + hint)
         broken += len(comps) > 1
         for c in comps[:6]:
             cl = np.array([boxes[i][0] for i in c]).min(0)

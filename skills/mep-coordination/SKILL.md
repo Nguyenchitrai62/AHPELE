@@ -42,7 +42,14 @@ description: How an MEP coordinator routes and coordinates services (cable tray,
   extrusion) or check them with `ahpele_clash.py --clearance CLASS=MM`; a model that is clash-free only under thinner or
   shorter solids than the contract assumes will fail.
 
-## 5. Verify on the exported file, iterate to zero
+## 5. Joints: make the centerlines meet
+- Connectivity is judged on centerlines: two runs are joined only where their centerlines meet end to end (elbow,
+  straight joint) or where one run ends ON the centerline of another (tee). Runs that stop at another run's surface,
+  sit side by side, or cross mid-span are not joined, even if their boxes touch.
+- So extend every run to the centerline intersection point of the run it joins (the solids overlap at the joint; that
+  overlap is part of the same run and not a clash), or model an explicit fitting that both runs enter.
+
+## 6. Verify on the exported file, iterate to zero
 - Validate and clash-check the file you will submit, not the lists in your script (a schema or EXPRESS-rule error
   usually fails the whole file, e.g. every IfcShapeRepresentation needs its RepresentationIdentifier such as 'Body'):
   `python3 /tmp/ahpele/bin/ahpele_clash.py model.ifc --point <entry x,y,z>`. Resolve hard clashes by moving whole runs to
