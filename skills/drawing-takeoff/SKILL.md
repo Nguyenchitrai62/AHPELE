@@ -24,6 +24,16 @@ description: How a professional estimator counts and measures items from a drawi
 - A symbol not in the legend is not a scheduled item: carry no quantity, report it with sheet and location.
   A legend item with no instance has quantity zero; never carry a quantity you cannot point to.
 
+## 2b. Tools for reading the sheets (`python3 /tmp/ahpele/bin/ahpele_drawing.py ...`)
+- `grid SHEET --cols 4 --rows 3` writes an overview with a labelled grid and one tile per cell: read the sheet cell by
+  cell (tiles are large enough to see symbols) and refer to places by cell (B3) and pixel coordinates.
+- `crop SHEET --box x0,y0,x1,y1 --dpi 300` zooms on a legend, a title block, a keynote or a doubtful symbol.
+- `find SHEET --template legend_symbol.png --rot 0,90,180,270` lists every place that looks like a symbol, with scores:
+  cut the template from the legend or from one clear instance on the same sheet at the same dpi. Look at the overlay;
+  review every mid-score candidate crop; run it once per similar legend symbol and give each place to the best match.
+  Never drop candidates by threshold alone, and never invent counts or locations: every register row points to a place.
+- `mark SHEET --points register.csv` draws your counted items on the sheet: compare with the sheet for misses and doubles.
+
 ## 3. Count into a per-item register, never into totals
 - Every counted item is one row: sheet, x, y (sheet coordinates), mark, grid bay, how found, flags
   (reference-only, duplicate-of, deleted-by-revision, added-by-note). All totals, per-sheet and per-condition tables

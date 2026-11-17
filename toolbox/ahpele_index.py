@@ -345,7 +345,17 @@ def main():
         elif size > MAX_FILE_BYTES:
             row["note"] = "too large to index"
         elif kind in ("image", "other"):
-            row["note"] = "image: view with the read tool" if kind == "image" else ""
+            row["note"] = ""
+            if kind == "image":
+                dims = ""
+                try:
+                    from PIL import Image as _Img
+                    with _Img.open(path) as im:
+                        dims = f" {im.width}x{im.height}px"
+                except Exception:  # noqa: BLE001  Pillow missing or unreadable image: keep the plain note
+                    pass
+                row["note"] = (f"image{dims}: a drawing or scan; read it in tiles and zooms "
+                               "(ahpele_drawing.py grid / crop / find), not only as one small picture")
         else:
             try:
                 if kind == "pdf":

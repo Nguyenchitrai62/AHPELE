@@ -163,7 +163,10 @@ WORKFLOW = (
     " A single missed hard requirement usually makes the whole deliverable"
     " fail, so aim for complete coverage of the governing documents, not a"
     " sample. If the deliverable includes a constraint or requirement"
-    " register, build it from this table.\n"
+    " register, build it from this table; when the register is kept per item"
+    " (per circuit, section, element, plant), each item's register must list"
+    " every hard requirement that governs that item, with its source clause"
+    " and value: an incomplete item register can forfeit that item.\n"
     "4. Write a check script that recomputes the key numbers from your own"
     " deliverable and tests it against every row of the requirements table and"
     " every schema rule in the checklist. When the task gives a format"
@@ -173,9 +176,13 @@ WORKFLOW = (
     " eyeball it). Fix every failure. Improve the"
     " objective (cost, performance) only while all hard checks keep passing,"
     " and re-run the checks after every change.\n"
-    "5. Keep a margin on hard limits: a value exactly at a limit often fails after rounding, a different load"
-    " case or a stricter reading of the clause, so design to a visible reserve (for example utilisation about 0.95"
-    " or less, or the next standard size) unless the instruction rewards hitting the limit exactly.\n"
+    "5. Feasibility first. Meeting every hard requirement is usually worth far more than a better objective: a"
+    " feasible but costlier design beats an optimal one that breaks a single limit. When unsure, choose the"
+    " conservative feasible option; when a requirement can be read two ways, satisfy the stricter reading and say"
+    " which reading you applied. Keep a margin on hard limits: a value exactly at a limit often fails after rounding,"
+    " a different load case or a stricter reading of the clause, so design to a visible reserve (for example"
+    " utilisation about 0.95 or less, or the next standard size) unless the instruction rewards hitting the limit"
+    " exactly.\n"
     "6. Answer every ask explicitly. List each question and request in the instruction in /tmp/ahpele/asks.md and"
     " give each one its own direct answer in the deliverable: the specific fact (value with unit, and the record it"
     " comes from: document, section or sheet, date) and a definite conclusion in plain words. Citing a clause,"
@@ -254,6 +261,11 @@ CHECKER_NOTE = (
     " placement or unit error), broken runs, each run's distance to a point, and with"
     " --clearance CLASS=MM soft clashes against required clearances or envelopes."
     " A self-check computed from your script's own variables cannot catch these.\n"
+    "For drawings (PDF or image sheets) you must read or count from: python3 "
+    + "/tmp/ahpele/bin/ahpele_drawing.py grid|crop|find|mark ... cuts a sheet into"
+    " labelled tiles, zooms on a region, finds every instance of a legend symbol"
+    " (candidates with coordinates and scores, look-alikes flagged for review)"
+    " and marks your counted items on the sheet so you can see misses and doubles.\n"
 )
 # AHPELE RC-0017: schema-level IFC checker (standard library), next to the format checker.
 IFC_CHECKER_SRC = HERE / "toolbox" / "ahpele_ifc.py"
@@ -261,6 +273,9 @@ IFC_CHECKER_DST = "/tmp/ahpele/bin/ahpele_ifc.py"
 # AHPELE RC-0023: geometry read-back (clashes, stacked placements, connectivity); needs ifcopenshell in the task.
 CLASH_CHECKER_SRC = HERE / "toolbox" / "ahpele_clash.py"
 CLASH_CHECKER_DST = "/tmp/ahpele/bin/ahpele_clash.py"
+# AHPELE RC-0030: drawing reader (tiles with a labelled grid, zoomed crops, symbol search from a legend crop, overlays).
+DRAWING_SRC = HERE / "toolbox" / "ahpele_drawing.py"
+DRAWING_DST = "/tmp/ahpele/bin/ahpele_drawing.py"
 # AHPELE S1-S5: skills copied into the task container (pi's own skill loader
 # reads through the task tools, which act on the task container, so the files
 # must live there). Advertised by name and description; read on demand.
@@ -312,6 +327,8 @@ async def install_extras(session: taskbridge.Session) -> str:
         await session.write_file(IFC_CHECKER_DST, IFC_CHECKER_SRC.read_bytes())
       if CLASH_CHECKER_SRC.exists():
         await session.write_file(CLASH_CHECKER_DST, CLASH_CHECKER_SRC.read_bytes())
+      if DRAWING_SRC.exists():
+        await session.write_file(DRAWING_DST, DRAWING_SRC.read_bytes())
       text += CHECKER_NOTE
     if flag("SKILLS") and SKILLS_DIR.exists():
       skills = skill_index()
