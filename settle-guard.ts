@@ -42,6 +42,8 @@ const VERIFY =
 // While more than REVIEW_MIN_LEFT of the time remains, a normal finish gets a
 // review pass first (at most MAX_REVIEWS). AHPELE_REVIEW=0 disables it.
 const REVIEW_ON = (process.env.AHPELE_REVIEW ?? "1") !== "0";
+// AHPELE RC-0028: the independent checker session must not be told to fix deliverables.
+const VERIFY_ON = (process.env.AHPELE_VERIFY ?? "1") !== "0";
 const REVIEW_MIN_LEFT = 0.4;
 const MAX_REVIEWS = 2;
 const START_MS = Date.now();
@@ -112,7 +114,7 @@ export default function (pi: ExtensionAPI) {
 		else if (event.outcome === "completed" && REVIEW_ON && reviews < MAX_REVIEWS && leftFrac > REVIEW_MIN_LEFT) {
 			reviews++;
 			text = review(Math.round((STOP_AT_MS - Date.now()) / 60000), Math.round(leftFrac * 100));
-		} else if (!verified && event.outcome === "completed") {
+		} else if (!verified && VERIFY_ON && event.outcome === "completed") {
 			verified = true;
 			text = VERIFY;
 		}

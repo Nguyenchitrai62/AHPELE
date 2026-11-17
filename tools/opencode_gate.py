@@ -119,10 +119,14 @@ async def proxy(request: web.Request) -> web.StreamResponse:
     model = body.get("model")
     if model not in ALLOWED:
         return _err(403, f"model {model!r} is not allowed (allowed: {sorted(ALLOWED)})")
-    if ALLOWED[model] != endpoint:
+    translate = (ALLOWED[model] == "responses" and endpoint == "chat/completions"
+                 and not body.get("stream") and not body.get("tools"))
+    if ALLOWED[model] != endpoint and not translate:
         return _err(400, f"model {model!r} is only served on /v1/{ALLOWED[model]}, not /v1/{endpoint}")
 
     sid = _session_id(request, body)
+    if translate:  # a plain chat call (e.g. the local judge) to a Responses-only model
+        return await _chat_via_responses(request, body, model, sid)
     headers = {
         "Authorization": f"Bearer {OPENCODE_KEY}",
         "Content-Type": "application/json",
@@ -186,6 +190,63 @@ async def proxy(request: web.Request) -> web.StreamResponse:
             "billing": oc.get("billing_source"),
             "error": text[:300] if status >= 400 else None,
         })
+
+
+def _text_of(content) -> str:
+    if isinstance(content, str):
+        return content
+    return "\n".join(p.get("text", "") for p in content or [] if isinstance(p, dict))
+
+
+async def _chat_via_responses(request: web.Request, body: dict, model: str, sid: str) -> web.Response:
+    """Serves a non-streaming, tool-free Chat Completions request from the Responses API (LOCAL judge use)."""
+    req: dict = {"model": model, "stream": False,
+                 "input": [{"role": m.get("role", "user"), "content": _text_of(m.get("content"))}
+                           for m in body.get("messages") or []]}
+    if body.get("max_tokens") or body.get("max_completion_tokens"):
+        req["max_output_tokens"] = body.get("max_completion_tokens") or body.get("max_tokens")
+    if body.get("reasoning_effort"):
+        req["reasoning"] = {"effort": body["reasoning_effort"]}
+    rf = body.get("response_format") or {}
+    if rf.get("type") == "json_object":
+        req["text"] = {"format": {"type": "json_object"}}
+    elif rf.get("type") == "json_schema":
+        js = rf.get("json_schema") or {}
+        req["text"] = {"format": {"type": "json_schema", "name": js.get("name", "out"),
+                                  "schema": js.get("schema", {}), "strict": bool(js.get("strict"))}}
+    raw = json.dumps(req).encode()
+    headers = {"Authorization": f"Bearer {OPENCODE_KEY}", "Content-Type": "application/json",
+               "User-Agent": USER_AGENT, "x-opencode-session": sid}
+    started = time.time()
+    params = {"max_tokens": req.get("max_output_tokens"), "reasoning_effort": body.get("reasoning_effort"),
+              "thinking": None, "n_messages": len(req["input"]), "n_tools": 0, "req_bytes": len(raw)}
+    _log({"ts": round(started, 3), "event": "start", "model": model, "session": sid, **params})
+    status, text, usage = 0, "", {}
+    try:
+        async with request.app["client"].post(f"{UPSTREAM}/responses", data=raw, headers=headers) as upstream:
+            status, text = upstream.status, await upstream.text()
+        if status >= 400:
+            return web.Response(status=status, text=text, content_type="application/json")
+        data = json.loads(text)
+        usage = data.get("usage") or {}
+        out = "".join(c.get("text", "") for item in data.get("output") or [] if item.get("type") == "message"
+                      for c in item.get("content") or [] if c.get("type") == "output_text")
+        return web.json_response({
+            "id": data.get("id", "gate"), "object": "chat.completion", "created": int(started), "model": model,
+            "choices": [{"index": 0, "message": {"role": "assistant", "content": out},
+                         "finish_reason": "stop" if data.get("status") == "completed" else "length"}],
+            "usage": {"prompt_tokens": usage.get("input_tokens"), "completion_tokens": usage.get("output_tokens"),
+                      "total_tokens": usage.get("total_tokens")}})
+    finally:
+        oc = usage.get("opencode", {}) if isinstance(usage, dict) else {}
+        _log({"ts": round(started, 3), "event": "end", "secs": round(time.time() - started, 2), "ttfb": None,
+              "resp_bytes": len(text),
+              "reasoning_tokens": (usage.get("output_tokens_details") or {}).get("reasoning_tokens"),
+              "cached_tokens": (usage.get("input_tokens_details") or {}).get("cached_tokens"), **params,
+              "model": model, "endpoint": "chat/completions->responses", "session": sid, "status": status,
+              "stream": False, "input_tokens": usage.get("input_tokens"), "output_tokens": usage.get("output_tokens"),
+              "list_cost": oc.get("list_cost"), "billing": oc.get("billing_source"),
+              "error": text[:300] if status >= 400 else None})
 
 
 async def _startup(app: web.Application) -> None:

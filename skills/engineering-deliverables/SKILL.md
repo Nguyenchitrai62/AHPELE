@@ -57,6 +57,12 @@ description: Method for engineering design and calculation packages graded again
   `python3 /tmp/ahpele/bin/ahpele_ifc.py <file>` until it reports 0 errors, and compare its structure printout
   (storeys and elevations, property sets, footprints, heights) with what the contract requires. A grader that cannot
   read one entity usually scores the whole file 0.
+- Placed or routed 3D models (coordination models, MEP routing, layouts): verify the FILE, not your script's variables.
+  `python3 /tmp/ahpele/bin/ahpele_clash.py <file.ifc> --point <entry x,y,z>` re-reads it with ifcopenshell's geometry
+  engine in world coordinates and lists clashing pairs, element classes stacked at one spot, broken runs and the
+  distance from each run to the entry point. Coordinates in `IfcCartesianPoint` are in the project length unit (a
+  millimetre project takes millimetres); library helpers such as `ifcopenshell.api` placement calls take SI metres and
+  convert for you, so do not divide by 1000 by hand as well. Iterate until 0 clashes and one network per service.
 
 ## 7. Optimise last
 - Only after all hard checks pass: improve the objective (cost, performance) with a systematic search (enumerate

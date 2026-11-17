@@ -31,6 +31,17 @@ description: How to write an engineering memo, letter, reply, review response or
 8. Signature block for the reviewing engineer if the request asks for one (name/title placeholders only where the
    request leaves the signer unnamed; never invent credentials).
 
+## Determinations an expert reader can check (most of the marks)
+- Make a list of every question and request in the instruction (asks.md) and answer each one in its own labelled place.
+- Each answer states the specific fact and the conclusion in one or two plain sentences: "<thing> is / is not <state>,
+  because <fact with value and unit> (<document, section/sheet, date>)". Then give the working.
+- Citing the governing clause is not enough: say what the record actually shows against it. Do not defer the answer to
+  another document, a later review or another party when the record lets you decide; if it does not, say exactly what
+  is missing, who must provide it and what the decision is meanwhile.
+- Commit to one disposition per question. No "may", "appears to", "could potentially" for things you can check.
+- Name the cause, not only the symptom: when something fails or is non-conforming, state why (which input, assumption,
+  revision or condition) and what has to change.
+
 ## Quality rules
 - Be specific: dates, amounts, ratings, section numbers, document titles. No vague hedging.
 - Distinguish facts from the record, requirements, and your engineering judgement.

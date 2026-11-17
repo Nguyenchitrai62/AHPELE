@@ -172,7 +172,16 @@ WORKFLOW = (
     " on yours; read your file back the way a grader would (parse it, do not"
     " eyeball it). Fix every failure. Improve the"
     " objective (cost, performance) only while all hard checks keep passing,"
-    " and re-run the checks after every change."
+    " and re-run the checks after every change.\n"
+    "5. Keep a margin on hard limits: a value exactly at a limit often fails after rounding, a different load"
+    " case or a stricter reading of the clause, so design to a visible reserve (for example utilisation about 0.95"
+    " or less, or the next standard size) unless the instruction rewards hitting the limit exactly.\n"
+    "6. Answer every ask explicitly. List each question and request in the instruction in /tmp/ahpele/asks.md and"
+    " give each one its own direct answer in the deliverable: the specific fact (value with unit, and the record it"
+    " comes from: document, section or sheet, date) and a definite conclusion in plain words. Citing a clause,"
+    " restating the requirement, or referring the reader to another document is not an answer; when something"
+    " cannot be determined, say exactly what is missing and what that means for the decision. Check the deliverable"
+    " against asks.md before you finish."
 )
 # AHPELE H1: document toolbox. Before pi starts, toolbox/ahpele_index.py is
 # copied into the task container and run on the workdir; it writes a text
@@ -238,10 +247,20 @@ CHECKER_NOTE = (
     " references, valid STEP numbers and strings) and prints the spatial"
     " structure, storey elevations, property sets and footprint polygons."
     " Graders that cannot read one entity usually score the whole file 0.\n"
+    "For 3D models (IFC) with placed elements or routed services: python3 "
+    + "/tmp/ahpele/bin/ahpele_clash.py <file.ifc> [--point x,y,z] rebuilds the"
+    " geometry from the FILE with ifcopenshell (world coordinates, as a grader"
+    " does): schema and EXPRESS-rule validation, clashing solids, elements stacked at one spot (a"
+    " placement or unit error), broken runs, each run's distance to a point, and with"
+    " --clearance CLASS=MM soft clashes against required clearances or envelopes."
+    " A self-check computed from your script's own variables cannot catch these.\n"
 )
 # AHPELE RC-0017: schema-level IFC checker (standard library), next to the format checker.
 IFC_CHECKER_SRC = HERE / "toolbox" / "ahpele_ifc.py"
 IFC_CHECKER_DST = "/tmp/ahpele/bin/ahpele_ifc.py"
+# AHPELE RC-0023: geometry read-back (clashes, stacked placements, connectivity); needs ifcopenshell in the task.
+CLASH_CHECKER_SRC = HERE / "toolbox" / "ahpele_clash.py"
+CLASH_CHECKER_DST = "/tmp/ahpele/bin/ahpele_clash.py"
 # AHPELE S1-S5: skills copied into the task container (pi's own skill loader
 # reads through the task tools, which act on the task container, so the files
 # must live there). Advertised by name and description; read on demand.
@@ -291,6 +310,8 @@ async def install_extras(session: taskbridge.Session) -> str:
       await session.write_file(CHECKER_DST, CHECKER_SRC.read_bytes())
       if IFC_CHECKER_SRC.exists():
         await session.write_file(IFC_CHECKER_DST, IFC_CHECKER_SRC.read_bytes())
+      if CLASH_CHECKER_SRC.exists():
+        await session.write_file(CLASH_CHECKER_DST, CLASH_CHECKER_SRC.read_bytes())
       text += CHECKER_NOTE
     if flag("SKILLS") and SKILLS_DIR.exists():
       skills = skill_index()
@@ -313,6 +334,50 @@ async def install_extras(session: taskbridge.Session) -> str:
     await session.log(f"ahpele: extras skipped: {type(exc).__name__}: {exc}")
   return text
 
+
+# AHPELE RC-0028: independent checker. When the author session ends with enough time left, a second session with a
+# clean context (instruction, documents and the files on disk only, none of the author's reasoning) looks for
+# violations and misreadings and writes findings; a third session verifies each finding and fixes the deliverables.
+# Engineering practice: the checking engineer is not the designer. AHPELE_CHECKER=0 disables it.
+REVIEW_FILE = "/tmp/ahpele/independent_review.md"
+CHECKER_MIN_LEFT_SEC = 30 * 60   # run the check-and-fix cycle only with at least this much time left
+CHECKER_SHARE = 0.4              # share of the remaining time the checker may use (capped below)
+CHECKER_MAX_SEC = 75 * 60
+CHECKER_PROMPT = (
+    "You are the independent checking engineer for the task below. Another engineer (the author) has already"
+    " produced the deliverables; they are on disk. You did not do the work and you must not trust it: assume there"
+    " are errors and find them. Do NOT modify, move or delete any deliverable file.\n\n"
+    "Priorities: first the hard requirements (code and safety limits, capacities, permit and contract limits,"
+    " format rules): one violated hard requirement fails the whole deliverable, so check every one on the values in"
+    " the files, for every case it covers, and flag any value at or within rounding of its limit. Second, every"
+    " question or request in the instruction: is each answered directly, with the specific fact (value, unit, source)"
+    " and a definite conclusion? An answer that only cites a clause, restates the requirement, hedges, or defers to"
+    " another document counts as MAJOR.\n\n"
+    "Method: (1) read the instruction and list every explicit requirement and every requirement of the governing"
+    " documents it points to (use /tmp/ahpele/inventory.md, /tmp/ahpele/req_candidates.md and the documents"
+    " themselves; check which revisions govern); (2) open each deliverable and parse it; (3) for each requirement,"
+    " check the deliverable against it yourself, recomputing key numbers with your own script from the source data"
+    " (do not reuse the author's scripts or tables as evidence; /tmp/ahpele/requirements.csv and compliance tables"
+    " written by the author may be wrong or incomplete); check every operating mode, load case, element and period a"
+    " requirement covers, the factors it prescribes, the exact file names, formats, fields and units the instruction"
+    " asks for, and every claim and conclusion in the text against its source; (4) look for what is missing.\n\n"
+    "Write your findings to " + REVIEW_FILE + " as a numbered list, most serious first. For each: severity"
+    " (BLOCKING = a hard requirement or format rule is violated or a deliverable is missing; MAJOR = wrong value or"
+    " conclusion; MINOR), the requirement (document, clause or instruction sentence), what the deliverable has, what"
+    " it should be, and the evidence (file, page, your computed value). Write the file early and keep it updated."
+    " Report only what you verified; if you find nothing wrong after a real check, say so. Then stop with a one-line"
+    " summary.\n\nThe author's final summary was:\n{summary}\n\nThe task instruction given to the author:\n"
+)
+FIXER_PROMPT = (
+    "\n\n---\nState of the work: an earlier session already produced the deliverables for this task; they are on"
+    " disk, with its working files under /tmp/ahpele (requirements, checks). An independent checking engineer then"
+    " reviewed them and wrote findings to " + REVIEW_FILE + ". Your job now: read the findings, verify each one"
+    " against the instruction and the source documents (the checker can be wrong too), fix the deliverables in place"
+    " for every finding you confirm, re-run the checks, and keep everything that is already correct. Do not start"
+    " over. Note each finding you reject, with the reason, at the end of " + REVIEW_FILE + ". Finish with a complete"
+    " final summary of what the deliverables contain and where they are, as the instruction asks.\n\nThe earlier"
+    " session's final summary was:\n{summary}\n"
+)
 
 TIME_NOTE = (
     " You have about {minutes} minutes in all; leave time to finish the"
@@ -489,8 +554,9 @@ def configure(
 class Run:
   """Tracks JSON stream events from a single Pi subprocess run."""
 
-  def __init__(self, session: taskbridge.Session, model: str):
+  def __init__(self, session: taskbridge.Session, model: str, keep_final: bool = True):
     self.session, self.model, self.replies = session, model, 0
+    self.keep_final, self.last_text = keep_final, ""
 
   async def on_event(self, event: dict[str, Any]) -> None:
     """Processes a parsed JSON event from Pi, updating final message and usage.
@@ -507,7 +573,9 @@ class Run:
           if b.get("type") == "text"
       )
       if text.strip():
-        self.session.final_message = text.strip()
+        self.last_text = text.strip()
+        if self.keep_final:
+          self.session.final_message = text.strip()
       if message.get("stopReason") == "error":
         await self.session.log(
             f"pi: model error: {message.get('errorMessage')}"
@@ -541,6 +609,52 @@ class Run:
       return
     if isinstance(event, dict):
       await self.on_event(event)
+
+
+async def independent_check(session, pi_argv, env, work, model, extra_note: str) -> None:
+  """RC-0028: a clean-context checker session writes findings; a fixer session verifies and applies them."""
+  left = session.time_left()
+  if left is None or left < CHECKER_MIN_LEFT_SEC:
+    await session.log(f"ahpele: independent check skipped ({int((left or 0) // 60)} min left)")
+    return
+  author_final = session.final_message or ""
+  cap = min(CHECKER_MAX_SEC, CHECKER_SHARE * left)
+  orig_deadline = session.deadline
+  base = [e for e in ("task-tools.ts", "context-guard.ts", "settle-guard.ts")]
+  await session.log(f"ahpele: independent check: {int(cap // 60)} min of {int(left // 60)} min left")
+  try:
+    session.deadline = min(orig_deadline, time.monotonic() + cap + STOP_BEFORE_SEC)
+    cenv = dict(env)
+    cenv.update(AHPELE_REVIEW="0", AHPELE_VERIFY="0", AHPELE_COMPLIANCE_GATE="0", AHPELE_REQ_GATE="0",
+                AHPELE_STOP_AT_EPOCH=str(int(time.time() + cap)))
+    system = NOTE.format(workdir=session.workdir) + TIME_NOTE.format(minutes=int(cap // 60)) + extra_note
+    crun = Run(session, model, keep_final=False)
+    await taskbridge.run_process(
+        pi_argv(base, system), session, env=cenv, cwd=str(work), on_line=crun.on_line,
+        stdin=(CHECKER_PROMPT.format(summary=author_final[:3000]) + session.instruction).encode(),
+        stop_before_sec=STOP_BEFORE_SEC, log_prefix="checker: ")
+  finally:
+    session.deadline = orig_deadline
+    session.final_message = author_final
+  try:
+    findings = (await session.read_file(REVIEW_FILE)).decode("utf-8", "replace")
+  except Exception:  # noqa: BLE001
+    findings = ""
+  serious = len(re.findall(r"\b(BLOCKING|MAJOR)\b", findings))
+  await session.log(f"ahpele: checker wrote {len(findings)} chars, {serious} blocking/major findings")
+  left = session.time_left()
+  if not serious or left is None or left < 10 * 60:
+    return
+  fenv = dict(env)
+  fenv.update(AHPELE_REVIEW="0", AHPELE_STOP_AT_EPOCH=str(int(time.time() + max(left - STOP_BEFORE_SEC, 0))))
+  exts = list(base) + (["phase-guard.ts"] if flag("PHASES") else [])
+  frun = Run(session, model)
+  await taskbridge.run_process(
+      pi_argv(exts, note(session) + extra_note), session, env=fenv, cwd=str(work), on_line=frun.on_line,
+      stdin=(session.instruction + FIXER_PROMPT.format(summary=author_final[:3000])).encode(),
+      stop_before_sec=STOP_BEFORE_SEC, log_prefix="fixer: ")
+  if not frun.last_text:
+    session.final_message = author_final
 
 
 async def solve(session: taskbridge.Session) -> str:
@@ -600,6 +714,10 @@ async def solve(session: taskbridge.Session) -> str:
         env["AHPELE_STOP_AT_EPOCH"] = str(
             int(time.time() + max(left - STOP_BEFORE_SEC, 0))
         )
+      # task start, fixed across pi restarts, so phase-guard's time fractions stay within the task (RC-0024)
+      if not hasattr(session, "_ahpele_t0"):
+        session._ahpele_t0 = int(time.time())
+      env["AHPELE_START_EPOCH"] = str(session._ahpele_t0)
       env["AHPELE_DELIVERABLES"] = json.dumps(
           deliverable_paths(session.instruction)
       )
@@ -609,29 +727,32 @@ async def solve(session: taskbridge.Session) -> str:
       extensions = ["task-tools.ts", "context-guard.ts", "settle-guard.ts"]
       if flag("PHASES"):
         extensions.append("phase-guard.ts")  # AHPELE H3
-      argv = [
-          PI,
-          "--print",
-          "--mode",
-          "json",
-          "--no-session",
-          "-nc",
-          "-ns",
-          "-np",
-          "-na",
-          # task tools; AHPELE: context-guard (RC-0002, recent images only),
-          # settle-guard (RC-0005, no settling on truncated/empty turns),
-          # phase-guard (H3, time checks for missing deliverables)
-          *[a for ext in extensions for a in ("-e", str(HERE / ext))],
-          "--provider",
-          name,
-          "--model",
-          model,
-          "--thinking",
-          profile(model).get("thinking", THINKING),
-          "--append-system-prompt",
-          note(session) + index_note + extras_note,
-      ]
+      def pi_argv(exts: list[str], system: str) -> list[str]:
+        return [
+            PI,
+            "--print",
+            "--mode",
+            "json",
+            "--no-session",
+            "-nc",
+            "-ns",
+            "-np",
+            "-na",
+            # task tools; AHPELE: context-guard (RC-0002, recent images only),
+            # settle-guard (RC-0005, no settling on truncated/empty turns),
+            # phase-guard (H3, time checks for missing deliverables)
+            *[a for ext in exts for a in ("-e", str(HERE / ext))],
+            "--provider",
+            name,
+            "--model",
+            model,
+            "--thinking",
+            profile(model).get("thinking", THINKING),
+            "--append-system-prompt",
+            system,
+        ]
+
+      argv = pi_argv(extensions, note(session) + index_note + extras_note)
       run = Run(session, model)
       done = await taskbridge.run_process(
           argv,
@@ -643,6 +764,11 @@ async def solve(session: taskbridge.Session) -> str:
           stop_before_sec=STOP_BEFORE_SEC,
           log_prefix="pi: ",
       )
+      if run.replies and flag("CHECKER"):
+        try:
+          await independent_check(session, pi_argv, env, work, model, index_note + extras_note)
+        except Exception as exc:  # noqa: BLE001  the author's deliverables stand if the cycle fails
+          await session.log(f"ahpele: independent check failed: {type(exc).__name__}: {exc}")
   if not run.replies:
     raise RuntimeError(
         f"pi exited with {done.code} before the model answered:"

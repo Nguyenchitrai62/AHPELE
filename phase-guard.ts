@@ -78,7 +78,8 @@ async function gateNeeded(): Promise<boolean> {
 }
 
 export default function (pi: ExtensionAPI) {
-	const start = Date.now();
+	const t0 = Number(process.env.AHPELE_START_EPOCH ?? "0") * 1000;
+	const start = t0 > 0 && t0 <= Date.now() ? t0 : Date.now(); // task start, not this pi process's start (RC-0024)
 	const total = STOP_AT_MS > start ? STOP_AT_MS - start : 0;
 	let next = 0;
 	let gateSent = !GATE_ON;
@@ -96,7 +97,7 @@ export default function (pi: ExtensionAPI) {
 		const frac = (Date.now() - start) / total;
 		if (frac < MARKS[next]) return undefined;
 		while (next < MARKS.length && frac >= MARKS[next]) next++;
-		const pct = Math.round(frac * 100);
+		const pct = Math.min(100, Math.round(frac * 100));
 		const left = Math.max(0, Math.round((STOP_AT_MS - Date.now()) / 60000));
 		const absent = await missing();
 		let text: string;
