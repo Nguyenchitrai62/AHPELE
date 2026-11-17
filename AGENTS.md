@@ -150,6 +150,9 @@ judge, danh sách task, điểm từng task và trung bình, token/chi phí/th�
   subagent riêng được đọc rubric/prompt judge trong `tests/` của task dev và chấm deliverable đã sinh. Nó chỉ trả về số
   (điểm, số tiêu chí đạt/tổng), ghi vào `research/data/opus-judge/`, không chép nội dung rubric ra ngoài. Agent nghiên cứu
   chính và harness không bao giờ đọc rubric; không dùng kết quả từng tiêu chí để sửa harness.
+- **Judge chuẩn của quy trình (người dùng, 2026-11-17):** điểm LLM dùng để báo cáo và ra quyết định luôn là điểm của
+  giám khảo Opus 5.5 cách ly (cho sát với judge chính thức). Judge DeepSeek trong `eval/run.py` chỉ để pipeline chấm
+  chạy hết (điểm script, xuất artifacts) và để tham khảo; không dùng điểm DeepSeek để kết luận.
 
 ## 6. Kỹ thuật cần nhớ
 
