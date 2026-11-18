@@ -5,7 +5,7 @@
 set -euo pipefail
 
 ENTRY="$(cd "$(dirname "$0")/.." && pwd)"
-KIT="${PLE_KIT:-/home/ttlab/src/ple}"
+KIT="${PLE_KIT:-$(cd "$ENTRY/.." && pwd)/ple}"  # the kit checked out next to this repo
 LOCAL_ENV="$KIT/local.env"
 LOG_DIR="$HOME/.cache/ahpele"
 PORT="${GATE_PORT:-8090}"

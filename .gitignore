@@ -7,3 +7,9 @@ __pycache__/
 runs/
 node_modules/
 research/
+# internal notes and local-only helpers (kept on this machine, not part of the submission)
+AGENTS.md
+CLAUDE.md
+docs/
+tools/progress.sh
+tools/run_status.py
