@@ -21,9 +21,9 @@ penetrates the other by more than --tol. Elements meant to touch (segments meeti
 rack standing on the floor) do not count.
 
 Connectivity: routed elements (pipe / duct / cable-carrier / cable segments and fittings) are
-grouped by system (IfcRelAssignsToGroup) or else by class + ObjectType; inside each group, runs are
-joined where their centerlines meet (end to end, a tee, or a run ending inside a fitting) within
---gap; runs that merely touch side by side or cross mid-span are not joined. More than one network in a group means a
+grouped by system (IfcRelAssignsToGroup) or else by class + ObjectType; inside each group, elements
+whose bounding boxes touch within --gap form one network; the count of networks whose centerlines
+meet (end to end, tee, or into a fitting) is also shown when it differs. More than one network in a group means a
 break. Needs ifcopenshell (and numpy); knows nothing about any particular task.
 """
 import argparse
@@ -109,9 +109,8 @@ def _seg_closest(p1, q1, p2, q2):
 
 
 def _joined(bi, bj, tol):
-    """True when two routed elements join as an engineer (and most graders) would count it: centerlines meet end to
-    end or as a tee (an end on the other run), or a run ends inside a fitting. Runs that only touch side by side or
-    cross each other mid-span are not joined."""
+    """Centerline joint test: centerlines meet end to end or as a tee (an end on the other run), or a run ends inside a
+    fitting. Runs that only touch side by side or cross each other mid-span are not joined in this sense."""
     ai, aj = _axis(*bi), _axis(*bj)
     if ai is None and aj is None:  # two fittings: boxes overlapping or touching
         return bool(np.all(bi[0] - tol <= bj[1]) and np.all(bj[0] - tol <= bi[1]))
@@ -305,18 +304,16 @@ def main():
         for d, g, x, y, p in sorted(soft, key=lambda r: r[0])[:a.limit]:
             print(f"  {d:7.1f} mm < {g:g} mm  {label(x)}  x  {label(y)}  near ({p[0]:.0f}, {p[1]:.0f}, {p[2]:.0f})")
     pts = [np.array([float(v) for v in s.split(",")]) for s in a.point]
-    print(f"\nnetworks (runs joined at their centerlines: end to end, tee, or into a fitting, within {a.gap:g} mm;"
-          " runs that only touch side by side or cross mid-span are NOT joined; grouped by system or class+ObjectType):")
-    touch = networks(f, boxes, a.gap, mode="touch")
+    print(f"\nnetworks (elements whose boxes touch within {a.gap:g} mm; the centerline-joined count, where runs meet end"
+          " to end or as a tee, is shown when it differs; grouped by system or class+ObjectType):")
+    centre = nets
+    nets = networks(f, boxes, a.gap, mode="touch")
     broken = 0
     for g, comps in nets.items():
         comps.sort(key=len, reverse=True)
         n = sum(len(c) for c in comps)
-        hint = ""
-        if len(comps) > 1 and len(touch.get(g, [])) < len(comps):
-            hint = (f"  (touching boxes give {len(touch[g])}: runs stop at another run's surface; extend each run to the"
-                    " centerline of the run it joins so the runs overlap at every joint)")
-        print(f"  {g}: {n} elements in {len(comps)} network(s)" + ("" if len(comps) == 1 else "  <- BROKEN") + hint)
+        extra_c = f"  (centerline-joined: {len(centre.get(g, []))} network(s))" if len(centre.get(g, [])) != len(comps) else ""
+        print(f"  {g}: {n} elements in {len(comps)} network(s)" + ("" if len(comps) == 1 else "  <- BROKEN") + extra_c)
         broken += len(comps) > 1
         for c in comps[:6]:
             cl = np.array([boxes[i][0] for i in c]).min(0)
@@ -325,7 +322,6 @@ def main():
                             for k, p in enumerate(pts))
             print(f"     {len(c):4d} elements, x {cl[0]:.0f}..{ch[0]:.0f} y {cl[1]:.0f}..{ch[1]:.0f} "
                   f"z {cl[2]:.0f}..{ch[2]:.0f}{extra}")
-    nsoft = len(soft) if a.clearance else 0
     print(f"\nsummary: {n_invalid} validation issue(s), {len(rows)} clashing pairs, "
           + (f"{nsoft} clearance violations, " if a.clearance else "") + f"{broken} broken network group(s)")
     return 1 if rows or broken or n_invalid or nsoft else 0

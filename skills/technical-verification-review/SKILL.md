@@ -83,7 +83,6 @@ Say plainly whether the planned start can hold, the earliest realistic date, and
 ## Write determinations the reader can verify
 - For every check and every question in the request: the specific fact found in the record (value, unit, source and
   location) and a definite conclusion (verified / not verified / carried forward / cannot be carried forward, and why).
-- Quoting a clause or deferring to another document or party is not a determination when the record lets you decide.
 - State the cause of each non-conformance (which input, assumption, revision or site condition) and the specific item
   that must be produced, by whom, before which activity.
 

@@ -35,10 +35,9 @@ description: How to write an engineering memo, letter, reply, review response or
 - Make a list of every question and request in the instruction (asks.md) and answer each one in its own labelled place.
 - Each answer states the specific fact and the conclusion in one or two plain sentences: "<thing> is / is not <state>,
   because <fact with value and unit> (<document, section/sheet, date>)". Then give the working.
-- Citing the governing clause is not enough: say what the record actually shows against it. Do not defer the answer to
-  another document, a later review or another party when the record lets you decide; if it does not, say exactly what
-  is missing, who must provide it and what the decision is meanwhile.
-- Commit to one disposition per question. No "may", "appears to", "could potentially" for things you can check.
+- When the record does not let you decide a question, say exactly what is missing, who must provide it and what the
+  decision is meanwhile.
+- Commit to one disposition per question, as engineering requests usually ask.
 - Name the cause, not only the symptom: when something fails or is non-conforming, state why (which input, assumption,
   revision or condition) and what has to change.
 

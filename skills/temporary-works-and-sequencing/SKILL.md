@@ -8,19 +8,13 @@ description: Temporary works and construction sequencing - scaffolds and access 
 Project documents and the adopted regulations govern. When a project document restates a regulation, open the
 regulation and apply it as written (or the stricter of the two); a paraphrase is not the requirement.
 
-## Scaffolds (US: 29 CFR 1926 Subpart L; check the edition the project adopts)
-- Capacity: each scaffold and component supports, without failure, its own weight AND at least 4 times the maximum
-  intended load applied or transmitted to it (1926.451(a)(1)). Check capacity >= own weight + 4 x intended load, not
-  capacity >= 4 x intended load.
-- Platforms: each working level fully planked or decked between the front uprights and the guardrail supports
-  (1926.451(b)(1)); minimum width 18 in (1926.451(b)(2)) is a separate rule, not a substitute for full planking.
-  Platform gaps and overlaps, planks extending over supports, and front-edge distance have their own limits.
-- Restraint: supported scaffolds with a height to least base width ratio over 4:1 are restrained by guying, tying or
-  bracing (1926.451(c)(1)); place ties at the first level meeting 4:1 and at the vertical and horizontal intervals the
-  rule sets for the scaffold width, at each end and at intermediate intervals. Compute the ratio for every bay and
-  stage, including partially erected and partially dismantled states.
-- Fall protection above 10 ft (guardrails 38-45 in top rail, midrail, toeboards where objects can fall); access every
-  level; footing on base plates and mudsills on firm ground; overhead power line clearances.
+## Scaffolds and access platforms (US: 29 CFR 1926 Subpart L; check the edition the project adopts)
+- Read each paragraph of the subpart that applies (capacity, platform construction, criteria for supported and
+  suspended scaffolds, access, use, fall protection, falling-object protection, training) and turn each into a check
+  on your own numbers and drawings, for every bay and every erection and dismantling stage.
+- Typical checks: component and system capacity against the loads the rule names; platform construction, width and
+  gaps; restraint of tall or slender scaffolds (height to base ratio, ties, guys, braces); footing and mudsills;
+  guardrails and toeboards; access between levels; clearance from power lines.
 
 ## Excavations (29 CFR 1926 Subpart P)
 - Protective system for excavations 5 ft deep or more unless entirely in stable rock (sloping, benching, shoring or a
