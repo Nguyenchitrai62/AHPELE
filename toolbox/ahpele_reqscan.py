@@ -6,6 +6,7 @@ ahpele_index.py (/tmp/ahpele/corpus) so that hard constraints are not missed:
 
   python3 ahpele_reqscan.py            # scan: writes /tmp/ahpele/req_candidates.md and .csv
   python3 ahpele_reqscan.py --check    # coverage: lists candidates not yet reviewed
+  python3 ahpele_reqscan.py --register FILE.csv|.xlsx   # register rows: is each value in the document it cites?
 
 A candidate counts as reviewed when its ID (e.g. R0042) appears in
 /tmp/ahpele/requirements.csv (adopted) or /tmp/ahpele/rejected.csv (rejected,
@@ -230,16 +231,116 @@ def check(limit):
     return 1
 
 
+SRC_COL = re.compile(r"source|clause|document|doc\b|ref|citation|basis|standard|section", re.I)
+VAL_COL = re.compile(r"value|limit|threshold|criterion|criteria|requirement|min|max|allow", re.I)
+CLAUSE_REF = re.compile(r"(§\s*[\w.()-]+|\b(?:clause|section|sec\.|para\.?|table|article|art\.)\s*[\w.()-]+)", re.I)
+
+
+def norm_num(x):
+    x = x.replace(",", "")
+    try:
+        v = float(x)
+    except ValueError:
+        return {x}
+    out = {x, f"{v:g}"}
+    if v == int(v):
+        out.add(str(int(v)))
+    return out
+
+
+def read_register(path):
+    if path.lower().endswith((".xlsx", ".xlsm")):
+        try:
+            import openpyxl
+        except ImportError:
+            sys.exit("--register on .xlsx needs openpyxl; export the sheet to CSV")
+        wb = openpyxl.load_workbook(path, data_only=True, read_only=True)
+        rows = []
+        for ws in wb.worksheets:
+            rows += [["" if c is None else str(c) for c in r] for r in ws.iter_rows(values_only=True)]
+        return rows
+    with open(path, newline="", encoding="utf-8-sig", errors="replace") as fh:
+        return list(csv.reader(fh))
+
+
+def register_check(path, limit):
+    """Checks a requirement/constraint register against the indexed corpus. First output line is machine-readable."""
+    rows = [r for r in read_register(path) if any(str(c).strip() for c in r)]
+    if len(rows) < 2:
+        print("REGISTER rows=0")
+        print("register is empty")
+        return 1
+    head = [str(c).strip() for c in rows[0]]
+    src = [i for i, h in enumerate(head) if SRC_COL.search(h)]
+    val = [i for i, h in enumerate(head) if VAL_COL.search(h) and i not in src]
+    corpus = os.path.join(OUT, "corpus")
+    docs = {}
+    for dp, _, fns in os.walk(corpus):
+        for fn in fns:
+            if fn.endswith(".txt"):
+                full = os.path.join(dp, fn)
+                docs[os.path.relpath(full, corpus)[:-4]] = full
+    cache = {}
+
+    def text_of(d):
+        if d not in cache:
+            cache[d] = re.sub(r"(?<=\d),(?=\d{3})", "", read_text(docs[d]))
+        return cache[d]
+
+    def match_docs(cell):
+        toks = [t for t in re.findall(r"[A-Za-z0-9][A-Za-z0-9._-]{2,}", cell) if not re.fullmatch(r"[\d.]+", t)]
+        hits = []
+        for d in docs:
+            name = os.path.basename(d).lower()
+            score = sum(1 for t in toks if t.lower() in name)
+            if score:
+                hits.append((score, d))
+        hits.sort(reverse=True)
+        return [d for s, d in hits if s == hits[0][0]] if hits else []
+
+    notfound, unmatched, multi = [], [], []
+    for n, r in enumerate(rows[1:], 2):
+        cells = [str(c) for c in r]
+        src_txt = " ".join(cells[i] for i in src if i < len(cells))
+        val_txt = " ".join(cells[i] for i in val if i < len(cells)) if val else ""
+        if len(set(m.lower() for m in CLAUSE_REF.findall(src_txt))) > 1:
+            multi.append((n, src_txt[:90]))
+        nums = NUMBER.findall(val_txt)
+        if not nums or not src_txt.strip():
+            continue
+        cand = match_docs(src_txt)
+        if not cand:
+            unmatched.append((n, src_txt[:90]))
+            continue
+        missing = [x for x in nums if not any(any(v in text_of(d) for v in norm_num(x)) for d in cand)]
+        if missing:
+            notfound.append((n, ", ".join(missing[:4]), src_txt[:80], os.path.basename(cand[0])))
+    print(f"REGISTER rows={len(rows) - 1} notfound={len(notfound)} unmatched={len(unmatched)} multi={len(multi)}")
+    if not src or not val:
+        print(f"columns used: source={[head[i] for i in src]} value={[head[i] for i in val]} (name them clearly)")
+    for n, miss, s_, d in notfound[:limit]:
+        print(f"row {n}: value {miss} not found in the cited document ({d}; cited as: {s_}) - write the number as the"
+              " clause states it, or cite the table, catalogue or calculation it comes from")
+    for n, s_ in unmatched[:limit]:
+        print(f"row {n}: no indexed document matches the citation '{s_}' - cite the document as it is named")
+    for n, s_ in multi[:limit]:
+        print(f"row {n}: several clauses in one row ({s_}) - one requirement per row")
+    return 1 if notfound or multi else 0
+
+
 def main():
     global OUT
     ap = argparse.ArgumentParser()
     ap.add_argument("--check", action="store_true", help="list candidates not yet adopted or rejected")
+    ap.add_argument("--register", help="check a register file: each value must appear in the document it cites")
     ap.add_argument("--limit", type=int, default=60)
     ap.add_argument("--out", default=OUT, help="index folder (default /tmp/ahpele)")
     a = ap.parse_args()
     OUT = a.out
     if a.check:
         return check(a.limit)
+    if a.register:
+        return register_check(a.register, min(a.limit, 30))
     scan()
     return 0
 

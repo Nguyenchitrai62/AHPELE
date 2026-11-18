@@ -86,3 +86,17 @@ Say plainly whether the planned start can hold, the earliest realistic date, and
 - Quoting a clause or deferring to another document or party is not a determination when the record lets you decide.
 - State the cause of each non-conformance (which input, assumption, revision or site condition) and the specific item
   that must be produced, by whom, before which activity.
+
+## Review like a senior engineer, not a paperwork checker
+- Read the subject's own records line by line (as-built notes, inspection and test records, photos, schedules,
+  submittals): for each line note the material, method, label or condition, check it against the code edition and
+  standards that govern, and record the result in a line-review table (line, requirement, conforms yes/no, evidence).
+  Procedural approvals by others (inspector, AHJ, another reviewer) are evidence, not proof.
+- Walk every operating state or construction stage: what is energised, loaded, flowing, open or exposed in each; what
+  must keep working (protection, monitoring, drainage, access) and from where it is fed; where water, load or current
+  goes when it leaves the element (downstream receiver, adjacent structure, existing permanent work).
+- Scope both ways: list what the request puts in and out of scope; do not turn items under separate review into
+  conditions of yours, and do not drop an item that bears directly on the question because another comment covers it.
+- Decide late: write the case for each possible disposition with its evidence before choosing; then commit to one.
+- Write for the reader: answer first, then the basis; keep the memo as short as the question allows; report values to
+  a sensible precision with units; an external letter carries no internal references or internal copy list.

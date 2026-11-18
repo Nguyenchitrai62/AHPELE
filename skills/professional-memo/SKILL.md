@@ -42,6 +42,14 @@ description: How to write an engineering memo, letter, reply, review response or
 - Name the cause, not only the symptom: when something fails or is non-conforming, state why (which input, assumption,
   revision or condition) and what has to change.
 
+## Scope, states and length
+- Keep a scope ledger: what the request asks, what it excludes, what is under someone else's review. Items under separate
+  review are mentioned, not decided; items that bear on the answer stay in even if raised elsewhere.
+- Check the answer in every operating state or stage the request covers (before / during / after an event, normal and
+  abnormal), not only the steady case.
+- Length and precision follow the reader: a decision memo is usually 1-3 pages plus attachments; report numbers to the
+  precision of the data (not six decimals); match tone and distribution to an internal or external recipient.
+
 ## Quality rules
 - Be specific: dates, amounts, ratings, section numbers, document titles. No vague hedging.
 - Distinguish facts from the record, requirements, and your engineering judgement.

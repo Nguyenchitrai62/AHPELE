@@ -166,7 +166,14 @@ WORKFLOW = (
     " register, build it from this table; when the register is kept per item"
     " (per circuit, section, element, plant), each item's register must list"
     " every hard requirement that governs that item, with its source clause"
-    " and value: an incomplete item register can forfeit that item.\n"
+    " and value: an incomplete item register can forfeit that item. One row per"
+    " requirement; the value is the number as written in the cited clause (a"
+    " number you computed or took from a catalogue, table or schedule cites that"
+    " source instead); include the clauses that a cited clause refers to. When"
+    " a project document restates or interprets a code or standard clause, open"
+    " the original clause and apply it as written, or the stricter of the two."
+    " python3 /tmp/ahpele/bin/ahpele_reqscan.py --register <register file> checks"
+    " that every value appears in the document it cites.\n"
     "4. Write a check script that recomputes the key numbers from your own"
     " deliverable and tests it against every row of the requirements table and"
     " every schema rule in the checklist. When the task gives a format"
@@ -182,7 +189,16 @@ WORKFLOW = (
     " which reading you applied. Keep a margin on hard limits: a value exactly at a limit often fails after rounding,"
     " a different load case or a stricter reading of the clause, so design to a visible reserve (for example"
     " utilisation about 0.95 or less, or the next standard size) unless the instruction rewards hitting the limit"
-    " exactly.\n"
+    " exactly; the reserve follows the tolerance the documents give and is not"
+    " an excuse for a costlier design where cost or performance is scored.\n"
+    "   Optimise like an engineer: for every item, build and price each option the"
+    " documents allow (methods, sizes, routes, shared or separate works) before"
+    " choosing; never reject an option for all items with one general sentence;"
+    " optimise the whole set (shared costs, interactions), not item by item in a"
+    " fixed order; and use the time you have.\n"
+    "   Keep the files consistent: recompute every total, ledger, schedule and"
+    " count in the deliverable from the submitted files themselves (the same"
+    " rule each line states), and make the narrative say what the files say.\n"
     "6. Answer every ask explicitly. List each question and request in the instruction in /tmp/ahpele/asks.md and"
     " give each one its own direct answer in the deliverable: the specific fact (value with unit, and the record it"
     " comes from: document, section or sheet, date) and a definite conclusion in plain words. Citing a clause,"
@@ -360,6 +376,8 @@ REVIEW_FILE = "/tmp/ahpele/independent_review.md"
 CHECKER_MIN_LEFT_SEC = 30 * 60   # run the check-and-fix cycle only with at least this much time left
 CHECKER_SHARE = 0.4              # share of the remaining time the checker may use (capped below)
 CHECKER_MAX_SEC = 75 * 60
+CHECKER_RESERVE_SHARE = 0.3      # the author's deadline is pulled in by this share of the task time ...
+CHECKER_RESERVE_MAX_SEC = 100 * 60  # ... at most this much, so checker + fixer always have time
 CHECKER_PROMPT = (
     "You are the independent checking engineer for the task below. Another engineer (the author) has already"
     " produced the deliverables; they are on disk. You did not do the work and you must not trust it: assume there"
@@ -369,7 +387,13 @@ CHECKER_PROMPT = (
     " the files, for every case it covers, and flag any value at or within rounding of its limit. Second, every"
     " question or request in the instruction: is each answered directly, with the specific fact (value, unit, source)"
     " and a definite conclusion? An answer that only cites a clause, restates the requirement, hedges, or defers to"
-    " another document counts as MAJOR.\n\n"
+    " another document counts as MAJOR. Third, what a senior reviewer would catch: read the subject's records line"
+    " by line (materials, methods, labels, conditions, not only the calculations); walk every operating state or"
+    " stage and ask what is energised, loaded, flowing or exposed and where it goes; check the scope both ways"
+    " (nothing out of scope treated as a condition, nothing relevant left out); argue the opposite conclusion;"
+    " check that register values are the numbers written in the cited clauses; recompute totals, ledgers and"
+    " schedules from the submitted files; check each reported number is physically plausible; and look for a"
+    " feasible option the author dismissed that would score better on the objective.\n\n"
     "Method: (1) read the instruction and list every explicit requirement and every requirement of the governing"
     " documents it points to (use /tmp/ahpele/inventory.md, /tmp/ahpele/req_candidates.md and the documents"
     " themselves; check which revisions govern); (2) open each deliverable and parse it; (3) for each requirement,"
@@ -391,7 +415,11 @@ FIXER_PROMPT = (
     " reviewed them and wrote findings to " + REVIEW_FILE + ". Your job now: read the findings, verify each one"
     " against the instruction and the source documents (the checker can be wrong too), fix the deliverables in place"
     " for every finding you confirm, re-run the checks, and keep everything that is already correct. Do not start"
-    " over. Note each finding you reject, with the reason, at the end of " + REVIEW_FILE + ". Finish with a complete"
+    " over. Change a decision or conclusion only on decisive evidence from the documents, never because a finding"
+    " calls it contestable; never remove the reserve on a hard limit; after every change re-run every check (hard"
+    " limits, geometry, consistency of totals) and update every statement in the deliverables that the change"
+    " affects, so the fix creates no new violation. Note each finding you reject, with the reason, at the end of "
+    + REVIEW_FILE + ". Finish with a complete"
     " final summary of what the deliverables contain and where they are, as the instruction asks.\n\nThe earlier"
     " session's final summary was:\n{summary}\n"
 )
@@ -725,6 +753,13 @@ async def solve(session: taskbridge.Session) -> str:
           NODE_NO_WARNINGS="1",
           TASK_WORKDIR=session.workdir,
       )
+      # RC-0032: reserve time for the independent check and fix (the author once left the checker 18 minutes)
+      orig_deadline, reserve = session.deadline, 0.0
+      left0 = session.time_left()
+      if flag("CHECKER") and left0 is not None and left0 >= 2 * CHECKER_MIN_LEFT_SEC:
+        reserve = min(CHECKER_RESERVE_SHARE * left0, CHECKER_RESERVE_MAX_SEC)
+        session.deadline = orig_deadline - reserve
+        await session.log(f"ahpele: author budget {int((left0 - reserve) // 60)} min, {int(reserve // 60)} min reserved for the independent check")
       left = session.time_left()
       if left is not None:
         # wall-clock time at which run_process stops pi (settle-guard.ts)
@@ -781,6 +816,7 @@ async def solve(session: taskbridge.Session) -> str:
           stop_before_sec=STOP_BEFORE_SEC,
           log_prefix="pi: ",
       )
+      session.deadline = orig_deadline  # give the reserved time back to the check-and-fix cycle
       if run.replies and flag("CHECKER"):
         try:
           await independent_check(session, pi_argv, env, work, model, index_note + extras_note)
