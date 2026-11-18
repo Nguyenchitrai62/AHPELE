@@ -28,18 +28,18 @@ description: How a reviewer checks an engineer's estimate (bid/bond estimate) ag
   cleanout, outlet structure, riprap pad). Each schedule/plan tag counts once; reconcile counts across sheets.
 - Area/volume items: SY = SF/9, CY = CF/27; TON = CY x unit weight (use the stated density; riprap typically
   ~1.4-1.7 ton/CY in place - cite the source). Riprap pad volume = length x width x thickness.
-- Where the plans give no dimension or stationing for an item already carried, the carried quantity stands unless
-  the instructions say otherwise; note "no basis on plans - carried qty retained".
-- Apply rounding only where instructed and only to the stated quantity (e.g. "next whole foot" = ceiling, per item
+- Items with no measurable basis on the plans: apply the instruction's rule for them, otherwise flag them; state
+  which you did.
+- Apply rounding only where instructed and only to the stated quantity (e.g. "round up" = ceiling, per item
   or per reach as the rule says - state which). Never round intermediate values otherwise.
 
 ## 3. Unit prices
 - Match the schedule entry on description, size, material/class and unit exactly (24" RCP is not 24" HDPE; a
   48" manhole is not a 60" one; EA vs LF vs LS). Unit of the estimate must equal the schedule unit; convert the
   quantity, not the price, if they differ.
-- "Actual"/"at cost"/lump-sum entries: keep the amount already carried unless told otherwise.
-- No matching entry: flag it (what plans show, closest schedule items and why they don't fit), keep the carried
-  amount in the subtotal if instructed, and never invent or interpolate a price.
+- Allowance / actual-cost / lump-sum items: follow the instruction's rule for them and state it.
+- No matching schedule entry: flag it (what the plans show, the closest entries and why they do not fit); never
+  invent or interpolate a price; treat the subtotal as the instruction directs.
 - Watch for prices taken from the wrong size row, outdated schedule edition, or units swapped.
 
 ## 4. Arithmetic

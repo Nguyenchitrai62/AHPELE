@@ -55,8 +55,8 @@ function review(minutesLeft: number, pctLeft: number): string {
 		"deadlines, document status) against your numbers with a script; run python3 /tmp/ahpele/bin/ahpele_reqscan.py " +
 			"--check if it exists and resolve every unreviewed candidate; and look for anything you have not examined: " +
 		"documents you skimmed, conditions you assumed were met, conflicts between documents, dates and deadlines, items " +
-		"that need someone to act. If the task asks whether anything stands in the way, check every requirement and every " +
-		"record for issues before concluding there are none. Fix what you find, improve the weakest part of the " +
+		"that need someone to act. If the task asks for a go/no-go decision (approve, issue, energise, accept), check every " +
+		"applicable condition and record before you conclude that nothing blocks it. Fix what you find, improve the weakest part of the " +
 		"deliverable, re-run your checks, then give your final summary."
 	);
 }

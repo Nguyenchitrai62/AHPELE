@@ -1,6 +1,6 @@
 ---
 name: professional-memo
-description: How to write an engineering memo, letter, reply, review response or technical note for a named recipient, judged by an expert rubric - answer first, basis from the record, every issue with owner and timing, exact scope, signature block, and a correct DOCX file. Use whenever the deliverable is a memo, letter, reply, response, review, disposition or note.
+description: How to write an engineering memo, letter, reply, review response or technical note for a named recipient, written for an expert reader - answer first, basis from the record, every issue with owner and timing, exact scope, signature block, and a correct DOCX file. Use whenever the deliverable is a memo, letter, reply, response, review, disposition or note.
 ---
 
 # Professional engineering memo
@@ -11,10 +11,9 @@ description: How to write an engineering memo, letter, reply, review response or
 - Gather the record: correspondence (emails, letters, RFIs), applications, studies, test reports, standards, contracts,
   tracking data in project applications. Build a dated timeline of relevant events in `/tmp/ahpele/timeline.md`.
 - For each potential issue, find the exact source (document, section, date) and what it requires.
-- When the request asks whether anything stands in the way (whether something can be approved, issued, energised,
-  accepted, paid...), do not stop at the first favourable reading. Build a checklist of every condition that applies
+- For go/no-go questions (approve, issue, energise, accept, pay), do not stop at the first favourable reading. Build a checklist of every condition that applies
   (agreements, studies, permits, tests, payments, insurance, notices, deadlines, sign-offs, open correspondence) and
-  check each one against the record as of the stated date. Only conclude that nothing stands in the way after every
+  check each one against the record as of the stated date. Only conclude that nothing blocks the decision after every
   condition has been checked and cited.
 
 ## Structure
@@ -31,7 +30,7 @@ description: How to write an engineering memo, letter, reply, review response or
 8. Signature block for the reviewing engineer if the request asks for one (name/title placeholders only where the
    request leaves the signer unnamed; never invent credentials).
 
-## Determinations an expert reader can check (most of the marks)
+## Determinations the reader can check
 - Make a list of every question and request in the instruction (asks.md) and answer each one in its own labelled place.
 - Each answer states the specific fact and the conclusion in one or two plain sentences: "<thing> is / is not <state>,
   because <fact with value and unit> (<document, section/sheet, date>)". Then give the working.

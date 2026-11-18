@@ -1,6 +1,6 @@
 ---
 name: der-interconnection-screening
-description: Utility DER interconnection screens and reports - fast-track and supplemental review screens (15 % of peak, minimum load from AMI interval data), pre-application capacity reports from queue data, certified equipment lists and witness tests, case tracking. Use for DER/solar/storage interconnection review tasks.
+description: Utility DER interconnection screens and reports - fast-track and supplemental review screens (15 % of peak, minimum load from AMI interval data), pre-application capacity reports from queue data, certified equipment lists and witness tests. Use for DER/solar/storage interconnection review tasks.
 ---
 
 # DER interconnection screening, pre-application reports and certified equipment
@@ -50,41 +50,37 @@ facilities study at customer cost), or withdraw. Never "pass" a failing screen b
 Contents: application/queue ID, size (AC, DC, storage, export limit), feeder/line section, procedure and edition,
 data used and as-of date, each screen with basis, numbers and result, disposition and applicant's next step,
 assumptions, preparer and reviewer/countersignature blocks.
-If an earlier memo exists (even countersigned): do not alter it. Issue a new revision that states it supersedes
-"vN dated ...", lists each error or new fact (wrong window, units, line section, missing queued project, data
-gap), and gives the corrected determination; it needs fresh review/countersignature before going to the applicant.
+To correct an issued document, issue a new revision that says what changed and why; it needs its own review and
+approval.
 
 ## Pre-application report / capacity request (SGIP 1.2)
 - The utility supplies existing data only (no study): total capacity of the substation/bank and circuit likely to
   serve the site, existing aggregate generation, aggregate queued generation, available capacity, single vs three
   phase and distance, peak and minimum load (daytime and absolute) when available, regulators/protective devices
   between site and substation, network service, known constraints.
-- Say plainly: figures are indicative, as of a stated date, not a guarantee, not a capacity reservation, and confer
-  no queue position; the request is not an interconnection application; capacity is allocated by queue order when
-  a complete application is filed and studied; queue changes after the date. Do not "confirm" a figure in writing.
+- Pre-application data are informational, as of a stated date, non-binding and confer no queue position (SGIP 1.2);
+  say so. The request is not an interconnection application; capacity is allocated by queue order when a complete
+  application is filed and studied.
 - Available capacity = applicable limit (hosting capacity, thermal rating or screen limit stated in the record) -
   in-service generation - active queue on the same feeder/section. Count active statuses (application complete,
   in study, ISA signed, under construction, awaiting PTO) and in-service; exclude withdrawn, rejected, expired,
   cancelled, duplicates, other feeders and pre-app requests. Use AC nameplate or certified export limit (not DC);
   storage counts at its export capability. Check MW/kW columns.
-- Compare the requested size with the result (exceeds -> likely study/upgrades). Correct any wrong quoted figure.
+- Compare the requested size with the result (exceeds -> likely study/upgrades). Check any figure the requester
+  quotes against the record.
 
 ## Certified equipment and witness tests
 - Certification: NRTL listing to UL 1741; SB = IEEE 1547.1-2020 tests for IEEE 1547-2018 (SA: older Rule 21);
   state lists (e.g. CEC grid-support inverters) and the utility's Certified Equipment List.
-- Carriage check per site: take the equipment actually installed (commissioning checklist, nameplate photos,
-  as-builts; substitutions happen) and match manufacturer, full model number incl. suffix/rating variant, firmware
-  or software version, and certification standard against the CURRENT list revision as of the date (delisted,
-  superseded, expired entries do not count). Application data are not evidence of what was installed.
+- Carriage check per site: check the as-built record of installed equipment (manufacturer, full model number incl.
+  suffix/rating variant, firmware or software version, certification standard) against the list revision in force on
+  the as-of date (delisted, superseded, expired entries do not count).
 - Not carried -> type test / certification, or field verification witnessed by the utility (IEEE 1547-2018 clause 11
   test & verification, IEEE 1547.1-2020 procedures): unintentional islanding (cease to energize within 2 s),
   voltage/frequency trip and clearing times, ride-through category settings, enter-service / reconnect delay and
   ramp, open-phase response, voltage/reactive and frequency-watt functions, export/power-control limit, disconnect
   and interlock operation, protective relay functional tests if relay-based, applied settings vs utility profile.
-- Customer/installer (often with manufacturer or commissioning agent) performs; utility witnesses (a waiver is
-  decided by the authority the record names). On file first: approved application/agreement,
+- Customer/installer (often with manufacturer or commissioning agent) performs; utility witnesses. On file first:
+  approved application/agreement,
   AHJ final, as-built single-line, site plan, settings file and firmware evidence, test procedure accepted in
   advance, data sheets and certificates, relay settings, test equipment calibration, switching order.
-- Scope a batch only after removing sites already tested, waived, at PTO, withdrawn or otherwise out of it.
-Case tracking: one item per action (each site test, each follow-up) with owner, due date, reference; record the
-determination on the case; close only when deliverable, items and records name the same sites and figures.

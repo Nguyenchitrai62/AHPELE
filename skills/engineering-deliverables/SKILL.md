@@ -55,8 +55,8 @@ description: Method for engineering design and calculation packages graded again
   unset one; an IfcBuildingStorey has 10 attributes, an IfcPropertySet 5, an IfcRelDefinesByProperties 6), write every REAL
   with a decimal point (`20.` or `20.0`, never `20` and never `4.5.`; coordinates, directions, depths, elevations), and double apostrophes inside strings. Run
   `python3 /tmp/ahpele/bin/ahpele_ifc.py <file>` until it reports 0 errors, and compare its structure printout
-  (storeys and elevations, property sets, footprints, heights) with what the contract requires. A grader that cannot
-  read one entity usually scores the whole file 0.
+  (storeys and elevations, property sets, footprints, heights) with what the contract requires. One unreadable
+  entity can make the whole file unreadable.
 - Placed or routed 3D models (coordination models, MEP routing, layouts): verify the FILE, not your script's variables.
   `python3 /tmp/ahpele/bin/ahpele_clash.py <file.ifc> --point <entry x,y,z>` re-reads it with ifcopenshell's geometry
   engine in world coordinates and lists clashing pairs, element classes stacked at one spot, broken runs and the

@@ -78,8 +78,8 @@ description: How a civil reviewer checks site drainage - detention basins and em
 - Spillway detail should show: crest elevation and length, side slopes, design storm and Q (blocked-outlet basis),
   depth over crest and design WSE, top-of-berm elevation and freeboard dimension, lining type with D50/thickness/
   filter, apron length/width/thickness, cutoff walls, discharge direction, reference to the study/calc.
-- Basin notes: 100-yr WSE and volume, outlet sizes/elevations, "spillway to be kept free of fences, walls,
-  landscaping and debris", maintenance responsibility and easement, inspection/certification requirements.
+- Basin notes: 100-yr WSE and volume, outlet sizes/elevations, a note keeping the spillway and overflow
+  path clear of obstructions, maintenance responsibility and easement, inspection/certification requirements.
 - QA/QC habits: same elevation and label on plan, profile, section and detail; north arrow/flow arrows; units;
   notes cite the correct (current) study title/date; revision clouds match the comment response; every agency comment
   closed or answered with a sheet reference. Use drawing-takeoff for reading the sheets themselves.

@@ -8,8 +8,9 @@ description: How a professional estimator counts and measures items from a drawi
 ## 1. Build the sheet index first
 - One row per sheet: number, title, discipline (A/S/M/E/P/FA/T…), type (plan, enlarged plan, schedule, legend,
   details, section), scale, revision number and date from the title block, notes that point to other sheets.
-- Sheet numbering convention: discipline letter + series (x0xx general/legends/schedules, x1xx plans, x2xx
-  device/power plans, x3xx sections/enlarged, x5xx-x6xx details/schedules); confirm on the sheet itself.
+- US National CAD Standard sheet ID: discipline letter + type digit (0 general/legends/notes, 1 plans, 2 elevations,
+  3 sections, 4 enlarged/large-scale views, 5 details, 6 schedules and diagrams, 9 3D) + sequence, e.g. E-101. Office
+  series vary: confirm on the sheet index and the sheets themselves.
 - Dimensions on metric sets are millimetres unless noted; "do not scale" notes mean counts and grid references
   come from the drawing, distances from dimensions or from the grid, not from a ruler. If you must measure,
   calibrate on the graphic scale bar or the grid spacing of THAT sheet (scales differ between sheets).
@@ -21,8 +22,8 @@ description: How a professional estimator counts and measures items from a drawi
 - Read the legend notes, general notes, sheet notes and keynote schedule of EVERY sheet you count. They state:
   which side of a match line is counted, which areas are shown on enlarged plans (parent drawn empty), how grid
   bays/locations are written, what to do with symbols not in the legend, and which devices are required but not drawn.
-- A symbol not in the legend is not a scheduled item: carry no quantity, report it with sheet and location.
-  A legend item with no instance has quantity zero; never carry a quantity you cannot point to.
+- A symbol the legend does not identify: do not guess; list it as an unresolved item or RFI with sheet and
+  location, and treat it as the instruction directs. Never carry a quantity you cannot point to.
 
 ## 2b. Tools for reading the sheets (`python3 /tmp/ahpele/bin/ahpele_drawing.py ...`)
 - `grid SHEET --cols 4 --rows 3` writes an overview with a labelled grid and one tile per cell: read the sheet cell by
@@ -49,16 +50,14 @@ description: How a professional estimator counts and measures items from a drawi
   schedules it. Convert sheet coordinates to a common building grid to check that no item is counted on two sheets.
 - Enlarged plans: the parent plan area is empty; count those items from the enlarged plan only. Enlarged details
   on one sheet may overlap each other: deduplicate by building-grid position.
-- Keyed notes that require undrawn items: compute the census the note asks for from geometry on the sheet it
-  names (number of column bays along a wall, number of units of equipment, doors, etc.), write the census as a table
-  with the evidence, and add those items to the register flagged added-by-note.
+- Keyed and general notes can require items that are not drawn: count them as the note says, record the basis
+  (what was counted, on which sheet) and add them to the register flagged added-by-note.
 - Revision clouds/addenda: list every item inside each cloud with coordinates, then apply the deletion/addition
-  exactly as described (e.g. "positions measured from the south"). Check the revision date against the addendum date.
+  exactly as described. Check the revision date against the addendum date.
 
 ## 5. Conditions and assemblies
-- Location attributes (wall type, fire rating, damp/wet area, mounting) come from the architectural plan and the
-  schedule; compute them per item (e.g. distance to the nearest wall centreline), applying any precedence rules the
-  documents state. Record the rule used in the register.
+- Location-dependent attributes come from the architectural plans and schedules; apply the rule the documents give
+  for assigning them, and record it in the register.
 - For each (item type, condition) pair, quote the specification sentences that require or forbid components
   ("required", "shall", "not used", "separate", "in addition", "in one assembly") and pick catalogue items whose
   listing matches the condition. Check every forbidden component is absent and every required one present.
@@ -68,4 +67,5 @@ description: How a professional estimator counts and measures items from a drawi
 - Every legend mark has either a count with register rows or zero with a statement that none was found.
 - Repetitive layouts (rows of cabinets, bays) usually give repetitive counts; investigate outliers.
 - Narrative (basis of estimate) and tables agree: same sheets, same counts, same exclusions.
-- Pricing: band by the quantity required for the work; spares and carton rounding apply to what is bought only.
+- Price per the contract and price-list rules; keep work quantity and purchase quantity (spares, pack sizes)
+  separate and state the basis of each.

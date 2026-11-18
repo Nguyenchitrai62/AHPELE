@@ -11,29 +11,25 @@ telemetry/RTU end-to-end test, POI protective device acceptance) -> witness test
 PTO. Parallel operation before PTO happens only for a witness test under a switching order.
 Pre-PTO backfeed / energization for commissioning: utility energizes the customer's transformer and collection
 system with the generators disabled and isolated (inverter disconnects open and locked). Normally requires: an
-agreement term allowing it, a written request, AHJ final approval of the work being energized (permits usually
-forbid energizing before final approval), customer equipment complete and safe to energize (code-compliant
-wiring, grounding, overcurrent protection, labels, disconnects), metering set, switching order.
+agreement term allowing it, a written request, AHJ final approval of the work being energized, customer
+equipment complete and safe to energize (code-compliant wiring, grounding, overcurrent
+protection, labels, disconnects), metering set, switching order.
 Reviewer's duties:
 - Two separate checks: (1) procedural conditions in the agreement, tariff, standards and permit; (2) an
   independent engineering review of the customer's construction records line by line against the code edition
   the permit adopts and the utility standards. Do this even when the AHJ has passed the work; an approval by
-  another party is evidence, not proof. A non-conformance visible in the record stands in the way until the
-  customer corrects it and documents the correction.
+  another party is evidence, not proof. A code non-conformance in the record must be corrected and documented
+  before energization/PTO.
 - Walk the operating states: before PTO (POI device open), during the requested operation, normal parallel
-  operation, after a POI trip or utility outage. In each state ask what is energized, what must keep working
-  (protection, telemetry and its station power, metering, controls) and from which source it is fed, and what
-  must be isolated.
-- Items "under separate review" are not re-decided, but the customer-provided provisions they depend on
-  (station service, conduits, pads, communication paths) remain in scope.
-- Typical engineering review list for electrical construction records: conductor ampacity with correction factors
-  and terminal temperature ratings; overcurrent device sizing (125 % continuous for inverter / PV circuits);
-  equipment grounding conductor size per OCPD rating, full size in each parallel raceway; grounding electrode
-  conductor; busbar loading rules for multiple sources; wiring method permitted for the location (exposed, wet,
-  sunlight, underground, cable tray rules, support and securing intervals, burial depth); corrosion protection of
-  metal supports and enclosures outdoors; enclosure ratings; disconnecting means location, grouping and
-  labelling; working space; available fault current vs equipment ratings; voltage limits of dc circuits vs
-  equipment maximums; source and backup of auxiliary/control power.
+  operation, after a POI trip or utility outage. In each state ask what is energized, what must remain in
+  service, and what must be isolated.
+- Respect the stated scope; where an out-of-scope item depends on something in scope, review the in-scope part.
+- Review electrical construction records by NEC article (the edition the permit adopts), plus the utility's
+  interconnection standards: 110 (equipment ratings vs available fault current, working space, enclosure ratings,
+  markings); 240 (overcurrent protection); 250 (grounding and bonding, equipment grounding and electrode conductors);
+  300/310 (wiring methods for the location, support, burial, ampacity with correction factors and terminal ratings);
+  312/314 (cabinets, boxes, enclosures); 690 (PV circuits, dc voltage, disconnects, rapid shutdown, labels); 705
+  (interconnected sources: point of connection, busbar and conductor rules, disconnects); 706 (energy storage).
 Professional reply / memo:
 - First sentence answers the question one way or the other (yes / no / not on that date) with the decisive reason.
 - For each obstacle: what it is, the exact requirement (document, clause, edition), the evidence in the record,

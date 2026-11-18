@@ -27,13 +27,13 @@ description: How an MEP coordinator routes and coordinates services (cable tray,
 
 ## 3. Clearances that count as clashes or code violations
 - Insulation, lagging, flanges and support envelopes are part of the solid that must not clash.
-- Sprinkler heads: keep the zone directly below each deflector clear (NFPA 13 obstruction rules: about 18 in / 460 mm
-  below deflectors, with extra rules for obstructions near heads). Wide obstructions need heads beneath them.
+- Sprinkler heads: keep the zone directly below each deflector clear (NFPA 13: 18 in (457 mm) below deflectors, or the
+  value the project states, with extra rules for obstructions near heads). Wide obstructions need heads beneath them.
 - Electrical equipment: dedicated space above switchboards, panelboards and PDUs is kept free of foreign systems,
   notably piping (NEC 110.26: the width and depth of the equipment, up to 6 ft / 1.8 m above it or to the structural
   ceiling); working space in front stays clear.
-- Keep power and data separated (a stated minimum distance on at least one axis) and keep the minimum headroom below the
-  lowest service.
+- Separate power from data by the distance the project, TIA-569 or the manufacturer requires, and keep the minimum
+  headroom below the lowest service.
 
 ## 4. Model the contract's conventions into the geometry
 - Read how the instruction defines clashes and clearances, and build the solids that way: any covering, envelope,
@@ -42,9 +42,9 @@ description: How an MEP coordinator routes and coordinates services (cable tray,
 
 ## 5. Verify on the exported file, iterate to zero
 - Validate and clash-check the file you will submit, not the lists in your script (a schema or EXPRESS-rule error
-  usually fails the whole file, e.g. every IfcShapeRepresentation needs its RepresentationIdentifier such as 'Body'):
+  can make the file unreadable, e.g. every IfcShapeRepresentation needs its RepresentationIdentifier such as 'Body'):
   `python3 /tmp/ahpele/bin/ahpele_clash.py model.ifc --point <entry x,y,z>`. Resolve hard clashes by moving whole runs to
   their band, then re-run until there are none.
-- Continuity: each service must be one connected network that starts at its entry point; check that every row or piece
-  of equipment it must serve is within the required distance and over the required share of its length.
+- Continuity: each system is one connected network from its source, and every load it serves has a connection (drop
+  or tap).
 - Re-check code clearances and efficiency (total length) after the last change, then re-export and check again.

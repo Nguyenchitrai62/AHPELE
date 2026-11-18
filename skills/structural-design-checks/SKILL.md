@@ -9,7 +9,7 @@ description: Practical structural engineering knowledge for designing and checki
 - A project design-criteria document usually modifies the code (drift rules, live-load reductions, deflection limits,
   resistance factors). Apply the project's method exactly as written; use code defaults only where it is silent.
 - When the criteria say a value "is taken from" or "is governed by" a standard clause, that clause is the governing
-  source: cite it in a register row of its own, with the number exactly as the clause states it.
+  source: cite the clause that governs, with its value.
 - Never mix design bases: allowable (ASD) tables are checked with service-level combinations, factored resistances (phi)
   with factored (LRFD) combinations. Resisting dead load in uplift/overturning is factored down (typically 0.9D) and
   excludes loads that are not permanently attached (hung services, equipment allowances).
@@ -45,9 +45,8 @@ description: Practical structural engineering knowledge for designing and checki
   a minimum attachment regardless of demand.
 
 ## 5. Diaphragms, chords and collectors
-- Force distributes to vertical elements by relative stiffness (rigid/semi-rigid) or by tributary width (flexible). A
-  stiffer diaphragm pulls more force to the stiffest frames and their collectors: stiffening the deck can make a
-  collector or chord fail. Re-run the analysis with the stiffness of the deck actually specified.
+- Force distributes to vertical elements by relative stiffness (rigid/semi-rigid) or by tributary width (flexible). In
+  a semi-rigid diaphragm the distribution depends on deck stiffness: re-run the analysis with the deck specified.
 - Collectors and their connections to the vertical system are designed for overstrength-amplified seismic force (Omega_0)
   in the higher seismic design categories; chords and the diaphragm itself use the unamplified force. Compare the
   AMPLIFIED collector force with the collector/splice capacity; the weakest link (often a bolted splice) governs.
@@ -62,13 +61,10 @@ description: Practical structural engineering knowledge for designing and checki
   made with the wrong model are not valid. Write every reported number from the model output by script.
 
 ## 7. Zoning and cost
-- Build a cell-by-cell map of the minimum specification each location needs (gravity, deflection, uplift, shear,
-  boundary rules). Then cover it with the allowed number of zones/rectangles: start from the cheapest specification as
-  the base and add enclosing rectangles of the heavier specification around each cluster of demanding cells, merging
-  clusters until the caps are met. Compare several layouts.
-- Price every layout completely: area x rate per specification + counted fasteners/connectors x rates + per-item set-up
-  costs (per distinct zone, rectangle, material grade, pattern). A zone is worth adding when area x rate saving exceeds
-  its set-up costs.
+- Build a map of the minimum specification each location needs (gravity, deflection, uplift, shear, boundary rules)
+  and zone to that demand map, within any zoning limits the project sets. Compare several layouts.
+- Price each layout completely with the project's cost rules (including any per-zone or set-up costs) and keep the
+  cheapest feasible layout.
 - Recheck all hard limits for every candidate; keep the best feasible layout on disk.
 
 ## 8. Units and models (BIM / CAD)

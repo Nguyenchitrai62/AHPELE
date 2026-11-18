@@ -1,19 +1,22 @@
 #!/usr/bin/env python3
 """AHPELE geometry check for IFC models: clashes and network connectivity, read back from the FILE.
 
-  python3 ahpele_clash.py model.ifc                       # validation + clashes (> 2 mm) + connectivity
-  python3 ahpele_clash.py model.ifc --tol 2 --gap 5       # penetration tolerance / joint gap, in millimetres
-  python3 ahpele_clash.py model.ifc --point 200,4910,3000 # distance from each network to a point (mm, world)
+  python3 ahpele_clash.py model.ifc                       # validation + clashes + connectivity
+  python3 ahpele_clash.py model.ifc --tol T --gap G       # penetration tolerance / joint gap, in millimetres
+  python3 ahpele_clash.py model.ifc --point X,Y,Z         # distance from each network to a point (mm, world)
   python3 ahpele_clash.py model.ifc --ignore IfcSlab,IfcCovering   # leave classes out of the clash test
-  python3 ahpele_clash.py model.ifc --clearance IfcPipeSegment=25.4  # soft clash: keep 25.4 mm around pipes (insulation,
-                                                                   # access or code envelopes the contract counts)
+  python3 ahpele_clash.py model.ifc --clearance CLASS=MM  # soft clash: keep MM around elements of CLASS
+                                                          # (insulation, access or code envelopes the contract states)
 
-Why: a self-check computed from the script's own variables shows what you MEANT to build; a grader
-reads the IFC with ifcopenshell's geometry engine (world coordinates, placements, units, profiles).
-This tool does the same, so a wrong unit, a misplaced element or an overlap shows up here.
+--tol is a configurable tolerance: use the clash tolerance the contract states (the default is only a small
+numerical allowance for modelling round-off).
 
-Validation: ifcopenshell.validate with EXPRESS where-rules (schema-only if the rule engine cannot run), the
-check most IFC graders run first; any issue can make the whole file fail.
+Why: a self-check computed from the script's own variables shows what you MEANT to build; any other
+software reads the IFC through a geometry engine (world coordinates, placements, units, profiles).
+This tool does the same with ifcopenshell, so a wrong unit, a misplaced element or an overlap shows up here.
+
+Validation: ifcopenshell.validate with EXPRESS where-rules (schema-only if the rule engine cannot run);
+an invalid entity can make the file unreadable to other tools.
 
 Clashes: ifcopenshell.geom.tree intersection test between every pair of products with a body
 (spaces, openings, annotations and spatial elements are skipped); a pair clashes when one solid
@@ -164,7 +167,7 @@ def networks(f, boxes, gap, mode="centerline"):
 
 
 def validate(path, limit):
-    """Schema + EXPRESS where-rule validation, as graders usually run first. Returns the number of issues."""
+    """Schema + EXPRESS where-rule validation. Returns the number of issues."""
     import logging
     import ifcopenshell.validate
 
@@ -210,7 +213,8 @@ def box_dist(b, p):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("ifc")
-    ap.add_argument("--tol", type=float, default=2.0, help="penetration that counts as a clash, mm (default 2)")
+    ap.add_argument("--tol", type=float, default=2.0, help="penetration that counts as a clash, mm; set it to the tolerance the contract states "
+                    "(default 2, a round-off allowance)")
     ap.add_argument("--gap", type=float, default=5.0, help="joint gap that still connects two elements, mm")
     ap.add_argument("--ignore", default="", help="comma-separated classes left out of the clash test")
     ap.add_argument("--point", action="append", default=[], help="x,y,z in mm: report each network's distance")

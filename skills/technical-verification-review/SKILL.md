@@ -6,7 +6,7 @@ description: How a reviewer verifies a design, submittal, calculation or test re
 # Technical verification review
 
 The reviewer's job is to decide, from the record, whether the item can be relied on for the work it releases. Do not
-adopt the requester's framing ("verify on the Rev.2 basis so work can go ahead"): verify independently, then decide.
+adopt the requester's framing: verify independently, then decide.
 
 ## 1. Fix the basis before checking anything
 - **As-of date**: the register due date or the date the request states. Documents dated after it are out of scope;
@@ -33,8 +33,8 @@ List every design input with its value, unit and the document it came from, then
   RFIs and their answers, NCRs, monitoring readings, test reports.
 - Loads and surcharges: adjacent foundations, equipment, traffic, stockpiles, staged loads, live-load portion.
 - Geometry and sequence: dimensions, depths, elevations (check the datum), stages, removal of supports.
-A design built on an input the record contradicts (e.g. groundwater lower than logged, a layer missing, a surcharge
-omitted) is not verified, however good its arithmetic.
+A design built on an input the record contradicts (e.g. a soil parameter, load, level or dimension that differs from
+the record) is not verified, however good its arithmetic.
 
 ## 3. Recompute the governing checks yourself
 - Write a script (`/tmp/ahpele/verify.py`) with every input, its source and unit; recompute each governing check
@@ -42,12 +42,12 @@ omitted) is not verified, however good its arithmetic.
   the designer's inputs. Report both: "designer: X; with logged conditions: Y; required: Z".
 - State the method and standard used (formula, chart, code clause), the acceptance criterion and its source.
 - Flag differences > ~5-10% and explain the cause (input, method, arithmetic).
-- Classify every check in a table: check | designer's result | reviewer's result | criterion | **can be carried forward
-  as it stands / cannot** | reason (which input changed, which record shows it). A check unaffected by the changed
-  input can be carried forward; one that depends on it cannot.
+- Classify every check in a table: check | designer's result | reviewer's result | criterion | **still valid / needs
+  revision** | reason (the input that changed, and the record that shows it). A check unaffected by a changed input
+  stays valid; one that depends on it needs revision.
 
 ## 4. Effects beyond the item
-- Adjacent and permanent works: what the released activity does to work already built or nearby (undermining,
+- Effects on adjacent and existing works (undermining,
   surcharge, dewatering drawdown and settlement, vibration, loss of support, heave, changed drainage). Name the elements
   (grid lines, footings, slabs, utilities) and give the magnitude or the check needed, plus protection and monitoring
   (instrument type, baseline, alert/action thresholds, frequency).
@@ -76,13 +76,13 @@ Say plainly whether the planned start can hold, the earliest realistic date, and
   or "Not applicable - reason" rather than deleting). Sections usually map to: reviewed documents, basis, findings
   with working, disposition, required actions, schedule, attachments, signature.
 - Every number carries a unit and names the record it comes from (document, revision, table/page, boring, date).
-- Register entry: item ID, response text (one paragraph: disposition, decisive reason, required actions and owner),
-  responder name, date, status. It must say exactly what the memo says; status "Closed" only if verified.
+- Register entry: item ID, response (disposition, decisive reason, required actions and owner), responder, date and
+  status, consistent with the memo; close an item only when it has been verified.
 - If the task exposes a tracker/register application, update it and read it back (see workplace-apps).
 
 ## Write determinations the reader can verify
 - For every check and every question in the request: the specific fact found in the record (value, unit, source and
-  location) and a definite conclusion (verified / not verified / carried forward / cannot be carried forward, and why).
+  location) and a definite conclusion (verified / not verified / still valid / needs revision, and why).
 - State the cause of each non-conformance (which input, assumption, revision or site condition) and the specific item
   that must be produced, by whom, before which activity.
 

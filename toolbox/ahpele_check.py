@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """AHPELE deliverable checker (runs inside the task container).
 
-Re-opens each deliverable the way a grader's parser would and reports problems:
+Re-opens each deliverable the way the recipient's software would and reports problems:
 missing or empty files, unreadable archives, CSV/JSON/XLSX/DOCX/IFC that do not
 parse, placeholder values (TBD, NaN, ...), Python that does not compile.
 Standard library only; uses ifcopenshell when it is importable.
