@@ -54,6 +54,9 @@ def label(e):
     return f"#{e.id()} {e.is_a()}" + (f" '{n}'" if n else "") + (f" [{t}]" if t and t != n else "")
 
 
+BOXLIKE = set()  # ids of solids that are axis-aligned boxes (their bounding box is the solid)
+
+
 def load(path, threads):
     f = ifcopenshell.open(path)
     s = ifcopenshell.geom.settings()
@@ -68,7 +71,11 @@ def load(path, threads):
             tree.add_element(shape)
             v = np.array(shape.geometry.verts, dtype=float).reshape(-1, 3) * 1000.0  # engine output is metres
             if len(v):
-                boxes[shape.id] = (v.min(0), v.max(0))
+                lo, hi = v.min(0), v.max(0)
+                boxes[shape.id] = (lo, hi)
+                corner = (np.isclose(v, lo, atol=0.5) | np.isclose(v, hi, atol=0.5)).all()
+                if corner and (hi - lo).min() > 0.5:
+                    BOXLIKE.add(shape.id)
             if not it.next():
                 break
     return f, tree, boxes
@@ -266,6 +273,22 @@ def main():
         seen.add(k)
         p = (np.array(list(c.p1)) + np.array(list(c.p2))) / 2 * 1000.0
         rows.append((c.distance * 1000.0, x, y, p))
+    # axis-aligned boxes (ducts, trays, busway, rectangular insulation envelopes, slabs): exact interval overlap,
+    # because a mesh-based test can miss two boxes that share a face plane and overlap along it
+    ids = [e.id() for e in elems if e.id() in BOXLIKE]
+    if len(ids) > 1:
+        lo = np.array([boxes[i][0] for i in ids]); hi = np.array([boxes[i][1] for i in ids])
+        for k in range(len(ids) - 1):
+            ov = np.minimum(hi[k], hi[k + 1:]) - np.maximum(lo[k], lo[k + 1:])
+            depth = ov.min(1)
+            for j in np.nonzero(depth > a.tol)[0]:
+                i1, i2 = ids[k], ids[k + 1 + j]
+                key = tuple(sorted((i1, i2)))
+                if key in seen:
+                    continue
+                seen.add(key)
+                cpt = (np.maximum(lo[k], lo[k + 1 + j]) + np.minimum(hi[k], hi[k + 1 + j])) / 2
+                rows.append((float(depth[j]), f.by_id(i1), f.by_id(i2), cpt))
     rows.sort(key=lambda r: -r[0])
     soft = []
     for spec in a.clearance:
@@ -303,9 +326,10 @@ def main():
 
     if a.clearance:
         same_s = [r for r in soft if net_of.get(r[2].id()) and net_of.get(r[2].id()) == net_of.get(r[3].id())]
-        print(f"\nclearance violations: {len(soft)} pairs closer than the required clearance"
-              + (f" ({len(same_s)} within one run, usually joints)" if same_s else ""))
-        for d, g, x, y, p in sorted(soft, key=lambda r: r[0])[:a.limit]:
+        other = [r for r in soft if r not in same_s]
+        print(f"\nclearance violations: {len(other)} pairs from different runs or elements closer than the required"
+              " clearance" + (f" (plus {len(same_s)} within one run, its own joints or drops, not counted)" if same_s else ""))
+        for d, g, x, y, p in sorted(other, key=lambda r: r[0])[:a.limit]:
             print(f"  {d:7.1f} mm < {g:g} mm  {label(x)}  x  {label(y)}  near ({p[0]:.0f}, {p[1]:.0f}, {p[2]:.0f})")
     pts = [np.array([float(v) for v in s.split(",")]) for s in a.point]
     print(f"\nnetworks (elements whose boxes touch within {a.gap:g} mm; the centerline-joined count, where runs meet end"
@@ -326,6 +350,7 @@ def main():
                             for k, p in enumerate(pts))
             print(f"     {len(c):4d} elements, x {cl[0]:.0f}..{ch[0]:.0f} y {cl[1]:.0f}..{ch[1]:.0f} "
                   f"z {cl[2]:.0f}..{ch[2]:.0f}{extra}")
+    nsoft = len([r for r in soft if not (net_of.get(r[2].id()) and net_of.get(r[2].id()) == net_of.get(r[3].id()))]) if a.clearance else 0
     print(f"\nsummary: {n_invalid} validation issue(s), {len(rows)} clashing pairs, "
           + (f"{nsoft} clearance violations, " if a.clearance else "") + f"{broken} broken network group(s)")
     return 1 if rows or broken or n_invalid or nsoft else 0

@@ -325,6 +325,38 @@ def deliverable_paths(instruction: str) -> list[str]:
   return seen[:40]
 
 
+SKILL_INLINE_MAX = 2          # skills whose full text goes into the system prompt
+SKILL_INLINE_CHARS = 9000     # per skill
+SKILL_MIN_SCORE = 4.0
+GENERIC_SKILLS = {"engineering-deliverables", "professional-memo", "document-reading", "workplace-apps"}
+_STOP = set("""about above after again against also among another being below between both cannot could
+does doing during each either every from have having into itself more most must other over same should such than
+that their them then there these they this those through under until upon very were what when where which while
+with within without would your yours task tasks work used using uses make makes made need needs file files""".split())
+
+
+def _words(text: str) -> set[str]:
+  return {w for w in re.findall(r"[a-z][a-z0-9-]{3,}", text.lower()) if w not in _STOP}
+
+
+def matching_skills(instruction: str, skills: list[tuple[str, str, str]]) -> list[tuple[str, str]]:
+  """Skills whose name/description words best match the instruction (generic retrieval, idf-weighted)."""
+  import math
+  # process skills apply to every task and are summarised in the working method; inline discipline skills only
+  docs = [(n, folder, _words(n.replace("-", " ") + " " + d)) for n, d, folder in skills if n not in GENERIC_SKILLS]
+  df: dict[str, int] = {}
+  for _, _, ws in docs:
+    for w in ws:
+      df[w] = df.get(w, 0) + 1
+  inst = _words(instruction)
+  scored = []
+  for n, folder, ws in docs:
+    score = sum(math.log(1 + len(docs) / df[w]) for w in ws & inst)
+    scored.append((score, n, folder))
+  scored.sort(reverse=True)
+  return [(n, folder) for score, n, folder in scored[:SKILL_INLINE_MAX] if score >= SKILL_MIN_SCORE]
+
+
 def skill_index() -> list[tuple[str, str, str]]:
   """(name, description, relative SKILL.md path) for each bundled skill."""
   out = []
@@ -370,6 +402,11 @@ async def install_extras(session: taskbridge.Session) -> str:
                 for n, d, folder in skills
             )
         )
+        # RC-0035: agents often never open a skill; load the best-matching ones (by the instruction's words) up front
+        for n, folder in matching_skills(session.instruction, skills):
+          body = (SKILLS_DIR / folder / "SKILL.md").read_text(encoding="utf-8")
+          body = re.sub(r"\A---.*?---\s*", "", body, flags=re.S)
+          text += f"\nSkill loaded for this task ({n}; follow it where it applies):\n{body[:SKILL_INLINE_CHARS]}\n"
   except Exception as exc:  # noqa: BLE001  pylint: disable=broad-exception-caught
     await session.log(f"ahpele: extras skipped: {type(exc).__name__}: {exc}")
   return text
@@ -411,7 +448,12 @@ CHECKER_PROMPT = (
     "Write your findings to " + REVIEW_FILE + " as a numbered list, most serious first. For each: severity"
     " (BLOCKING = a hard requirement or format rule is violated or a deliverable is missing; MAJOR = wrong value or"
     " conclusion; MINOR), the requirement (document, clause or instruction sentence), what the deliverable has, what"
-    " it should be, and the evidence (file, page, your computed value). Write the file early and keep it updated."
+    " it should be, and the evidence (file, page, your computed value). Create the file within your first 10 minutes"
+    " and append each finding as soon as you have verified it (a review left unwritten when time runs out is lost);"
+    " run the quick deterministic checks (file formats, required fields, totals) before the slow reading. A finding,"
+    " adverse or favourable, quotes the clause it relies on and checks that clause's conditions and exceptions;"
+    " an operating state (equipment switched off, generation disabled) does not excuse a defect in work that will"
+    " be energised, loaded or relied on."
     " Report only what you verified; if you find nothing wrong after a real check, say so. Then stop with a one-line"
     " summary.\n\nThe author's final summary was:\n{summary}\n\nThe task instruction given to the author:\n"
 )
@@ -608,6 +650,8 @@ class Run:
   def __init__(self, session: taskbridge.Session, model: str, keep_final: bool = True):
     self.session, self.model, self.replies = session, model, 0
     self.keep_final, self.last_text = keep_final, ""
+    # text of the last turn that ended normally (a summary), and how the latest turn ended
+    self.stop_text, self.last_stop = "", ""
 
   async def on_event(self, event: dict[str, Any]) -> None:
     """Processes a parsed JSON event from Pi, updating final message and usage.
@@ -623,10 +667,14 @@ class Run:
           for b in message.get("content") or []
           if b.get("type") == "text"
       )
+      self.last_stop = message.get("stopReason") or ""
       if text.strip():
         self.last_text = text.strip()
+        if self.last_stop == "stop":
+          self.stop_text = text.strip()
         if self.keep_final:
-          self.session.final_message = text.strip()
+          # a run cut off mid-work ends on a progress note ("Let me now ..."); keep the last real summary then
+          self.session.final_message = text.strip() if self.last_stop == "stop" or not self.stop_text else self.stop_text
       if message.get("stopReason") == "error":
         await self.session.log(
             f"pi: model error: {message.get('errorMessage')}"
@@ -699,13 +747,20 @@ async def independent_check(session, pi_argv, env, work, model, extra_note: str)
   fenv = dict(env)
   fenv.update(AHPELE_REVIEW="0", AHPELE_STOP_AT_EPOCH=str(int(time.time() + max(left - STOP_BEFORE_SEC, 0))))
   exts = list(base) + (["phase-guard.ts"] if flag("PHASES") else [])
-  frun = Run(session, model)
-  await taskbridge.run_process(
-      pi_argv(exts, note(session) + extra_note), session, env=fenv, cwd=str(work), on_line=frun.on_line,
-      stdin=(session.instruction + FIXER_PROMPT.format(summary=author_final[:3000])).encode(),
-      stop_before_sec=STOP_BEFORE_SEC, log_prefix="fixer: ")
-  if not frun.last_text:
-    session.final_message = author_final
+  frun = Run(session, model, keep_final=False)
+  try:
+    await taskbridge.run_process(
+        pi_argv(exts, note(session) + extra_note), session, env=fenv, cwd=str(work), on_line=frun.on_line,
+        stdin=(session.instruction + FIXER_PROMPT.format(summary=author_final[:3000])).encode(),
+        stop_before_sec=STOP_BEFORE_SEC, log_prefix="fixer: ")
+  finally:
+    # the fixer's summary replaces the author's only if the fixer finished normally with a summary
+    if frun.last_stop == "stop" and len(frun.stop_text) >= 200:
+      session.final_message = frun.stop_text
+    else:
+      session.final_message = author_final
+      if frun.replies:
+        await session.log("ahpele: fixer did not finish with a summary; keeping the author's final message")
 
 
 async def solve(session: taskbridge.Session) -> str:

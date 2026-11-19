@@ -21,12 +21,20 @@ description: How an MEP coordinator routes and coordinates services (cable tray,
   plenum is another band when it is allowed.
 - Route mains along aisles and parallel to the grid, with branches at right angles to the equipment they serve. Keep
   routes out of column lines and away from the tops of racks and equipment that need service access.
+- In a shallow zone (an access-floor plenum, a tight ceiling void) give each service its own lane in plan first, side by
+  side with gaps, rather than stacking runs on top of each other along the same path; draw a section at every point where
+  several services enter or cross the zone to prove the vertical fit.
+- Keep water-carrying pipes (chilled water, condensate, sprinkler, drainage) off the path of busway, cable tray and
+  electrical equipment: cross them at right angles with the pipe below where possible, never run a pipe along over or
+  under a busway or tray for a distance (leaks and condensation drip onto live equipment).
 - Crossing priority when services compete for space: gravity drainage > large ducts and pipes > pressure pipes > cable
   tray and busway > small conduit. The more flexible service yields, and changing elevation is preferred to rerouting
   horizontally.
 
 ## 3. Clearances that count as clashes or code violations
 - Insulation, lagging, flanges and support envelopes are part of the solid that must not clash.
+- Leave a coordination allowance between services on top of every required clearance (installation tolerance, hangers,
+  insulation finish), so the layout stays clash-free under any reasonable reading of how envelopes are measured.
 - Sprinkler heads: keep the zone directly below each deflector clear (NFPA 13: 18 in (457 mm) below deflectors, or the
   value the project states, with extra rules for obstructions near heads). Wide obstructions need heads beneath them.
 - Electrical equipment: dedicated space above switchboards, panelboards and PDUs is kept free of foreign systems,
@@ -47,4 +55,7 @@ description: How an MEP coordinator routes and coordinates services (cable tray,
   their band, then re-run until there are none.
 - Continuity: each system is one connected network from its source, and every load it serves has a connection (drop
   or tap).
+- After ANY geometry change (a run added, moved or resized, often in response to a review), re-run the whole
+  coordination check on the exported file (validation, hard clashes, clearances between systems, continuity): fixing one
+  service often breaks another.
 - Re-check code clearances and efficiency (total length) after the last change, then re-export and check again.
