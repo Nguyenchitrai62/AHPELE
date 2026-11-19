@@ -153,7 +153,13 @@ WORKFLOW = (
     " Identify superseded, cancelled, draft or non-adopted documents and the"
     " RFIs, site instructions and correspondence that change requirements;"
     " the governing specification usually says which documents apply. Never"
-    " cite or apply a superseded or cancelled document.\n"
+    " cite or apply a superseded or cancelled document. Then cross-check the"
+    " documents against each other, as a reviewer does: for each key value"
+    " (ratings, sizes, settings, levels, loads, quantities, dates, names) list"
+    " what every document states and flag disagreements (a letter versus a"
+    " drawing, a submittal versus the specification, a field record versus a"
+    " design assumption); each disagreement is resolved by the governing"
+    " document or reported as a finding, never silently.\n"
     "3. Constraint discovery comes before any design, calculation or"
     " drafting. Extract every hard requirement (safety and code limits,"
     " standard clauses the project documents invoke, permit or authorisation"
@@ -175,7 +181,10 @@ WORKFLOW = (
     " that every value appears in the document it cites.\n"
     "4. Write a check script that recomputes the key numbers from your own"
     " deliverable and tests it against every row of the requirements table and"
-    " every schema rule in the checklist. When the task gives a format"
+    " every schema rule in the checklist. Check each hard limit for every case it"
+    " applies to (each load combination, operating state or stage, and each item,"
+    " member, circuit or zone), not only the governing case you expect, and print"
+    " the worst case per limit with its utilisation. When the task gives a format"
     " contract or an example file, the check script must implement every rule"
     " of the contract and must pass on the example file before you trust it"
     " on yours; read your file back the way the recipient's software would (parse it, do not"
@@ -803,17 +812,19 @@ async def solve(session: taskbridge.Session) -> str:
 
       argv = pi_argv(extensions, note(session) + index_note + extras_note)
       run = Run(session, model)
-      done = await taskbridge.run_process(
-          argv,
-          session,
-          env=env,
-          cwd=str(work),
-          on_line=run.on_line,
-          stdin=session.instruction.encode(),
-          stop_before_sec=STOP_BEFORE_SEC,
-          log_prefix="pi: ",
-      )
-      session.deadline = orig_deadline  # give the reserved time back to the check-and-fix cycle
+      try:
+        done = await taskbridge.run_process(
+            argv,
+            session,
+            env=env,
+            cwd=str(work),
+            on_line=run.on_line,
+            stdin=session.instruction.encode(),
+            stop_before_sec=STOP_BEFORE_SEC,
+            log_prefix="pi: ",
+        )
+      finally:
+        session.deadline = orig_deadline  # give the reserved time back to the check-and-fix cycle
       if run.replies and flag("CHECKER"):
         try:
           await independent_check(session, pi_argv, env, work, model, index_note + extras_note)
