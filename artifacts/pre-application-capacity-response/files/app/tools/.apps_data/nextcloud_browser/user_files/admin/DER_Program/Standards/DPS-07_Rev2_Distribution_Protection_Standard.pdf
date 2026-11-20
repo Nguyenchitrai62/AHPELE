@@ -1,0 +1,167 @@
+ALLENIOM UTILITIES — STANDARDS ENGINEERING
+DISTRIBUTION PROTECTION STANDARD
+Doc no. Rev Date Owner
+DPS-07 Rev 2 09/15/2023 Alleniom Standards Engineering
+Effective date: 09/15/2023
+Supersedes: DPS-07 Rev 1 (11/04/2019)
+Classification: Engineering Standard — Distribution Protection
+Approved by: Manager, Standards Engineering
+1. PURPOSE
+DPS-07 establishes minimum protection requirements for the interconnection of distributed energy resources
+(DER) to the Alleniom Utilities distribution system. The requirements set forth herein preserve system-side fault
+clearing, prevent unintentional islanding of generation onto de-energized distribution circuits, and ensure that the
+utility maintains a controllable, visible interruption point at every generating facility capable of exporting power to
+the distribution network.
+This standard defines the equipment, functional performance, and coordination principles applicable to protective
+devices installed at the point of interconnection (POI) of an export-capable DER site. It is issued by Standards
+Engineering under authority of the Director of Distribution Engineering and shall be applied to all in-scope
+projects at initial screening, detailed engineering review, construction, and commissioning.
+2. SCOPE
+This standard applies to all distribution-connected export-capable DER sites within the Alleniom Utilities service
+territory, including but not limited to:
+1. Commercial small-scale DER (500 kW – 1 MW nameplate).
+2. Medium-scale DER (1 MW – 5 MW nameplate).
+3. Any DER of any size that is capable, by facility design or operating configuration, of exporting real power to
+the distribution system through the point of common coupling.
+Sub-scope DER handled under the Simplified Small-Systems Process are outside the direct application of this
+standard; however, where such a facility is nonetheless configured for export, the protection principles of §4 shall
+apply as adapted by the Small-Systems review.
+Non-export configurations (facilities operated behind a reverse-power lockout with no export capability under any
+operating condition) are outside the scope of this standard and are addressed under separate protection
+guidance.
+3. REFERENCES
+The following documents are referenced in the application of this standard:
+(cid:127) IEEE 1547 — Standard for Interconnection and Interoperability of Distributed Energy Resources with
+Associated Electric Power Systems Interfaces.
+(cid:127) IEEE C37.230 — Guide for Protective Relay Applications to Distribution Lines.
+(cid:127) IEEE C37.60 / IEC 62271-111 — Requirements for Overhead, Pad-Mounted, Dry-Vault, and Submersible
+Automatic Circuit Reclosers.
+(cid:127) ANSI C57.13 — Requirements for Instrument Transformers.
+DPS-07 Rev 2 | Distribution Protection Standard | Effective 09/15/2023 Page 1
+
+(cid:127) Alleniom Utilities TCS-02 — Telemetry & Communications Standard.
+(cid:127) Alleniom Utilities ERP-9 — Engineering Referral Procedure.
+Where a referenced external standard is revised, the revision in effect on the date of the site's engineering
+determination shall govern, unless Standards Engineering directs otherwise in writing.
+4. PROTECTION REQUIREMENTS
+4.1 General
+Every distribution-connected DER site subject to this standard shall be equipped with protective equipment
+sufficient to accomplish, at minimum, the following:
+(a) Isolate the DER from the distribution system upon loss of the utility source, before the operation of any utility
+reclosing sequence that would attempt to re-energize the affected circuit.
+(b) Isolate the DER from the distribution system upon detection of abnormal voltage or frequency conditions on
+the utility side of the point of interconnection, within the trip times required by the applicable interconnection
+standard.
+(c) Present the utility system operator with a visible, remotely operable, and lockable point of interruption
+between the DER and the distribution circuit at all times when the DER is connected.
+(d) Coordinate with upstream and downstream distribution protective devices such that a DER-side fault is
+cleared by DER-side devices and a utility-side fault is cleared by utility-side devices, without unnecessary
+tripping of either.
+4.2 Point-of-Interconnection Recloser Requirement
+Every export-capable in-scope DER site shall be equipped with a utility-owned point-of-interconnection
+(POI) recloser. No exceptions are specified.
+The POI recloser shall satisfy the following requirements:
+1. Ownership and control. The POI recloser and its associated control cabinet, communications interface,
+current and voltage transformers, and control power supply shall be owned, installed, maintained, and
+operated by Alleniom Utilities. The DER owner shall provide the physical site, the equipment pad, primary
+conductors to the recloser terminals, and any auxiliary services (grounding, station service, communications
+backhaul) as specified in the site's construction package.
+2. Ratings. The recloser shall be rated for the maximum continuous current, momentary current, short-circuit
+interrupting current, and system voltage of the feeder or lateral to which it is connected, with margin per
+Distribution Protection Engineering's feeder-specific settings sheet.
+3. Functional elements. At minimum, the recloser control shall implement the following ANSI device functions,
+with settings determined per site by Distribution Protection Engineering:
+— 50/51 phase and 50N/51N ground overcurrent (instantaneous and time),
+— 27/59 undervoltage and overvoltage,
+— 81U/81O underfrequency and overfrequency,
+— 25 synchronism check for closing into an energized system,
+— 32 directional power element, available for use as an export-limit enforcement or reverse-power
+backstop as directed by the site's engineering determination,
+— 79 automatic reclosing, enabled or blocked per the coordination scheme in §5.
+4. Operability. The recloser shall be capable of local manual operation, local electrical operation from the
+control cabinet, and remote operation and monitoring via the utility SCADA system per TCS-02. Loss of
+communications shall not defeat local protection.
+DPS-07 Rev 2 | Distribution Protection Standard | Effective 09/15/2023 Page 2
+
+5. Visible break and lockout. The recloser shall provide, or be paired with, a visible-break disconnect
+operable by utility personnel, with provision for utility padlocking in the open position for the purpose of
+clearance holds.
+6. Location. The POI recloser shall be located on the utility side of the point of interconnection, at a location
+accessible to Alleniom Utilities crews 24 hours per day, 7 days per week, without transiting locked customer
+premises.
+4.3 DER-Side Protection
+DER-side protection (generator step-up transformer protection, inverter interface protection, plant collection
+protection, and any owner-installed disconnects) shall be provided by the DER owner, coordinated with the POI
+recloser settings, and reviewed by Alleniom Utilities Distribution Protection Engineering prior to commissioning.
+DER-side protection does not substitute for the POI recloser required under §4.2.
+4.4 Grounding
+The DER interconnection transformer grounding configuration shall be determined per site to be compatible with
+the grounding of the connected distribution circuit, in accordance with Distribution Protection Engineering's
+grounding practice memorandum for the affected feeder class.
+4.5 Anti-Islanding
+The DER shall be equipped with anti-islanding protection meeting the trip times and non-detection zone
+requirements of the applicable interconnection standard. Passive schemes based solely on utility-side voltage
+and frequency measurement are permitted only where the site's system impact study demonstrates the passive
+scheme's detection performance for the range of expected islanding conditions on the connected feeder;
+otherwise an active or communications-assisted scheme shall be provided.
+5. COORDINATION REQUIREMENTS
+5.1 Coordination with Feeder Reclosing
+The POI recloser shall be coordinated with the upstream feeder recloser and any mid-line reclosers such that:
+(a) The POI recloser opens on loss of the utility source before the first reclose attempt of any upstream
+recloser.
+(b) The POI recloser remains open and locked out until the utility source has been restored, verified stable per
+the site's synchronism-check settings, and the utility system operator has authorized reconnection per the
+site's operating procedure.
+(c) Coordination time-current characteristics shall be documented in the site's protection coordination study
+prior to energization.
+5.2 Coordination with DER-Side Protection
+DER-side protective devices shall clear DER-side faults without operation of the POI recloser to the extent
+reasonably practicable. Where a DER-side fault is not cleared by DER-side devices within the allowable time, the
+POI recloser shall trip as backup protection.
+5.3 Direct Transfer Trip
+Direct transfer trip (DTT) shall be applied at any site where the system impact study identifies an unacceptable
+non-detection zone for anti-islanding, or where the connected feeder configuration requires supervised opening
+of the POI recloser on operation of an upstream device. Where DTT is applied, the associated communications
+channel shall meet the availability and monitoring requirements of TCS-02.
+5.4 Reclosing Blocking
+Automatic reclosing on the upstream feeder recloser may be blocked, delayed, or supervised at sites where the
+DER contribution to fault current, the DER anti-islanding characteristic, or the customer load composition on the
+DPS-07 Rev 2 | Distribution Protection Standard | Effective 09/15/2023 Page 3
+
+affected feeder warrants such a change. The determination shall be made per site by Distribution Protection
+Engineering and recorded in the site's interconnection file.
+5.5 Settings Governance
+All protection settings for the POI recloser, and any changes to upstream feeder recloser settings driven by the
+DER interconnection, shall be issued in writing by Distribution Protection Engineering and shall not be altered in
+the field without a written revision order.
+6. TESTING
+6.1 Factory Acceptance
+The POI recloser and its control shall be subjected to factory acceptance testing per the manufacturer's standard
+test protocol and per IEEE C37.60 / IEC 62271-111, with test records delivered to Alleniom Utilities prior to
+shipment.
+6.2 Site Acceptance
+Prior to placing the DER site in service, the following site acceptance activities shall be performed and witnessed
+by Alleniom Utilities:
+1. Insulation resistance and dielectric withstand testing of primary and secondary circuits.
+2. Current transformer and voltage transformer ratio, polarity, and burden verification.
+3. Functional testing of each enabled ANSI device function against its issued setting, including pickup, timing,
+and reset.
+4. End-to-end trip testing from each protection element through the recloser interrupter.
+5. Verification of local and remote (SCADA) control, status, and metering per TCS-02.
+6. Verification of synchronism check and reclose-block logic.
+7. Verification of visible-break disconnect operation and lockout provisions.
+6.3 Commissioning and Cutover
+Cutover of the DER site to the distribution system shall not proceed until all §6.2 activities are complete and
+accepted in writing by Alleniom Utilities. The site's initial parallel operation shall be observed by the utility system
+operator with the POI recloser under active SCADA supervision.
+6.4 Periodic Testing
+The POI recloser shall be included in the utility's periodic recloser maintenance program. DER-side protective
+devices shall be tested by the DER owner on a schedule not to exceed that of comparable utility-owned
+equipment, with test records made available to Alleniom Utilities on request.
+6.5 Post-Event Testing
+Following any operation of the POI recloser attributable to a system disturbance, a DER-side event, or a
+mis-operation, Distribution Protection Engineering shall review the event records and direct such retesting or
+resetting as it determines appropriate before the site is returned to service.
+End of DPS-07 Rev 2 — Distribution Protection Standard. Distribution: Alleniom Standards Engineering master file;
+Distribution Protection Engineering; Distribution Operations; DER Program Office; APUC filing (informational).
+DPS-07 Rev 2 | Distribution Protection Standard | Effective 09/15/2023 Page 4

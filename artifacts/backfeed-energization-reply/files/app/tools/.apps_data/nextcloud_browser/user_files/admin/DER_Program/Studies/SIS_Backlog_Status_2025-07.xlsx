@@ -1,0 +1,64 @@
+[Sheet: SIS Backlog]
+System Impact Study Backlog — Status Report											
+Report:	DER Planning Group — SIS Backlog Status										
+As of:	07/14/2025										
+Owner:	Ivo Grantham, Manager, DER Planning Group										
+Prepared by:	DER Planning Group, Alleniom Utilities										
+Doc no. DPG-SIS-BL-2025-07  ·  Rev 1  ·  Date 07/14/2025  ·  Owner Ivo Grantham											
+Note: withdraw-and-reapply cycles account for a growing share of new-study intake (Q2 2025).											
+Backlog Rows											
+Study ID	Project ID	Customer	Capacity	Feeder	Study Type	Assigned Engineer	Start Date	Target Complete	Days Aging	Status	Notes
+SIS-2024-088	PXA-2024-0117	Hailbouy Solar (Harkwell Ridge)	2.2 MW	ALN-042	SIS — medium	Ivo Grantham	12/03/2024	03/03/2025	223	complete	Study delivered 02/24/2025; ISA executed 07/03/2025 at 2.2 MW
+SIS-2024-089	PXA-2024-0356	Prestford Community Solar LP	1.8 MW	ALN-171	SIS — medium	Priya Nakamura	12/09/2024	03/09/2025	217	past target	Feeder short-circuit rerun pending from Distribution Planning
+SIS-2024-090	PXA-2024-0362	Halwater Community Solar	1.6 MW	ALN-303	SIS — medium	Devon Reyes	12/12/2024	03/12/2025	214	past target	Non-payment hold overlap; awaiting Finance disposition
+SIS-2024-091	PXA-2024-0295	Halstonfield Distribution Center	720 kW	ALN-181	SIS — small	Kaisha Odell	12/16/2024	03/16/2025	210	complete	Report issued 02/28/2025; awaiting equipment allocation
+SIS-2024-092	PXA-2024-0386	Yardbrook Community Solar	1.6 MW	ALN-126	SIS — medium	Ivo Grantham	12/18/2024	03/18/2025	208	past target	Second re-scope after customer capacity revision 02/2025
+SIS-2025-001	PXA-2024-0129	Vernand Logistics	620 kW	ALN-142	SIS — small	Priya Nakamura	01/06/2025	04/06/2025	189	complete	Report issued 03/24/2025; site awaiting RTU
+SIS-2025-002	PXA-2024-0455	Vellmoor Community Solar LP	3.0 MW	ALN-045	SIS — medium	Devon Reyes	01/09/2025	04/09/2025	186	past target	Standards-conflict hold on POI recloser question
+SIS-2025-003	PXA-2024-0164	Brookfen USD (North HS Array)	720 kW	ALN-124	SIS — small	Kaisha Odell	01/13/2025	04/13/2025	182	complete	Report issued 04/02/2025; construction complete 04/18/2025
+SIS-2025-004	PXA-2023-0428	Brackwater Industries LLC	830 kW	ALN-338	SIS — small	Ivo Grantham	01/20/2025	04/20/2025	175	complete	Report issued 04/11/2025
+SIS-2025-005	PXA-2023-0446	Halvenwater Property Trust	610 kW	ALN-345	SIS — small	Priya Nakamura	01/27/2025	04/27/2025	168	complete	Report issued 04/15/2025
+SIS-2025-006	PXA-2024-0343	Prairie Corridor Business Park	860 kW	ALN-088	SIS — small	Devon Reyes	02/03/2025	06/22/2025	161	complete	Awaiting protection coordination sign-off
+SIS-2025-007	PXA-2024-0460	Trenmoor Community Solar LP	1.6 MW	ALN-057	SIS — medium	Kaisha Odell	2025-04-29 00:00:00	2025-07-28 00:00:00	76	in progress	Withdrawn and reapplied 04/29/2025 at revised 1.6 MW; assigned a new queue position under the reapplication (no queue-date inheritance, per tariff Sec 12.3 / POL-QM-05)
+SIS-2025-008	PXA-2024-0488	Halvingham Community Solar	2.6 MW	ALN-303	SIS — medium	Ivo Grantham	02/10/2025	05/11/2025	154	past target	Customer info hold; NOIW served 06/03/2025
+SIS-2025-009	PXA-2024-0530	Prestmoor Community Solar LP	2.4 MW	ALN-212	SIS — medium	Priya Nakamura	02/17/2025	05/18/2025	147	past target	Fault-current study rerun in progress
+SIS-2025-010	PXA-2023-0455	Grantsboro Farms Coop	620 kW	ALN-092	SIS — small	Devon Reyes	02/24/2025	05/25/2025	140	complete	Report issued 05/19/2025
+SIS-2025-011	PXA-2023-0473	Halvenford Storage Group	550 kW	ALN-352	SIS — small	Kaisha Odell	03/03/2025	06/08/2025	133	complete	Report drafted; peer review outstanding
+SIS-2025-012	PXA-2023-0481	Ovingham Foods Inc.	690 kW	ALN-099	SIS — small	Ivo Grantham	03/06/2025	06/20/2025	130	complete	Essential-service coordination; POI recloser scope pending
+SIS-2025-013	PXA-2024-0537	Marbray Distribution LLC	720 kW	ALN-159	SIS — small	Priya Nakamura	03/10/2025	06/08/2025	126	past target	Customer info hold; NOIW served 06/10/2025
+SIS-2025-014	PXA-2023-0495	Ellsford Manufacturing LLC	810 kW	ALN-359	SIS — small	Devon Reyes	03/17/2025	06/15/2025	119	complete	Report issued 06/06/2025
+SIS-2025-015	PXA-2024-0549	Trenwyck Property Trust	600 kW	ALN-178	SIS — small	Kaisha Odell	03/20/2025	06/18/2025	116	past target	Original filing withdrawn 05/12/2025; reapplied at same capacity 05/28/2025 — study restarted
+SIS-2025-016	PXA-2024-0550	Ellsford Property Group	660 kW	ALN-119	SIS — small	Ivo Grantham	03/24/2025	06/22/2025	112	past target	Customer info hold; NOIW prepared but not yet sent
+SIS-2025-017	PXA-2024-0207	Alleron Community Solar Initiative — Rowan Hill	1.05 MW	ALN-166	SIS — medium	Priya Nakamura	03/27/2025	06/25/2025	109	complete	Report issued 06/12/2025; grant deadline 09/30/2025
+SIS-2025-018	PXA-2024-0563	Halvenford Distribution LLC	720 kW	ALN-126	SIS — small	Devon Reyes	04/02/2025	07/01/2025	103	past target	Awaiting standards clarification
+SIS-2025-019	PXA-2024-0221	Brookfen USD (West Elementary Array)	640 kW	ALN-124	SIS — small	Kaisha Odell	04/07/2025	07/06/2025	98	complete	Report issued 06/24/2025; construction complete 05/23/2025
+SIS-2025-020	PXA-2024-0582	Wintbray Property Trust	660 kW	ALN-359	SIS — small	Ivo Grantham	04/10/2025	07/09/2025	95	past target	Customer info hold; NOIW prepared but not yet sent
+SIS-2025-021	PXA-2025-0011	Halvedale Storage LLC	570 kW	ALN-282	SIS — small	Priya Nakamura	04/14/2025	07/13/2025	91	past target	Third-party fault-current review pending
+SIS-2025-022	PXA-2024-0059	Vellwyn Community Solar	1.5 MW	ALN-338	SIS — medium	Devon Reyes	04/21/2025	07/20/2025	84	in progress	Steady-state complete; protection coordination in review
+SIS-2025-023	PXA-2024-0077	Brackenhaven Community Solar LP	1.8 MW	ALN-205	SIS — medium	Kaisha Odell	04/25/2025	07/24/2025	80	in progress	Feeder model updates in progress
+SIS-2025-024	PXA-2024-0103	Corfield Community Solar LP	2.7 MW	ALN-079	SIS — medium	Ivo Grantham	05/01/2025	07/30/2025	74	in progress	Application originally filed 12/2024 as 640 kW; withdrew 04/17/2025 and reapplied at 1.15 MW
+SIS-2025-025	PXA-2024-0120	Marridge Community Solar	3.4 MW	ALN-310	SIS — medium	Priya Nakamura	05/05/2025	08/03/2025	70	in progress	Load flow drafts under peer review
+SIS-2025-026	PXA-2024-0139	Prestmere Solar Development	2.5 MW	ALN-261	SIS — medium	Devon Reyes	05/12/2025	08/10/2025	63	in progress	Awaiting AMI extract from Distribution Planning
+SIS-2025-027	PXA-2024-0183	Bramble Community Solar LP	2.1 MW	ALN-331	SIS — medium	Kaisha Odell	05/15/2025	08/13/2025	60	in progress	Screening reclassified to SIS after supplemental review
+SIS-2025-028	PXA-2024-0197	Prestwater Community Solar	2.0 MW	ALN-029	SIS — medium	Ivo Grantham	05/19/2025	08/17/2025	56	in progress	Load-flow model updates pending Distribution Planning review
+SIS-2025-029	PXA-2024-0208	Kirkwater Community Solar	2.1 MW	ALN-171	SIS — medium	Priya Nakamura	05/22/2025	08/20/2025	53	in progress	Prior application PXA-2024-0672 withdrawn 04/2025; re-filed as new intake
+SIS-2025-030	PXA-2025-0198	City of Elmsworth (Municipal Service Center)	900 kW	ALN-306	SIS — small	Devon Reyes	05/28/2025	08/26/2025	47	in progress	Duplicate-application review outstanding with queue admin
+SIS-2025-031	PXA-2025-0024	Halstonwyck Foods Inc.	810 kW	ALN-021	SIS — small	Kaisha Odell	06/02/2025	09/01/2025	42	in progress	Awaiting environmental clearance from customer
+SIS-2025-032	PXA-2024-0236	Fernbriar Community Solar LP	2.2 MW	ALN-345	SIS — medium	Ivo Grantham	06/05/2025	09/03/2025	39	in progress	Load-share study with existing on-site generator
+SIS-2025-033	PXA-2024-0269	Vellwater Community Solar LP	1.5 MW	ALN-261	SIS — medium	Priya Nakamura	06/09/2025	09/07/2025	35	in progress	Prior filing PXA-2024-0685 (720 kW) withdrawn 05/2025; new filing at 1.25 MW opened as fresh study
+SIS-2025-034	PXA-2025-0231	Wexley Distribution Center	480 kW	ALN-171	SIS — small	Devon Reyes	06/12/2025	09/10/2025	32	in progress	Capacity discrepancy flagged at screening 06/26/2025
+SIS-2025-035	PXA-2024-0290	Ravenford Community Solar	2.6 MW	ALN-184	SIS — medium	Kaisha Odell	06/16/2025	09/15/2025	28	in progress	Second Feeder ALN-042 project post Harkwell Ridge ISA — coordination review
+SIS-2025-036	PXA-2025-0244	Merrow Creamery (New Rooftop PV)	300 kW	ALN-118	SIS — small	Ivo Grantham	06/18/2025	09/17/2025	26	in progress	Co-located existing DER flagged at intake against service address; classification pending
+SIS-2025-037	PXA-2024-0299	Halstonford Community Solar	2.5 MW	ALN-126	SIS — medium	Priya Nakamura	06/23/2025	09/22/2025	21	in progress	Prior filing PXA-2024-0709 withdrawn 04/2025 following capacity re-scope
+SIS-2025-038	PXA-2024-0332	Prestmere Renewables Corp	3.5 MW	ALN-079	SIS — medium	Devon Reyes	06/26/2025	09/24/2025	18	in progress	Feeder base case update needed
+SIS-2025-039	PXA-2024-0342	Prestwyn Community Solar	2.4 MW	ALN-324	SIS — medium	Kaisha Odell	06/30/2025	09/28/2025	14	in progress	Coordinating with Distribution Planning on feeder capacity confirmation
+Summary (row counts)											
+Rows total		44									
+Complete		13									
+In progress		19									
+Past target		12									
+Owner sign-off											
+Name	Ivo Grantham										
+Title	Manager, DER Planning Group										
+Org	Alleniom Utilities										
+Email	ivo.grantham@alleniom.com										

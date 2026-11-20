@@ -1,0 +1,216 @@
+Alleniom Utilities | Standards Engineering TCS-02 Rev 1 | Effective 06/01/2021
+ALLENIOM UTILITIES — STANDARDS ENGINEERING
+TELEMETRY & COMMUNICATIONS STANDARD
+4200 Veldmere Boulevard, Halston, Alleron 01HA · (612) 555-0100 · alleniom.com
+Doc no. Rev Date Owner
+TCS-02 Rev 1 06/01/2021 Alleniom Standards Engineering
+Document title: Telemetry & Communications Standard
+Applies to: Distributed Energy Resource (DER) facilities interconnected to the Alleniom Utilities
+distribution system within the DER Program scope
+Effective date: 06/01/2021
+Approving authority: Manager, Standards Engineering
+§1 PURPOSE
+This standard establishes the minimum technical and operational requirements for real-time
+telemetry and communications between in-scope Distributed Energy Resource (DER) facilities
+and the Alleniom Utilities System Operations Center (SOC). It governs the equipment, data
+content, refresh cadence, communications transport, and cybersecurity posture required for a
+DER facility to be observed and dispatchable through the utility's Supervisory Control and Data
+Acquisition (SCADA) system.
+TCS-02 is one component of Alleniom's DER interconnection framework. Its provisions are limited
+to telemetry and communications. Requirements for interconnection classification, protective
+functions, service agreements, commissioning, and other lifecycle activities are addressed in the
+standards and procedures cited by the interconnection standard (DIS-01) and are outside the
+scope of this document.
+§2 SCOPE
+TCS-02 applies to every in-scope DER site as defined by DIS-01 §3 — that is, every DER whose
+nameplate capacity meets or exceeds the DER Program threshold of 500 kW. Sub-500 kW DER
+handled under the Simplified Small-Systems Process is outside the scope of this standard.
+TCS-02 applies to:
+(cid:127) a. Commercial small-scale DER (500 kW – 1 MW).
+(cid:127) b. Medium-scale DER (1 MW – 5 MW).
+(cid:127) c. Aggregated DER facilities recognized as a single site under DIS-01 §3.4, where the
+aggregate capacity meets or exceeds the DER Program threshold.
+(cid:127) d. DER commissioned on or after the effective date of this standard, and DER
+commissioned before the effective date that undergo material modification, POI relocation, or
+capacity change requiring a new interconnection application.
+Telemetry & Communications Standard Page 1 TCS-02
+
+Alleniom Utilities | Standards Engineering TCS-02 Rev 1 | Effective 06/01/2021
+Where a DER site interfaces with the distribution system through a shared point of common
+coupling with other generation, the aggregate facility is the object of this standard, and the
+aggregate is measured and controlled as a single interconnected entity.
+§3 RTU REQUIREMENTS
+§3.1 Ownership and installation
+Each in-scope DER site shall be equipped with a utility-owned Remote Terminal Unit (RTU)
+installed at, or immediately adjacent to, the point of interconnection. The RTU shall be procured,
+owned, installed, configured, maintained, and — where required — replaced by Alleniom Utilities.
+The customer shall provide the physical mounting location, environmental enclosure, station AC
+service, and communications entrance conduit specified in the utility's site-specific RTU
+installation drawing.
+§3.2 Approved models
+The utility-owned RTU shall be one of the three models currently used for utility-owned RTU
+service: YOT-8963, YOT-8856, or YOT-7963. Substitution is not permitted. A customer power
+plant controller (PPC) may use any RTU on the plant side, provided it can communicate with the
+utility-owned RTU via DNP3 (§4.2).
+§3.3 Functional requirements
+Each RTU shall, at minimum:
+(cid:127) a. Poll the DER facility's generation metering, inverter/PCS gateway, and station
+instrumentation at the refresh cadence specified in §6.
+(cid:127) b. Encode and forward the required data points (§6) to the Alleniom SCADA front-end
+processors over an approved communications path (§4).
+(cid:127) c. Timestamp all values to a common reference (§3.5) and buffer data locally for a minimum
+of seventy-two (72) hours in the event of communications loss, with automatic backfill upon
+restoration.
+(cid:127) d. Report communications status, device health, and configuration version to SCADA as
+diagnostic points.
+(cid:127) e. Accept authenticated remote configuration updates and firmware from Alleniom
+SCADA/EMS Engineering only.
+§3.4 Environmental and station-service requirements
+The RTU enclosure shall meet the environmental rating specified in the site-specific installation
+drawing. Station AC service to the enclosure shall be provided by the customer through a
+dedicated branch circuit backed by an uninterruptible supply sized for a minimum four (4) hour
+outage ride-through, sufficient to maintain telemetry through short-duration station outages.
+§3.5 Time synchronization
+The RTU shall discipline its internal clock to an authoritative time source using either GNSS (GPS)
+time or the Alleniom SCADA network time reference. All values reported to SCADA shall carry a
+timestamp accurate to within ±1 second of UTC.
+§3.6 Commissioning and end-to-end verification
+Telemetry & Communications Standard Page 2 TCS-02
+
+Alleniom Utilities | Standards Engineering TCS-02 Rev 1 | Effective 06/01/2021
+Prior to the RTU being accepted as commissioned, Alleniom shall perform an end-to-end
+point-to-point test that verifies each required data point (§6) at the SCADA operator display,
+exercises any control points released to SCADA, and validates alarm and quality flags.
+Commissioning of the RTU is a prerequisite to the telemetry condition stated in §5.
+§4 COMMUNICATIONS
+§4.1 Communications transport
+The RTU shall communicate with Alleniom SCADA over one of the transports approved by
+SCADA/EMS Engineering:
+(cid:127) a. Utility-managed fiber to an Alleniom aggregation node, or
+(cid:127) b. Utility-provisioned licensed private wireless (point-to-multipoint), or
+(cid:127) c. Utility-provisioned cellular service on the approved carrier list, using SIM credentials held
+by Alleniom.
+Customer-owned or shared-use networks are not permitted as the primary telemetry transport.
+Where site conditions do not permit any of the transports listed above, the site is not eligible for
+interconnection under the DER Program until a suitable transport can be provisioned.
+§4.2 SCADA protocol
+The RTU shall communicate with SCADA using DNP3 Serial or DNP3 over TCP/IP. Secure
+Authentication v5 shall be enabled on the DNP3 link where supported by the RTU. Configuration
+parameters — DNP3 addresses, timeouts, unsolicited response classes, integrity poll intervals —
+shall follow the site-specific configuration record issued by SCADA/EMS Engineering.
+§4.3 Availability
+The end-to-end telemetry path (RTU, transport, front-end processor) shall be designed for a
+monthly availability of not less than 99.5 percent, measured at the SCADA front-end. Persistent
+loss of telemetry constitutes a departure from the site's interconnection basis and shall be
+corrected by the customer and utility working together to the extent each owns the affected
+equipment.
+§4.4 Address and IP management
+All IP addresses, DNP3 addresses, VLAN assignments, and routing between the RTU and
+Alleniom SCADA are assigned and managed by Alleniom. Customer equipment shall not initiate
+connections toward the RTU other than as expressly permitted in the site-specific configuration
+record.
+§5 TELEMETRY CONDITION FOR PERMISSION TO OPERATE
+§5. ‡500 kW requires utility-owned RTU + SCADA telemetry; no PTO without live telemetry.
+This requirement applies to all in-scope DER sites, including aggregated facilities under
+DIS-01 §3.4.
+Live telemetry, for the purposes of §5, means that the RTU installed under §3 is:
+(cid:127) a. Physically installed, configured, and end-to-end commissioned in accordance with §3.6;
+Telemetry & Communications Standard Page 3 TCS-02
+
+Alleniom Utilities | Standards Engineering TCS-02 Rev 1 | Effective 06/01/2021
+(cid:127) b. Communicating with Alleniom SCADA over an approved transport (§4) at the refresh
+cadence required by §6; and
+(cid:127) c. Presenting all required data points (§6) as valid (not stale, not forced, not flagged
+bad-quality) at the SCADA operator display at the moment Permission to Operate (PTO) is
+issued.
+Compliance with §5 is confirmed by the SOC Shift Supervisor on shift at the time PTO is
+requested. The SOC's confirmation is recorded against the interconnection file. PTO shall not be
+issued to any in-scope DER site until §5 is satisfied.
+§6 DATA POINTS AND REFRESH RATES
+§6.1 Required data points
+Each in-scope DER site shall present, at minimum, the following analog and status points to
+Alleniom SCADA. Where the site's arrangement includes multiple inverter blocks or multiple
+aggregated facilities behind a common POI, values shall be reported both individually per block
+and as a facility total.
+Analog values (per site, and per block where applicable):
+Point Units Sign convention
+Real power, net export at POI kW Export positive
+Reactive power, net at POI kVAr Absorbing positive
+POI voltage, per phase V —
+POI current, per phase A —
+Frequency at POI Hz —
+Gross generation (per inverter block) kW Generation positive
+Auxiliary/parasitic load (where separately metered) kW Load positive
+Cumulative energy delivered kWh Export positive
+Cumulative energy received kWh Import positive
+Ambient / cabinet temperature (RTU health) °C —
+Status and diagnostic points:
+Point Description
+Site online / offline Aggregate operating state of the DER
+Inverter/PCS block status Per block: run, standby, fault
+Communications heartbeat RTU-to-SCADA path health
+Time-sync quality GNSS/NTP discipline status
+Configuration version Active RTU configuration identifier
+Alarm summary Rolled-up device alarm state
+§6.2 Refresh rates
+Telemetry & Communications Standard Page 4 TCS-02
+
+Alleniom Utilities | Standards Engineering TCS-02 Rev 1 | Effective 06/01/2021
+Analog values shall be updated to SCADA at intervals no longer than four (4) seconds using DNP3
+Class 1/2 event reporting for point-on-change and Class 0 integrity poll no less frequently than
+every sixty (60) seconds. Status points shall be reported by exception on change of state, with an
+integrity poll no less frequently than every sixty (60) seconds. Cumulative energy registers shall be
+reported no less frequently than every five (5) minutes.
+§6.3 Data quality
+Every value delivered to SCADA shall carry a DNP3 quality flag. Values shall be marked online,
+restart, communications lost, or over-range as circumstances warrant. Values held constant by the
+RTU during communications loss shall not be reported as online upon restoration; they shall be
+reported with the communications-lost flag until fresh source values are acquired.
+§6.4 Retention
+Alleniom retains all telemetry from in-scope DER sites in the historian for a minimum of thirty-six
+(36) months at the raw acquisition cadence, and indefinitely at hourly aggregation, for planning,
+engineering analysis, and regulatory reporting.
+§7 CYBERSECURITY
+§7.1 Applicability
+The RTU, the communications transport between the RTU and Alleniom SCADA, and any
+customer equipment that shares a physical or logical interface with the RTU are subject to this
+section. Alleniom-owned assets covered here are administered under Alleniom's cyber-security
+program consistent with NIST SP 800-82 and NERC CIP where applicable.
+§7.2 Access control
+Local and remote access to the RTU is limited to Alleniom SCADA/EMS Engineering and to
+Alleniom-authorized service personnel. Local craft access requires two-factor authentication
+against Alleniom's identity system. Passwords, shared secrets, and cryptographic keys are
+managed by Alleniom and are not disclosed to the customer, developer, or any third party.
+§7.3 Communications security
+DNP3 Secure Authentication v5 shall be enabled where supported by the RTU. All
+communications traversing any non-utility segment shall be tunneled through an
+Alleniom-managed VPN using IPsec (IKEv2) with mutual certificate authentication. Certificates
+shall have a maximum validity of thirteen (13) months and are rotated by Alleniom.
+§7.4 Firmware, configuration, and change management
+RTU firmware and configuration are updated only by Alleniom SCADA/EMS Engineering, following
+the Alleniom change-management process. Firmware images shall be verified against a
+cryptographic signature prior to installation. The customer shall not attempt to modify, upgrade, or
+reconfigure the RTU or the utility-owned communications equipment.
+§7.5 Logging and monitoring
+The RTU shall log authentication events, configuration changes, communications state transitions,
+and firmware operations. Logs are forwarded to Alleniom's centralized log-management system.
+Anomalies detected by that system are handled per Alleniom's cyber-security incident response
+procedure.
+Telemetry & Communications Standard Page 5 TCS-02
+
+Alleniom Utilities | Standards Engineering TCS-02 Rev 1 | Effective 06/01/2021
+§7.6 Physical security
+The RTU shall be housed in a locked, tamper-evident enclosure. Enclosure keys, cores, and any
+physical access tokens are held by Alleniom. Physical intrusion of the enclosure shall generate a
+status point (tamper alarm) reported to SCADA under §6.
+§7.7 Incident response
+The customer shall report, without delay, any known or suspected compromise of the RTU, its
+enclosure, its communications transport, or any interface between customer equipment and
+utility-owned telemetry equipment. Reports shall be directed to the Alleniom SOC and to
+SCADA/EMS Engineering.
+§7.8 Decommissioning
+At end of life, the RTU and its cryptographic material are returned to Alleniom for secure disposal.
+Customer equipment previously interfaced to the RTU shall be sanitized of any Alleniom-provided
+credentials before it is repurposed or disposed of.
+End of TCS-02.
+Telemetry & Communications Standard Page 6 TCS-02

@@ -1,0 +1,52 @@
+[Sheet: Summary]
+Supplier Lead-Time Report — DER Program Equipment	
+Doc no. SCADA-EQP-2025-06  ·  Rev 1  ·  Date 06/30/2025  ·  Owner Marcus Deele	
+Author: Marcus Deele, SCADA/EMS Engineering — marcus.deele@alleniom.com	
+As of: 06/30/2025	
+Distribution: DER Program Office; Distribution Operations; Standards Engineering	
+Field	Value
+Report	Supplier Lead-Time Report — DER Program Equipment (RTUs & POI reclosers)
+Prepared by	Marcus Deele, SCADA/EMS Engineering
+As of	06/30/2025
+Scope	Utility-owned RTU and POI recloser procurement in support of in-scope DER interconnection commissionings (≥500 kW). Program-owned only; customer-side equipment excluded.
+Current approved suppliers — RTU	Kelvraith Grid Systems, Inc. (approved supplier of record)
+Current approved suppliers — POI recloser	Norstead Power Controls, LLC (approved supplier of record)
+Quoted lead time — RTU	~8-month lead time from PO acknowledgement to delivery to Halston staging yard
+Quoted lead time — POI recloser	~8-month lead time from PO acknowledgement to delivery to Halston staging yard
+Lead-time framing	The ~8-month supplier lead time for RTUs and POI reclosers from the current approved suppliers, both device types, is a shortcoming of the current approved suppliers. Quoted intervals have not shortened materially through 2024–2025 despite repeated escalation with Kelvraith and Norstead account management.
+Incoming — 08/2025	2 RTU + POI recloser sets arriving 08/2025 (one complete set per site allocation).
+Incoming — 03/2026	Next delivery 03/2026 (aggregated shipment covering remaining committed orders).
+Sites waiting on utility equipment	7 completed sites awaiting utility equipment (construction complete; RTU and/or POI recloser outstanding). See companion tracker for site-level detail.
+Flag — grant-funded project	Grant-funded community project contracted in-service 09/30/2025 at risk. Alleron Community Solar Initiative — Rowan Hill (1.05 MW) requires RTU + POI recloser; only two sets land 08/2025 and the next window is 03/2026.
+Related standards	TCS-02 §5 (≥500 kW → utility RTU + SCADA telemetry); DPS-07 §4.2 / DIS-01 §5 (POI recloser applicability); OG-17 (deployment sequencing of constrained utility equipment).
+Companion files	DER-EQP-COMPL Completed_Sites_Awaiting_Equipment.xlsx (site-level roster); OG-17 Equipment Deployment Prioritization Guideline.
+Narrative notes	
+• The ~8-month lead time is quoted by both current approved suppliers and has been reconfirmed by Kelvraith (RTU) on 06/12/2025 and by Norstead (POI recloser) on 06/18/2025 against outstanding purchase orders.	
+• Neither supplier has offered an expedite fee schedule that would compress the interval below ~8 months. Requests for partial shipments have been declined by both suppliers on the basis of factory build slotting.	
+• Vendor qualification of alternative sources for equivalent RTUs and POI reclosers is in progress; see Tab 3.	
+[Sheet: Orders on Hand]
+Tab 2 — Orders on Hand					
+Purchase orders currently in flight with the current approved suppliers. Quantities are program-owned sets (utility side of POI). "Set" = one RTU or one POI recloser unless noted.					
+Supplier	Device	PO Number	PO Date	Qty	Expected Delivery
+Kelvraith Grid Systems, Inc.	RTU (utility-owned, SCADA-integrated per TCS-02 §5)	PO-ALN-2024-1187	12/09/2024	2	08/2025
+Norstead Power Controls, LLC	POI recloser (utility-owned, distribution class)	PO-ALN-2024-1194	12/16/2024	2	08/2025
+Kelvraith Grid Systems, Inc. / Norstead Power Controls, LLC (aggregated)	RTU + POI recloser sets (mixed shipment across both suppliers)	PO-ALN-2025-0403 / PO-ALN-2025-0417	07/22/2024 (Kelvraith) / 07/29/2024 (Norstead) — reissued 02/2025 for revised delivery slot	5 RTU / 3 POI recloser	03/2026
+Notes					
+• The 08/2025 shipments cover two complete site sets (one RTU + one POI recloser per site) and are the only utility equipment scheduled to land between the report date and the 09/30/2025 grant milestone.					
+• The 03/2026 aggregated row reflects the next confirmed factory slot after 08/2025. Neither supplier has offered an intermediate delivery between these two dates.					
+• All POs are firm-order, no-cancellation past factory-cut date. Kelvraith factory-cut for the 03/2026 batch occurred 03/2025; Norstead factory-cut occurred 04/2025.					
+[Sheet: Open Vendor Queries]
+Tab 3 — Open Vendor Queries							
+Alternative suppliers under evaluation for equivalent RTUs and POI reclosers, with the intent of qualifying a second source and shortening the ~8-month lead time from the current approved suppliers. Owner: Marcus Deele (SCADA/EMS Engineering).							
+Query ID	Alternative Supplier	Device Category	Equivalent To	Status	Quoted Lead Time	Owner	Next Step
+VQ-2025-014	Halbrent Substation Automation, GmbH	RTU	Kelvraith RTU platform	Datasheet + protocol compatibility review in progress	~14 weeks quoted (unverified)	Marcus Deele	SCADA lab interoperability bench test 07/2025
+VQ-2025-015	Threydon Controls Corp.	RTU	Kelvraith RTU platform	Initial NDA executed 05/28/2025; awaiting reference-site list	Not yet quoted	Marcus Deele	Reference calls; UL / IEEE 1547 compliance letter
+VQ-2025-016	Ferrowick Switchgear Ltd.	POI recloser	Norstead distribution-class recloser	Type-test documentation under review by Standards Engineering	~18 weeks quoted (unverified)	Marcus Deele	Coordinate type-test acceptance with Evan Solberg
+VQ-2025-017	Coastwide Electric Apparatus, Inc.	POI recloser	Norstead distribution-class recloser	Pre-qualification questionnaire returned 06/20/2025	~22 weeks quoted (unverified)	Marcus Deele	Factory audit scoping call scheduled 07/2025
+VQ-2025-018	Kelvraith Grid Systems, Inc. — engineering escalation	RTU	(incumbent)	Open request for expedited slot on outstanding PO-ALN-2025-0403	No commitment offered	Marcus Deele	Quarterly account review 07/2025
+VQ-2025-019	Norstead Power Controls, LLC — engineering escalation	POI recloser	(incumbent)	Open request for expedited slot on outstanding PO-ALN-2025-0417	No commitment offered	Marcus Deele	Quarterly account review 07/2025
+Notes							
+• None of the alternative suppliers listed have been added to the Alleniom approved-supplier list as of 06/30/2025. Any procurement action against VQ-2025-014 through VQ-2025-017 requires Standards Engineering type-test acceptance and Distribution Operations sign-off prior to PO issuance.							
+• Lead-time quotes from alternative suppliers are preliminary and have not been validated against Alleniom-specific configuration (communications card, protection settings, mounting).							
+• Second-source qualification will not affect the 08/2025 or 03/2026 deliveries already in flight from the current approved suppliers.							
+End of report — Marcus Deele, SCADA/EMS Engineering, 06/30/2025.							

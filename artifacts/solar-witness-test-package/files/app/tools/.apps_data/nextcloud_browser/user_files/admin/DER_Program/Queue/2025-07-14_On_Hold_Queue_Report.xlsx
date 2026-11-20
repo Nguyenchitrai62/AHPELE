@@ -1,0 +1,166 @@
+[Sheet: Summary]
+Alleniom Utilities — DER Interconnection Program		
+Weekly On-Hold Queue Export		
+As of:	2025-07-14 00:00:00	
+Prepared by:	DER Program Office	
+Source system:	ICQ (Interconnection Queue)	
+Metric	Count	Notes
+Active applications	380	active
+On hold	140	on-hold
+Past study timelines	62	past study timelines
+On-hold composition (this export)		
+Hold Reason Category	Count	% of On-Hold
+Non-payment >90 days	5	0.03571428571428571
+Awaiting customer information	38	0.2714285714285714
+Standards clarification pending	12	0.08571428571428572
+Awaiting utility equipment	15	0.1071428571428571
+Construction scheduling	35	0.25
+Other operational hold reasons	35	0.25
+Total on-hold rows	140	
+[Sheet: Holds]
+Project ID	Customer	Site	Capacity (kW)	Hold Reason	Hold Start Date
+PXA-2023-0871	Kavendale Cold Storage LLC	Kavendale Cold Storage Rooftop PV	620	non-payment >90 days	2025-07-02 00:00:00
+PXA-2024-0155	Grantsford Industrial Park LP	Grantsford Warehouse D Array	780	non-payment >90 days	2025-07-08 00:00:00
+PXA-2024-0203	Whitfen Regional Medical Ctr	Whitfen Medical Campus PV	910	non-payment >90 days	2025-06-18 00:00:00
+PXA-2024-0327	Bramwell Timber Products Inc.	Bramwell Sawmill Rooftop PV	560	non-payment >90 days	2025-06-22 00:00:00
+PXA-2024-0498	Northmere Data Center Holdings	Northmere DC East Roof Array	990	non-payment >90 days	2025-06-30 00:00:00
+PXA-2024-0161	Corvale Public Library District	Corvale Central Library Array	540	awaiting customer information	2025-03-18 00:00:00
+PXA-2024-0182	Hemlock Grove Vineyards LLC	Hemlock Grove Winery PV	680	awaiting customer information	2025-04-02 00:00:00
+PXA-2024-0224	Ferndell Auto Group	Ferndell Auto Dealership Roof	520	awaiting customer information	2025-04-09 00:00:00
+PXA-2024-0267	Alderwick Township	Alderwick Public Works Yard PV	610	awaiting customer information	2025-04-15 00:00:00
+PXA-2024-0301	Sterling Ridge Baptist Church	Sterling Ridge Sanctuary Array	500	awaiting customer information	2025-04-22 00:00:00
+PXA-2024-0512	Ridgemoor Community College	Ridgemoor Field House PV	810	awaiting customer information	2025-06-03 00:00:00
+PXA-2025-0033	Foxbriar Meats Co-op	Foxbriar Processing Facility PV	720	awaiting customer information	2025-06-09 00:00:00
+PXA-2025-0074	Kellingford Municipal Airport	Kellingford Terminal Roof PV	640	awaiting customer information	2025-06-16 00:00:00
+PXA-2024-0388	Averton Corridor Logistics LLC	Averton DC-1 Rooftop Array	730	awaiting customer information	2025-05-06 00:00:00
+PXA-2024-0447	Sandhurst Business Center LP	Sandhurst Building 4 PV	570	awaiting customer information	2025-05-19 00:00:00
+PXA-2025-0092	Lanescroft Beverage Bottling	Lanescroft Bottling Plant Roof	690	awaiting customer information	2025-06-23 00:00:00
+PXA-2025-0119	Perrindale Assisted Living	Perrindale Campus Solar	510	awaiting customer information	2025-07-01 00:00:00
+PXA-2024-0134	Wesbridge Commercial Realty	Wesbridge Office Park Array	550	awaiting customer information	2025-03-04 00:00:00
+PXA-2024-0148	Talmadge Farms LLC	Talmadge Barn Rooftop PV	580	awaiting customer information	2025-03-11 00:00:00
+PXA-2024-0176	Ashland Ridge Golf Resort	Ashland Ridge Clubhouse PV	530	awaiting customer information	2025-03-25 00:00:00
+PXA-2024-0195	Halveston Manufacturing Corp	Halveston Plant 2 Array	720	awaiting customer information	2025-04-01 00:00:00
+PXA-2024-0218	Rowanwood Property Group	Rowanwood Retail Center PV	610	awaiting customer information	2025-04-07 00:00:00
+PXA-2024-0245	Millridge Storage Partners	Millridge Self-Storage Roof	540	awaiting customer information	2025-04-16 00:00:00
+PXA-2024-0281	Cranfield Grain & Feed Co.	Cranfield Elevator Site PV	590	awaiting customer information	2025-04-28 00:00:00
+PXA-2025-0901	Bellemere Health Group	Bellemere Outpatient Clinic PV	620	awaiting customer information	2025-05-01 00:00:00
+PXA-2025-0902	Foxglove Retail Holdings	Foxglove Plaza Rooftop Array	660	awaiting customer information	2025-05-09 00:00:00
+PXA-2025-0903	Trellwyn Church Consortium	Trellwyn Fellowship Hall PV	500	awaiting customer information	2025-05-12 00:00:00
+PXA-2024-0421	Marley Distribution Ltd.	Marley DC-North Rooftop Array	780	awaiting customer information	2025-05-16 00:00:00
+PXA-2024-0463	Ostenfield Community Center	Ostenfield Rec Complex PV	520	awaiting customer information	2025-05-21 00:00:00
+PXA-2024-0489	Prairiehaven Cooperative	Prairiehaven Feed Mill Array	610	awaiting customer information	2025-05-27 00:00:00
+PXA-2024-0524	Belnwood Development LLC	Belnwood Business Park PV	670	awaiting customer information	2025-06-04 00:00:00
+PXA-2024-0551	Kingwater Bottling Corp	Kingwater North Plant Array	730	awaiting customer information	2025-06-06 00:00:00
+PXA-2024-0578	Havenridge Senior Living	Havenridge Main Campus PV	540	awaiting customer information	2025-06-10 00:00:00
+PXA-2025-0009	Coldwell Retail Trust	Coldwell Marketplace Array	590	awaiting customer information	2025-06-12 00:00:00
+PXA-2025-0021	Elmvale Business Association	Elmvale Commerce Center PV	620	awaiting customer information	2025-06-17 00:00:00
+PXA-2025-0047	Rusanne Farms Cooperative	Rusanne Dairy Rooftop Array	550	awaiting customer information	2025-06-20 00:00:00
+PXA-2025-0056	Lynchford Church of God	Lynchford Fellowship PV	500	awaiting customer information	2025-06-23 00:00:00
+PXA-2025-0068	Barrowmill Manufacturing	Barrowmill Plant 3 Roof Array	710	awaiting customer information	2025-06-25 00:00:00
+PXA-2025-0081	Timberpine Retreat Center	Timberpine Lodge PV	510	awaiting customer information	2025-06-27 00:00:00
+PXA-2025-0115	Redgate Property Holdings	Redgate Corporate Campus PV	650	awaiting customer information	2025-07-01 00:00:00
+PXA-2025-0128	Yarrowdale Auto Distributors	Yarrowdale Warehouse Roof PV	570	awaiting customer information	2025-07-03 00:00:00
+PXA-2025-0141	Melverne Industrial Park LLC	Melverne Building A Array	690	awaiting customer information	2025-07-07 00:00:00
+PXA-2025-0157	Winsomere Retail LLC	Winsomere Outlet Center PV	630	awaiting customer information	2025-07-09 00:00:00
+PXA-2025-0167	Corcorra Foods Inc.	Corcorra Processing Plant PV	720	construction scheduling	2025-07-10 00:00:00
+PXA-2024-0523	Kelmar Industrial Park Solar LLC	Kelmar Industrial Park Array	2400	standards clarification pending	2025-03-12 00:00:00
+PXA-2024-0611	Ashborough Township	Ashborough Public Works Array	620	standards clarification pending	2025-03-18 00:00:00
+PXA-2025-0018	Silvermont Distribution Co.	Silvermont Distribution Rooftop	850	standards clarification pending	2025-03-26 00:00:00
+PXA-2025-0041	Westgate Meadows Solar LLC	Westgate Meadows Solar	1800	standards clarification pending	2025-04-02 00:00:00
+PXA-2025-0057	Draystone College	Draystone College Array	940	standards clarification pending	2025-04-09 00:00:00
+PXA-2025-0086	Ridgeview Solar Partners LLC	Ridgeview Feeder Array	3000	standards clarification pending	2025-04-17 00:00:00
+PXA-2025-0104	Corliston Manufacturing Inc.	Corliston Plant Rooftop PV	1200	standards clarification pending	2025-04-28 00:00:00
+PXA-2025-0131	Varnell Foods Cooperative	Varnell Foods Processing PV	780	standards clarification pending	2025-05-06 00:00:00
+PXA-2025-0148	Halstead Point Solar LLC	Halstead Point Solar Farm	2100	standards clarification pending	2025-05-14 00:00:00
+PXA-2025-0163	Northshore Community Hospital	Northshore Hospital Campus PV	1500	standards clarification pending	2025-05-23 00:00:00
+PXA-2025-0177	Wexborn County Fairgrounds	Wexborn Fairgrounds Array	550	standards clarification pending	2025-06-03 00:00:00
+PXA-2025-0189	Ember Ridge Solar LLC	Ember Ridge Solar Farm	2700	standards clarification pending	2025-06-16 00:00:00
+PXA-2024-0142	City of Elmsworth	Northside Water Treatment Plant PV	780	awaiting utility equipment	2025-05-12 00:00:00
+PXA-2024-0207	Alleron Community Solar Initiative	Rowan Hill Community Solar	1050	awaiting utility equipment	2025-06-09 00:00:00
+PXA-2024-0164	Brookfen Unified School District	Brookfen North High School Array	720	awaiting utility equipment	2025-04-28 00:00:00
+PXA-2024-0221	Brookfen Unified School District	Brookfen West Elementary Array	640	awaiting utility equipment	2025-06-02 00:00:00
+PXA-2024-0129	Vernand Logistics LLC	Vernand Logistics C&I Rooftop PV	620	awaiting utility equipment	2025-04-07 00:00:00
+PXA-2024-0295	Halstonfield Distribution Ctr	Halstonfield Distribution Center PV	720	awaiting utility equipment	2025-06-23 00:00:00
+PXA-2024-0343	Prairie Corridor Partners LLC	Prairie Corridor Business Park PV	860	awaiting utility equipment	2025-07-01 00:00:00
+PXA-2024-0369	Larchmont Assembly Corp	Larchmont Plant B Rooftop PV	710	awaiting utility equipment	2025-05-06 00:00:00
+PXA-2024-0416	Fenmark Commerce LLC	Fenmark Warehouse Array	590	awaiting utility equipment	2025-05-16 00:00:00
+PXA-2024-0454	Grantsburg Township	Grantsburg DPW Facility PV	640	awaiting utility equipment	2025-05-28 00:00:00
+PXA-2024-0491	Rockhaven Farms LLC	Rockhaven Cooperative Array	550	awaiting utility equipment	2025-06-04 00:00:00
+PXA-2024-0533	Peakstone Manufacturing	Peakstone Facility 2 PV	780	awaiting utility equipment	2025-06-11 00:00:00
+PXA-2025-0904	Halbertson Retail Group	Halbertson Distribution Rooftop	630	awaiting utility equipment	2025-06-17 00:00:00
+PXA-2025-0043	Carbrook Industrial LLC	Carbrook Metals Plant PV	810	awaiting utility equipment	2025-06-24 00:00:00
+PXA-2025-0089	Nettleford Farms Coop	Nettleford Grain Elevator PV	560	awaiting utility equipment	2025-07-02 00:00:00
+PXA-2024-0102	Belhaven Retail Partners	Belhaven Shopping Center PV	620	construction scheduling	2025-03-12 00:00:00
+PXA-2024-0116	Trentmoor Storage Inc.	Trentmoor Facility A Array	540	construction scheduling	2025-03-18 00:00:00
+PXA-2024-0138	Grangeford Foods LLC	Grangeford Processing Plant PV	710	construction scheduling	2025-03-24 00:00:00
+PXA-2024-0159	Verwick Industries Inc.	Verwick Assembly Plant Array	690	construction scheduling	2025-04-01 00:00:00
+PXA-2024-0187	Harborlight Commerce LLC	Harborlight Trade Center PV	580	construction scheduling	2025-04-07 00:00:00
+PXA-2024-0212	Millbrooke Business Trust	Millbrooke Corporate Park Array	640	construction scheduling	2025-04-10 00:00:00
+PXA-2024-0234	Kestrel Point Development	Kestrel Point Retail PV	550	construction scheduling	2025-04-14 00:00:00
+PXA-2024-0256	Whitmere Foods Co.	Whitmere Processing Rooftop	720	construction scheduling	2025-04-17 00:00:00
+PXA-2024-0278	Aldertown Farms Coop	Aldertown Dairy Array	590	construction scheduling	2025-04-21 00:00:00
+PXA-2024-0303	Sableridge Realty Group	Sableridge Business Center PV	610	construction scheduling	2025-04-25 00:00:00
+PXA-2024-0325	Northland Storage LLC	Northland Facility 3 Array	500	construction scheduling	2025-04-29 00:00:00
+PXA-2024-0348	Rennwood Industries	Rennwood Plant A Rooftop PV	730	construction scheduling	2025-05-02 00:00:00
+PXA-2024-0374	Corvyn Distribution LLC	Corvyn DC-2 Array	660	construction scheduling	2025-05-06 00:00:00
+PXA-2024-0402	Hazelford Property Group	Hazelford Office Complex PV	570	construction scheduling	2025-05-09 00:00:00
+PXA-2024-0429	Grandview Retail Partners	Grandview Marketplace Array	620	construction scheduling	2025-05-13 00:00:00
+PXA-2024-0458	Elmshire Township	Elmshire Municipal Complex PV	540	construction scheduling	2025-05-16 00:00:00
+PXA-2024-0483	Barnsley Manufacturing	Barnsley Plant B Rooftop	700	construction scheduling	2025-05-20 00:00:00
+PXA-2024-0509	Kentwood Development LLC	Kentwood Corporate Park PV	650	construction scheduling	2025-05-23 00:00:00
+PXA-2024-0531	Foxbridge Storage Trust	Foxbridge Warehouse Array	580	construction scheduling	2025-05-27 00:00:00
+PXA-2024-0559	Newmark Distribution Corp	Newmark DC-East Rooftop	720	construction scheduling	2025-05-30 00:00:00
+PXA-2024-0574	Windmere Farms Coop	Windmere Feed Mill PV	600	construction scheduling	2025-06-03 00:00:00
+PXA-2025-0004	Rothgate Industrial Group	Rothgate Plant 4 Array	680	construction scheduling	2025-06-06 00:00:00
+PXA-2025-0016	Sunderly Retail LLC	Sunderly Shopping Plaza PV	560	construction scheduling	2025-06-10 00:00:00
+PXA-2025-0031	Craigmore Holdings LLC	Craigmore Office Rooftop	610	construction scheduling	2025-06-13 00:00:00
+PXA-2025-0049	Brantwyn Foods Inc.	Brantwyn Bakery Roof PV	550	construction scheduling	2025-06-17 00:00:00
+PXA-2025-0063	Highdale Development Corp	Highdale Retail Center Array	640	construction scheduling	2025-06-20 00:00:00
+PXA-2025-0077	Marrenford Industrial LLC	Marrenford Facility 1 PV	700	construction scheduling	2025-06-23 00:00:00
+PXA-2025-0088	Terrmill Commercial Realty	Terrmill Office Complex PV	570	construction scheduling	2025-06-26 00:00:00
+PXA-2025-0097	Berwyn Farms Cooperative	Berwyn Grain Elevator Array	590	construction scheduling	2025-06-28 00:00:00
+PXA-2025-0108	Chelmwood Storage Corp	Chelmwood Yard 2 Rooftop	520	construction scheduling	2025-07-01 00:00:00
+PXA-2025-0122	Longview Distribution LLC	Longview DC-3 Array	750	construction scheduling	2025-07-03 00:00:00
+PXA-2025-0135	Meadowvale Retail Trust	Meadowvale Center PV	610	construction scheduling	2025-07-05 00:00:00
+PXA-2025-0149	Grafton Meadows Coop	Grafton Farm Complex Array	580	construction scheduling	2025-07-07 00:00:00
+PXA-2025-0161	Winchester Property Group	Winchester Business Park PV	640	construction scheduling	2025-07-09 00:00:00
+PXA-2024-0125	Halbrook Data Services LLC	Halbrook DC Facility Rooftop	890	protection settings review pending	2025-03-06 00:00:00
+PXA-2024-0151	Sandsmere Property LLC	Sandsmere Mixed-Use Array	540	study queue backlog	2025-03-13 00:00:00
+PXA-2024-0169	Cranfield Utilities Coop	Cranfield Feed Center PV	620	SCADA integration pending	2025-03-20 00:00:00
+PXA-2024-0193	Millwater Development Corp	Millwater Business Center PV	700	planning study pending	2025-03-27 00:00:00
+PXA-2024-0227	Wychcombe Realty Group	Wychcombe Office Complex PV	560	affected system operator coordination	2025-04-03 00:00:00
+PXA-2024-0249	Stonecrest Industrial LLC	Stonecrest Plant 2 Array	720	planning study pending	2025-04-08 00:00:00
+PXA-2024-0263	Farthingale Farms LLC	Farthingale Rooftop Array	500	study queue backlog	2025-04-11 00:00:00
+PXA-2024-0289	Ellmoor Retail Holdings	Ellmoor Shopping Center Array	580	commissioning documentation review	2025-04-16 00:00:00
+PXA-2024-0311	Brackenridge Storage LLC	Brackenridge Yard PV	610	protection settings review pending	2025-04-20 00:00:00
+PXA-2024-0334	Rushmere Industries Inc.	Rushmere Plant A Rooftop PV	690	planning study pending	2025-04-24 00:00:00
+PXA-2024-0361	Windercliff Foods Ltd.	Windercliff Processing PV	650	SCADA integration pending	2025-04-29 00:00:00
+PXA-2024-0385	Fenbrook Property Trust	Fenbrook Corporate Center Array	570	study queue backlog	2025-05-03 00:00:00
+PXA-2024-0410	Kilnvale Community Solar LP	Kilnvale Community Site 2	1420	affected system operator coordination	2025-05-08 00:00:00
+PXA-2024-0436	Ravenscombe Manufacturing	Ravenscombe Facility 3 PV	730	protection settings review pending	2025-05-12 00:00:00
+PXA-2024-0468	Sedgewick Township	Sedgewick Public Works PV	520	commissioning documentation review	2025-05-17 00:00:00
+PXA-2024-0495	Ashendale Retail Partners	Ashendale Shopping Plaza PV	610	study queue backlog	2025-05-22 00:00:00
+PXA-2024-0517	Bellhaven Foods LLC	Bellhaven Processing Plant PV	700	planning study pending	2025-05-26 00:00:00
+PXA-2024-0545	Thornmere Storage Trust	Thornmere Warehouse Array	540	SCADA integration pending	2025-05-29 00:00:00
+PXA-2024-0562	Kettleford Industrial LLC	Kettleford Plant 1 Rooftop	680	protection settings review pending	2025-06-02 00:00:00
+PXA-2024-0581	Ambledown Realty LLC	Ambledown Office Park PV	590	study queue backlog	2025-06-05 00:00:00
+PXA-2025-0007	Cransley Farms Cooperative	Cransley Dairy Rooftop Array	550	commissioning documentation review	2025-06-09 00:00:00
+PXA-2025-0019	Beverley Distribution Corp	Beverley DC-1 Rooftop	720	planning study pending	2025-06-12 00:00:00
+PXA-2025-0038	Longbrook Industries	Longbrook Plant Site A Array	690	protection settings review pending	2025-06-15 00:00:00
+PXA-2025-0052	Wentworth Business Trust	Wentworth Corporate Complex PV	630	SCADA integration pending	2025-06-18 00:00:00
+PXA-2025-0066	Kirkfield Retail LLC	Kirkfield Center Array	570	study queue backlog	2025-06-21 00:00:00
+PXA-2025-0079	Callenwick Foods Inc.	Callenwick Cannery Rooftop	700	planning study pending	2025-06-25 00:00:00
+PXA-2025-0093	Threshford Property Group	Threshford Office Rooftop PV	550	commissioning documentation review	2025-06-28 00:00:00
+PXA-2025-0105	Marchwood Development LLC	Marchwood Business Center PV	610	protection settings review pending	2025-07-01 00:00:00
+PXA-2025-0113	Everslee Community Solar LP	Everslee Field 1 Array	1580	affected system operator coordination	2025-07-03 00:00:00
+PXA-2025-0125	Norwich Fields Coop	Norwich Elevator Rooftop PV	590	SCADA integration pending	2025-07-05 00:00:00
+PXA-2025-0137	Oakenshaw Industries	Oakenshaw Plant B Array	720	study queue backlog	2025-07-07 00:00:00
+PXA-2025-0146	Blythewood Retail Trust	Blythewood Marketplace PV	610	planning study pending	2025-07-09 00:00:00
+PXA-2025-0154	Crestmere Business Holdings	Crestmere Corporate Roof Array	640	protection settings review pending	2025-07-10 00:00:00
+PXA-2025-0159	Fernbrook Distribution LLC	Fernbrook DC-North Rooftop	700	commissioning documentation review	2025-07-11 00:00:00
+PXA-2025-0165	Ashgate Manufacturing	Ashgate Plant 5 Array	680	protection settings review pending	2025-07-12 00:00:00
+[Sheet: Notes]
+Notes
+•  Row set represents on-hold applications only; active queue rows are reported separately.
+•  Hold Start Date reflects the date the project entered its current hold state (source: ICQ status log).
+•  Domestic rooftop projects are excluded from this program-scope export.

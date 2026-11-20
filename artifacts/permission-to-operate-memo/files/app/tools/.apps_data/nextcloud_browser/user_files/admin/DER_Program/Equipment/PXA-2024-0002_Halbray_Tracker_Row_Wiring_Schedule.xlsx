@@ -1,0 +1,18 @@
+[Sheet: Header]
+Tracker Row Wiring Schedule: Halbray Field Solar Site 3 (PXA-2024-0002)
+Tamsworth Electrical Constructors Inc. · Alleron Electrical Contractor Lic. #EC-11847
+Drawing E-203 Rev B, 06/20/2025. The tracker rows of blocks 1 to 8: one slew drive per row, supplied by its block's controller.
+Prepared: R. Vance, Electrical Engineer, Tamsworth Electrical Constructors Inc., 06/20/2025.
+[Sheet: Blocks]
+Block	Rows	Drives	Supplied by
+Block 1	12 rows	12 x slew drive, 48 V dc, 0.25 kW, one per row	Block 1 controller
+Block 2	12 rows	12 x slew drive, 48 V dc, 0.25 kW, one per row	Block 2 controller
+Block 3	12 rows	12 x slew drive, 48 V dc, 0.25 kW, one per row	Block 3 controller
+Block 4	12 rows	12 x slew drive, 48 V dc, 0.25 kW, one per row	Block 4 controller
+Block 5	12 rows	12 x slew drive, 48 V dc, 0.25 kW, one per row	Block 5 controller
+Block 6	12 rows	12 x slew drive, 48 V dc, 0.25 kW, one per row	Block 6 controller
+Block 7	12 rows	12 x slew drive, 48 V dc, 0.25 kW, one per row	Block 7 controller
+Block 8	12 rows	12 x slew drive, 48 V dc, 0.25 kW, one per row	Block 8 controller
+[Sheet: Wiring]
+Item	Construction
+Drive circuits	3 x 12 AWG Cu Type TC, from each block's controller along the row piles to each row's drive

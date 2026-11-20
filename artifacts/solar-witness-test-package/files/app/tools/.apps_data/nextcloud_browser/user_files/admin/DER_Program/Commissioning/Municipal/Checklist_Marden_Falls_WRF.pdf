@@ -1,0 +1,48 @@
+ALLENIOM UTILITIES · DER PROGRAM OFFICE
+DER COMMISSIONING CHECKLIST
+Facility: Marden Falls Water Reclamation Facility Array · Nameplate: 980 kW · Date: 06/24/2025
+Host Customer / Municipality: City of Marden Falls
+220 Cascade Boulevard, Marden Falls, Alleron 75MF
+Contact: Facilities & Operations Division · (612) 555-1038 · publicworks@mardenfalls.gov
+Inverter model (cover sheet): Solmery Power SM-245K-3P
+Item Result Notes
+Inverter model verified against Pass Solmery Power SM-245K-3P — model listed on
+application Certified Equipment List 2025-Q2
+Nameplate ratings match approved Pass 980 kW AC aggregate; four (4) SM-245K-3P inverters
+design
+Construction complete — visual Pass Racking, module strings, AC combiner, MV
+walk-down interconnect enclosure inspected; punch list closed
+Anti-islanding function test (IEEE Pass Trip observed within specified window
+1547.1)
+Voltage/frequency ride-through settings Pass Programmed per approved settings sheet (Category
+verified II)
+Protective relay settings as specified Pass 27/59, 81U/O, 25, and 32 elements confirmed against
+protection coordination memo
+Grounding — equipment and system Pass Continuity verified on inverter chassis, AC combiner,
+MV switchgear, and site ground grid; ground-fault
+detection function exercised
+Labeling and disconnect accessibility Pass Utility disconnect placarded; DER warning labels
+affixed at meter, AC combiner, and MV switchgear per
+DIS-01 §8
+Metering and production meter check Pass Revenue meter sealed; production meter reads within
+tolerance against inverter portal
+Telemetry provisioning (RTU + SCADA) Pass Utility-owned RTU installed and provisioned; SCADA
+points verified end-to-end with SOC per TCS-02 §5
+Witness test: waiver eligible n Marked Waiver eligible — inverter model listed on current CEL
+(CEL-2025-Q2); pre-marked, copy-forward disposition
+Witness Test Disposition
+n Witness test: waiver eligible
+Witness test required — scheduled date: N/A (waiver eligible marked above)
+Basis: Per ENG-PRC-014 §3, sites whose inverter model appears on the current Certified Equipment List
+edition at the time of commissioning are eligible for waiver of the on-site witness test. Cover-sheet inverter
+
+model Solmery Power SM-245K-3P is carried on CEL-2025-Q2 (published 04/30/2025).
+Field Engineer Sign-Off
+Commissioning agent (Field Services): K. Ondras
+Printed name: K. Ondras Employee ID: AFE-2231
+Date: 06 / 24 / 2025
+Signature: /s/ K. Ondras
+Standards Engineering review (waiver eligibility confirmation): Pending
+Reviewed by: Pending Date: Pending
+Alleniom Utilities — DER Program Office · 4200 Veldmere Boulevard, Halston, Alleron 01HA · (612) 555-0100 · alleniom.com
+Doc no. DER-CX-2025-0624-MFWRF · Rev 1.0 · 06/24/2025 · Owner: DER Program Office

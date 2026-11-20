@@ -1,0 +1,95 @@
+ALLENIOM UTILITIES — DER PROGRAM OFFICE
+DER WITNESS TEST & WAIVER PROCEDURE
+Doc no. ENG-PRC-014 · Rev 3 · 04/30/2025 · Owner: Standards Engineering (Evan Solberg)
+Alleniom Utilities · DER Program Office · 4200 Veldmere Boulevard, Halston, Alleron 01HA · (612) 555-0100 · alleniom.com
+§1 PURPOSE
+This procedure establishes when Alleniom Utilities personnel must witness commissioning tests of a
+customer’s Distributed Energy Resource (DER) prior to issuance of Permission to Operate (PTO), and
+when the on-site witness test may be waived on the basis of the equipment installed at the facility. It is the
+controlling document for the DER Program commissioning group and for Standards Engineering waiver
+dispositions.
+Companion documents: Alleniom DER Interconnection Standard DIS-01 Rev 4; Telemetry &
+Communications Standard TCS-02; the current edition of the Alleniom Certified Equipment List (CEL).
+§2 SCOPE
+Applies to every in-scope DER facility interconnecting to the Alleniom distribution system under the DER
+Program (commercial small-scale 500 kW – 1 MW and medium-scale 1 MW – 5 MW). Domestic rooftop
+DER and sub-500 kW facilities routed through the Simplified Small-Systems Process are outside the
+scope of this procedure.
+Applies to the initial commissioning of a new interconnection, to re-commissioning following a capacity
+change or protective-equipment replacement, and to the disposition of any request to waive the on-site
+witness test in favor of an accepted commissioning-agent test record.
+§3 WAIVER ELIGIBILITY RULE
+Witness-test waivers apply ONLY to equipment listed on the CURRENT edition of the Certified Equipment
+List at the waiver date. Equipment not carried on the current CEL edition requires an on-site witness test
+before Permission to Operate (PTO) is issued. Listings appearing solely on a superseded CEL edition do
+NOT confer waiver eligibility on the current-edition date.
+The following are corollaries of the rule and are provided for the avoidance of doubt:
+1. The “waiver date” is the date on which Standards Engineering signs the waiver disposition, not the
+date on which the applicant filed the interconnection application, executed the ISA, or completed
+construction.
+2. Every protective device and every inverter (or power conversion system) installed at the facility must
+appear on the current CEL edition. A facility with any single unlisted component is ineligible.
+3. Withdrawal of an equipment listing at the time of a CEL republication is a substantive event. A listing
+that was carried on a prior edition and was not carried forward into the successor edition confers no
+waiver eligibility once the successor edition takes effect.
+4. Front-matter footnotes, cross-references, or historical annotations in the current CEL that describe a
+prior edition’s contents are informational only. They do not extend eligibility to models that are not
+themselves listed in the body of the current edition.
+ENG-PRC-014 Rev 3 · Alleniom Utilities DER Program Office Page 1
+
+5. The CEL edition in force on the waiver date is the sole reference. A model that was listed at the time
+an application was filed, but is no longer listed on the waiver date, requires the on-site witness test.
+§4 PROCEDURE
+§4.1 Look up model against current CEL.
+The commissioning coordinator retrieves the current edition of the Certified Equipment List from the
+Standards Engineering document repository. The coordinator confirms the edition identifier and the
+“supersedes” reference on the CEL cover page, and verifies that no more recent edition has been
+published between the file date shown on the coordinator’s copy and the waiver disposition date. For each
+inverter and each protective device installed at the facility, the coordinator locates the exact make, model,
+and firmware family in the body of the current CEL and records the CEL row reference on the
+commissioning checklist.
+If any installed model is not present in the body of the current CEL — including any model that appears
+solely on a superseded CEL edition — the facility is ineligible for a witness-test waiver and an on-site
+witness test is required prior to PTO. Superseded editions of the CEL are archived and are not to be used
+to establish eligibility under this section. The coordinator marks the commissioning checklist “witness test
+required” and forwards to §4.2.
+Where every installed model is confirmed on the current CEL, the coordinator marks the checklist “waiver
+eligible” and forwards to Standards Engineering for written disposition. Waiver disposition remains at the
+discretion of Standards Engineering; a positive eligibility determination under this section is a necessary
+but not sufficient condition for issuance of a waiver.
+§4.2 Schedule an on-site witness test.
+Where a witness test is required, the commissioning coordinator schedules the test with the customer or
+the customer’s commissioning agent, targeting the earliest mutually available date consistent with the
+applicant’s construction-complete status and the availability of an Alleniom Utilities witness engineer.
+Testing shall be performed per IEEE 1547.1 and shall include, at minimum, the protective-function trip
+tests, the anti-islanding test, and the ride-through verifications specified in DIS-01 Rev 4 §6. The customer
+or commissioning agent supplies the test plan, calibrated instrumentation, and the qualified personnel to
+operate the equipment; the Alleniom witness engineer observes, records, and dispositions the test in
+accordance with §4.3.
+Where the required on-site witness test cannot be scheduled prior to the applicant’s targeted energization
+date, the facility remains without PTO. On-site witness testing is not to be deferred to a post-PTO date
+under any circumstance, and PTO is not to be issued conditionally against a future witness test.
+§4.3 Documentation.
+The commissioning coordinator maintains a single commissioning record for each facility. The record shall
+include, at minimum:
+(cid:127) the completed commissioning checklist, including the CEL edition identifier consulted, the CEL row
+reference for each listed model, and the “waiver eligible” or “witness test required” determination;
+(cid:127) for waiver-eligible facilities, the written Standards Engineering waiver disposition, signed and dated
+by the Standards Engineer of record;
+ENG-PRC-014 Rev 3 · Alleniom Utilities DER Program Office Page 2
+
+(cid:127) for witness-tested facilities, the witness engineer’s test record, including instrument identifiers,
+measured values, pass/fail dispositions per test point, and the witness engineer’s signature and
+date;
+(cid:127) the manufacturer’s certificate of conformance, factory test report, or equivalent evidence supporting
+the CEL listing relied upon;
+(cid:127) correspondence with the customer or commissioning agent bearing on scheduling, deferrals, or
+test-plan negotiation.
+The commissioning record is retained in the facility interconnection file and is a prerequisite to PTO
+issuance by the System Operations Center. PTO shall not be issued in the absence of either (a) a signed
+witness-test disposition or (b) a signed waiver disposition supported by a §4.1 eligibility determination
+against the current CEL edition.
+End of procedure. See DIS-01 Rev 4 for interconnection standards, TCS-02 for telemetry requirements, and the
+current CEL edition for the list of qualifying equipment. Revisions to this procedure are issued by Standards
+Engineering and take effect on the date shown in the document-control block above.
+ENG-PRC-014 Rev 3 · Alleniom Utilities DER Program Office Page 3

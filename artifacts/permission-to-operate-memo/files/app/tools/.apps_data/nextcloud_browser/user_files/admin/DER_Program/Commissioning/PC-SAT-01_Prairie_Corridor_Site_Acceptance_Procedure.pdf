@@ -1,0 +1,30 @@
+ALLENIOM UTILITIES — DISTRIBUTION PROTECTION ENGINEERING
+4200 Veldmere Boulevard, Halston, Alleron 01HA · (612) 555-0100 · alleniom.com
+POI Recloser Site Acceptance Procedure: PC-SAT-01
+Doc no. Rev Date Owner
+DPE-PC-SAT-01 Rev 0 07/09/2025 Distribution Protection Engineering
+Site: Prairie Corridor Business Park PV (PXA-2024-0343), POI recloser PC-POI-R1 with control NPC-38.
+Issued for the site acceptance at cutover under DPS-07 §6.2, against settings sheet DPE-PC-POI-R1 Rev A.
+To be performed after installation and witnessed by Alleniom Utilities; results recorded on this form at the test.
+Steps
+Step 1 Insulation and dielectric. Measure insulation resistance of primary and secondary circuits at 5 kV DC for
+one minute; apply the manufacturer's dielectric withstand test to the secondary wiring. Record the values.
+Step 2 Instrument transformers. Verify CT ratio 200:5, polarity and burden; verify VT ratio 7200:120 V and
+polarity on both sides of the interrupter.
+Step 3 Functional testing. Test the elements below against settings sheet Rev A by secondary injection: pickup,
+timing and reset for each. Elements: 50/51, 50N/51N, 27, 59, 81U, 81O, 32; 25 and 79 under step 6.
+Step 4 End-to-end trip. From each element of step 3, trip the recloser through the interrupter and confirm the
+open indication locally and at SCADA.
+Step 5 Control, status and metering. Operate the recloser locally and from SCADA; confirm status points and
+metering at the SCADA operator display against the RTU point table SCADA-PC-RTU-CFG-01.
+Step 6 Synchronism check and reclose logic. With the utility source live and the park bus dead, confirm the 25
+element permits the close; close from the control cabinet and confirm the recloser closes. Open the recloser,
+open the upstream line disconnect to de-energize the line side, and confirm a close command is refused. Trip
+the recloser by secondary injection on the 27 element and confirm it goes to lockout with 79 blocked; confirm
+the lockout holds until the operator release. Restore the line side, wait the stable-source time of settings sheet
+Rev A (5 minutes), release, and confirm the close through 25.
+Step 7 Visible break. Operate the visible-break disconnect; apply the utility padlock in the open position and
+confirm the clearance hold.
+Acceptance
+Accepted in writing by Distribution Protection Engineering on completion of steps 1 to 7 (DPS-07 §6.3).
+Prepared: Nolan Achterberg, P.E., Distribution Protection Engineer, 07/09/2025.

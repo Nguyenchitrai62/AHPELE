@@ -1,0 +1,24 @@
+[Sheet: Header]
+Monitoring and Communications Schedule: Corwyn Office Complex PV (PXA-2023-0629)
+Brantley Electric Company · Alleron Electrical Contractor Lic. #EC-12306
+Drawing E-401 Rev C, 06/24/2025. The PV monitoring system: data-acquisition cabinet DAS-1, its gateway and the inverter communication links; and the inverters' data link to the utility RTU (ISA §7.2).
+Prepared: K. Osei, Electrical Engineer, Brantley Electric Company, 06/24/2025.
+[Sheet: Cabinet]
+Tag	Equipment	Location	Data	Mounting
+DAS-1	Data-acquisition cabinet, 24 x 20 x 8 in., steel, NEMA 1: Vexlar VX-Link gateway, cellular modem, 24 V dc power supply and the terminal strip for the five inverter links	Ground-floor electrical room of the parking structure	120 V supply from office building panel LP-2, circuit 14, 20 A	Wall-mounted in the electrical room
+[Sheet: Links]
+Link	From	To	Cable	Route
+COM-C1	INV-C1 RS-485 port 1	DAS-1 terminal strip	Shielded twisted pair, 2-pair, 24 AWG	3/4 in. rigid steel conduit along the canopy beam, then 1 in. Schedule 40 PVC underground, apart from the power circuits
+COM-C2	INV-C2 RS-485 port 1	DAS-1 terminal strip	Shielded twisted pair, 2-pair, 24 AWG	3/4 in. rigid steel conduit along the canopy beam, then 1 in. Schedule 40 PVC underground, apart from the power circuits
+COM-C3	INV-C3 RS-485 port 1	DAS-1 terminal strip	Shielded twisted pair, 2-pair, 24 AWG	3/4 in. rigid steel conduit along the canopy beam, then 1 in. Schedule 40 PVC underground, apart from the power circuits
+COM-C4	INV-C4 RS-485 port 1	DAS-1 terminal strip	Shielded twisted pair, 2-pair, 24 AWG	3/4 in. rigid steel conduit along the canopy beam, then 1 in. Schedule 40 PVC underground, apart from the power circuits
+COM-C5	INV-C5 RS-485 port 1	DAS-1 terminal strip	Shielded twisted pair, 2-pair, 24 AWG	3/4 in. rigid steel conduit along the canopy beam, then 1 in. Schedule 40 PVC underground, apart from the power circuits
+COM-RTU	INV-C1 to INV-C5 RS-485 port 2, one multi-drop bus	Utility RTU enclosure on the POI pole, RTU serial port (per-inverter ac power and status for SCADA)	Shielded twisted pair, 2-pair, 24 AWG	3/4 in. rigid steel conduit along the canopy beams, then 1 in. Schedule 40 PVC underground to the POI pole, apart from the power circuits; 3/4 in. rigid steel conduit up the pole
+[Sheet: Points]
+Point	Source	Interval
+AC power, energy, voltage and current per inverter	INV-C1 to INV-C5	5 min
+Inverter status and fault codes	INV-C1 to INV-C5	On change
+[Sheet: Notes]
+Note
+Dimensions are in inches unless noted; heights are above finished grade.
+Concrete is cast in place, 3,000 psi, with chamfered edges; steel is hot-dip galvanized unless noted.

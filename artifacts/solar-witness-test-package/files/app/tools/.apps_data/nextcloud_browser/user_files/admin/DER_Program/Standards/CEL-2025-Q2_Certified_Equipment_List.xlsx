@@ -1,0 +1,75 @@
+[Sheet: Front Matter]
+Alleniom Utilities — Certified Equipment List	
+Edition: CEL-2025-Q2 · Published 04/30/2025 · Supersedes CEL-2024-Q4 (published 10/31/2024).	
+PCS listing basis: UL 1741-SB / UL 3141.	
+Doc no.	CEL-2025-Q2
+Revision	Q2-2025
+Effective date	04/30/2025
+Supersedes	CEL-2024-Q4 (10/31/2024)
+Owner	Standards Engineering (Evan Solberg)
+Approved by	Manager, Standards Engineering
+Distribution	DER Program Office; Interconnection Studies; DER Planning Group; SCADA/EMS Engineering; Commissioning; Regulatory Affairs; contracted developers on request
+Next scheduled edition	CEL-2025-Q3 (planned 07/31/2025)
+Cross-reference — DIS-01 Rev 4 §3.6 (Controlled-capacity recognition)	
+A limit below nameplate is recognized only with a valid UL 1741 / UL 3141 PCS certification plus an approved Control Narrative — sufficient in themselves for recognition. Where the site's arrangement includes utility equipment, the recognized limit is enforced as applicable: telemetry monitoring, and on pure-generation sites the POI recloser's ANSI 32 directional-power element set to the recognized limit and tripping on violation.	
+How to use this list	
+The Inverters tab lists smart-inverter models with a valid UL 1741-SB certification of record as of the edition date. The Power Control Systems tab lists UL 3141-certified PCS assemblies eligible to satisfy the controlled-capacity recognition path under DIS-01 §3.6. Listing on this edition does not by itself authorize interconnection; project-specific screening, protection, and commissioning requirements continue to apply. Models superseded, delisted, or withdrawn between quarterly editions are removed from the current tab; superseded editions remain available through Standards Engineering on request.	
+Change summary since CEL-2024-Q4	
+— 8 inverter models added on new UL 1741-SB certifications received 11/2024–04/2025.	
+— 2 inverter models removed — manufacturer discontinued line or certification not renewed under UL 1741-SB.	
+— 3 PCS models added (Quenda Controls QC-PCS-250; Verronex Power Systems VPS-Cap-1500; Verronex Power Systems VPS-Cap-3000).	
+— All Torvane Electric TE-75K rows recertified to UL 1741-SB; superseded UL 1741 (non-SB) entry retired.	
+Contact	Evan Solberg, Standards Engineering — evan.solberg@alleniom.com · (612) 555-0113
+[Sheet: Inverters]
+Manufacturer	Model	Rated kW	Listing Basis	Effective Date	Notes
+Solmery Power	SM-60K-3P	60	UL 1741-SB	03/14/2024	Three-phase string inverter; carried from CEL-2024-Q4.
+Solmery Power	SM-100K-3P	100	UL 1741-SB	03/14/2024	Three-phase string inverter.
+Solmery Power	SM-125K-3P	125	UL 1741-SB	03/14/2024	Carried from CEL-2024-Q4.
+Solmery Power	SM-160K-3P	160	UL 1741-SB	07/22/2024	—
+Solmery Power	SM-215K-3P	215	UL 1741-SB	11/18/2024	Carried from CEL-2024-Q4 (Q4 addendum listing).
+Solmery Power	SM-245K-3P	245	UL 1741-SB	01/27/2025	Carried from CEL-2024-Q4 (Q4 addendum listing).
+Solmery Power	SM-300K-3P	300	UL 1741-SB	03/03/2025	Three-phase central-string.
+Torvane Electric	TE-33K	33	UL 1741-SB	11/05/2024	—
+Torvane Electric	TE-75K	75	UL 1741-SB	02/12/2025	Recertified to SB profile; prior UL 1741 record retired.
+Torvane Electric	TE-100K	100	UL 1741-SB	11/05/2024	—
+Torvane Electric	TE-125K	125	UL 1741-SB	11/05/2024	—
+Torvane Electric	TE-150K	150	UL 1741-SB	12/09/2024	New listing this edition.
+Torvane Electric	TE-180K	180	UL 1741-SB	12/09/2024	Carried from CEL-2024-Q4 (Q4 addendum listing).
+Torvane Electric	TE-225K	225	UL 1741-SB	02/28/2025	—
+Vexlar Energy	VX-50C	50	UL 1741-SB	06/02/2024	—
+Vexlar Energy	VX-90C	90	UL 1741-SB	06/02/2024	—
+Vexlar Energy	VX-140C	140	UL 1741-SB	09/16/2024	Carried from prior edition.
+Vexlar Energy	VX-200C	200	UL 1741-SB	06/02/2024	—
+Vexlar Energy	VX-250C	250	UL 1741-SB	06/02/2024	Carried from CEL-2024-Q4.
+Vexlar Energy	VX-320C	320	UL 1741-SB	02/04/2025	New listing this edition.
+Halbrick Solar	HB-50	50	UL 1741-SB	04/19/2024	Single-phase 208 V.
+Halbrick Solar	HB-125	125	UL 1741-SB	04/19/2024	—
+Halbrick Solar	HB-250	250	UL 1741-SB	08/07/2024	—
+Fenwyck Power	FW-Grid 100	100	UL 1741-SB	05/23/2024	—
+Fenwyck Power	FW-Grid 175	175	UL 1741-SB	10/14/2024	—
+Fenwyck Power	FW-Grid 275	275	UL 1741-SB	01/13/2025	New listing this edition.
+Ostreme Electric	OE-3P-60	60	UL 1741-SB	05/06/2024	—
+Ostreme Electric	OE-3P-150	150	UL 1741-SB	05/06/2024	—
+Ostreme Electric	OE-3P-330	330	UL 1741-SB	02/17/2025	New listing this edition.
+Nordreem Grid	NG-XT-125	125	UL 1741-SB	08/26/2024	—
+Nordreem Grid	NG-XT-225	225	UL 1741-SB	12/16/2024	New listing this edition.
+Cerlant PV	CL-208-100	100	UL 1741-SB	07/08/2024	Low-voltage commercial.
+Cerlant PV	CL-480-250	250	UL 1741-SB	07/08/2024	480 V commercial three-phase.
+Marlweth Inverter	MW-Central 500	500	UL 1741-SB	03/10/2025	New listing this edition; central inverter, ≥500 kW class.
+[Sheet: Power Control Systems]
+Manufacturer	Model	Rated kW	Listing Basis	Effective Date	Notes
+Quenda Controls	QC-PCS-250	250	UL 3141	02/24/2025	New listing this edition; suitable for small commercial export-limiting.
+Quenda Controls	QC-PCS-500	500	UL 3141	09/27/2024	Carried from CEL-2024-Q4.
+Quenda Controls	QC-PCS-1000	1000	UL 3141	09/27/2024	Carried from CEL-2024-Q4.
+Delrix Grid Sciences	DGS-PCS-2000	2000	UL 3141	12/04/2024	Medium-scale central PCS.
+Verronex Power Systems	VPS-Cap-1500	1500	UL 3141	03/28/2025	New listing this edition.
+Verronex Power Systems	VPS-Cap-3000	3000	UL 3141	03/28/2025	New listing this edition; medium-scale (1–5 MW) applications.
+[Sheet: Notes and Cross-References]
+Item	Reference
+Controlled-capacity recognition	DIS-01 Rev 4 §3.6 — restated verbatim in Front Matter.
+Telemetry & communications for ≥500 kW	TCS-02 §5.
+Protective device requirements at export-capable POI	DPS-07 Rev 2 §4.2.
+Standards conflict routing	ERP-9 §3 (Form ER-11); Bulletin EB-2025-03 (03/24/2025).
+Witness test & waiver eligibility	Witness Test & Waiver Procedure (Standards Engineering) — eligibility requires the installed inverter to appear on the CURRENT CEL edition.
+Superseded editions	CEL-2024-Q4 (published 10/31/2024) is superseded by this edition and is not to be used for new commissioning determinations.
+Listing removals	Models delisted between editions are removed from the current tabs without further notation; historical certification records are retained by Standards Engineering.

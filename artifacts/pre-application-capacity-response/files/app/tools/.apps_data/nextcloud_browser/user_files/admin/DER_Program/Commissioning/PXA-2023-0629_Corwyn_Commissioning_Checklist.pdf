@@ -1,0 +1,51 @@
+ALLENIOM UTILITIES — DER PROGRAM OFFICE
+4200 Veldmere Boulevard, Halston, Alleron 01HA · (612) 555-0100 · alleniom.com
+DER Commissioning Checklist
+Doc no. CX-CW-01 · Rev 2 · Date 07/14/2025 · Owner Commissioning, DER Program Office
+Field Entry
+Site name Corwyn Office Complex PV
+Application PXA-2023-0629
+Customer Corwyn Realty Partners
+Site address 2400 Corwyn Parkway, Wrenford, Alleron 04WR
+Nameplate 700 kW ac, five canopy inverters
+Feeder ALN-072
+Contractor Brantley Electric Company (permit WEP-25-0317)
+Commissioning items
+Item Basis Status (07/14/2025)
+Interconnection Service Agreement ISA-Corwyn-Office- Executed 09/12/2024
+Complex
+Utility RTU installed and end-to-end TCS-02 §3.6 Accepted by SCADA/EMS Engineering
+point-to-point test (Marcus Deele), 07/08/2025
+RTU points valid at SCADA TCS-02 §6 Confirmed by SCADA/EMS Engineering
+(Marcus Deele), 07/08/2025
+POI recloser settings and DPS-07 §5.1 Issued by Distribution Protection
+protection coordination study Engineering (N. Achterberg, P.E.),
+06/18/2025
+DER-side protection review DPS-07 §4.3 Reviewed with the coordination study by
+Distribution Protection Engineering (N.
+Achterberg, P.E.), 06/18/2025
+POI recloser site acceptance, items DPS-07 §6.2 Complete and accepted in writing by
+1 to 7 Distribution Protection Engineering (N.
+Achterberg, P.E.), 07/08/2025
+Revenue meter RM-0629 ISA Set and tested by Alleniom Metering;
+delivered and received registers verified,
+07/08/2025
+Inverter CEL check ENG-PRC-014 VX-140C (5): CEL-2025-Q2, Inverters tab,
+§4.1 row 18
+Certificate of conformance ENG-PRC-014 Vexlar VX-CC-25-0522 (UL 1741-SB; IEEE
+§4.3 1547-2018 Category III), on file
+Witness test determination ENG-PRC-014 Witness test required: the SWBD-PV
+§4.1 breakers are protective devices not carried
+on CEL-2025-Q2
+AHJ final inspection Permit Final approval 07/02/2025 (Certificate of
+WEP-25-0317 Final Approval)
+Witness test ENG-PRC-014 Held 07/08/2025 under switching order
+§4.2, §4.3 DO-2025-0677; record WT-0629-01 signed
+by the witness engineer (M. Halbrook, P.E.);
+all test points passed
+SOC confirmation of live telemetry TCS-02 §5 Telemetry live at the SOC, confirmed by the
+SOC Shift Supervisor (L. Kovalchuk),
+07/08/2025
+Permission to operate ISA Requested by Corwyn Realty Partners on
+07/10/2025 for 08/04/2025
+Coordinator: S. Rennick, Commissioning, Alleniom Utilities, 07/14/2025.

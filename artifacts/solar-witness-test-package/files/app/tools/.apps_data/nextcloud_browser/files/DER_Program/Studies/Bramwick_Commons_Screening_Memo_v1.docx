@@ -1,0 +1,68 @@
+Alleniom Utilities — DER Program Office
+
+4200 Veldmere Boulevard, Halston, Alleron 01HA  ·  (612) 555-0100  ·  alleniom.com
+
+
+SUPPLEMENTAL REVIEW SCREEN DETERMINATION
+
+To:      Meera Vellanki, Manager, Interconnection Studies
+From:   Priya Ranganathan, Interconnection Studies
+Date:   06/25/2025
+Subject: Bramwick Commons Solar (1.8 MW, Feeder ALN-214) — Supplemental Review Screen Determination
+
+1. Project
+
+The application was routed to supplemental review following failure of an initial fast-track screen. This memo records the disposition of the 100%-of-minimum-load screen applied under SRP-3 Rev 3.
+2. Screen applied
+100%-of-minimum-load screen for solar, per §4 of SRP-3 (Rev 3, effective 02/10/2025). Under this screen, the requested DER capacity is compared against the minimum load observed on the subject feeder from AMI interval data.
+3. Analysis
+Reviewed AMI interval load data for Feeder ALN-214 from the Alleniom AMI Data Warehouse and identified a minimum feeder load of 1.1 MW. The value was drawn from the feeder AMI record available on file for ALN-214. No intervals were excluded for known feeder outages, load transfers, or planned switching during the period reviewed.
+
+4. Comparison
+1.8 MW requested exceeds 1.1 MW minimum feeder load — screen FAILED.
+
+5. Recommendation
+Study Agreement required prior to advancement. The application should not proceed on the supplemental-review track. A Study Agreement should be offered to Bramwick Commons Solar LLC, with the scope covering the technical conditions that gave rise to the failed screen on Feeder ALN-214.
+6. Disposition
+Return supplemental review file to Interconnection Studies queue with a failed-screen flag on Feeder ALN-214.
+Notify the applicant of the screen result and forward the Study Agreement package.
+Hold advancement of PXA record for Bramwick Commons Solar until Study Agreement is executed.
+
+
+Signed:
+Priya Ranganathan
+Staff Analyst, Interconnection Studies
+Alleniom Utilities
+priya.ranganathan@alleniom.com
+06/25/2025
+Reviewed by:
+/s/ Meera Vellanki
+Meera Vellanki
+Manager, Interconnection Studies
+06/25/2025
+File: /DER_Program/Studies/Bramwick_Commons_Screening_Memo_v1.docx
+Reference standard: SRP-3 Rev 3 §4 (Supplemental Review Procedure)
+
+[Table 1]
+Doc no. | Rev | Date | Owner
+IS-BRAM-2025-06-25 | v1 | 06/25/2025 | Interconnection Studies
+
+[Table 2]
+Item | Value
+Applicant | Bramwick Commons Solar LLC
+Project | Bramwick Commons Solar
+Requested capacity | 1.8 MW
+Point of interconnection | Feeder ALN-214
+Resource type | Solar photovoltaic
+
+[Table 3]
+Parameter | Value
+Subject feeder | ALN-214
+Data source | Alleniom AMI Data Warehouse — feeder-aggregate interval data
+Data window | 06/24/2024 – 06/24/2025 (12 months of AMI data available on file)
+Interval cadence | Sixty (60) minutes
+Feeder minimum load identified | 1.1 MW
+
+[Table 4]
+Requested capacity | Feeder minimum load | Result
+1.8 MW | 1.1 MW | FAILED

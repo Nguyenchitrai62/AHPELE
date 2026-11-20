@@ -1,0 +1,15 @@
+[Sheet: Header]
+RTU Plant-Side Device Table: PC-RTU-01
+Alleniom Utilities — SCADA/EMS Engineering · 4200 Veldmere Boulevard, Halston, Alleron 01HA · (612) 555-0100 · alleniom.com
+Doc no. SCADA-PC-RTU-DEV-01  ·  Rev 0  ·  Date 07/08/2025  ·  Owner SCADA/EMS Engineering (Marcus Deele)
+Site: Prairie Corridor Business Park PV (PXA-2024-0343). Plant LAN 192.168.10.0/24, addresses assigned by Alleniom (TCS-02 §4.4).
+Device list supplied by the customer's integrator, Ridgeway Controls (R. Okafor), 06/30/2025; checked against the site walkdown of 07/07/2025.
+Prepared: Marcus Deele, SCADA/EMS Engineer, 07/08/2025.
+[Sheet: Devices]
+Devices
+192.168.10.1  |  customer switch SW-1, managed  |  not polled
+192.168.10.5  |  PC-RTU-01 plant port  |  Modbus client
+192.168.10.21  |  Solmery SP-Link gateway, inverter fleet  |  registers 40001 to 40120
+192.168.10.25  |  rooftop weather station WS-1 (irradiance, module temperature)  |  registers 30001 to 30010, not mapped to SCADA
+192.168.10.40  |  revenue meter M-1, DNP3 outstation  |  not polled
+INV-1 to INV-6  |  Solmery inverters, reached through the SP-Link gateway  |  not addressed directly

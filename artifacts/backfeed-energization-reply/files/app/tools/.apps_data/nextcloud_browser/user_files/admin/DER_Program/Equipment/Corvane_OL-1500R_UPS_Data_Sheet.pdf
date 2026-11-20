@@ -1,0 +1,29 @@
+CORVANE POWER SYSTEMS
+Industrial power protection · corvanepower.com
+OL-1500R Online Double-Conversion UPS: Data Sheet
+Document OL1500R-DS Rev 4, 03/2024.
+Ratings
+Parameter Value
+Rating 1500 VA / 1350 W
+Topology Online double-conversion
+Input / output 120 V AC, 60 Hz
+Internal battery 4 x 12 V, 9 Ah VRLA (432 Wh nominal)
+Usable battery energy 376 Wh at 25 degC, new battery, to 10.5 V per block
+Inverter efficiency, battery mode 88 percent
+Standing loss, online mode (no load) 40 W
+Enclosure mounting Rack or DIN-plate, -20 to +50 degC
+Runtime
+Runtime at constant output load, computed from the usable battery energy, the inverter efficiency and the
+online standing loss above. Derate 20 percent at end of battery life and below 10 degC.
+Output load (W) Runtime, new battery at 25 degC (h)
+20 5.99
+30 5.07
+40 4.40
+50 3.88
+60 3.48
+80 2.87
+100 2.45
+150 1.79
+200 1.41
+300 0.99
+Corvane Power Systems. Specifications subject to change without notice.

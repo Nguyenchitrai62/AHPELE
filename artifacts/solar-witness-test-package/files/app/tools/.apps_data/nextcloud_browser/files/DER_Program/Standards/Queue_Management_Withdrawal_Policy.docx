@@ -1,0 +1,120 @@
+Alleniom Utilities — DER Program Office
+4200 Veldmere Boulevard, Halston, Alleron 01HA  ·  (612) 555-0100  ·  alleniom.com
+Doc no. POL-QM-05  ·  Rev 3  ·  Date 03/15/2025  ·  Owner: DER Program Office
+
+Queue Management & Withdrawal Policy
+Applies to:  All DER Interconnection Program applications (≥500 kW) administered by the DER Program Office.
+Supersedes:  POL-QM-05 Rev 2 (07/12/2023).
+Owner:  DER Program Office.
+Approving Authority:  Manager, Interconnection Studies.
+
+§1  Purpose
+This policy sets out the internal procedures by which the DER Program Office administers queue integrity and orderly withdrawal of applications from the active DER interconnection queue. It is intended to ensure that:
+(a)	applications are closed only on a documented basis;
+(b)	queue positions are established, retained, and released in a manner consistent with the Company's APUC-filed interconnection tariff (in particular §12.3, §12.4, and §12.6) and with the DER Interconnection Standard (DIS-01);
+(c)	staff processing intake, screening, and case-management actions apply a single, uniform standard when an application appears stalled, abandoned, superseded, or replaced by a subsequent filing at the same site; and
+(d)	the record supporting each queue action is complete and auditable.
+Nothing in this policy modifies the tariff. Where any provision of this policy is read to conflict with the tariff or with an applicable engineering standard, the tariff and the standard control, and the conflict shall be referred to Regulatory Affairs for reconciliation.
+§2  Withdrawal upon Customer Request
+A stalled or abandoned application is closed only upon receipt of the customer's official withdrawal confirmation, provided in writing by letter or email. Where a new filing is submitted for the same site while a prior application remains open, the program shall request the customer's official withdrawal of the prior filing; the new application takes its own queue date at time of filing. No queue-date inheritance is permitted.
+§2.1  Scope of §2
+This §2 governs closure of applications that have not been the subject of a formal Notice of Impending Withdrawal/Cancellation under tariff §12.4. It applies where:
+(a)	the customer has ceased substantive engagement with the program (whether by prolonged non-response, express indication of intent not to proceed, or otherwise);
+(b)	the customer or an authorized developer has requested closure of an application without such a notice having issued; or
+(c)	a new application is filed for the same site (as identified by service address, meter, or point of common coupling) while a prior application for that site remains in the active queue.
+§2.2  Form of the Withdrawal Confirmation
+To constitute an “official withdrawal confirmation” for purposes of this §2, the writing must:
+(a)	be from the applicant of record (or from a person whose authority to act for the applicant has been established on the record — e.g., the developer named as the applicant's designated representative on the intake form);
+(b)	be received by the DER Program Office by letter or email, addressed to der.program@alleniom.com or delivered to the DER Program Office at the letterhead address above;
+(c)	identify the application by application identifier (PXA-YYYY-NNNN) and site; and
+(d)	state expressly that the applicant withdraws the identified application.
+Neither an oral communication (telephone, meeting, or voicemail), nor a status note recorded by staff, nor the mere filing of a new application at the same site, shall by itself constitute the official withdrawal confirmation required under this §2.
+§2.3  Procedure — Stalled or Abandoned Application (Non-Notice Path)
+Where staff identify an application within the scope of §2.1(a) or §2.1(b), the case handler shall:
+1.	Confirm the application's status in the active queue and document the basis for concluding that the application is stalled or abandoned;
+2.	Prepare and send a written communication (letter or email) to the applicant of record requesting the applicant's official withdrawal confirmation in the form specified in §2.2;
+3.	Log the request in the case file and in the queue-management system;
+4.	On receipt of the official withdrawal confirmation, close the application and record the closure date, the closure basis (“§2 — customer request”), and the reference to the writing on file; and
+5.	Preserve the withdrawal writing in the case file in accordance with §4.
+Absent receipt of the official withdrawal confirmation, the application shall not be closed under this §2. If the applicant does not provide the confirmation and non-response persists, the case handler may refer the matter for issuance of a formal Notice of Impending Withdrawal/Cancellation under §3.
+§2.4  Duplicate Filings at the Same Site
+Where a new application is filed for the same site while a prior application for that site remains open in the queue:
+(a)	The DER Program Office shall accept the new application in the ordinary course and shall assign the new application its own queue date determined as of the date the new application is determined to be complete. No queue-date inheritance is permitted between the prior and the new application.
+(b)	The program shall request the customer's official withdrawal of the prior filing in the form specified in §2.2. That request may be combined with the completeness/acknowledgement communication for the new application.
+(c)	The prior application shall remain open in the queue until the official withdrawal confirmation is received, or until the prior application is otherwise closed by operation of §3 or under another tariff mechanism. The two applications shall not be merged, consolidated, or treated as continuations of a single filing.
+(d)	Where the applicant states a preference or expectation that the earlier queue date apply to the new filing, staff shall respond in writing that the new application's queue date is fixed by §12.3 of the tariff and by this §2.4, and that closure of the prior application does not alter the queue date of the new application.
+§2.5  Consistency with DIS-01 §7 and Tariff §12.6
+Nothing in this §2 authorizes the use of a customer-requested withdrawal to reopen or amend an executed Interconnection Service Agreement. Post-execution changes to material terms of an ISA — including nameplate capacity and point of interconnection — require withdrawal-and-reapplication in accordance with DIS-01 §7 and tariff §12.6. A customer-requested withdrawal in that context establishes a new queue date for the successor application; no queue-date inheritance is permitted.
+§3  Deemed Withdrawal (Procedural Restatement of Tariff §12.4)
+Following issuance of a formal Notice of Impending Withdrawal/Cancellation, if the applicant fails to respond within 30 business days, the application is deemed withdrawn.
+§3.1  Relationship to the Tariff
+This §3 is a procedural restatement, for internal use, of the deemed-withdrawal mechanism established by tariff §12.4. In the event of any inconsistency between this §3 and §12.4, the tariff controls. Staff shall consult §12.4 for the authoritative statement of the mechanism.
+§3.2  Prerequisites to Issuance of a Notice
+The DER Program Office shall not issue a Notice of Impending Withdrawal/Cancellation unless:
+(a)	the application has been open in the queue and staff have been unable to advance it because of the applicant's non-response or failure to supply required information or documentation;
+(b)	at least one prior written follow-up has been sent to the applicant identifying the item or items required and requesting response by a stated date; and
+(c)	the case handler has confirmed that the matter does not fall within the construction-payment default procedure under tariff §12.5, which is a distinct mechanism (project on hold, not withdrawn, while a 30-business-day payment deadline runs).
+§3.3  Form and Service of the Notice
+Every Notice of Impending Withdrawal/Cancellation shall:
+(a)	be issued in writing on Alleniom Utilities letterhead;
+(b)	be served by certified mail or by verified electronic delivery, in accordance with tariff §12.4;
+(c)	identify the application by identifier and site;
+(d)	state the item(s) requiring response;
+(e)	state the date of issuance and the date on which the 30 business-day response window expires, computed under §3.4; and
+(f)	state the consequence of non-response, i.e., that the application shall be deemed withdrawn and closed from the active queue without further action.
+§3.4  Computation of 30 Business Days
+For purposes of this §3 and of tariff §12.4:
+(a)	“Business days” excludes Saturdays, Sundays, and federal legal public holidays observed within the response window;
+(b)	Day 1 is the first business day after the date of issuance stated on the notice;
+(c)	The following federal holidays observed within response windows relevant to the current filing period are recognized as non-business days and are not counted:
+
+(d)	Where a response window straddles a federal holiday not listed above, the case handler shall exclude that holiday from the count and document the calculation in the case file.
+§3.5  Effect of Non-Response
+If the applicant fails to submit a substantive response curing the matter identified in the notice within 30 business days computed under §3.4, the application shall be deemed withdrawn as of the day following expiration of the window. The DER Program Office shall:
+(a)	mark the application “deemed withdrawn — §12.4” in the queue-management system;
+(b)	record the notice-issuance date, the expiration date, and the closure date in the withdrawal-notice log; and
+(c)	preserve the notice, proof of service, and the closure entry in the case file in accordance with §4.
+§3.6  Effect of Timely Response
+A substantive response received on or before expiration of the 30 business-day window suspends the deemed-withdrawal consequence. The case handler shall evaluate the response and, if the identified matter is cured, release the application to resume processing. If the response is non-substantive or does not cure the identified matter, the case handler shall so document and, if warranted, issue a further follow-up or a subsequent Notice of Impending Withdrawal/Cancellation.
+§3.7  Non-Substitution
+Issuance of a Notice of Impending Withdrawal/Cancellation is not a substitute for the customer-request path under §2, and the customer-request path under §2 is not a substitute for the deemed-withdrawal path under §3. Case handlers shall not use one mechanism to accomplish what should be effected under the other.
+§4  Record-Keeping Requirements
+§4.1  Case File Contents
+For every application closed under §2 or §3, the DER Program Office shall maintain a case file containing, at minimum:
+(a)	the original application and all completeness/acknowledgement communications;
+(b)	for §2 closures: the writing (letter or email) requesting official withdrawal confirmation from the applicant; the applicant's official withdrawal confirmation (letter or email) as received; and any related correspondence bearing on the applicant's intent to withdraw;
+(c)	for §3 closures: the prior follow-up correspondence relied upon under §3.2(b); the Notice of Impending Withdrawal/Cancellation as issued; proof of service (certified mail receipt or verified electronic delivery record); the 30 business-day computation worksheet; and any response received;
+(d)	the queue-management system entry recording the closure basis, closure date, and (for §2 duplicate-filing cases) the queue-date determination applied to the successor application under §2.4(a); and
+(e)	any related engineering or standards correspondence relied upon in the closure decision.
+§4.2  Queue-Management System Entries
+Every closure shall be recorded in the queue-management system with:
+(a)	application identifier and site;
+(b)	closure basis, expressed as one of: “§2 — customer request (letter)”, “§2 — customer request (email)”, “§2.4 — superseded by successor application”, “§12.4 — deemed withdrawn”, or such other codes as the DER Program Office may prescribe;
+(c)	closure date;
+(d)	case handler; and
+(e)	reference to the writing(s) supporting the closure basis.
+§4.3  Withdrawal-Notice Log
+The DER Program Office shall maintain a running Withdrawal-Notice Log recording every Notice of Impending Withdrawal/Cancellation issued. The log shall include, at minimum: application identifier; site; date of issuance; method of service; response deadline (computed under §3.4); response received (date and disposition, if any); and closure date (if any). The log is subject to periodic reconciliation against the on-hold queue report; unreconciled entries shall be brought to the attention of the Manager, Interconnection Studies.
+§4.4  Retention
+Case files and log entries shall be retained in accordance with the Company's records retention schedule for regulated interconnection records. Records shall not be purged, redacted, or altered while an application remains open, while a response window under §3 is running, or while the closure is within the period during which reconsideration may be sought.
+§4.5  Audit and Reporting
+The Manager, Interconnection Studies shall be prepared, on request of Regulatory Affairs, to produce for any closed application: the closure basis; the writing(s) supporting the closure basis; the queue-date determination for any successor application; and, where applicable, the notice, proof of service, and 30 business-day computation. Reports to the Alleron Public Utilities Commission concerning queue closures shall be prepared from the withdrawal-notice log and the queue-management system entries described above.
+
+Document Control
+
+[Table 1]
+Holiday | Observed Date
+Memorial Day | 05/26/2025
+Juneteenth National Independence Day | 06/19/2025
+Independence Day | 07/04/2025
+
+[Table 2]
+Field | Value
+Document number | POL-QM-05
+Revision | Rev 3
+Effective date | 03/15/2025
+Owner | DER Program Office
+Approving authority | Manager, Interconnection Studies
+Prior revision | POL-QM-05 Rev 2 (07/12/2023)
+Reference — tariff | §12.3, §12.4, §12.5, §12.6, §12.7
+Reference — standards | DIS-01 §7

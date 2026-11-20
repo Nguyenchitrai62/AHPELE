@@ -1,0 +1,17 @@
+[Sheet: Header]
+Canopy Cable Schedule: Corwyn Office Complex PV (PXA-2023-0629)
+Brantley Electric Company · Alleron Electrical Contractor Lic. #EC-12306
+Drawing E-201 Rev C, 06/24/2025. Inverter output circuits from each canopy's inverter to SWBD-PV. Each canopy's inverter output circuit runs in rigid metal conduit along its main beam; the ladder tray on the north side of the beam holds the PV circuits (E-301).
+Prepared: K. Osei, Electrical Engineer, Brantley Electric Company, 06/24/2025.
+[Sheet: Inverter Output Circuits]
+Circuit	From	To	Inverter output current (A)	Breaker at SWBD-PV (A)	Conductors in the canopy	Column riser and underground	Ampacity at 40 °C, 90 °C column (A)	Terminal rating 75 °C (A)	Length (m)	Voltage drop (%)
+AC-C1	Canopy C1 inverter, 480 V ac output, through the disconnect beside it	SWBD-PV, its inverter breaker for canopy C1	168	225	3 x 1/C 4/0 AWG Cu THHN/THWN-2 and 1/C 4 AWG Cu THHN/THWN-2 green, in 2-1/2 in. rigid metal conduit along the canopy main beam	West-end column: 2-1/2 in. rigid steel conduit down the column; then 2-1/2 in. Schedule 40 PVC, 600 mm cover, to SWBD-PV	236.6	230	96	1.16
+AC-C2	Canopy C2 inverter, 480 V ac output, through the disconnect beside it	SWBD-PV, its inverter breaker for canopy C2	168	225	3 x 1/C 4/0 AWG Cu THHN/THWN-2 and 1/C 4 AWG Cu THHN/THWN-2 green, in 2-1/2 in. rigid metal conduit along the canopy main beam	West-end column: 2-1/2 in. rigid steel conduit down the column; then 2-1/2 in. Schedule 40 PVC, 600 mm cover, to SWBD-PV	236.6	230	112	1.35
+AC-C3	Canopy C3 inverter, 480 V ac output, through the disconnect beside it	SWBD-PV, its inverter breaker for canopy C3	168	225	3 x 1/C 4/0 AWG Cu THHN/THWN-2 and 1/C 4 AWG Cu THHN/THWN-2 green, in 2-1/2 in. rigid metal conduit along the canopy main beam	West-end column: 2-1/2 in. rigid steel conduit down the column; then 2-1/2 in. Schedule 40 PVC, 600 mm cover, to SWBD-PV	236.6	230	128	1.55
+AC-C4	Canopy C4 inverter, 480 V ac output, through the disconnect beside it	SWBD-PV, its inverter breaker for canopy C4	168	225	3 x 1/C 4/0 AWG Cu THHN/THWN-2 and 1/C 4 AWG Cu THHN/THWN-2 green, in 2-1/2 in. rigid metal conduit along the canopy main beam	West-end column: 2-1/2 in. rigid steel conduit down the column; then 2-1/2 in. Schedule 40 PVC, 600 mm cover, to SWBD-PV	236.6	230	144	1.74
+AC-C5	Canopy C5 inverter, 480 V ac output, through the disconnect beside it	SWBD-PV, its inverter breaker for canopy C5	168	225	3 x 1/C 4/0 AWG Cu THHN/THWN-2 and 1/C 4 AWG Cu THHN/THWN-2 green, in 2-1/2 in. rigid metal conduit along the canopy main beam	West-end column: 2-1/2 in. rigid steel conduit down the column; then 2-1/2 in. Schedule 40 PVC, 600 mm cover, to SWBD-PV	236.6	230	160	1.93
+[Sheet: Trays]
+Item	Construction
+Trays	One 12 in. hot-dip galvanized steel ladder tray per canopy, 9 in. rung spacing, on the north side of the canopy main beam; tray sections bonded with bonding jumpers
+Supports	Tray clamps to the beam at 1.5 m centers
+Column risers	Rigid steel conduit, threaded, with a bonding bushing at the tray end

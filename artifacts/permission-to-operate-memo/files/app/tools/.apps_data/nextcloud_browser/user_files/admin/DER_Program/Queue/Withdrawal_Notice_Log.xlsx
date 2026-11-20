@@ -1,0 +1,33 @@
+[Sheet: Withdrawal Notice Log]
+Withdrawal Notice Log							
+Alleniom Utilities — DER Interconnection Program						Holidays	
+Interconnection Studies Queue Administration						2025-05-26 00:00:00	Memorial Day
+						2025-06-19 00:00:00	Juneteenth
+Register:	Notices of Impending Withdrawal/Cancellation (Tariff §12.4)					2025-07-04 00:00:00	Independence Day
+Maintained by:	Interconnection Studies — M. Vellanki						
+Source system:	ICQ (Interconnection Queue) — Notices module						
+As of:	2025-07-14 00:00:00						
+Doc no.:	ICQ-WNL-STANDING						
+Rev:	2025.28						
+Owner:	Meera Vellanki						
+Notices Register							
+Project ID	Prepared Date	Sent Date	Method	Response Deadline			
+PXA-2024-0161	2025-04-17 00:00:00	2025-04-22 00:00:00	certified mail	2025-06-04 00:00:00			
+PXA-2024-0182	2025-04-24 00:00:00	2025-04-29 00:00:00	certified mail	2025-06-11 00:00:00			
+PXA-2024-0224	2025-05-01 00:00:00	2025-05-06 00:00:00	email	2025-06-18 00:00:00			
+PXA-2024-0267	2025-05-12 00:00:00	2025-05-15 00:00:00	certified mail	2025-06-30 00:00:00			
+PXA-2024-0301	2025-05-22 00:00:00	2025-05-27 00:00:00	email	2025-07-10 00:00:00			
+PXA-2024-0388	2025-05-12 00:00:00		certified mail				
+PXA-2024-0447	2025-05-20 00:00:00		certified mail				
+PXA-2024-0512	2025-06-04 00:00:00	2025-06-09 00:00:00	certified mail	2025-07-23 00:00:00			
+PXA-2025-0033	2025-06-10 00:00:00	2025-06-15 00:00:00	email	2025-07-29 00:00:00			
+PXA-2025-0074	2025-06-17 00:00:00	2025-06-22 00:00:00	certified mail	2025-08-04 00:00:00			
+PXA-2025-0092	2025-06-24 00:00:00		email				
+PXA-2025-0119	2025-07-02 00:00:00		certified mail				
+Legend							
+Column	Definition						
+Project ID	ICQ application identifier						
+Prepared Date	Date the notice was drafted and packaged by Interconnection Studies						
+Sent Date	Date the notice was released to the applicant of record						
+Method	Delivery channel of record (certified mail or email)						
+Response Deadline	Sent Date + 30 business days per Tariff §12.4; excludes Memorial Day (05/26/2025), Juneteenth (06/19/2025), Independence Day (07/04/2025)						

@@ -1,0 +1,24 @@
+port: 5014
+bindIP: 0.0.0.0
+
+db:
+  type: postgres
+  host: /app/tools/mcp_servers/wiki_js/.state/pgrun
+  port: 5015
+  user: wikijs
+  pass: wikijs
+  db: wiki
+  ssl: false
+
+logLevel: info
+logFormat: default
+
+dataPath: /opt/wikijs/data
+
+bodyParserLimit: 5mb
+
+offline: false
+
+ha: false
+
+trustProxy: true

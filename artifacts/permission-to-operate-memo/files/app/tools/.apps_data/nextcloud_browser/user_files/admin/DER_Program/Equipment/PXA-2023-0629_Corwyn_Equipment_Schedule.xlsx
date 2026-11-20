@@ -1,0 +1,22 @@
+[Sheet: Header]
+Equipment Schedule: Corwyn Office Complex PV (PXA-2023-0629)
+Brantley Electric Company · Alleron Electrical Contractor Lic. #EC-12306
+Drawing E-101 Rev C, 06/24/2025. A 700 kW ac parking-canopy array at the Corwyn Office Complex: five canopies, one Vexlar VX-140C inverter (140 kW ac, 480 V, 3-phase) per canopy over the surface lots beside the parking structure, PV switchboard SWBD-PV, step-up transformer T-1 and the 13.2 kV point of interconnection on feeder ALN-072.
+Prepared: K. Osei, Electrical Engineer, Brantley Electric Company, 06/24/2025.
+[Sheet: Equipment]
+Tag	Equipment	Location	Data	Mounting
+T-1	T-1: 750 kVA, 13.2 kV grounded wye to 480Y/277 V	Equipment yard, north lot	Pad-mounted, liquid-filled; impedance 5.75 %; secondary cable bus to SWBD-PV	Cast-in-place concrete pad
+PSW-1	T-1 primary switch: 15 kV, 200 A load-break, with 65E current-limiting fuses	Equipment yard	Pad-mounted, padlockable; T-1 full-load primary current 32.8 A	Cast-in-place concrete pad
+SWBD-PV	PV switchboard: 480Y/277 V, 3-phase, 4-wire, NEMA 3R, 1,200 A bus, 1,200 A main breaker; five 225 A inverter breakers (INV-C1 to INV-C5) and a 40 A two-pole breaker for TX-1; 35 kA rated, all its breakers	Equipment yard, beside T-1	T-1 full-load secondary current 902 A; available fault current at SWBD-PV 15.7 kA	Floor-standing on the 4 in. concrete housekeeping pad; base channels bolted to cast-in steel channel inserts
+TX-1	Auxiliary transformer: 15 kVA, dry-type, single-phase, 480 V to 120/240 V, NEMA 3R; fed from a 40 A two-pole breaker in SWBD-PV	Equipment yard, beside SWBD-PV	Full-load current 31.3 A primary, 62.5 A secondary; secondary 4 AWG Cu, 1.5 m in 1 in. rigid steel conduit, to the PP-1 main breaker; neutral bonded at TX-1; grounding electrode conductor 6 AWG Cu to the 2 AWG bare Cu ground ring	Galvanized steel frame on the SWBD-PV pad, 0.5 m above the pad
+PP-1	Auxiliary panel: 120/240 V, single-phase, 3-wire, 100 A bus, 70 A main breaker, NEMA 3R. Circuit 1: dedicated 20 A circuit to the utility RTU enclosure on the POI pole, through the 1.5 kVA online UPS in that enclosure (5.5 h at the RTU load). Circuit 2: SWBD-PV enclosure heaters, 20 A. Circuits 3 to 12: spare.	Equipment yard, beside TX-1	Circuit 1: 2 x 12 AWG Cu and 12 AWG Cu ground in 3/4 in. Schedule 40 PVC at 600 mm cover to the POI pole, then 3/4 in. rigid steel conduit up the pole	Galvanized steel frame on the SWBD-PV pad, 0.5 m above the pad
+INV-C1 to INV-C5	Vexlar VX-140C inverter, one per canopy, NEMA 3R	East-end column of each canopy, within the curbed planting island; concrete-filled steel bollard on the drive side; working space faces the island walkway	Rated ac current 168 A at 480 V; integral PV arc-fault protection; control power internal, from the inverter's own ac output terminals	Column bracket, 1.2 m above grade
+AD-C1 to AD-C5	Inverter ac disconnect: 480 V, 3-pole, 400 A frame fused switch with 225 A fuses, NEMA 3R, lockable; one per inverter, its ac isolating device	End column of each canopy, beside its inverter	Visible-break; padlockable handle; on the inverter output circuit ahead of the canopy conduit	Column bracket, 1.2 m above grade
+RM-0629	Revenue meter (utility-owned), 13.2 kV primary metering	Point of interconnection	Set by Alleniom Metering	Utility pole
+POI	POI recloser and RTU (utility-owned)	Point of interconnection	Alleniom facilities under the ISA	Utility pole
+GND	480Y/277 V neutral bonded at the SWBD-PV main; grounding electrode conductor 3/0 AWG bare Cu from the SWBD-PV neutral bus to the 2 AWG bare Cu ground ring around the T-1 and SWBD-PV pads; canopy steel and module frames bonded to the equipment grounding conductors	Site	Resistance to earth measured 4.2 ohm, 06/2025	—
+Labels	Arc-flash labels on SWBD-PV and INV-C1 to INV-C5; SWBD-PV label giving the nominal voltage, the available fault current, the clearing time and the date of the calculation; SWBD-PV marked as fed by multiple sources, with the total of its breakers, excluding the main, not to exceed the bus rating; a plaque at SWBD-PV and at PSW-1 showing the location of each power source and its disconnect; each AD-C marked as the inverter ac disconnect; the SWBD-PV main marked as the PV system disconnect; a dc power source label at each inverter dc input and each combiner giving the maximum dc voltage, 958.6 V	Site	Applied 06/26/2025	—
+[Sheet: Notes]
+Note
+Dimensions are in inches unless noted; heights are above finished grade.
+Concrete is cast in place, 3,000 psi, with chamfered edges; steel is hot-dip galvanized unless noted.

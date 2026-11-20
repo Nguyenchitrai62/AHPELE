@@ -1,0 +1,56 @@
+Feeder ALN-108 Planning Study — Post-Publication Update Q3 2024
+Alleniom Utilities — Distribution Planning
+DER Program Office · 4200 Veldmere Boulevard, Halston, Alleron 01HA · (612) 555-0100 · alleniom.com
+
+Doc no. PLN-ALN-108-2024-10 · Rev 1 · Date 10/15/2024 · Owner: Distribution Planning
+Prepared by: June Halloway, Distribution Planning Engineer
+Contact: june.halloway@alleniom.com
+
+1. Purpose
+This memorandum constitutes an interim update to the published Alleniom Utilities Feeder Hosting Capacity Map (HCM-2024-Q2, published 05/15/2024) with respect to Feeder ALN-108 (Elderpine substation, 13.2 kV, pure-generation category). It is issued between scheduled quarterly refreshes of the Hosting Capacity Map to record a material queue addition on the subject feeder that has occurred since the last published map release, so that Distribution Planning staff, applicant-facing correspondence, and pre-application dialogue may be informed of a working interim figure until the next full refresh cycle.
+The scope of this document is limited to Feeder ALN-108. It does not modify the published values shown on any other feeder in HCM-2024-Q2, nor does it substitute for a formal feeder-level planning study in support of any specific interconnection application. Applicants and pre-application requesters seeking definitive feeder guidance for project scoping decisions should continue to consult Distribution Planning directly, and any project of consequential size on Feeder ALN-108 will require a full feeder-level planning study following the standard Alleniom Distribution Planning methodology.
+2. Baseline: Published Available Capacity
+The Alleniom Utilities Feeder Hosting Capacity Map was published on 05/15/2024. The map reflects, on a per-feeder basis, the published available capacity value derived from the most recent completed planning study of record for each feeder as of the publication date, incorporating recorded peak and minimum load, existing interconnected DER of record at the time of the underlying study, and standard thermal, voltage, and protection screens.
+For Feeder ALN-108, the published values on HCM-2024-Q2 are as follows:
+
+The 3.0 MW figure shown above is the baseline against which subsequent queue activity is netted for the purposes of this interim update. It remains, until the next scheduled quarterly refresh of the Hosting Capacity Map or an intervening full feeder re-study, the sole published available capacity of record for Feeder ALN-108.
+3. Post-Publication Queue Activity
+Distribution Planning has reviewed the Active Queue Report as of the date of this document to identify interconnection applications assigned to Feeder ALN-108 that have been queued subsequent to publication of the Hosting Capacity Map. The following post-publication queue entry has been identified on Feeder ALN-108:
+
+The 1.2 MW project queued on 09/18/2024 is a pure-generation interconnection request, consistent with the DER category assigned to the feeder in HCM-2024-Q2. It represents the sole queue addition on Feeder ALN-108 identified in the Active Queue Report between the publication date of the map (05/15/2024) and the date of this study.
+No other pending applications, executed interconnection service agreements, or in-service DER additions on Feeder ALN-108 have been identified since publication of HCM-2024-Q2 that would materially alter the baseline figure or the interim netted position stated below.
+4. Interim Netted Figure
+Applying the post-publication queue entry identified in Section 3 against the published available capacity of record stated in Section 2, the interim netted available capacity figure for Feeder ALN-108 as of the date of this document is calculated as follows:
+Interim available capacity: 3.0 MW − 1.2 MW = 1.8 MW.
+This interim figure is provided as a working reference for Distribution Planning staff and for use in pre-application correspondence concerning Feeder ALN-108 where such correspondence is issued between quarterly refreshes of the Hosting Capacity Map. The figure is not a substitute for, and does not supersede, the published available capacity value of record on HCM-2024-Q2; the published value remains 3.0 MW until the next map republication.
+The interim figure carries the following stated limitations:
+It reflects the state of the queue as of the date of this document only. Any subsequent queue additions, withdrawals, or reassignments affecting Feeder ALN-108 that post-date this study are not reflected in the figure above and will require Distribution Planning to reassess the interim position accordingly.
+It applies a straight-line nameplate netting against the published available capacity. A full feeder re-study, when performed, may yield a different available capacity value on Feeder ALN-108 depending on updated load recordings, revised existing-DER accounting, and the outcome of thermal, voltage, and protection screens as re-run against current data.
+The 1.2 MW queue entry is at the application/queue stage. Should that application be withdrawn or should its final capacity change following study or agreement negotiation, the interim netted figure would require corresponding adjustment.
+5. Recommendation
+Distribution Planning recommends the following:
+Distribution Planning staff should treat 1.8 MW as the working interim available capacity for Feeder ALN-108 in any pre-application dialogue, applicant correspondence, or internal scoping analysis conducted between the date of this document and the next scheduled refresh of the Hosting Capacity Map. The published 3.0 MW figure on HCM-2024-Q2 remains the value of record for the map itself and should not be altered on the published map absent republication.
+A refreshed feeder-level planning study for Feeder ALN-108 should be scheduled to be undertaken in advance of, and its results incorporated into, the next full quarterly refresh of the Hosting Capacity Map. Feeder ALN-108 should be included among the feeders prioritized for re-study on the criteria stated in the map front matter: application date of pending queue entries, capacity requested relative to published available headroom, and DER category (pure generation is weighted more heavily against feeder headroom than net-metering behind-the-meter interconnections at equivalent nameplate).
+This document should be reissued or superseded if any further queue activity on Feeder ALN-108 arises before the next quarterly map refresh, so that the working interim figure remains accurate as of its date of issue. Distribution Planning will monitor the Active Queue Report accordingly.
+Applicants inquiring about Feeder ALN-108 between the date of this document and the next scheduled map republication should be directed to Distribution Planning for confirmation of the interim position before finalizing project sizing decisions, consistent with the general applicability note carried in the front matter of HCM-2024-Q2.
+
+Prepared by:
+June Halloway
+Distribution Planning Engineer
+Alleniom Utilities — Distribution Planning
+june.halloway@alleniom.com
+Date: 10/15/2024
+
+[Table 1]
+Attribute | Value
+Feeder ID | ALN-108
+Substation | Elderpine
+Nominal voltage | 13.2 kV
+DER category | Pure Generation
+Last completed planning study | 04/2024
+Published available capacity | 3.0 MW
+Publication date | 05/15/2024
+
+[Table 2]
+Queue date | Feeder | Requested capacity (nameplate) | DER category
+09/18/2024 | ALN-108 | 1.2 MW | Pure Generation

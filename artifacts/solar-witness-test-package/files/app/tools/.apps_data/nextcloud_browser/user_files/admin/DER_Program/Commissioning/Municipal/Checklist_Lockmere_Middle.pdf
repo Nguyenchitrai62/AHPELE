@@ -1,0 +1,122 @@
+ALLENIOM UTILITIES · DER PROGRAM OFFICE
+DER COMMISSIONING CHECKLIST
+Facility: Lockmere Middle School Array · District: Lockmere Community School District · Capacity: 720 kW
+· Date: 06/18/2025
+Cover Sheet
+Site name Lockmere Middle School Array
+Host / customer Lockmere Community School District
+District address 610 Chestnut Ridge Lane, Lockmere, Alleron 34LO
+District contact (612) 555-0708 · lockmerecsd.org
+Site classification Commercial small-scale DER (500 kW – 1 MW)
+Nameplate capacity 720 kW
+Inverter model Torvane Electric TE-180K
+Inverter quantity 4 × TE-180K (180 kW each; ganged AC output)
+Application ID PXA-2024-0793
+Feeder ALN-152
+Applicable standard DIS-01 Rev 4; TCS-02 §5; DPS-07 Rev 2
+Certified Equipment List edition CEL-2025-Q2 (published 04/30/2025)
+Commissioning date 06/18/2025
+Doc no. COMM-LKM-MS-2025-06
+Section 1 — Construction Complete
+Item Result Notes
+Mechanical installation complete per Pass Racking, modules, combiner boxes, AC/DC
+approved design conductors installed per stamped drawings dated
+02/07/2025
+Electrical installation complete Pass 480 V three-phase service; step-up to 12.47 kV
+primary at pad-mount transformer
+AHJ electrical inspection cleared Pass Lockmere Building Dept. permit BE-2025-0148;
+sign-off 06/09/2025
+Nameplate ratings match approved design Pass 720 kW DC; 720 kW AC aggregate at PCC
+DC array insulation resistance / continuity Pass All strings > 1 MW at 1000 VDC test
+AC conductor / transformer commissioning Pass Insulation, phase rotation, and continuity verified
+As-built drawings and O&M manuals on Pass Set delivered to district facilities office and Alleniom
+site Records
+Section 2 — Inverter & Equipment Verification
+Item Result Notes
+Inverter model verified against application Pass Torvane Electric TE-180K
+
+Item Result Notes
+Inverter model listed on Certified Pass Torvane Electric TE-180K appears on CEL-2025-Q2
+Equipment List (UL 1741-SB, effective 12/09/2024)
+Inverter serial numbers recorded Pass S/N TE180K-24-11482 / -11487 / -11491 / -11502
+Firmware version recorded Pass Torvane FW 4.11.02 (SB-profile)
+Anti-islanding function test (IEEE 1547.1) Pass Trip observed at 2.0 s under open-utility condition
+Voltage / frequency ride-through settings Pass Category II, Region III per approved settings sheet
+verified
+Section 3 — Protection Settings
+Item Result Notes
+Protective relay settings match approved Pass 27/59, 81U/81O, 25, 32 as specified
+settings sheet
+Overvoltage / undervoltage thresholds Pass 27: 0.88 pu (2.0 s) · 59: 1.10 pu (1.0 s) · 59: 1.20 pu
+(0.16 s)
+Over-/under-frequency thresholds Pass 81U: 58.5 Hz (2.0 s) · 81O: 61.2 Hz (2.0 s)
+Anti-islanding coordination Pass Passive + active method per Torvane TE-180K
+certification
+DER breaker trip / close functional Pass Local and remote trip verified from inverter aux relay
+Reclose-block interlock on utility side Pass POI recloser reclose block coordinated with DER
+breaker status contact
+Section 4 — Grounding
+Item Result Notes
+Equipment grounding electrode system Pass Ground ring at inverter pad; two driven rods at
+installed per NEC 250 transformer pad
+Ground resistance measurement Pass 3.8 W measured by fall-of-potential (Megger
+DET4TC2)
+DC array equipment bonding Pass Module frames, rails, combiners bonded and
+continuous
+AC neutral / grounding configuration per Pass Wye-grounded 480 V secondary; utility-side
+design grounding per DPS-07
+Ground fault protection functional Pass Inverter GFDI self-test executed
+Section 5 — Labeling & Access
+Item Result Notes
+Utility disconnect labeled and accessible Pass Lockable, visible-blade AC disconnect on north wall
+of maintenance building
+PV system placards installed per NEC Pass Placards at service entrance, main panel, inverter
+690.56 pad, disconnect
+Warning signage at combiner and DC Pass Arc-flash and DC voltage warnings posted
+junction boxes
+Emergency shutdown procedure posted Pass Laminated procedure at inverter pad and main
+disconnect
+
+Item Result Notes
+POI single-line diagram posted Pass Posted inside utility disconnect enclosure
+Access clearances meet NEC 110.26 Pass 42 in. front, 30 in. side working space verified
+Section 6 — Telemetry & Communications Provisioning
+Item Result Notes
+Utility-owned RTU installed (TCS-02 §5) Pass Alleniom RTU asset RTU-LKM-171-04; installed
+06/12/2025
+SCADA point list configured Pass Real / reactive power, voltage, breaker status, alarms
+per point list rev C
+Communications circuit provisioned Pass Cellular backhaul with primary/backup APN; signal ‡
+-78 dBm
+End-to-end SCADA point verification with Pass Verified with SOC 06/17/2025 (ref. SCADA ticket
+SOC TKT-25-04188)
+Time synchronization verified Pass NTP lock to Alleniom master clock; drift < 50 ms
+Live telemetry available prior to PTO Pass Live points received at SOC continuously since
+06/17/2025 15:20
+Section 7 — Witness Test Disposition
+Witness test: waiver eligible n (checkbox marked — copy-forward from application)
+Witness test: witness attendance
+required
+Basis cited on cover sheet Inverter model Torvane Electric TE-180K listed on Certified
+Equipment List (CEL-2025-Q2, 04/30/2025)
+Standards Engineering review Pending
+Section 8 — Field Engineer Sign-Off
+Commissioning agent (print) K. Ondras, Field Services
+Commissioning agent (signature) /s/ K. Ondras
+Date 06/18/2025
+Field engineer (print) M. Halbrook, P.E., Alleniom DER Field Engineering
+Field engineer (signature) /s/ M. Halbrook, P.E.
+Date 06/18/2025
+District representative (print) P. Ashworth, Facilities Director, Lockmere Community School District
+District representative (signature) /s/ P. Ashworth
+Date 06/18/2025
+Section 9 — Standards Engineering Review (to be completed)
+Reviewer (print)
+Signature
+Date
+Waiver eligibility confirmed Confirmed Denied
+
+Notes
+Distribution: DER Program Office · Interconnection Studies · Standards Engineering · Commissioning ·
+SOC · Lockmere Community School District Facilities
+Doc no. COMM-LKM-MS-2025-06 · Rev 0 · 06/18/2025 · Owner: Commissioning (Field Services)

@@ -1,0 +1,21 @@
+TRELLUM MOUNTING SYSTEMS
+Low-slope ballasted racking · trellummounting.com
+Racking Submittal: Wintbrook Processing Rooftop (PXA-2024-0099)
+Submittal TMS-24-1187 Rev B, 03/14/2025, for Fenmoor Electric LLC. System: Trellum LB-10 ballasted, 10
+degree tilt, east-west rows, 1,768 modules (Halcrest HC-550M, 550 W).
+1. Structural attachment
+Item Design
+Wind design ASCE 7-16, 115 mph, exposure C; roof zones 1, 2 and 3 by the corner and
+edge layout
+Ballast Zone 1: 2 blocks per module bay; zone 2: 3 blocks; zone 3: 4 blocks plus 2
+mechanical attachments per row end
+Added dead load 4.1 psf average, 6.8 psf maximum (zone 3); checked by the owner's structural
+engineer, letter 02/27/2025
+Rails and clamps Aluminum 6005-T5 rails; mid and end clamps with integrated bonding pins
+2. Bonding
+Module frames bond to the rails through the clamp bonding pins; rails bond row to row with 6 AWG bare copper
+and connect to the equipment grounding conductor at each combiner.
+3. Array wiring
+String home runs: 10 AWG PV wire from the last module of each string to its combiner, held to the rails with
+stainless cable clips. Module-level rapid shutdown units mount on the rails under each module.
+Prepared: D. Asante, P.E., Trellum Mounting Systems, 03/14/2025.

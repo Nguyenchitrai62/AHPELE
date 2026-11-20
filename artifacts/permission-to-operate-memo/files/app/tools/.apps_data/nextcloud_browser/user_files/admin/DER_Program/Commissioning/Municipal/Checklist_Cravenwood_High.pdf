@@ -1,0 +1,98 @@
+ALLENIOM UTILITIES — DER PROGRAM OFFICE
+DER COMMISSIONING CHECKLIST
+Doc no. COMM-CK-CRV-HS-01 · Rev 0 · Date 06/18/2025 · Owner Commissioning / Standards
+Engineering
+Cover Sheet
+Field Entry
+Site name Cravenwood High School Array
+District / Customer Cravenwood Community School District
+District address 915 Founders Way, Cravenwood, Alleron 47CR
+District contact Facilities Office · cravenwoodcsd.org · (612) 555-0812
+League affiliation Alleron Municipal League — member district
+Application ID PXA-2024-0779
+Nameplate capacity 860 kW
+DER class Commercial small-scale (500 kW – 1 MW) — program scope
+Inverter model (as installed) Solmery Power SM-215K-3P
+Inverter listing basis UL 1741-SB · listed on CEL-2025-Q2 (published 04/30/2025)
+Feeder / POI ALN-137 (per approved single-line)
+Field engineer of record S. Rennick, Commissioning — Alleniom Utilities
+Checklist date 06/18/2025
+Section 1 — Construction Complete
+# Item Result Notes
+1.1 Construction complete per approved single-line and civil Pass Walkdown 06/17/2025
+drawings
+1.2 Array installed at nameplate 860 kW; module count and Pass —
+string configuration match a design
+1.3 Inverter model verified against application — Solmery Pass Model listed on Certified Equipment
+Power SM-215K-3P List CEL-2025-Q2
+1.4 Nameplate ratings match approved design Pass —
+1.5 AC/DC disconnects installed and operable Pass —
+1.6 Warning placards and lockout provisions per NEC 690/705 Pass —
+Section 2 — Protection Settings
+
+# Item Result Notes
+2.1 Voltage and frequency ride-through settings per approved Pass Verified from inverter local display
+settings sheet (IEEE 1547-2018 Category profile)
+2.2 Anti-islanding function test (IEEE 1547.1) Pass Trip in 1.7 s
+2.3 Trip and reconnect thresholds match approved settings Pass —
+sheet
+2.4 Protective relay / DER breaker settings as specified Pass —
+2.5 Reactive power / voltage support mode configured per Pass Volt-VAR curve loaded
+approved settings
+Section 3 — Grounding
+# Item Result Notes
+3.1 Equipment grounding conductors sized and bonded per Pass —
+approved design
+3.2 DER neutral grounding scheme matches approved Pass —
+single-line
+3.3 Ground electrode continuity test Pass —
+3.4 Enclosure and structural bonding continuous to service Pass —
+grounding electrode
+Section 4 — Labeling
+# Item Result Notes
+4.1 Point-of-interconnection placard installed and legible Pass —
+4.2 AC disconnect labeled and accessible to utility personnel Pass —
+4.3 Inverter and switchgear placards match approved Pass —
+single-line references
+4.4 Emergency contact information posted at main service Pass Cravenwood Community School
+District facilities line posted
+Section 5 — Telemetry Provisioning
+# Item Result Notes
+5.1 Utility-owned RTU installed and cabinet keyed to Alleniom Pending RTU delivery scheduled per DER
+standard Program equipment queue
+5.2 SCADA point map loaded and verified against approved Pending Awaiting RTU commissioning
+I/O list
+5.3 End-to-end telemetry point check with SOC (real power, Pending To be run at RTU commissioning per
+reactive power, breaker status, alarms) TCS-02 §5
+5.4 Communications path (fiber/cellular) tested to SOC Pending —
+front-end
+
+# Item Result Notes
+5.5 PTO withheld until live telemetry confirmed by SOC Noted No PTO without live telemetry
+(TCS-02 §5)
+Section 6 — Witness Test Disposition
+# Item Result Notes
+6.1 Witness test: waiver eligible [X] Marked Copy-forward —
+municipal-array batch, 06/2025
+6.2 Basis for waiver eligibility Inverter model on current —
+Certified Equipment List
+(CEL-2025-Q2)
+6.3 Field engineer recommendation Waive witness test —
+6.4 Standards Engineering concurrence (pending signature — Section —
+8)
+Section 7 — Outstanding Items
+(cid:127) Section 5 telemetry provisioning to close at RTU commissioning; PTO cannot issue until Section 5
+items 5.1–5.4 are marked Pass and SOC has confirmed live telemetry.
+(cid:127) No open items in Sections 1–4 or 6.
+Section 8 — Field Engineer Sign-Off
+Field engineer of record certifies that construction, protection settings, grounding, and labeling items in
+Sections 1–4 have been inspected and, where marked Pass, meet the approved design and applicable
+Alleniom standards (DIS-01 Rev 4, DPS-07 Rev 2, TCS-02). Section 5 items remain open pending utility
+telemetry commissioning. Section 6 witness-test disposition is submitted for Standards Engineering review.
+Role Name Signature Date
+Field engineer, Commissioning S. Rennick /s/ S. Rennick 06/18/2025
+District representative Cravenwood CSD Facilities ______________________ ____/____/____
+Standards Engineering (waiver ____________________ ______________________ ____/____/____
+concurrence)
+DER Program Office (file) ____________________ ______________________ ____/____/____
+Alleniom Utilities — DER Program Office · 4200 Veldmere Boulevard, Halston, Alleron 01HA · (612) 555-0100 · alleniom.com

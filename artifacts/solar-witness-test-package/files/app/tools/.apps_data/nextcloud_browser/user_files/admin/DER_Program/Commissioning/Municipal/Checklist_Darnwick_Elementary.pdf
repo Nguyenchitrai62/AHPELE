@@ -1,0 +1,77 @@
+ALLENIOM UTILITIES · DER PROGRAM OFFICE
+DER COMMISSIONING CHECKLIST
+Facility: Darnwick Elementary School Array · District / Customer: Darnwick Community School District
+Site address: 44 Willowvale Avenue, Darnwick, Alleron 21DA · Nameplate: 640 kW
+Inverter model (per cover sheet): Arvexa PV-750 · Commissioning date: 06/15/2025
+Point of interconnection: Secondary service — school building main switchgear
+Batch: Municipal school-district batch 2025-06
+Cover sheet values (as submitted)
+Field Value
+Site name Darnwick Elementary School Array
+Customer / district Darnwick Community School District
+Site address 44 Willowvale Avenue, Darnwick, Alleron 21DA
+Nameplate 640 kW
+Inverter model Arvexa PV-750
+EPC of record (see project file)
+Owner contact Facilities, Darnwick CSD — (612) 555-0621
+Section 1 — Construction Completion
+# Item Result Notes
+1.1 Construction complete per approved single-line Pass Walk-down 06/15/2025
+1.2 All modules, racking, combiners installed to Pass
+design
+1.3 AC service conductors and disconnects installed Pass
+1.4 Punch-list items closed or documented Pass No open items
+Section 2 — Protection Settings
+# Item Result Notes
+2.1 Voltage/frequency ride-through settings verified Pass Per approved settings sheet
+2.2 Anti-islanding function test (IEEE 1547.1) Pass Trip within specified window
+2.3 Protective relay settings match approved design Pass Inverter internal protection per
+Arvexa PV-750 factory profile
+2.4 Reconnect timing configured Pass Per approved settings sheet
+Section 3 — Grounding
+# Item Result Notes
+3.1 Equipment grounding continuity verified Pass
+
+# Item Result Notes
+3.2 DC array grounding scheme per design Pass
+3.3 Grounding electrode conductor sized and Pass
+terminated
+3.4 Bond to service ground verified Pass
+Section 4 — Labeling & Accessibility
+# Item Result Notes
+4.1 AC disconnect labeled per code Pass
+4.2 PV system placard at service equipment Pass
+4.3 Emergency/rapid-shutdown labeling at points of Pass
+entry
+4.4 Disconnect physically accessible to utility Pass Exterior wall, north elevation
+personnel
+Section 5 — Telemetry Provisioning (stub)
+# Item Result Notes
+5.1 Utility-owned RTU installation Pending RTU allocation not yet scheduled
+5.2 SCADA point-list confirmed with SCADA/EMS Pending Awaiting RTU delivery
+Engineering
+5.3 Communications path to SOC established Pending
+5.4 Live telemetry verified end-to-end Pending Cannot complete until RTU
+installed
+Stub-out: telemetry provisioning items remain open pending equipment allocation. PTO will not be issued until
+Section 5 is closed.
+Section 6 — Witness Test Disposition
+n Witness test: waiver eligible
+Witness test scheduled
+Witness test completed
+Notes: Copy-forward from municipal school-district batch 2025-06. Pre-marked at batch level; all sites in this
+batch carry the same disposition.
+Field Engineer Sign-Off
+The undersigned certifies that Sections 1 through 4 have been walked and observed on site, and that Section 5
+items are stubbed pending equipment allocation as noted above.
+Field engineer (print) M. Halbrook, P.E., Alleniom DER Field Engineering
+
+Signature /s/ M. Halbrook, P.E.
+Date 06 / 15 / 2025
+Employee ID / badge AFE-1042
+Standards Engineering Review (pending)
+Reviewed by Pending
+Signature Pending
+Date Pending
+Alleniom Utilities — DER Program Office · 4200 Veldmere Boulevard, Halston, Alleron 01HA · (612) 555-0100
+Doc no. COMM-CHK-DARN-ELEM · Rev 0 · 06/2025 · Owner: Commissioning

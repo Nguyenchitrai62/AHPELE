@@ -1,0 +1,26 @@
+[Sheet: Hold List]
+Standards Conflict Hold List							
+Doc no.:	SCR-HL-004	Rev:	12	Date:	07/14/2025	Owner:	Interconnection Studies (Meera Vellanki)
+As of:	07/14/2025	Prepared by:	Meera Vellanki, Manager — Interconnection Studies				
+Source:	Initial technical screening queue, DER Program						
+Applications listed below are parked at initial technical screening on the DIS-01 Rev 4 §5 / DPS-07 Rev 2 §4.2 recloser question. Rows are ordered by hold start date.							
+Project ID	Customer	Site Type	Capacity	Feeder	Screening Stage	Hold Reason	Hold Start Date
+PXA-2024-0523	Kelmar Industrial Park Solar LLC	pure-export generation	2.4 MW	ALN-057	Initial Technical Screening	standards clarification pending	03/12/2025
+PXA-2024-0611	Ashborough Township	load/generation-decoupling	620 kW	ALN-121	Initial Technical Screening	standards clarification pending	03/18/2025
+PXA-2025-0018	Silvermont Distribution Co.	load/generation-decoupling	850 kW	ALN-186	Initial Technical Screening	standards clarification pending	03/26/2025
+PXA-2025-0041	Westgate Meadows Solar LLC	pure-export generation	1.8 MW	ALN-073	Initial Technical Screening	standards clarification pending	04/02/2025
+PXA-2025-0057	Draystone College	load/generation-decoupling	940 kW	ALN-142	Initial Technical Screening	standards clarification pending	04/09/2025
+PXA-2025-0086	Ridgeview Solar Partners LLC	pure-export generation	3.0 MW	ALN-208	Initial Technical Screening	standards clarification pending	04/17/2025
+PXA-2025-0104	Corliston Manufacturing Inc.	load/generation-decoupling	1.2 MW	ALN-095	Initial Technical Screening	standards clarification pending	04/28/2025
+PXA-2025-0131	Varnell Foods Cooperative	load/generation-decoupling	780 kW	ALN-164	Initial Technical Screening	standards clarification pending	05/06/2025
+PXA-2025-0148	Halstead Point Solar LLC	pure-export generation	2.1 MW	ALN-051	Initial Technical Screening	standards clarification pending	05/14/2025
+PXA-2025-0163	Northshore Community Hospital	load/generation-decoupling	1.5 MW	ALN-119	Initial Technical Screening	standards clarification pending	05/23/2025
+PXA-2025-0177	Wexborn County Fairgrounds	load/generation-decoupling	550 kW	ALN-137	Initial Technical Screening	standards clarification pending	06/03/2025
+PXA-2025-0189	Ember Ridge Solar LLC	pure-export generation	2.7 MW	ALN-078	Initial Technical Screening	standards clarification pending	06/16/2025
+[Sheet: Notes]
+Notes	
+•	Hold reason label copied forward from the initial-screening triage template used by Interconnection Studies.
+•	Screening stage is "Initial Technical Screening" for each row; no application on this list has advanced to feasibility, system impact, or facilities studies.
+•	Feeder assignments reflect the point of interconnection stated on the application; no feeder-level planning study has been drawn for these projects while the hold is in place.
+•	Capacities are as filed on the application; nameplate verification has not been performed for any row on this list.
+•	List maintained by Meera Vellanki, Manager — Interconnection Studies. Contact: meera.vellanki@alleniom.com.

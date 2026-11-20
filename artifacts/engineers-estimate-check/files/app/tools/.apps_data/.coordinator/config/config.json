@@ -1,0 +1,15 @@
+{
+  "agents": {},
+  "checkpoints": [
+    {
+      "type": "tool_call"
+    },
+    {
+      "interval_seconds": 1.0,
+      "type": "periodic"
+    }
+  ],
+  "enabled": false,
+  "events": [],
+  "run_id": null
+}

@@ -1,0 +1,46 @@
+ALLENIOM UTILITIES · DER PROGRAM OFFICE
+DER COMMISSIONING CHECKLIST
+Facility: Tresbay Community Center Array · Municipality: Town of Tresbay · Capacity: 560 kW · Date:
+06/18/2025
+Site name: Tresbay Community Center Array
+Municipality: Town of Tresbay, 12 Harbor Street, Tresbay, Alleron 60TR
+Nameplate: 560 kW
+Inverter model (per cover sheet): Vexlar Energy VX-140C (4 × 140 kW)
+Feeder / POI: ALN-176 · Pad-mounted transformer T-4
+Interconnection application: PXA-2025-0061
+Checklist
+Item Result Notes
+Construction complete — mechanical & electrical scope Pass Turnover walk 06/10/2025; punch list
+closed against approved design closed
+Inverter model verified against application Pass Model listed on Certified Equipment
+List 2025-Q2
+Nameplate ratings match approved design Pass 4 × 140 kW = 560 kW aggregate
+Anti-islanding function test (IEEE 1547.1) Pass Trip in 1.7 s
+Voltage/frequency ride-through settings verified Pass Per approved settings sheet
+Protective relay settings as specified Pass Settings loaded and
+password-locked
+Grounding — equipment grounding conductor Pass 1.2 W to grid; bond torqued and
+continuity; grounding electrode system bonded and witnessed
+megger-tested
+Labeling and disconnect accessibility Pass Utility disconnect placarded; PV
+plaque at service entrance
+Metering and production meter check Pass Revenue-grade meter installed;
+polarity verified
+Telemetry provisioning — utility-owned RTU comm test Pending RTU awaiting delivery; SCADA point
+to SOC (TCS-02 §5) list issued
+Witness test disposition [X] Waiver Copy-forward from prior
+eligible municipal-array checklist; inverter on
+current CEL edition
+Witness Test Section
+
+[X] Witness test: waiver eligible
+[ ] Witness test required — schedule with Standards Engineering
+[ ] Witness test completed on: N/A
+Basis for waiver-eligible pre-mark: installed inverter model appears on the current Certified Equipment List
+edition per witness-test procedure (copy-forward from the municipal-array batch disposition).
+Field Engineer Sign-Off
+Commissioning agent: K. Ondras · Field Services
+Signature: /s/ K. Ondras · Date: 06/18/2025
+Reviewed · Standards Engineering: Pending · Date:
+Pending
+Doc no. COMM-2025-TRB-01 · Rev 0 · 06/18/2025 · Owner: Commissioning

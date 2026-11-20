@@ -1,0 +1,46 @@
+ALLENIOM UTILITIES — DER PLANNING GROUP
+4200 Veldmere Boulevard, Halston, Alleron 01HA · (612) 555-0100 · alleniom.com
+System Impact Study Report
+Doc no. Rev Date Owner
+SIS-2025-006 Rev 0 06/22/2025 DER Planning Group
+Project: PXA-2024-0343, Prairie Corridor Business Park PV, 860 kW AC. Customer: Prairie Corridor Partners
+LLC. Site: 2200 Corridor Parkway, Halston, Alleron 05HA. Feeder ALN-088 (13.2 kV).
+Study type: SIS (small). Prepared by Devon Reyes, DER Planning Group; reviewed by Ivo Grantham, Manager,
+DER Planning Group. Study start 02/03/2025; complete 06/22/2025.
+1. Facility description
+The array is installed on the rooftops of the park's four buildings: six Solmery inverters in three blocks (two
+SM-245K-3P in block 1, two SM-125K-3P in block 2, two SM-60K-3P in block 3), 860 kW AC in total. The
+inverters connect to the park's 480 V distribution and reach the feeder through the park's existing 13.2 kV
+primary service and revenue meter M-1. The array sits behind the meter at that service, so the park's tenant
+load is served first and the surplus is exported at the point of interconnection.
+Park demand at the service, from 12 months of AMI interval data at meter M-1 (calendar 2024): weekday
+daytime (10:00 to 16:00) 410 to 620 kW; weekend daytime 170 to 260 kW; annual peak 744 kW (08/14/2024,
+15:00).
+2. Assumptions
+Export at the point of interconnection was studied at 860 kW with zero park load, the bounding case for voltage
+rise and reverse power flow. Fault contribution was taken at 1.1 per unit of inverter rated current. Anti-islanding
+is by the inverters' UL 1741-SB active scheme (all six models are carried on CEL-2025-Q2).
+3. Results
+Screen Result Basis
+Steady-state voltage at POI, full export, 1.031 pu (limit 1.05 pu) DIS-01 Rev 4
+light load
+Voltage change on loss of full output 2.1 percent (limit 3 percent) DIS-01 Rev 4
+Thermal loading, ALN-088 trunk 71 percent of rating at full Feeder model 2025-01
+export
+Fault current contribution at POI 41 A (three-phase) 1.1 pu inverter current
+Islanding non-detection zone not identified; DTT not required DPS-07 §4.5, §5.3
+4. Conditions of interconnection
+4.1 Utility-owned POI recloser per DPS-07 §4.2, with settings issued by Distribution Protection Engineering
+under DPS-07 §5.5. Automatic reclosing at the POI recloser to be blocked, with the recloser locked out on loss
+of the utility source per DPS-07 §5.1(b); synchronism check (25) to supervise closing.
+4.2 Upstream feeder recloser ALN-088 R2: first reclose interval raised from 0.5 s to 2.0 s so the POI recloser
+opens on loss of source before the first reclose attempt (DPS-07 §5.1(a)).
+4.3 Directional power element (32) at the POI recloser applied as an export backstop at 900 kW, 2.0 s.
+4.4 Utility-owned RTU and SCADA telemetry per TCS-02, including the §6.1 points, ahead of Permission to
+Operate (TCS-02 §5).
+4.5 Protection coordination study and sign-off by Distribution Protection Engineering before energization
+(DPS-07 §5.1(c)).
+5. Status
+Study complete 06/22/2025. Conditions 4.1, 4.3 and 4.5 pass to Distribution Protection Engineering; 4.2 to
+Distribution Operations; 4.4 to SCADA/EMS Engineering.
+Devon Reyes, DER Planning Group, 06/22/2025.

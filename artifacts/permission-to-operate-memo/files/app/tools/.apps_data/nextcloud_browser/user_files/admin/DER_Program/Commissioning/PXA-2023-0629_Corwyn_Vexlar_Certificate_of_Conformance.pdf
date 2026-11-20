@@ -1,0 +1,54 @@
+VEXLAR ENERGY
+Commercial inverters · vexlarenergy.com
+Certificate of Conformance
+Certificate no. VX-CC-25-0522 · Issued 05/22/2025 · Vexlar Energy Quality Assurance
+Field Entry
+Customer Brantley Electric Company, for Corwyn Realty Partners (Corwyn Office
+Complex PV, PXA-2023-0629)
+Purchase order BEC-PO-25-0418
+Product VX-140C central-string inverter: 140 kW ac, 480 V, three-phase, 60 Hz;
+NEMA 3R
+Firmware family 4.2 (build 4.2.7)
+Units Five: S/N VX140C-25-03311, VX140C-25-03312, VX140C-25-03315,
+VX140C-25-03318, VX140C-25-03320; shipped 05/22/2025
+Certification UL 1741, including Supplement SB (utility-interactive inverters);
+certification of record effective 09/16/2024; certifying laboratory Calderon
+Testing Laboratories (NRTL), report CTL-24-1187
+Interconnection standard IEEE 1547-2018: abnormal operating performance Category III; normal
+operating performance Category B
+Type tests (IEEE 1547.1-2020), all passed
+Test Result
+Voltage trip, OV1, OV2, UV1, UV2 (magnitude and clearing time) Pass
+Frequency trip, OF1, OF2, UF1, UF2 (magnitude and clearing time) Pass
+Voltage ride-through, Category III Pass
+Frequency ride-through Pass
+Rate-of-change-of-frequency ride-through Pass
+Voltage phase-angle change ride-through Pass
+Enter service (delay and ramp) Pass
+Unintentional islanding Pass
+Open phase Pass
+Constant power factor, voltage-reactive power, active power-reactive power and Pass
+constant reactive power modes
+Frequency-droop Pass
+Default settings as shipped (IEEE 1547-2018 Category III)
+Function Setting Clearing time
+OV2 1.20 pu 0.16 s
+OV1 1.10 pu 13.0 s
+UV1 0.88 pu 21.0 s
+UV2 0.50 pu 2.0 s
+OF2 62.0 Hz 0.16 s
+OF1 61.2 Hz 300 s
+UF1 58.5 Hz 300 s
+UF2 56.5 Hz 0.16 s
+Voltage continuous operation 0.88 to 1.10 pu; mandatory operation —
+ride-through, 0.70 to 0.88 pu for at least 20 s and 0.50 to 0.70 pu for at
+Category III least 10 s; momentary cessation above 1.10 to 1.20 pu for at
+least 12 s and below 0.50 pu for at least 1 s
+Frequency continuous operation 58.8 to 61.2 Hz; mandatory operation —
+ride-through, 57.0 to 58.8 Hz and 61.2 to 61.8 Hz for at least 299 s
+Category III
+Enter service 0.917 to 1.05 pu and 59.5 to 60.1 Hz for 300 s —
+Reactive power Constant power factor 1.00 —
+Each unit passed Vexlar's production test (insulation, ground-fault detection, firmware load and settings
+verification) before shipment; the production test reports are held by Vexlar Energy Quality Assurance.
+Certified by: /s/ Ingrid Marsh, Quality Manager, Vexlar Energy, 05/22/2025.

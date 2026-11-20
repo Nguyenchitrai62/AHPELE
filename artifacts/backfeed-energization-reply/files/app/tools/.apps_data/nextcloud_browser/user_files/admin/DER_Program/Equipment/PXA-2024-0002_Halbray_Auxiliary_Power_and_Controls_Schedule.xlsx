@@ -1,0 +1,14 @@
+[Sheet: Header]
+Auxiliary Power and Controls Schedule: Halbray Field Solar Site 3 (PXA-2024-0002)
+Tamsworth Electrical Constructors Inc. · Alleron Electrical Contractor Lic. #EC-11847
+Drawing E-202 Rev B, 06/20/2025. Panelboard AUX-1 and the single-axis tracker controllers TC-1 to TC-8 at the array north edge.
+Prepared: R. Vance, Electrical Engineer, Tamsworth Electrical Constructors Inc., 06/20/2025.
+[Sheet: Panelboard]
+Tag	Equipment	Location	Data
+AUX-1	AUX-1 panelboard: 800 V, 3-phase, 3-wire, 100 A main lugs, NEMA 3R, 65 kA short-circuit current rating	Array north edge, beside TC-1	Branch breakers: eight 3-pole 15 A, to TC-1 to TC-8
+[Sheet: Controllers]
+Tag	Equipment	Location	Data
+TC-1 to TC-8	Single-axis tracker controllers, 800 V, 3-phase input, NEMA 3R, one per tracker block	Array north edge, rows 1 to 8	Position and wind-stow control for its block
+[Sheet: Mounting]
+Item	Construction
+Mounting	AUX-1 panelboard and TC-1 to TC-8 controllers on 1-5/8 in. steel strut, green enamel finish

@@ -1,0 +1,37 @@
+[Sheet: Header]
+125 V DC Battery and Charger Sizing: Wintbrook Processing Rooftop (PXA-2024-0099)
+Fenmoor Electric LLC · Alleron Electrical Contractor Lic. #EC-12093
+Drawing E-007 Rev B, 03/28/2025. System: 125 V dc, ungrounded, supplying the 52-DER trip and close circuits and the HPR-751 relay. Battery: 60 cells, Norvale NV-2-50 VRLA, 50 Ah (8 h rate), in battery room BR-1.
+Prepared: M. Iversen, Electrical Engineer, Fenmoor Electric LLC, 03/28/2025.
+[Sheet: Duty Cycle]
+Period	Load (A)	Duration (min)	Ah
+Trip of 52-DER plus continuous	12.6	1	0.21
+Continuous: relay, indication, ground detector	0.6	478	4.78
+Close of 52-DER, spring charge, plus continuous	18.6	1	0.31
+Duty cycle total			5.3
+[Sheet: Battery]
+Item	Value
+Duty cycle (Ah)	5.3
+Temperature factor (15 degC)	1.11
+Design margin	1.1
+Aging factor	1.25
+Required capacity (Ah)	8.09
+Selected cell capacity (Ah, 8 h rate)	50
+One-minute rate to 1.75 V per cell (A)	105
+Largest one-minute load (A)	18.6
+End-of-discharge voltage, 60 cells x 1.75 V (V)	105
+Trip coil minimum operating voltage (V)	70
+Close coil minimum operating voltage (V)	90
+Relay minimum operating voltage (V)	88
+Float voltage, 60 cells x 2.25 V (V)	135
+Lowest maximum among the coils and relay (V)	140
+Battery disconnect	2-pole fused, 60 A, 250 V dc, fuses 20 kA interrupting at 250 V dc, lockable, at the rack end, in sight of the cells and of DCP-1
+Battery disconnect label	125 V dc nominal; available fault current 2.6 kA; calculation date 03/28/2025; arc-flash label
+Battery room	BR-1: 1.0 m clear in front of the rack; LED fixture switched at the door
+[Sheet: Charger]
+Item	Value
+Charger	BC-1, 125 V dc, 10 A, with ground detection and alarm contacts; VRLA; no equalize; recharge at float
+Continuous load (A)	0.6
+Recharge of 50 Ah x 1.1 in 12 h (A)	4.58
+Charger output required (A)	5.18
+Charger output rating (A)	10

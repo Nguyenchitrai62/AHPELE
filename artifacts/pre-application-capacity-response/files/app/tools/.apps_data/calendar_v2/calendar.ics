@@ -1,0 +1,25 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Archipelago Calendar Server//EN
+BEGIN:VEVENT
+SUMMARY:Proposed — Northline Renewables ALN-108 pre-application meeting
+DTSTART;TZID=America/Chicago:20250729T100000
+DTEND;TZID=America/Chicago:20250729T110000
+DTSTAMP:20261119T123428Z
+UID:4926df7e-ca59-4928-81a8-a8a27aa430ce
+ATTENDEE;CN="June Halloway";PARTSTAT=ACCEPTED:mailto:june.halloway@allenio
+ m.com
+ATTENDEE;CN="Meera Vellanki";PARTSTAT=NEEDS-ACTION:mailto:meera.vellanki@a
+ lleniom.com
+CREATED:20261119T123428Z
+DESCRIPTION:Proposed pre-application dialogue for Northline Renewables' 3 
+ MW project on Feeder ALN-108. Response dated 07/14/2025 offers this slot\;
+  Northline confirmation requested by 07/22/2025. Capacity discussion only 
+ — no capacity or queue position is reserved. Attendees: June Halloway (D
+ istribution Planning)\, Meera Vellanki (Interconnection Studies)\, Northli
+ ne representatives.
+LAST-MODIFIED:20261119T123428Z
+LOCATION:Alleniom Utilities\, 4200 Veldmere Boulevard\, Halston\, or video
+  conference
+END:VEVENT
+END:VCALENDAR

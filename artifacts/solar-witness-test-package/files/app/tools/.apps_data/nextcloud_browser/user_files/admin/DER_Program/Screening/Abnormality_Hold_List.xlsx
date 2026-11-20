@@ -1,0 +1,26 @@
+[Sheet: Abnormality Hold List]
+Abnormality Hold List — Technical Screening			
+Alleniom Utilities — DER Program Office			
+Interconnection Studies / Technical Screening			
+List owner	Tomás Ibarra, Sr. Interconnection Engineer		
+As of	07/14/2025		
+Source	Screening intake queue — flagged items pending technical review		
+Flagged Applications			
+Project ID	Flag Reason	Hold Start Date	Flagged By
+PXA-2024-0338	equipment schedule incomplete	02/11/2025	Tomás Ibarra
+PXA-2024-0402	single-line diagram missing	03/04/2025	Meera Vellanki
+PXA-2024-0451	DPS-07 protective relay settings not submitted with application	03/19/2025	Tomás Ibarra
+PXA-2024-0487	inverter model not on current CEL	04/02/2025	Evan Solberg
+PXA-2025-0016	site plan does not identify POI	04/08/2025	Tomás Ibarra
+PXA-2025-0089	feeder assignment unresolved	05/06/2025	June Halloway
+PXA-2025-0112	applicant signature block incomplete	05/13/2025	Tomás Ibarra
+PXA-2025-0137	anti-islanding trip settings not stated	05/20/2025	Evan Solberg
+PXA-2025-0158	AC disconnect location not shown	05/28/2025	Tomás Ibarra
+PXA-2025-0175	existing-DER register check flagged co-located array	06/03/2025	Meera Vellanki
+PXA-2025-0202	one-line diagram inconsistent with equipment schedule	06/12/2025	Tomás Ibarra
+PXA-2025-0219	transformer data sheet missing	06/18/2025	Tomás Ibarra
+PXA-2025-0054	grounding scheme not specified	06/25/2025	Meera Vellanki
+PXA-2025-0231	stated-vs-nameplate discrepancy	06/26/2025	Tomás Ibarra
+PXA-2025-0247	telemetry interface not addressed	07/01/2025	Marcus Deele
+PXA-2025-0258	site load data not provided	07/08/2025	Tomás Ibarra
+Maintained by Tomás Ibarra (tomas.ibarra@alleniom.com). Entries are added on flag by the screening engineer of record and remain on this list until the flag is cleared by the applicant or reassigned for further review.			

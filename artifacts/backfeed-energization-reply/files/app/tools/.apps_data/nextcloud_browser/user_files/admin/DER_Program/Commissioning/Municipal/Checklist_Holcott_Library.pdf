@@ -1,0 +1,97 @@
+ALLENIOM UTILITIES — DER PROGRAM OFFICE
+DER COMMISSIONING CHECKLIST
+Doc no. CX-HOL-LIB-01 · Rev 0 · Date 06/17/2025 · Owner Field Services
+Cover Sheet
+Site name Holcott Public Library Array
+Municipality / Host Town of Holcott
+Site address 80 Old Mill Road, Holcott, Alleron 84HO
+Nameplate AC capacity 510 kW
+Inverter model Selvix SV-720 ¹
+DER class Commercial small-scale (500 kW – 1 MW)
+Point of interconnection Utility secondary, service transformer T-4
+Commissioning date 06/17/2025
+Field crew Alleniom Field Services — Crew 12
+¹ Reference: Selvix SV-720 listed in CEL-2024-Q4 (published 10/31/2024).
+Section A — Construction & Physical Installation
+# Item Result Notes
+A-1 Construction complete per approved single-line [X] Pass [ ] Fail Punch-list closed
+06/12/2025
+A-2 Combiner boxes, conductors, and disconnects installed [X] Pass [ ] Fail
+to specification
+A-3 AC and DC disconnects accessible and clearly [X] Pass [ ] Fail
+identified
+A-4 Enclosure NEMA rating verified for outdoor location [X] Pass [ ] Fail NEMA 3R at inverter pad
+A-5 Site housekeeping and clearances verified [X] Pass [ ] Fail
+Section B — Protection & Settings
+# Item Result Notes
+B-1 Voltage ride-through settings loaded per approved [X] Pass [ ] Fail Category II per DIS-01
+settings sheet
+B-2 Frequency ride-through settings loaded per approved [X] Pass [ ] Fail
+settings sheet
+B-3 Anti-islanding function tested (IEEE 1547.1) [X] Pass [ ] Fail Trip within 2.0 s
+B-4 Overcurrent protection coordinated with utility feeder [X] Pass [ ] Fail
+B-5 Protective relay settings match approved coordination [X] Pass [ ] Fail
+study
+CX-HOL-LIB-01 · Rev 0 Page 1
+
+Section C — Grounding & Bonding
+# Item Result Notes
+C-1 Equipment grounding continuity verified at inverter, [X] Pass [ ] Fail
+combiner, and AC disconnect
+C-2 System grounding electrode conductor sized and [X] Pass [ ] Fail
+bonded per NEC Article 690
+C-3 Ground-fault detection function operational [X] Pass [ ] Fail
+C-4 Ground resistance measured [X] Pass [ ] Fail 3.8 W at test well
+Section D — Labeling & Signage
+# Item Result Notes
+D-1 Utility-facing placard at service entrance identifying PV [X] Pass [ ] Fail
+system
+D-2 Warning labels at each disconnect (“Utility and PV [X] Pass [ ] Fail
+sources”)
+D-3 Arc-flash and shock hazard labels applied per NFPA [X] Pass [ ] Fail
+70E
+D-4 Emergency shutdown procedure posted at inverter pad [X] Pass [ ] Fail
+D-5 Point-of-interconnection labeled with Alleniom feeder [X] Pass [ ] Fail
+designation
+Section E — Telemetry & Communications
+# Item Result Notes
+E-1 Utility-owned RTU installed and enclosure sealed [ ] Pass [ ] Fail [X] RTU allocation pending -
+Pending equipment not allocated
+E-2 Fiber / cellular back-haul provisioned to SOC [ ] Pass [ ] Fail [X]
+Pending
+E-3 Point list mapped per TCS-02 §5 (kW, kVAR, breaker [X] Pass [ ] Fail Point list submitted
+status, alarm block) 06/10/2025
+E-4 End-to-end signal verification with SOC [ ] Pass [ ] Fail [X] To follow RTU
+Pending energization
+E-5 Production revenue meter installed and sealed [X] Pass [ ] Fail Meter S/N 44-118-7392
+Section F — Witness Test Disposition
+Witness test disposition (Alleniom Standards Engineering to confirm):
+[X] Witness test: waiver eligible
+[ ] Witness test: required — schedule with Standards Engineering
+[ ] Witness test: conditional (see notes)
+Basis noted by field crew: inverter make/model identified on Cover Sheet; footnote reference recorded. Final waiver
+determination reserved to Standards Engineering per Witness Test Waiver Procedure.
+Field notes: —
+Section G — Outstanding Items to PTO
+1. RTU + POI-side telemetry provisioning (Section E-1, E-2, E-4) — dependent on utility equipment allocation.
+2. Standards Engineering to confirm Section F disposition and countersign.
+3. SOC to confirm live telemetry receipt prior to Permission to Operate.
+Per TCS-02 §5, no Permission to Operate will be issued without live telemetry to the SOC.
+CX-HOL-LIB-01 · Rev 0 Page 2
+
+Sign-off
+Field Engineer (Alleniom Field Services)
+Name (printed): M. Halbrook, P.E., Alleniom DER Field Engineering
+Signature: /s/ M. Halbrook, P.E.
+License / badge no.: AFE-1042
+Date: 06/17/2025
+Field Services Supervisor (pending)
+Name (printed): Pending
+Signature: Pending
+Date: Pending
+Standards Engineering countersignature (pending · witness test disposition)
+Name (printed): Pending
+Signature: Pending
+Date: Pending
+Alleniom Utilities — DER Program Office · 4200 Veldmere Boulevard, Halston, Alleron 01HA · (612) 555-0100 · alleniom.com
+CX-HOL-LIB-01 · Rev 0 Page 3

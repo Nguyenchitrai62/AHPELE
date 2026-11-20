@@ -1,0 +1,21 @@
+VEXLAR ENERGY
+Commercial inverters · vexlarenergy.com
+VX-C Series Central-String Inverters: VX-140C and VX-320C
+Document VXC-DS Rev 5, 09/2024.
+Parameter VX-140C VX-320C
+Rated ac power 140 kW 320 kW
+AC output 480 V, three-phase, 60 Hz 480 V, three-phase, 60 Hz
+Rated ac current 168 A 385 A
+Maximum dc voltage 1000 V 1000 V
+MPPT voltage range 600 to 850 V 600 to 850 V
+Maximum dc input current 260 A 600 A
+Maximum dc short-circuit current 320 A 720 A
+DC inputs 2, each fused (80 to 250 A, 6, each fused (80 to 250 A,
+1000 V dc) with a load-break 1000 V dc) with a load-break
+disconnect disconnect
+PV arc-fault protection Integral, UL 1699B Integral, UL 1699B
+Rapid shutdown Compatible with module-level Compatible with module-level
+rapid shutdown transmitters rapid shutdown transmitters
+Utility interactive UL 1741-SB UL 1741-SB
+Enclosure NEMA 3R, indoor or outdoor NEMA 3R, indoor or outdoor
+Vexlar Energy. Specifications subject to change without notice.

@@ -1,0 +1,56 @@
+Alleniom Utilities — Regulatory Affairs
+4200 Veldmere Boulevard, Halston, Alleron 01HA · (612) 555-0100 · alleniom.com
+
+INTERNAL MEMORANDUM
+
+TO: DER Program Manager
+CC: Dana Whitcomb, Vice President, Distribution Operations
+Meera Vellanki, Manager, Interconnection Studies
+Ivo Grantham, Manager, DER Planning Group
+FROM: Harriet Ngoyi, Director, Regulatory Affairs
+DATE: 07/01/2025
+SUBJECT: DER Backlog Review — Program Manager Tasking
+
+1. Confirmation of directive
+This memorandum confirms and operationalizes the internal directive issued 06/27/2025 by Dana Whitcomb, Vice President, Distribution Operations (DIR-2025-0627), ordering a full backlog review of the commercial DER interconnection program. Regulatory Affairs accepts ownership of the external commitments arising from that directive and, by this memorandum, assigns the internal queue-cleanup work to the DER Program Manager.
+The scope of the backlog review, as established by the VP, is the entire active, on-hold, and past-study-timeline population of the commercial DER program queue as of the anchor date. Every application is to be accounted for by name, application number, current posture, and next required action. Nothing in this memorandum reduces, expands, or alters that scope.
+2. Governing deadlines
+Two dates fix the outer boundary of this work and are not to be revisited without written concurrence from the VP office and Regulatory Affairs:
+08/15/2025 — Response to the Alleron Municipal League. Regulatory Affairs will issue the formal written response to the League's 06/20/2025 letter. The response will be substantive and project-specific, addressing the League's five enumerated requests on behalf of the fourteen member municipalities and school districts. Regulatory Affairs is the signatory; the DER Program Manager is responsible for delivering the underlying queue accounting on which the response will rest.
+09/10/2025 — APUC briefing. The queue accounting must be complete and defensible in advance of the briefing to the Alleron Public Utilities Commission's Energy Resources Division. Regulatory Affairs will not present partial data to the Commission. Any application whose disposition remains open on 09/10/2025 must have a written reason on file, not an oral one.
+Any interim regulatory information request the Division may issue in advance of the briefing will be answered from the same underlying record and will not create a separate work product for the Program Manager beyond timely disposition of the affected applications.
+3. Tasking of the DER Program Manager
+The DER Program Manager is tasked, effective immediately, with producing the following queue-cleanup inputs. Each input is to be closed on the record — with the supporting document, tariff citation, standard, or operating guideline named in the file — before it is reported as complete.
+3.1 On-hold list dispositions. Work the current on-hold population by hold-reason category. For each project, determine the correct disposition under the applicable tariff provisions and program policy, and clear holds where the underlying reason has resolved. Cross-reference hold-reason categories against the relevant queue and financial records. Business-day counts must follow the standard business-day convention.
+3.2 Applications-intake corrections. Review the active queue for duplicate, ghost, and stale-status records. Where a customer has filed a new application at a site with a prior, silently abandoned filing, resolve the intake question in writing before either record is closed or merged. Queue-date assignment must follow the written policy.
+3.3 Standards-conflict routing. For every project currently sitting on a standards-clarification hold, determine and execute the correct disposition under applicable program standards and operating procedures.
+3.4 Equipment allocation. Convene the equipment-allocation determination for the sites that have completed construction and are awaiting utility-owned equipment. Rank the sites under the applicable equipment deployment prioritization guideline in accordance with its procedures, and match against the current supplier delivery schedule reported by SCADA/EMS Engineering.
+3.5 Aggregation determinations. For applications proposing new DER at sites that may host existing generation, apply the applicable aggregation provision before finalizing program-scope routing.
+3.6 Capacity verifications. For any application on abnormality hold due to a stated-vs-nameplate capacity discrepancy, verify the nameplate from the application's technical documentation and apply the applicable interconnection standard to any claimed operating limit below inverter nameplate.
+3.7 Hosting-capacity corrections. Before any capacity figure from the published hosting-capacity map is communicated externally, confirm that the figure reflects the current state of the affected feeder. A priority refresh is to be requested from Distribution Planning under the published refresh-prioritization criteria.
+3.8 Witness-test dispositions. Verify each inverter model against the applicable certified equipment list under the commissioning procedure in effect at the time of determination. Waiver eligibility is to be determined against the applicable certified equipment list.
+3.9 Supplemental-review reversals. Review any supplemental-review determination on file for consistency with current program procedures. Where the record requires revision, update the file and flag any prior memorandum that has been superseded accordingly.
+4. Reporting cadence
+The DER Program Manager will provide weekly progress reports to Regulatory Affairs, with copy to the VP office, every Friday by close of business beginning 07/04/2025 and continuing through 09/12/2025. The weekly report will comprise:
+counts by disposition category, aligned to the categories in §3 above;
+items closed on the record during the reporting week, with the governing citation named;
+exceptions requiring Regulatory Affairs or VP attention, including any project at risk of missing 08/15/2025 or 09/10/2025;
+forward-look for the following reporting week.
+Reports are to be delivered in writing. Verbal updates do not substitute.
+5. General provisions
+Every disposition reached under this tasking must be tariff-defensible on the face of the file. Cite the specific tariff section, standard, operating guideline, or bulletin that supports the action. Where the record does not support the disposition on paper, the disposition is not ready and is to be held rather than reported.
+Follow the noticing, payment-deadline, and hold-clearance procedures as written. Standards or procedural conflicts route through the established referral process; they are not to be resolved informally in the queue. Queue-date treatment must remain within what the tariff and program policy permit.
+Regulatory Affairs will coordinate with Interconnection Studies (Meera Vellanki) on queue and notice records, and with the DER Planning Group (Ivo Grantham) on study status, on any input required for the League response or the APUC briefing. The DER Program Manager remains the single point of accountability for the queue-cleanup inputs enumerated in §3.
+Escalate obstacles to Regulatory Affairs in writing and, where the obstacle bears on the 08/15/2025 or 09/10/2025 dates, to the VP office concurrently.
+
+/s/
+Harriet Ngoyi
+Director, Regulatory Affairs
+Alleniom Utilities
+harriet.ngoyi@alleniom.com · (612) 555-0104
+
+[Table 1]
+Doc no. | RA-2025-07-01
+Rev | 1
+Date | 07/01/2025
+Owner | Regulatory Affairs

@@ -1,0 +1,238 @@
+ALLENIOM UTILITIES
+ENGINEERING REFERRAL PROCEDURE
+Standards Engineering · DER Program
+Doc no. Rev Date Owner
+ERP-9 Rev 2 03/24/2025 Alleniom Standards Engineering
+Document control
+Document number ERP-9
+Revision Rev 2
+Effective date 03/24/2025
+Supersedes ERP-9 Rev 1 (07/10/2022)
+Owner Alleniom Standards Engineering
+Approved by Manager, Standards Engineering
+Distribution Alleniom DER Program Office; Interconnection Studies; Distribution Protection
+Engineering; SCADA/EMS Engineering; DER Planning Group; Regulatory
+Affairs
+Attachments Bulletin EB-2025-03 (03/24/2025); Form ER-11 template; Precedent Register
+Revision history
+Rev Date Summary
+Rev 1 07/10/2022 Initial issue. Established referral form and per-site engineering determination path.
+Rev 2 03/24/2025 Reissued in conjunction with Bulletin EB-2025-03. §3 rewritten to state routing rule
+for standards conflicts; Form ER-11 fields expanded to capture site type and feeder;
+precedent register appended.
+§1 PURPOSE
+ERP-9 establishes the procedure by which an interconnection application encountering a standards
+conflict, a silence between standards, or site conditions falling outside the assumptions of a tabulated
+requirement is referred to a per-site protection/SCADA engineering determination. The procedure exists so
+that documentary conflicts between Alleniom standards do not accumulate as screening holds against
+active applications, and so that each affected site is resolved on the merits of its own protection scheme,
+on a schedule stated in §4.
+This procedure is issued by Standards Engineering and applies uniformly across the Alleniom DER
+Program. It is read together with DIS-01 (DER Interconnection Standard), DPS-07 (Distribution Protection
+Standard), TCS-02 (Telemetry & Communications Standard), and the APUC-filed interconnection tariff.
+
+§2 SCOPE
+ERP-9 applies to any in-scope DER application administered by the Alleniom DER Program at which one
+or more of the following conditions is encountered during initial screening, supplemental review, or system
+impact study:
+(1) Two applicable Alleniom standards state requirements that cannot both be applied on their face to
+the affected site.
+(2) An applicable standard is silent as to a site condition materially present in the application (a topic
+on which the standard does not speak, as distinct from a topic on which it speaks and permits an
+exception).
+(3) The reviewing engineer documents a reasoned basis to depart from a tabulated requirement in
+light of the site's specific protection arrangement.
+Sub-scope facilities handled under the Simplified Small-Systems Process are outside the direct application
+of ERP-9; the Small-Systems reviewer may nonetheless invoke Form ER-11 where an export configuration
+warrants site-specific protection engineering input.
+Nothing in this procedure permits a screening hold pending revision of a standard where ERP-9 provides a
+determination path. See §3 and Bulletin EB-2025-03 (attached).
+§3 REFERRAL ROUTING
+Any standards conflict encountered at screening or design shall be routed via Form ER-11 to a per-site
+protection/SCADA engineering determination. No “winning” document is selected across the program;
+each site is resolved on its own protection scheme.
+The reviewing engineer in Interconnection Studies initiates the referral by completing Form ER-11
+(template attached), attaching the relevant excerpts of the standards at issue, the application's connection
+diagram and equipment schedule, and any feeder-specific information required to characterize the site's
+protection arrangement. Interconnection Studies transmits the completed Form ER-11 to Distribution
+Protection Engineering; where SCADA/EMS input is required, the Manager, Distribution Protection
+Engineering routes a copy to the SCADA/EMS Engineering group for concurrent review.
+Referral does not itself alter the application's status in the DER Program queue. The affected application
+remains in queue during the referral period, and other screening activities that are not dependent on the
+referred question shall proceed in parallel.
+The per-site engineering determination is issued in writing on Form ER-11 by Distribution Protection
+Engineering, is signed by the responsible engineer and countersigned by the Manager, Distribution
+Protection Engineering, and is filed with the application record. The determination is binding for the
+referred site and does not create a general rule across the program; a subsequent site presenting a similar
+question is referred and determined on its own facts.
+Where the site's protection arrangement, as determined under this section, differs from the tabular default
+of DIS-01 §5 Table 5-1, the engineering determination on Form ER-11 supplements the site's
+protective-equipment scoping and is provided to the DER Program Office and to the contracts desk for
+incorporation into the interconnection service agreement.
+Where the referral resolves a recurring pattern that Standards Engineering considers appropriate to reflect
+in a future revision of a standard, the determinations are logged and reviewed as provided in §5.
+
+§4 TIMELINES
+Timelines below run from the date on which Interconnection Studies transmits the completed Form ER-11
+to Distribution Protection Engineering. Business days exclude weekends and federal holidays.
+Referral class Description Determination due
+Class A — Standards conflict, Two Alleniom standards state conflicting requirements at 10 business days
+no site protection novelty a site whose protection arrangement is otherwise
+ordinary.
+Class B — Standards conflict Conflict at a site whose arrangement (e.g., 20 business days
+with site protection novelty load/generation decoupling, non-standard grounding,
+unusual feeder configuration) requires additional
+protection engineering review.
+Class C — Standards silence, Applicable standard is silent as to a site condition 30 business days
+site condition outside tabulated materially present. Determination may require
+assumptions coordination study.
+Class D — SCADA/EMS input Any of the above where the site's telemetry or control 30 business days
+required in addition to arrangement requires concurrent SCADA/EMS
+protection engineering Engineering review.
+Classification is made by the Manager, Distribution Protection Engineering, on receipt of Form ER-11.
+Where the reviewer requests reclassification, the request is decided in writing within two business days.
+Extensions to the timelines above are permitted only in writing, are issued by the Manager, Distribution
+Protection Engineering, and are copied to the DER Program Manager and Regulatory Affairs. Applications
+shall not be held in queue pending revision of a standard where this procedure provides a determination
+path; extensions do not authorize a screening hold outside this procedure.
+§5 DOCUMENTATION
+The completed Form ER-11, the engineering determination, and any supporting studies are filed with the
+application record retained by Interconnection Studies for the retention period established by Regulatory
+Affairs. A copy of the completed Form ER-11 is filed in the Standards Engineering ERP-9 register of
+per-site determinations.
+The ERP-9 register records, at minimum: the referral number, the receipt date, the Project ID, the site type
+and feeder, the standards documents at issue, the assigned engineer, the determination date, and a short
+summary of the determination. The register is reviewed by Standards Engineering quarterly for recurring
+patterns; where a pattern warrants a standards revision proposal, Standards Engineering initiates that
+revision separately from, and in parallel with, ongoing per-site determinations under this procedure. A
+pending revision proposal does not stay determinations issued under this procedure and does not
+authorize a screening hold on affected applications.
+Determinations issued under ERP-9 are cited in the interconnection service agreement (ISA) drafted for
+the affected site by reference to the ER-11 referral number and determination date. Modifications to the
+site's protection arrangement subsequent to ISA execution are handled under the change-order provisions
+of the executed ISA, subject to DIS-01 §7 where capacity or POI is affected.
+
+ATTACHMENT 1 — BULLETIN EB-2025-03
+Bulletin EB-2025-03 (03/24/2025): Screening holds pending standards reconciliation are not permitted.
+Applications encountering standards conflict shall be routed via Form ER-11 immediately per ERP-9 §3.
+Issued by: Manager, Standards Engineering · Distribution: Alleniom DER Program Office; Interconnection
+Studies; Distribution Protection Engineering; SCADA/EMS Engineering; Regulatory Affairs.
+ATTACHMENT 2 — FORM ER-11 TEMPLATE
+Form ER-11 — Engineering Referral for Per-Site Determination
+Alleniom Utilities · Standards Engineering · ERP-9
+Referral identification
+Referral number ER-11-YYYY-NNN (assigned by Distribution Protection Engineering on
+receipt)
+Date submitted ______________
+Submitting engineer (Interconnection ______________
+Studies)
+Referral class (A / B / C / D per ERP-9 ______________
+§4)
+Project and site
+Project ID ______________
+Applicant / developer ______________
+Site name and address ______________
+Site type (n pure-export n ______________
+load-and-generation)
+Feeder ______________
+Requested capacity (kW / MW, aggregate ______________
+nameplate at PCC)
+Recognized §3.6 controlled capacity, if any ______________
+Standards question presented
+Standards documents at issue (cite section) ______________
+Nature of the conflict or silence ______________
+Reviewer's summary of the site's protection ______________
+arrangement
+Attachments (application, one-line diagram, ______________
+equipment schedule, standards excerpts)
+Engineering determination
+(completed by Distribution Protection Engineering; SCADA/EMS Engineering concurrent review as applicable)
+
+Assigned engineer ______________
+Date determination issued ______________
+Determination (specify protective and control ______________
+equipment applicable to the site)
+Basis (cite standards and IEEE ______________
+references)
+Downstream actions (protective-equipment ______________
+scoping, ISA reference)
+Signatures
+Role Name Signature Date
+Reviewing engineer, Interconnection
+Studies
+Assigned engineer, Distribution Protection
+Engineering
+Manager, Distribution Protection
+Engineering (countersign)
+SCADA/EMS Engineering (where
+applicable)
+File one copy with the application record (Interconnection Studies); file one copy in the ERP-9 register (Standards
+Engineering).
+ATTACHMENT 3 — PRECEDENT REGISTER (resolved 04/2025–06/2025)
+The following per-site determinations were issued and closed during the second quarter of 2025 under
+ERP-9 §3. The register is provided for informational reference only; each entry recites the determination
+made for the site listed and does not establish a general rule across the program. Subsequent applications
+presenting similar questions are referred and determined on their own facts.
+Referral no. Date Site type Feeder class Standards Engineering determination
+closed documents at
+issue
+ER-11-2025- 04/22/202 pure-export Overhead 12.47 DIS-01 §5 Table POI recloser specified. Site is
+004 5 kV, rural 5-1 (Category 2) a pure-generation
+three-phase vs. DPS-07 §4.2 (pure-export) arrangement
+with no customer load behind
+the PCC; the protection
+arrangement affords no
+alternative means of
+accomplishing the isolation,
+visible interruption, and
+coordination objectives of
+DPS-07 §4.1. Utility-owned
+POI recloser installed per
+DPS-07 §4.2, with ANSI 32
+directional-power element
+available for §3.6 export-limit
+enforcement should
+recognition be sought.
+
+Referral no. Date Site type Feeder class Standards Engineering determination
+closed documents at
+issue
+ER-11-2025- 05/29/202 pure-export Overhead 12.47 DIS-01 §5 Table POI recloser specified. Site is
+009 5 kV, suburban 5-1 (Category 2) a pure-generation
+three-phase with vs. DPS-07 §4.2 (pure-export) arrangement
+mid-line recloser served front-of-the-meter with
+no customer load behind the
+PCC; coordination with the
+upstream mid-line recloser is
+documented per DPS-07
+§5.1. Utility-owned POI
+recloser installed per DPS-07
+§4.2.
+ER-11-2025- 06/17/202 load/generatio Underground DIS-01 §5 Table DER breaker + protection
+014 5 n-decoupling 12.47 kV, 5-1 (Category 2), relay scheme specified; no
+industrial DPS-07 §4.2, POI recloser. Site is a
+premises DPS-07 §4.3 load-and-generation
+arrangement in which
+generation is isolated from
+the utility-facing service by a
+DER breaker with a dedicated
+protection relay scheme
+meeting the isolation,
+anti-islanding, and
+coordination objectives of
+DPS-07 §4.1, §4.3, and §4.5.
+The arrangement decouples
+generation from utility-side
+fault clearing without a
+utility-owned POI recloser at
+the point of interconnection;
+site retains customer-owned
+lockable visible-break
+disconnect per DIS-01 Table
+5-1 and provides utility
+SCADA visibility per TCS-02.
+Each of the above determinations is filed with the application record for the affected site and is binding for
+that site only. The pattern reflected in these three closures does not select a controlling document across
+the program: DIS-01 §5 Table 5-1 and DPS-07 §4.2 each remain in force as issued, and each new site
+presenting a comparable question is referred under §3 and determined on its own protection scheme.
+End of ERP-9 Rev 2 — Engineering Referral Procedure.

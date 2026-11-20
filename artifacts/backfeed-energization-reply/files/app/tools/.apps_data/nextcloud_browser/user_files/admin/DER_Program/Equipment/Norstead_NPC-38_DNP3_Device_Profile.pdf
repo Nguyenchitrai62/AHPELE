@@ -1,0 +1,37 @@
+NORSTEAD POWER CONTROLS, LLC
+Distribution automation · norsteadpower.com
+NPC-38 Recloser Control: DNP3 Device Profile
+Document NPC38-DP-0407 Rev 3, 11/2024. Applies to NPC-38 firmware R4.07. DNP3 subset level 2; serial
+(RS-485) and TCP/IP. Factory default point map below.
+Binary inputs (object 1, variation 2; events object 2)
+Index Name
+0 Recloser closed (52a)
+1 79 reclose blocked
+2 Control lockout
+3 Hot line tag
+4 Ground trip blocked
+5 Remote control enabled
+6 Battery alarm
+7 Cabinet door open
+Analog inputs (object 30, variation 1; events object 32)
+Index Name Units
+0 Voltage A, source side V
+1 Voltage B, source side V
+2 Voltage C, source side V
+3 Real power, three-phase kW
+4 Reactive power, three-phase kVAr
+5 Current A A
+6 Current B A
+7 Current C A
+8 Frequency Hz
+9 Voltage A, load side V
+10 Voltage B, load side V
+11 Voltage C, load side V
+12 Energy delivered kWh
+13 Energy received kWh
+Control relay output blocks (object 12)
+Index Name
+0 Trip
+1 Close
+Power and energy signs follow the control's metering direction setting.
+Norstead Power Controls, LLC.

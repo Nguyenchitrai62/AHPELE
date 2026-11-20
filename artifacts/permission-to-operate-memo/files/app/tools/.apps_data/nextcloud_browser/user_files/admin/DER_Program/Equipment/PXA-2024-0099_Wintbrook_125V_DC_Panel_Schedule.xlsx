@@ -1,0 +1,14 @@
+[Sheet: Header]
+Panel Schedule: DCP-1, 125 V DC
+Fenmoor Electric LLC · Alleron Electrical Contractor Lic. #EC-12093
+Drawing E-008 Rev B, 04/04/2025. System: 125 V dc, ungrounded. Location: switchgear room, beside charger BC-1. Ground detection: in charger BC-1, alarm to the switchgear annunciator.
+Main: 2-pole 60 A, 250 V dc molded-case switch, lockable, fed from the battery disconnect (2 x 1/C 6 AWG Cu, 6 m) and charger BC-1. Branch breakers: 10 kA interrupting at 250 V dc. Working space: 1.0 m clear in front of DCP-1 and BC-1.
+Prepared: M. Iversen, Electrical Engineer, Fenmoor Electric LLC, 04/04/2025.
+[Sheet: Ways]
+Way	Load	Breaker	Load (A)	Conductors
+1	DER breaker trip circuit, through the relay trip output	2-pole 20 A, 250 V dc	12	2 x 1/C 12 AWG Cu, blue / blue-white
+2	DER relay power supply	2-pole 10 A, 250 V dc	0.16	2 x 1/C 12 AWG Cu, blue / blue-white
+3	DER breaker close circuit and spring charging motor	2-pole 30 A, 250 V dc	18	2 x 1/C 10 AWG Cu, blue / blue-white
+4	Switchgear indication and annunciator	2-pole 10 A, 250 V dc	0.44	2 x 1/C 12 AWG Cu, blue / blue-white
+5	Spare	2-pole 20 A, 250 V dc		
+6	Spare	2-pole 20 A, 250 V dc		

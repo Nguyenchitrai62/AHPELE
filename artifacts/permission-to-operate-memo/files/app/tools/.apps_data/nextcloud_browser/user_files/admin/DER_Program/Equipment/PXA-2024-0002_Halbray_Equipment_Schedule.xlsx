@@ -1,0 +1,21 @@
+[Sheet: Header]
+Equipment Schedule: Halbray Field Solar Site 3 (PXA-2024-0002)
+Tamsworth Electrical Constructors Inc. · Alleron Electrical Contractor Lic. #EC-11847
+Drawing E-201 Rev B, 06/20/2025. A 2.3 MW community solar facility: four inverter skids (575 kW ac each, 2300 kW in all) on an 800 V ac collection system to switchboard CSB-1, step-up transformer T-1 and the 13.2 kV point of interconnection on feeder ALN-159.
+Prepared: R. Vance, Electrical Engineer, Tamsworth Electrical Constructors Inc., 06/20/2025.
+[Sheet: Equipment]
+Tag	Equipment	Location	Data
+T-1	T-1: 2,500 kVA, 13.2 kV grounded wye to 800Y/462 V	Transformer pad, east of the skids	Pad-mounted, liquid-filled; impedance 5.75 %; secondary close-coupled to CSB-1
+PSW-1	T-1 primary switch: 15 kV, 600 A load-break, with 150E current-limiting fuses	Transformer pad	Pad-mounted, padlockable; T-1 full-load primary current 109 A
+CSB-1	Collection switchboard: 800 V, 3-phase, NEMA 3R, 2,500 A bus, 2,000 A main breaker; four 600 A feeder breakers (C-1 to C-4) and one 30 A auxiliary breaker (AUX-1); 65 kA rated, all its breakers	Transformer pad	T-1 full-load secondary current 1804 A; available fault current at CSB-1 31.4 kA
+AUX-1	Panelboard: 800 V, 3-phase, NEMA 3R, 65 kA short-circuit current rating, fed by a 30 A breaker in CSB-1	Array north edge, beside TC-1	Feeder 3 x 1/C 10 AWG Cu, 2 kV Type RHW-2, in 1 in. HDPE duct in the collection trench; equipment grounding conductor 10 AWG Cu, green
+RM-0002	Revenue meter (utility-owned), 13.2 kV primary metering	Point of interconnection	Set by Alleniom Metering
+POI	POI recloser and RTU (utility-owned)	Point of interconnection	Alleniom facilities under the ISA
+GND	800Y/462 V neutral bonded at the CSB-1 main; grounding electrode conductor 4/0 AWG bare Cu from the CSB-1 neutral bus to the ground ring; ground ring 2 AWG bare Cu at the transformer pad and each skid pad, interconnected	Site	Resistance to earth measured 3.1 ohm, 06/2025
+Labels	Arc-flash labels on CSB-1, AUX-1, ACP-1 to ACP-4 and AD-1 to AD-4; CSB-1 label giving the nominal voltage, the available fault current, the clearing time and the date of the calculation; AUX-1 also marked as supplied from CSB-1	Site	Applied 07/02/2025
+[Sheet: Collection Feeders]
+Feeder	From	To	Conductors	Equipment grounding conductor	Overcurrent protection	Duct	Length (m)	Voltage drop at skid output (%)
+C-1	Skid SK-1 output	CSB-1	2 sets of 3 x 1/C 350 kcmil Cu, 2 kV Type RHW-2	1 AWG Cu in each duct	600 A breaker in CSB-1	2 x 4 in. HDPE duct, 900 mm cover, collection trench	165	0.89
+C-2	Skid SK-2 output	CSB-1	2 sets of 3 x 1/C 350 kcmil Cu, 2 kV Type RHW-2	1 AWG Cu in each duct	600 A breaker in CSB-1	2 x 4 in. HDPE duct, 900 mm cover, collection trench	205	1.11
+C-3	Skid SK-3 output	CSB-1	2 sets of 3 x 1/C 350 kcmil Cu, 2 kV Type RHW-2	1 AWG Cu in each duct	600 A breaker in CSB-1	2 x 4 in. HDPE duct, 900 mm cover, collection trench	240	1.3
+C-4	Skid SK-4 output	CSB-1	2 sets of 3 x 1/C 350 kcmil Cu, 2 kV Type RHW-2	1 AWG Cu in each duct	600 A breaker in CSB-1	2 x 4 in. HDPE duct, 900 mm cover, collection trench	275	1.49

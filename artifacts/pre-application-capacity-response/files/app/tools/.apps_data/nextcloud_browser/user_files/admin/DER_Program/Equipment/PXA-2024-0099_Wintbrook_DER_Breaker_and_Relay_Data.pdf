@@ -1,0 +1,18 @@
+FENMOOR ELECTRIC LLC
+Equipment data submittal
+DER Interconnection Breaker 52-DER and Relay: Equipment Data
+Submittal SUB-E-011 Rev A, 04/02/2025, for Wintbrook Processing Rooftop (PXA-2024-0099).
+Breaker
+Item Calder VB-15 vacuum circuit breaker
+Rating 15 kV, 1200 A, 25 kA interrupting
+Trip coil 125 V dc, operating range 70 to 140 V dc, 12 A; trip coil circuit interrupted
+by the breaker's 52a contact
+Close coil 125 V dc, operating range 90 to 140 V dc, 10 A
+Spring charging motor 125 V dc, 8 A, 6 s charge
+Auxiliary contacts 52a and 52b to the relay and SCADA
+Relay
+Item Hartwell HPR-751 DER interconnection relay
+Power supply 125/250 V dc, operating range 88 to 300 V dc, 20 W
+Trip output Make 30 A for 0.2 s, carry 6 A continuous, 250 V dc; trip circuit monitoring
+Settings Issued by Alleniom Distribution Protection Engineering
+Prepared: M. Iversen, Electrical Engineer, Fenmoor Electric LLC, 04/02/2025.

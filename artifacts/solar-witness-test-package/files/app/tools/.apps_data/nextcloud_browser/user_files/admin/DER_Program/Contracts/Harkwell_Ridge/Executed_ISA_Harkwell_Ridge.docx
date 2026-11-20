@@ -1,0 +1,76 @@
+INTERCONNECTION SERVICE AGREEMENT
+Alleniom Utilities — DER Program Office · 4200 Veldmere Boulevard, Halston, Alleron 01HA · (612) 555-0100 · alleniom.com
+Doc no. ISA-Harkwell-Ridge · Rev Final · Date 07/03/2025 · Owner: DER Program Office — Contracts
+
+Agreement No.: ISA-Harkwell-Ridge
+Project: Harkwell Ridge Solar
+Application No.: PXA-2024-0117
+This Interconnection Service Agreement (this “Agreement”) is entered into by and between Alleniom Utilities, an investor-owned electric utility organized under the laws of the State of Alleron, with principal offices at 4200 Veldmere Boulevard, Halston, Alleron 01HA (EIN 36-4820917) (the “Company”), and Hailbouy Solar, with offices at 2200 Ridge Point Road, Suite 400, Halston, Alleron 03HA (the “Interconnection Customer”), each a “Party” and collectively the “Parties.” This Agreement is effective as of the date last executed below.
+RECITALS
+WHEREAS, the Interconnection Customer filed with the Company an application for interconnection service, designated PXA-2024-0117, on 06/17/2024, in respect of a 2.2 MW single-axis-tracker ground-mount photovoltaic generating facility known as Harkwell Ridge Solar (the “Facility”), to be interconnected to the Company's distribution system at a point on Feeder ALN-042;
+WHEREAS, the Company completed technical screening, system impact and facilities studies for the Facility in accordance with the Alleniom DER Interconnection Standard, DIS-01 Rev 4, and issued a final study determination approving the Facility for execution of an Interconnection Service Agreement at the capacity and point of interconnection described in the application as filed;
+WHEREAS, the Company's tariff, as filed with and approved by the Alleron Public Utilities Commission, governs the interconnection of distributed energy resources of the Facility's class and forms an integral part of the terms and conditions of interconnection service provided hereunder;
+WHEREAS, the Parties intend by this Agreement to establish the terms, conditions, rights and obligations under which the Facility will be permitted to parallel with, and export energy to, the Company's distribution system;
+NOW, THEREFORE, in consideration of the mutual covenants and undertakings set forth herein, and other good and valuable consideration, the receipt and sufficiency of which are hereby acknowledged, the Parties agree as follows:
+
+ARTICLE 1 — DEFINITIONS
+1.1 Capitalized terms not defined in this Agreement shall have the meanings ascribed to them in the Company's filed tariff (the “Tariff”) and in the Alleniom DER Interconnection Standard, DIS-01 Rev 4 (the “DIS”).
+1.2 For the purposes of this Agreement, and without limitation of the foregoing:
+“Facility” means the generating equipment, ancillary equipment, and all interconnection facilities described in Article 2 hereof.
+“Point of Interconnection” or “POI” means the physical point at which the Facility is electrically connected to the Company's distribution system, as identified in Article 2.
+“Standards” means the standards and specifications identified in Article 4, each as in effect on the Effective Date and as such may be amended, superseded, or reissued by the Company in accordance with its ordinary regulatory practice.
+“Effective Date” has the meaning given in Article 3.
+“Certified Equipment List” or “CEL” means the Company's then-current Certified Equipment List published by Standards Engineering.
+ARTICLE 2 — DESCRIPTION OF FACILITY
+2.1 Project designation. Harkwell Ridge Solar (Application PXA-2024-0117).
+2.2 Interconnection Customer. Hailbouy Solar.
+2.3 Facility technology. Photovoltaic generation, single-axis-tracker ground-mount configuration.
+2.4 Nameplate export capacity. 2.2 MW (AC) at the Point of Interconnection.
+2.5 Point of Interconnection (POI). A three-phase primary tap on Feeder ALN-042, at the pole FKDN54D.
+2.6 Point of Common Coupling (PCC). Coincident with the Point of Interconnection identified in Section 2.5.
+2.7 Material terms. The capacity, technology, and Point of Interconnection stated in this Article are material terms of this Agreement.
+ARTICLE 3 — TERM AND EFFECTIVE DATE
+3.1 Effective Date. This Agreement is effective as of 07/03/2025 (the “Effective Date”), being the date on which the last of the two Parties has executed this Agreement.
+3.2 Term. This Agreement shall remain in full force and effect from the Effective Date until terminated in accordance with its terms or superseded by a successor agreement between the Parties.
+3.3 Continuing obligations. The obligations of the Parties in respect of indemnity, limitation of liability, confidentiality, and dispute resolution shall survive any termination or expiration of this Agreement.
+ARTICLE 4 — INTERCONNECTION STANDARDS
+4.1 Governing standards. The Facility shall at all times be designed, constructed, commissioned, operated, and maintained in conformity with the following Company standards and any successor or superseding editions thereof:
+(a) DIS-01 Rev 4 — Alleniom DER Interconnection Standard (effective 03/01/2024);
+(b) DPS-07 Rev 2 — Distribution Protection Standard (effective 09/15/2023);
+(c) TCS-02 — Telemetry and Communications Standard (effective 06/01/2021); and
+(d) CEL-2025-Q2 — Certified Equipment List (published 04/30/2025), as such may be superseded from time to time.
+4.2 Order of precedence. In the event of any inconsistency among the documents constituting this Agreement, the following order of precedence shall govern: (i) the Tariff; (ii) the applicable Company Standards enumerated in Section 4.1; (iii) the body of this Agreement.
+4.3 Compliance with successor standards. Nothing in this Agreement shall be construed to relieve the Interconnection Customer from the obligation to conform the Facility to successor or superseding editions of the Standards as and when they take effect, in accordance with the transition provisions of the applicable Standard.
+ARTICLE 5 — METERING AND TELEMETRY
+5.1 Metering. Revenue-quality metering shall be provided at the Point of Interconnection in accordance with the Tariff and the Company's metering specifications. Meters shall be owned, installed, tested, and maintained by the Company at the Interconnection Customer's cost, and shall be sealed at all times.
+5.2 Telemetry. In accordance with TCS-02 §5, the Interconnection Customer shall install, at its cost, provisions for a utility-owned Remote Terminal Unit (RTU) and shall make available all analog and binary status DNP3 points required by the Company's Telemetry and Communications Standard, together with such communication paths and standing-power provisions as the Company requires for SCADA integration.
+5.3 Commissioning of monitoring and control. Satisfactory commissioning and continuous availability of the telemetry described in Section 5.2 are conditions precedent to Permission to Operate. The Facility shall not be paralleled with the Company's distribution system in the absence of live utility telemetry, and any loss of telemetry after Permission to Operate shall be reported and remediated as provided in TCS-02.
+5.4 Data and access rights. The Interconnection Customer grants the Company such rights of access to the Facility, and such rights to receive and use metering and telemetry data, as are necessary for the Company to discharge its obligations under the Tariff and applicable Standards.
+ARTICLE 6 — PAYMENT TERMS
+6.1 Construction work order. The Interconnection Customer shall pay the Company for the construction of upgrades and interconnection facilities in accordance with the construction work order issued under this Agreement, on the schedule and in the amounts set forth therein, and in accordance with Tariff §12.5.
+6.2 Invoicing. Invoices shall be issued by the Company and shall be due and payable within thirty (30) calendar days of the invoice date, unless otherwise expressly provided in the construction work order. Amounts not paid when due shall bear interest at the rate set forth in the Tariff.
+6.3 Payment default. In the event of non-payment, the Company shall provide the Interconnection Customer written notice and a payment deadline of thirty (30) business days in accordance with Tariff §12.5. Business days exclude weekends and federal holidays. During the pendency of any such deadline the Facility shall remain subject to any construction or commissioning hold ordered by the Company.
+6.4 Ongoing operational charges. All charges, credits, and settlements applicable to interconnection service and associated ancillary services shall be as set forth in the Tariff.
+ARTICLE 7 — AMENDMENTS
+7.1 Amendments generally. No term of this Agreement may be modified or waived except by an instrument in writing signed by authorized representatives of both Parties.
+7.2 Governing standard. Post-execution matters affecting material terms of Article 2 are governed by the Company's then-current DER Interconnection Standard.
+7.3 Ministerial corrections. Corrections of clerical, typographical, or other manifest errors that do not affect a material term of Article 2 may be made by written acknowledgment signed by authorized representatives of both Parties.
+7.4 Reservation. Nothing in this Article shall limit the Company's right or obligation to require conformance of the Facility to successor Standards as provided in Section 4.3.
+ARTICLE 8 — SIGNATURES
+IN WITNESS WHEREOF, the Parties have caused this Agreement to be executed by their duly authorized representatives as of the dates set forth below, this Agreement being effective as of the date last executed.
+
+ALLENIOM UTILITIES
+By:  /s/ Dana Whitcomb
+_______________________________________________________
+Name: Dana Whitcomb
+Title: Vice President, Distribution Operations
+Date signed: 07/03/2025
+
+HAILBOUY SOLAR
+By:  /s/ Corey Lindqvist
+_______________________________________________________
+Name: Corey Lindqvist
+Title: Project Director
+Date signed: 07/03/2025
+
+Executed in two counterparts, each of which shall be deemed an original and both of which together shall constitute one and the same instrument. Filed with the DER Program Office — Contracts, Alleniom Utilities.

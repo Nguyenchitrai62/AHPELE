@@ -1,0 +1,32 @@
+ALLENIOM UTILITIES — DER PROGRAM OFFICE
+4200 Veldmere Boulevard, Halston, Alleron 01HA · (612) 555-0100 · alleniom.com
+DER Commissioning Checklist
+Doc no. CX-WB-01 · Rev 0 · Date 07/11/2025 · Owner Commissioning, DER Program Office
+Field Entry
+Site name Wintbrook Processing Rooftop
+Application PXA-2024-0099
+Customer Wintbrook Foods Inc.
+Site address 1450 Wintbrook Road, Halston, Alleron 06HA
+Nameplate 780 kW ac (972.4 kW dc), three inverters
+Feeder ALN-289
+Contractor Fenmoor Electric LLC (permit E-2025-0611)
+Commissioning items
+Item Basis Status (07/11/2025)
+Utility RTU installed and end-to-end TCS-02 §3.6 Accepted by SCADA/EMS Engineering
+point-to-point test (Marcus Deele), 06/30/2025
+POI recloser site acceptance, items DPS-07 §6.2 Complete and accepted in writing by
+1 to 7 Distribution Protection Engineering (N.
+Achterberg, P.E.), 07/02/2025
+Interconnection Service Agreement ISA-Wintbrook-Pro Executed 03/18/2025
+cessing
+Inverter listing check ENG-PRC-014 VX-320C (2) and VX-140C (1) located in the
+§4.1 body of CEL-2025-Q2
+Witness test determination ENG-PRC-014 Witness test required: the HPR-751 relay
+§4.1 and breaker 52-DER are protective devices
+not carried on CEL-2025-Q2
+Utility witness test ENG-PRC-014 Requested by Wintbrook Foods Inc. for the
+§4.2 week of 08/04/2025
+AHJ final inspection Permit Scheduled 07/28/2025
+E-2025-0611
+SOC confirmation of live telemetry TCS-02 §5 At the PTO request
+Coordinator: S. Rennick, Commissioning, Alleniom Utilities, 07/11/2025.

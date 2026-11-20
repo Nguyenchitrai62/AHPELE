@@ -1,0 +1,59 @@
+FENMOOR ELECTRIC LLC
+Alleron Electrical Contractor Lic. #EC-12093
+One-Line Diagram: Wintbrook Processing Rooftop (PXA-2024-0099)
+Drawing E-001 Rev C, 03/21/2025. 104 strings of 17 modules (972.4 kW dc) through 12 combiners to three
+inverters, 780 kW ac, to the 13.2 kV service through the DER interconnection breaker 52-DER.
+Element Description
+Arrays 104 strings x 17 Halcrest HC-550M; module-level rapid shutdown unit on every
+module
+Module data Halcrest HC-550M: Voc 49.8 V, Voc temperature coefficient -0.27 %/degC, Isc
+14.0 A, maximum series fuse rating 25 A. Design low temperature -23 degC, the
+ASHRAE extreme annual mean minimum dry bulb for Halston; maximum string
+Voc 956.3 V
+Combiners CB-1 to CB-12, Ravenell RCB-12-1000, up to 9 strings each, 25 A string fuses,
+integral load-break disconnect, on the roof
+DC feeders DC-1 to DC-12 in EMT to the inverter room (cable schedule E-004); each
+protected by a 200 A fuse at its inverter dc input, with a 6 AWG Cu equipment
+grounding conductor
+Inverters INV-1 (CB-1 to CB-5) and INV-2 (CB-6 to CB-10): Vexlar VX-320C; INV-3
+(CB-11, CB-12): Vexlar VX-140C; integral dc input disconnects and PV arc-fault
+protection; inverter room
+AC disconnects INV-1 and INV-2: 500 A fused disconnects, 2 AWG Cu equipment grounding
+conductors; INV-3: 225 A fused disconnect, 4 AWG Cu equipment grounding
+conductors; lockable; each marked as the PV system disconnect, with the
+line-and-load warning
+AC switchboard SWBD-PV, 1200 A, 480 V, 1200 A main breaker, 0.9 m wide; 1/0 Cu supply-side
+bonding jumper in each of the four raceways to T-PV; also carries its label giving
+the nominal voltage, the available fault current at the main, the main's clearing
+time and the date
+Step-up transformer T-PV, 1000 kVA, pad-mounted; 13.2 kV grounded-wye primary, 480Y/277 V
+secondary, the winding configuration approved in SIS-2024-041 under DPS-07
+§4.4
+DER interconnection 52-DER, Calder VB-15 vacuum breaker, 15 kV, 1200 A, in the switchgear room;
+breaker tripped by the Hartwell HPR-751 relay; 125 V dc trip and close supply from panel
+DCP-1
+Service 13.2 kV primary service; utility revenue meter M-1; utility-owned POI recloser and
+RTU; a directory at the service showing the location of the PV system ac
+disconnects, SWBD-PV and 52-DER
+125 V dc system 125 V dc, ungrounded: 60-cell battery in battery room BR-1, charger BC-1, panel
+DCP-1 in the switchgear room; ground detection in charger BC-1 (battery sizing
+record E-007)
+Battery room BR-1 Adjoins the switchgear room; door opens outward and carries panic hardware;
+exhaust fan with a fan-failure alarm
+Rapid shutdown Initiator at the main service room entrance; array conductors reduced to 30 V
+within 30 seconds of initiation
+Grounding Equipment grounding conductor with every circuit; the 480Y/277 V system
+neutral bonded at the SWBD-PV main, its grounding electrode conductor 250
+kcmil Al to the building steel and on to the ground rod outside the north wall;
+grounding electrode conductor to the building steel and the service electrode
+system
+Working space and 1.5 m clear in front of each inverter, ac disconnect and SWBD-PV; the inverter
+doors room door opens outward and carries panic hardware. Switchgear room (15 kV
+switchgear, one 0.9 m section, and breaker 52-DER): 2.8 m clear in front of the
+switchgear; its door opens outward and carries panic hardware
+Labels Rapid shutdown sign at the service identifying the rapid shutdown system and its
+initiator; a dc power source label at each dc disconnect giving the maximum dc
+voltage, 956 V; the PV power source marking on every dc raceway at 10 ft
+intervals and at each turn; arc-flash labels on SWBD-PV, the switchgear, panel
+DCP-1 and the battery disconnect
+Prepared: M. Iversen, Electrical Engineer, Fenmoor Electric LLC, 03/21/2025.

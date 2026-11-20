@@ -1,0 +1,90 @@
+INTERCONNECTION SERVICE AGREEMENT
+Alleniom Utilities — DER Program Office · 4200 Veldmere Boulevard, Halston, Alleron 01HA · (612) 555-0100 · alleniom.com
+Doc no. ISA-Corwyn-Office-Complex · Rev Final · Date 09/12/2024 · Owner: DER Program Office — Contracts
+Agreement No.: ISA-Corwyn-Office-Complex
+Project: Corwyn Office Complex PV
+Application No.: PXA-2023-0629
+This Interconnection Service Agreement (this "Agreement") is entered into by and between Alleniom Utilities, an investor-owned electric utility organized under the laws of the State of Alleron, with principal offices at 4200 Veldmere Boulevard, Halston, Alleron 01HA (the "Company"), and Corwyn Realty Partners, with offices at 2400 Corwyn Parkway, Wrenford, Alleron 04WR (the "Interconnection Customer"), each a "Party" and together the "Parties." This Agreement is effective as of the date last executed below.
+RECITALS
+WHEREAS, the Interconnection Customer filed with the Company an application for interconnection service, designated PXA-2023-0629, on 07/11/2023, for a 700 kW (ac) photovoltaic generating facility on five parking canopies at the Corwyn Office Complex, to be interconnected to the Company's distribution system on Feeder ALN-072;
+WHEREAS, the Company completed its review of the application under the Alleniom DER Interconnection Standard, DIS-01 Rev 4, and approved the Facility for execution of an Interconnection Service Agreement at the capacity and point of interconnection described in this Agreement;
+WHEREAS, the Company's tariff, as filed with and approved by the Alleron Public Utilities Commission, governs the interconnection of distributed energy resources of the Facility's class and forms part of the terms of interconnection service under this Agreement;
+NOW, THEREFORE, in consideration of the mutual covenants set forth herein, the Parties agree as follows:
+ARTICLE 1 — DEFINITIONS
+1.1 Capitalized terms not defined in this Agreement have the meanings given to them in the Company's filed tariff (the "Tariff") and in the Alleniom DER Interconnection Standard, DIS-01 Rev 4 (the "DIS").
+1.2 "Facility" means the generating facility described in Exhibit B: the five Vexlar VX-140C inverters, one on each of the five parking canopies, together with the Interconnection Customer's interconnection facilities identified in Exhibit B.
+1.3 "Point of Interconnection" or "POI" means the point on Feeder ALN-072 at which the Facility connects to the Company's distribution system, at the Company's POI recloser in the north lot. The point of common coupling coincides with the Point of Interconnection.
+1.4 "Company's Facilities" means the POI recloser, the remote terminal unit (RTU) and revenue meter RM-0629 described in Article 5.
+1.5 "Permission to Operate" means the Company's written permission for parallel operation of the Facility under Article 6.
+1.6 "Standards" means the Company standards identified in Section 4.1.
+ARTICLE 2 — DESCRIPTION OF FACILITY
+2.1 Project designation. Corwyn Office Complex PV (Application PXA-2023-0629).
+2.2 Interconnection Customer. Corwyn Realty Partners.
+2.3 Facility technology. Photovoltaic generation on five parking canopies over the surface lots beside the parking structure.
+2.4 Capacity. 700 kW (ac), export at the Point of Interconnection.
+2.5 Feeder. ALN-072, 13.2 kV.
+2.6 Material terms. The capacity and the Point of Interconnection stated in this Article are material terms of this Agreement (Tariff §12.6; DIS §7).
+ARTICLE 3 — TERM
+3.1 Effective Date. This Agreement is effective as of 09/12/2024, the date on which the last of the Parties executed it.
+3.2 Term. This Agreement remains in force from the Effective Date until terminated in accordance with its terms or superseded by a successor agreement between the Parties.
+3.3 Continuing obligations. The obligations of the Parties in respect of indemnity, limitation of liability, confidentiality and dispute resolution survive any termination of this Agreement.
+ARTICLE 4 — STANDARDS
+4.1 The Facility shall be designed, constructed, commissioned, operated and maintained in conformity with DIS-01 Rev 4, DPS-07 Rev 2, TCS-02 and the Company's Certified Equipment List, each as in effect from time to time.
+4.2 Order of precedence. In the event of any inconsistency, the following order governs: (i) the Tariff; (ii) the Standards; (iii) the body of this Agreement and its Exhibits.
+ARTICLE 5 — INTERCONNECTION FACILITIES
+5.1 Company's Facilities. The Company provides, owns and operates the POI recloser (DPS-07 §4.2), the RTU (TCS-02 §3) and revenue meter RM-0629 with 13.2 kV primary metering at the Point of Interconnection, at the Interconnection Customer's cost under the construction work order.
+5.2 Interconnection Customer's facilities. The Interconnection Customer provides, owns and maintains the interconnection facilities identified in Exhibit B and the site provisions for the Company's Facilities (equipment pad, primary conductors to the recloser terminals, and the station service and communications entrance for the RTU) as specified in the Company's construction package.
+5.3 Access. The Interconnection Customer grants the Company access at all times to the Point of Interconnection, the revenue meter and the Facility's disconnects.
+ARTICLE 6 — COMMISSIONING AND PERMISSION TO OPERATE
+6.1 Witness test. Before permission to operate, the Company may place the Facility in parallel with its distribution system solely for the witness test of the Facility under the Company's Witness Test & Waiver Procedure, under a Distribution Operations switching order and with the System Operations Center observing. At all other times before permission to operate the POI recloser is kept open.
+6.2 Permission to operate. Parallel operation begins only with the Company's written permission to operate, issued once the Company's facilities are commissioned and accepted, telemetry is live at the System Operations Center, the witness test is complete, and the authority having jurisdiction has given final approval of the customer's facilities.
+6.3 First parallel operation. The first parallel operation after permission to operate is observed by the System Operations Center with the POI recloser under SCADA supervision (DPS-07 §6.3).
+ARTICLE 7 — METERING AND TELEMETRY
+7.1 Metering. Revenue-quality bidirectional metering is provided at the Point of Interconnection, owned, installed, tested and maintained by the Company at the Interconnection Customer's cost, and sealed at all times.
+7.2 Telemetry. In accordance with TCS-02 §5, the Interconnection Customer provides, at its cost, the provisions for the Company's RTU and makes available the analog and status points that TCS-02 requires. Live telemetry at the System Operations Center is a condition of permission to operate, and any loss of telemetry after permission to operate is reported and remedied as TCS-02 provides.
+ARTICLE 8 — OPERATION
+8.1 Operating representatives. The Company's operating representative is the System Operations Center. The Interconnection Customer's operating representative is the Corwyn Office Complex property management office, reachable at all times at (612) 555-0827. Each Party gives the other its operating notices through these representatives.
+8.2 Loss of the utility source. On any loss of the utility source at the Point of Interconnection, the Facility shall cease to energize within 2.0 seconds.
+8.3 Disconnection by the Company. The Company may open the POI recloser and keep the Facility disconnected for a system emergency, for work on its distribution system, on loss of telemetry, or where the Facility fails to meet this Agreement, with notice to the Interconnection Customer where practicable.
+8.4 Reconnection. After the Company has opened the POI recloser, the Facility is placed back in parallel only on the release of the System Operations Center.
+8.5 Clearances. On the Company's request the Interconnection Customer opens and padlocks the Facility's disconnects identified in Exhibit B for a clearance and keeps them open until the Company releases the clearance.
+8.6 Planned outages. The Interconnection Customer gives the System Operations Center five (5) business days' notice of any planned outage of the Facility longer than one day.
+8.7 Changes. The Interconnection Customer makes no change to the Facility's equipment or settings without the Company's written consent under Article 12.
+ARTICLE 9 — MAINTENANCE AND RECORDS
+9.1 The Interconnection Customer maintains the Facility in accordance with the Standards and the manufacturers' instructions.
+9.2 The Interconnection Customer tests the Facility's protective functions on a schedule not longer than that of comparable Company equipment and makes the records available to the Company on request (DPS-07 §6.4).
+9.3 The Interconnection Customer keeps operating and maintenance records for the Facility for the term of this Agreement and makes them available to the Company on request.
+ARTICLE 10 — PAYMENT
+10.1 The Interconnection Customer pays for the Company's Facilities in accordance with the construction work order issued under this Agreement and Tariff §12.5.
+10.2 Invoices are due and payable within thirty (30) calendar days of the invoice date. Amounts not paid when due bear interest at the rate set forth in the Tariff.
+ARTICLE 11 — LIABILITY AND INSURANCE
+11.1 Each Party is responsible for the facilities it owns under this Agreement.
+11.2 The Interconnection Customer indemnifies the Company against third-party claims arising from the operation of the Facility, except to the extent caused by the Company's negligence.
+11.3 During the term the Interconnection Customer maintains commercial general liability insurance of not less than $2,000,000 per occurrence and provides a certificate of that insurance on the Company's request.
+ARTICLE 12 — AMENDMENTS
+12.1 No term of this Agreement may be modified or waived except by an instrument in writing signed by authorized representatives of both Parties.
+12.2 Changes to the capacity or the Point of Interconnection are governed by DIS §7. Other changes to the Facility are made by change order under Section 12.1.
+ARTICLE 13 — NOTICES
+13.1 Notices under this Agreement are in writing and are delivered by hand, by certified mail, or by e-mail with confirmation of receipt.
+13.2 To the Company: DER Program Office — Contracts, Alleniom Utilities, 4200 Veldmere Boulevard, Halston, Alleron 01HA; der.program@alleniom.com; (612) 555-0100.
+13.3 To the Interconnection Customer: Corwyn Realty Partners, attention Director of Property Operations, 2400 Corwyn Parkway, Wrenford, Alleron 04WR; (612) 555-0827.
+13.4 Operating notices under Article 8 pass between the operating representatives named in Section 8.1.
+ARTICLE 14 — SIGNATURES
+IN WITNESS WHEREOF, the Parties have caused this Agreement to be executed by their duly authorized representatives as of the dates set forth below, this Agreement being effective as of the date last executed.
+ALLENIOM UTILITIES
+By: /s/ Dana Whitcomb
+Name: Dana Whitcomb
+Title: Vice President, Distribution Operations
+Date signed: 09/12/2024
+CORWYN REALTY PARTNERS
+By: /s/ Nadia Ferreira-Holt
+Name: Nadia Ferreira-Holt
+Title: Director of Property Operations
+Date signed: 09/10/2024
+Executed in two counterparts, each of which shall be deemed an original and both of which together constitute one and the same instrument. Filed with the DER Program Office — Contracts, Alleniom Utilities.
+EXHIBIT A — POINT OF INTERCONNECTION
+Feeder ALN-072, 13.2 kV, three-phase. The Company's POI recloser and revenue meter RM-0629 are on the Company's pole at the north lot. The Interconnection Customer's 13.2 kV primary conductors run from the Point of Interconnection to primary switch PSW-1 and step-up transformer T-1 in the equipment yard.
+EXHIBIT B — FACILITY AND INTERCONNECTION FACILITIES
+B.1 Generating equipment. Five Vexlar VX-140C inverters, INV-C1 to INV-C5, 140 kW (ac) each at 480 V, three-phase, one on each of canopies C1 to C5; 700 kW (ac) in all. The inverters provide the interconnection protective functions by their certified functions (DIS Table 5-1, Category 2) and operate at the IEEE 1547-2018 Category III default settings and constant power factor 1.00 unless the Company directs otherwise in writing.
+B.2 Interconnection Customer's interconnection facilities. Inverter ac disconnects AD-C1 to AD-C5, one beside each inverter; PV switchboard SWBD-PV with five 225 A inverter breakers and a 1,200 A main breaker; step-up transformer T-1, 750 kVA, 13.2 kV grounded wye to 480Y/277 V; primary switch PSW-1 with current-limiting fuses; the 13.2 kV primary conductors from PSW-1 to the Point of Interconnection.
+B.3 Monitoring. The PV monitoring cabinet DAS-1 is the Interconnection Customer's own monitoring and is not part of the Company's telemetry.

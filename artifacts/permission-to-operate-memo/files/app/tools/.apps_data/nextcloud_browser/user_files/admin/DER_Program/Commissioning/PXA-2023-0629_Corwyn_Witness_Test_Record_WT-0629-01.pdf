@@ -1,0 +1,102 @@
+ALLENIOM UTILITIES — DER PROGRAM OFFICE
+4200 Veldmere Boulevard, Halston, Alleron 01HA · (612) 555-0100 · alleniom.com
+DER Witness Test Record
+Doc no. WT-0629-01 · Rev 0 · Date 07/08/2025 · Owner Commissioning, DER Program Office
+Field Entry
+Site name Corwyn Office Complex PV
+Application PXA-2023-0629
+Customer Corwyn Realty Partners
+Site address 2400 Corwyn Parkway, Wrenford, Alleron 04WR
+Nameplate 700 kW ac, five Vexlar VX-140C inverters (INV-C1 to INV-C5), firmware family 4.2
+Inverter serial numbers INV-C1 VX140C-25-03311; INV-C2 VX140C-25-03312; INV-C3 VX140C-25-03315; INV-C4 VX140C-25-03318;
+INV-C5 VX140C-25-03320
+Feeder ALN-072
+Test basis Witness Test & Waiver Procedure ENG-PRC-014 Rev 3 §4.2; IEEE 1547.1-2020
+Test plan, instruments and Supplied by Brantley Electric Company for Corwyn Realty Partners (ENG-PRC-014 §4.2)
+operators
+Parallel operation for the test 08:10 to 15:35 under Distribution Operations switching order DO-2025-0677; SOC operator observing; POI
+recloser closed at 08:10 and opened at 15:35 locally by Distribution Operations
+Site conditions Clear; ambient 27 to 31 °C
+Personnel
+Witness engineer M. Halbrook, P.E., Alleniom DER Field Engineering (AFE-1042)
+Commissioning coordinator S. Rennick, Commissioning, DER Program Office
+Commissioning agent K. Osei, Electrical Engineer, Brantley Electric Company
+Inverter manufacturer T. Lindgren, Field Service Engineer, Vexlar Energy
+Instruments
+Hioki PQ3198 power quality analyzer, S/N 230418771, calibrated 02/12/2025, due 02/12/2026
+Fluke 1738 power logger, S/N 44120871, calibrated 11/20/2024, due 11/20/2025
+Vexlar VX-Service 3.8 laptop tool (setpoints and event log)
+Sheet 1 — INV-C1 (canopy C1), S/N VX140C-25-03311
+1. Settings check: grid profile read at the inverter display; IEEE 1547-2018 Category III defaults; constant power factor 1.00. Pass.
+2. Overvoltage trip (OV2): threshold shifted to 1.00 pu with VX-Service; trip at 1.002 pu, clearing 0.14 s (limit 0.16 s). Pass.
+3. Overvoltage trip (OV1): threshold shifted to 1.00 pu with VX-Service; trip at 1.002 pu, clearing 12.9 s (limit 13.0 s). Pass.
+4. Undervoltage trip (UV2): threshold shifted to 1.00 pu; trip at 0.998 pu, clearing 1.97 s (limit 2.0 s). Pass.
+5. Undervoltage trip (UV1): threshold shifted to 1.00 pu; trip at 0.998 pu, clearing 20.8 s (limit 21.0 s). Pass.
+6. Overfrequency trip (OF2): threshold shifted to 60.00 Hz; trip at 60.004 Hz, clearing 0.15 s (limit 0.16 s). Pass.
+7. Overfrequency trip (OF1): threshold shifted to 60.00 Hz; trip at 60.004 Hz, clearing 299.6 s (limit 300 s). Pass.
+8. Underfrequency trip (UF2): threshold shifted to 60.00 Hz; trip at 59.996 Hz, clearing 0.15 s (limit 0.16 s). Pass.
+9. Underfrequency trip (UF1): threshold shifted to 60.00 Hz; trip at 59.996 Hz, clearing 299.5 s (limit 300 s). Pass.
+10. Ride-through verification: trip settings restored; voltage and frequency ride-through settings verified value by value with VX-Service against the Category III table of the
+certificate of conformance; all values match. Pass.
+11. DER-side disconnect: AD-C1 opened and padlocked; visible break confirmed; reclosed. Pass.
+Sheet 2 — INV-C2 (canopy C2), S/N VX140C-25-03312
+1. Settings check: grid profile read at the inverter display; IEEE 1547-2018 Category III defaults; constant power factor 1.00. Pass.
+2. Overvoltage trip (OV2): threshold shifted to 1.00 pu with VX-Service; trip at 1.003 pu, clearing 0.14 s (limit 0.16 s). Pass.
+3. Overvoltage trip (OV1): threshold shifted to 1.00 pu with VX-Service; trip at 1.002 pu, clearing 12.8 s (limit 13.0 s). Pass.
+4. Undervoltage trip (UV2): threshold shifted to 1.00 pu; trip at 0.998 pu, clearing 1.98 s (limit 2.0 s). Pass.
+5. Undervoltage trip (UV1): threshold shifted to 1.00 pu; trip at 0.998 pu, clearing 20.9 s (limit 21.0 s). Pass.
+6. Overfrequency trip (OF2): threshold shifted to 60.00 Hz; trip at 60.003 Hz, clearing 0.15 s (limit 0.16 s). Pass.
+7. Overfrequency trip (OF1): threshold shifted to 60.00 Hz; trip at 60.004 Hz, clearing 299.4 s (limit 300 s). Pass.
+8. Underfrequency trip (UF2): threshold shifted to 60.00 Hz; trip at 59.997 Hz, clearing 0.14 s (limit 0.16 s). Pass.
+9. Underfrequency trip (UF1): threshold shifted to 60.00 Hz; trip at 59.996 Hz, clearing 299.7 s (limit 300 s). Pass.
+10. Ride-through verification: trip settings restored; voltage and frequency ride-through settings verified value by value with VX-Service against the Category III table of the
+certificate of conformance; all values match. Pass.
+11. DER-side disconnect: AD-C2 opened and padlocked; visible break confirmed; reclosed. Pass.
+Sheet 3 — INV-C3 (canopy C3), S/N VX140C-25-03315
+1. Settings check: grid profile read at the inverter display; IEEE 1547-2018 Category III defaults; constant power factor 1.00. Pass.
+2. Overvoltage trip (OV2): threshold shifted to 1.00 pu with VX-Service; trip at 1.002 pu, clearing 0.13 s (limit 0.16 s). Pass.
+3. Overvoltage trip (OV1): threshold shifted to 1.00 pu with VX-Service; trip at 1.002 pu, clearing 12.9 s (limit 13.0 s). Pass.
+4. Undervoltage trip (UV2): threshold shifted to 1.00 pu; trip at 0.997 pu, clearing 1.97 s (limit 2.0 s). Pass.
+5. Undervoltage trip (UV1): threshold shifted to 1.00 pu; trip at 0.998 pu, clearing 20.8 s (limit 21.0 s). Pass.
+6. Overfrequency trip (OF2): threshold shifted to 60.00 Hz; trip at 60.004 Hz, clearing 0.15 s (limit 0.16 s). Pass.
+7. Overfrequency trip (OF1): threshold shifted to 60.00 Hz; trip at 60.004 Hz, clearing 299.5 s (limit 300 s). Pass.
+8. Underfrequency trip (UF2): threshold shifted to 60.00 Hz; trip at 59.996 Hz, clearing 0.15 s (limit 0.16 s). Pass.
+9. Underfrequency trip (UF1): threshold shifted to 60.00 Hz; trip at 59.996 Hz, clearing 299.6 s (limit 300 s). Pass.
+10. Ride-through verification: trip settings restored; voltage and frequency ride-through settings verified value by value with VX-Service against the Category III table of the
+certificate of conformance; all values match. Pass.
+11. DER-side disconnect: AD-C3 opened and padlocked; visible break confirmed; reclosed. Pass.
+Sheet 4 — INV-C4 (canopy C4), S/N VX140C-25-03318
+1. Settings check: grid profile read at the inverter display; IEEE 1547-2018 Category III defaults; constant power factor 1.00. Pass.
+2. Overvoltage trip (OV2): threshold shifted to 1.00 pu with VX-Service; trip at 1.002 pu, clearing 0.14 s (limit 0.16 s). Pass.
+3. Overvoltage trip (OV1): threshold shifted to 1.00 pu with VX-Service; trip at 1.002 pu, clearing 12.9 s (limit 13.0 s). Pass.
+4. Undervoltage trip (UV2): threshold shifted to 1.00 pu; trip at 0.998 pu, clearing 1.96 s (limit 2.0 s). Pass.
+5. Undervoltage trip (UV1): threshold shifted to 1.00 pu; trip at 0.998 pu, clearing 20.7 s (limit 21.0 s). Pass.
+6. Overfrequency trip (OF2): threshold shifted to 60.00 Hz; trip at 60.003 Hz, clearing 0.14 s (limit 0.16 s). Pass.
+7. Overfrequency trip (OF1): threshold shifted to 60.00 Hz; trip at 60.004 Hz, clearing 299.6 s (limit 300 s). Pass.
+8. Underfrequency trip (UF2): threshold shifted to 60.00 Hz; trip at 59.996 Hz, clearing 0.15 s (limit 0.16 s). Pass.
+9. Underfrequency trip (UF1): threshold shifted to 60.00 Hz; trip at 59.996 Hz, clearing 299.5 s (limit 300 s). Pass.
+10. Ride-through verification: trip settings restored; voltage and frequency ride-through settings verified value by value with VX-Service against the Category III table of the
+certificate of conformance; all values match. Pass.
+11. DER-side disconnect: AD-C4 opened and padlocked; visible break confirmed; reclosed. Pass.
+Sheet 5 — INV-C5 (canopy C5), S/N VX140C-25-03320
+1. Settings check: grid profile read at the inverter display; IEEE 1547-2018 Category III defaults; constant power factor 1.00. Pass.
+2. Overvoltage trip (OV2): threshold shifted to 1.00 pu with VX-Service; trip at 1.003 pu, clearing 0.14 s (limit 0.16 s). Pass.
+3. Overvoltage trip (OV1): threshold shifted to 1.00 pu with VX-Service; trip at 1.002 pu, clearing 12.8 s (limit 13.0 s). Pass.
+4. Undervoltage trip (UV2): threshold shifted to 1.00 pu; trip at 0.998 pu, clearing 1.98 s (limit 2.0 s). Pass.
+5. Undervoltage trip (UV1): threshold shifted to 1.00 pu; trip at 0.998 pu, clearing 20.9 s (limit 21.0 s). Pass.
+6. Overfrequency trip (OF2): threshold shifted to 60.00 Hz; trip at 60.004 Hz, clearing 0.15 s (limit 0.16 s). Pass.
+7. Overfrequency trip (OF1): threshold shifted to 60.00 Hz; trip at 60.004 Hz, clearing 299.4 s (limit 300 s). Pass.
+8. Underfrequency trip (UF2): threshold shifted to 60.00 Hz; trip at 59.997 Hz, clearing 0.15 s (limit 0.16 s). Pass.
+9. Underfrequency trip (UF1): threshold shifted to 60.00 Hz; trip at 59.996 Hz, clearing 299.6 s (limit 300 s). Pass.
+10. Ride-through verification: trip settings restored; voltage and frequency ride-through settings verified value by value with VX-Service against the Category III table of the
+certificate of conformance; all values match. Pass.
+11. DER-side disconnect: AD-C5 opened and padlocked; visible break confirmed; reclosed. Pass.
+Sheet 6 — Facility (INV-C1 to INV-C5 together)
+1. Anti-islanding (IEEE 1547.1): POI recloser opened by Distribution Operations under DO-2025-0677 with INV-C1 to INV-C5 exporting 118, 124, 121, 126 and 119 kW (608 kW in
+all); output of INV-C1 to INV-C5 fell to zero in 0.41, 0.44, 0.43, 0.39 and 0.46 s (limit 2.0 s). Pass.
+2. Enter service: POI recloser reclosed by Distribution Operations; INV-C1 to INV-C5 resumed export after 302, 301, 303, 302 and 304 s (minimum 300 s). Pass.
+Disposition
+All test points on INV-C1 to INV-C5 and on the Facility passed. Witness test complete; disposition: pass.
+Witness engineer: /s/ M. Halbrook, P.E. · 07/08/2025
+Commissioning coordinator: /s/ S. Rennick · 07/08/2025
+Commissioning agent: /s/ K. Osei · 07/08/2025

@@ -1,0 +1,55 @@
+ALLENIOM UTILITIES — DISTRIBUTION PROTECTION ENGINEERING
+4200 Veldmere Boulevard, Halston, Alleron 01HA · (612) 555-0100 · alleniom.com
+POI Recloser Settings Sheet: PC-POI-R1
+Doc no. Rev Date Owner
+DPE-PC-POI-R1 Rev B 07/10/2025 Distribution Protection Engineering
+Site: Prairie Corridor Business Park PV (PXA-2024-0343), feeder ALN-088, 13.2 kV. Issued in writing under
+DPS-07 §5.5; not to be altered in the field without a written revision order. Basis: SIS-2025-006 conditions 4.1,
+4.3 and 4.5.
+Recloser: Norstead Power Controls, distribution-class, three-phase, with control NPC-38, firmware R4.07. CT
+ratio 200:5; VTs 7200:120 V, both sides of the interrupter.
+1. Settings
+Function Status Setting
+50/51 phase Enabled Pickup 90 A primary; curve U2 (very inverse), TD 1.5; 50 at 1,200
+overcurrent A
+50N/51N ground Enabled Pickup 30 A primary; curve U2, TD 1.0; 50N at 600 A
+overcurrent
+27 undervoltage Enabled 0.88 pu, 2.0 s; 0.50 pu, 0.16 s
+59 overvoltage Enabled 1.10 pu, 2.0 s; 1.20 pu, 0.16 s
+81U / 81O frequency Enabled 59.3 Hz, 0.16 s / 60.5 Hz, 0.16 s
+32 directional power Enabled Export backstop 900 kW, 2.0 s, trip
+25 synchronism check Enabled Close supervision: live line / dead bus permitted (energizes the
+park from the utility source); live line / live bus within dV 5
+percent, df 0.10 Hz, angle 10 degrees; dead line / dead bus and
+dead line / live bus blocked
+79 automatic reclosing Blocked Any trip goes to lockout. Reconnection only by operator release
+after the utility source is restored and stable for 10 minutes,
+through the 25 element (DPS-07 §5.1(b))
+Metering direction Set Park to feeder positive (export positive) for kW, kVAr and kWh
+delivered
+2. Communications
+Item Setting
+DNP3 link to PC-RTU-01 Serial RS-485, outstation 38, 19.2 kbps
+DNP3 point map Norstead factory default, unmodified
+3. Coordination
+Upstream feeder recloser ALN-088 R2 first reclose interval 2.0 s (SIS-2025-006 condition 4.2, Distribution
+Operations work order DO-2025-0612). POI recloser 27/81 trip times clear before the first reclose attempt.
+Coordination study (DPS-07 §5.1(c)), recorded on this sheet:
+Check POI recloser Upstream device Margin
+PC-POI-R1
+Loss of source vs first 27 / 81U clear in 0.16 s ALN-088 R2 first reclose 2.0 s 1.84 s
+reclose
+Park-side fault, 1,500 A 50 instantaneous, 0.05 ALN-088 R2 51 at 1,500 A: 0.31 s
+s 0.36 s
+Park-side fault, 300 A 51 U2 TD 1.5: 0.61 s ALN-088 R2 51 at 300 A: 1.05 0.44 s
+s
+Ground fault, 200 A 51N U2 TD 1.0: 0.38 s ALN-088 R2 51N at 200 A: 0.43 s
+0.81 s
+Protection coordination sign-off (DPS-07 §5.1(c)): given 07/03/2025 and confirmed on Rev B, N. Achterberg,
+P.E., 07/10/2025.
+4. Revision history
+Rev Date Description
+A 07/03/2025 Issued for site acceptance and cutover.
+B 07/10/2025 Supersedes Rev A. Reconnection stable-source time revised from 5 to 10
+minutes at Distribution Operations' request (DO-2025-0655).
+Nolan Achterberg, P.E., Distribution Protection Engineer, Distribution Protection Engineering, 07/10/2025.

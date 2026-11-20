@@ -1,0 +1,257 @@
+ALLENIOM UTILITIES
+DER INTERCONNECTION STANDARD
+Doc no. Rev Effective date Owner
+DIS-01 Rev 4 03/01/2024 Alleniom Standards Engineering — Evan Solberg
+Document control
+Item Value
+Document number DIS-01
+Revision Rev 4
+Effective date 03/01/2024
+Supersedes DIS-01 Rev 3 (12/01/2021)
+Basis IEEE 1547-2018
+Owner Alleniom Standards Engineering (Evan Solberg)
+Approved by Manager, Standards Engineering
+Distribution Alleniom DER Program Office; Interconnection Studies; DER Planning Group;
+SCADA/EMS Engineering; Regulatory Affairs; contracted developers on request
+Next scheduled review 03/01/2027
+Revision history
+Rev Date Summary
+Rev 1 06/01/2016 Initial issue.
+Rev 2 09/01/2018 Alignment with IEEE 1547-2018. Introduced Category 1/2/3 protective-equipment table.
+Rev 3 12/01/2021 Program-scope threshold set at 500 kW; added §3.4 aggregation.
+Rev 4 03/01/2024 Added §3.5 shared-POI eligibility; added §3.6 controlled-capacity recognition (UL 1741 / UL
+3141 PCS + Control Narrative); §7 restated to require withdrawal and reapplication for
+post-execution capacity or POI changes; Table 5-1 rewritten by category.
+§1 Purpose and Scope
+This standard establishes the technical and procedural requirements for interconnection of distributed energy
+resources (DER) to the Alleniom Utilities distribution system. It is based on IEEE 1547-2018 and applicable state
+interconnection rules filed with the Alleron Public Utilities Commission (APUC), and it applies to all DER classes
+defined in §3.
+DIS-01 Rev 4 governs:
+(cid:127) classification of DER facilities by aggregate nameplate capacity at the point of common coupling (§3);
+(cid:127) eligibility to share an existing point of interconnection where legacy equipment is on site (§3.5);
+(cid:127) recognition of a controlled operating limit below nameplate (§3.6);
+(cid:127) protective and control equipment requirements by class and category (§5);
+DIS-01 Rev 4 — Alleniom DER Interconnection Standard Page 1
+
+DIS-01 Rev 4 · Effective 03/01/2024
+(cid:127) treatment of post-execution changes to executed interconnection service agreements (§7).
+This standard is read together with the APUC-filed interconnection tariff (§12). Where a topic is addressed by both
+this standard and the tariff, the tariff controls. Requirements for real-time monitoring and communications integration
+are established under TCS-02 and are not restated here except by cross-reference.
+§2 References
+The following documents are referenced within this standard. Unless otherwise noted, the latest published revision
+applies.
+(cid:127) IEEE 1547-2018 — IEEE Standard for Interconnection and Interoperability of Distributed Energy Resources
+with Associated Electric Power Systems Interfaces.
+(cid:127) DPS-07 Rev 2 — Alleniom Distribution Protection Standard (effective 09/15/2023). Establishes distribution
+protection requirements including protective devices at points of interconnection with export-capable in-scope
+facilities.
+(cid:127) TCS-02 — Alleniom Telemetry & Communications Standard (effective 06/01/2021). Governs utility-owned RTU
+installation and SCADA telemetry for DER at and above the program-scope threshold; establishes the condition
+for permission to operate.
+(cid:127) CEL-2025-Q2 — Alleniom Certified Equipment List (published 04/30/2025). Listing basis: UL 1741-SB and UL
+3141. The CEL front matter restates §3.6 of this standard.
+(cid:127) ERP-9 — Alleniom Engineering Referral Procedure (Form ER-11). §3 routes any standards
+Definitions of terms used in this standard follow IEEE 1547-2018 and, where applicable, the definitions in the
+APUC-filed tariff. The terms aggregate nameplate capacity and point of common coupling (PCC) have the meanings
+assigned by IEEE 1547-2018 and reflected in Company practice. The terms point of interconnection (POI),
+export-capable, and pure-generation site are used in accordance with their ordinary meaning in utility
+interconnection practice.
+§3 DER Classification
+DER facilities are classified by aggregate nameplate capacity at the point of common coupling, in accordance with
+IEEE 1547-2018. Class thresholds, applicable review path, and equipment references are stated in Table 3-1.
+Commercial small-scale 500 kW–1 MW; medium-scale 1 MW–5 MW; program scope ‡500 kW; sub-500 kW DER
+(commercial and residential) is handled under the Simplified Small-Systems Process, outside the DER Program.
+DIS-01 Rev 4 — Alleniom DER Interconnection Standard Page 2
+
+DIS-01 Rev 4 · Effective 03/01/2024
+Table 3-1 — DER classes
+Class Aggregate Program status Review path Protective
+nameplate at PCC equipment
+reference
+Residential / small < 500 kW Simplified Small-Systems Simplified small-systems Table 5-1, Category
+commercial Process — outside the screening 1
+DER Program
+Commercial small-scale 500 kW – 1 MW In DER Program scope Initial screening + Table 5-1, Category
+supplemental review under 2
+SRP-3
+Medium-scale 1 MW – 5 MW In DER Program scope Initial screening + system Table 5-1, Category
+impact study 3
+Large-scale (out of scope > 5 MW Handled under transmissio Full study process Not addressed
+for this standard) n-interconnection
+procedures
+The program-scope threshold is 500 kW. Facilities below 500 kW, whether commercial or residential in customer
+class, are routed to the Simplified Small-Systems Process and are not administered by the DER Program.
+§3.1 Determination of aggregate nameplate capacity
+Aggregate nameplate capacity is the sum of the manufacturer-rated ac output ratings of all generating equipment
+interconnected, or proposed to be interconnected, at a single point of common coupling. Manufacturer datasheets
+govern; derated or "operating" figures do not substitute for nameplate except as provided in §3.6.
+§3.2 Point of common coupling
+The point of common coupling is the point at which the DER facility is electrically connected to the Company's
+distribution system, as further defined in IEEE 1547-2018. The PCC is distinct from the point of interconnection (POI),
+the latter being the physical demarcation of Company-owned protective and metering equipment.
+§3.3 Determination on the basis of application
+Classification is determined on the facility as filed and as physically configured on site. Filing captions, project titles,
+and cover-letter characterizations do not alter classification; the connection diagram, the equipment schedule, and
+the address of record govern.
+§3.4 Aggregation
+Co-located DER behind the same point of common coupling counts toward one site total.
+Previously interconnected legacy equipment counts toward the aggregate regardless of the vintage of its permission
+to operate, regardless of whether it predates any current Alleniom standard, and regardless of the sequence or form
+in which subsequent applications are submitted at the same PCC. The aggregate governs the facility class and the
+resulting program-scope determination.
+An applicant proposing a new DER at a premises that already hosts DER shall identify the existing equipment on the
+application form and shall submit a one-line diagram showing the electrical relationship of the proposed equipment,
+the existing equipment, the customer load, the customer meter, and the PCC. Interconnection Studies verifies against
+the Company existing-DER register.
+§3.5 Shared-POI eligibility
+A new DER may share an existing POI only where the combined facility, including legacy equipment, can be brought
+to current monitoring/control standards; otherwise a separate POI and a new application are required. Where the
+existing system operates behind the meter, a new DER may instead be interconnected front-of-the-meter under its
+own service and POI, and is then evaluated on its own capacity without aggregation.
+DIS-01 Rev 4 — Alleniom DER Interconnection Standard Page 3
+
+DIS-01 Rev 4 · Effective 03/01/2024
+The two dispositions available under §3.5 are:
+1. Shared POI, aggregated. The combined facility (legacy equipment plus proposed equipment) is brought to
+current monitoring/control standards as prescribed by TCS-02 and by Table 5-1 at the aggregate class. The
+applicant is responsible for the retrofit and for demonstrating retrofit feasibility to Interconnection Studies. Where
+feasibility is confirmed, the application proceeds at the aggregate capacity at the shared POI.
+2. Separate POI, non-aggregated front-of-the-meter alternative. Where the existing system operates behind
+the meter and the applicant elects to interconnect the new DER front-of-the-meter under a separate service and
+its own POI, the new DER is evaluated on its own capacity, without aggregation with the legacy equipment.
+Class placement, review path, and Table 5-1 category are determined from the new DER's capacity alone.
+Retrofit feasibility of legacy equipment is a factual question the Company will not decide from records alone; the
+applicant or its authorized developer must confirm feasibility in writing. Absent that confirmation, the shared-POI path
+under §3.5(1) is not available and the application is redirected to §3.5(2) or withdrawn.
+§3.6 Controlled-capacity recognition
+A limit below nameplate is recognized only with a valid UL 1741 / UL 3141 PCS certification plus an approved Control
+Narrative — sufficient in themselves for recognition. Where the site's arrangement includes utility equipment, the
+recognized limit is enforced as applicable: telemetry monitoring, and on pure-generation sites the POI recloser's ANSI
+32 directional-power element set to the recognized limit and tripping on violation.
+Required submissions. To have a controlled operating limit recognized in place of aggregate nameplate for
+program-scope and study purposes, the applicant shall submit both of the following:
+1. A valid Power Control System (PCS) certification issued under UL 1741 (including Supplement SB where
+applicable) and/or UL 3141, identifying the specific equipment arrangement at the applicant's site and the
+setpoint range.
+2. An approved Control Narrative — a written engineering document describing how the site's control system
+enforces the requested operating limit, including the sensed quantities, the response actions, the response
+times, the interlocks, and any allowable modes and their setpoint ceilings.
+These two documents, taken together, are sufficient in themselves to establish recognition of the controlled limit.
+Recognition establishes the capacity at which the facility is reviewed, classified, and studied.
+Enforcement backstops as arrangement provides. Where the site's arrangement includes utility equipment, the
+recognized limit is enforced by the arrangement's existing equipment as follows:
+(cid:127) Telemetry monitoring. For sites at or above the TCS-02 threshold, the Company's RTU-to-SCADA telemetry
+monitors real-power export at the point of interconnection against the recognized limit. Sustained deviation
+triggers investigation under TCS-02 and may result in a hold on permission to operate.
+(cid:127) POI recloser directional-power element (pure-generation sites). On pure-generation sites — sites at which
+no customer load is served behind the point of common coupling — where a utility POI recloser is installed per
+Table 5-1 and DPS-07, the recloser's ANSI 32 directional-power element is set to the recognized limit and trips
+the site on violation. The ANSI 32 element is inherently available in modern reclosers and does not require
+additional utility hardware.
+Enforcement provisions apply only as the site's arrangement provides them. Their absence at a particular site does
+not reopen the recognition determination once the two required submissions are on file.
+No controlled limit without submissions. In the absence of both a valid UL 1741 / UL 3141 PCS certification and
+an approved Control Narrative, nameplate governs for classification, program-scope determination, and study.
+Certified Equipment List. CEL-2025-Q2 restates this section in its front matter. Listing of a PCS on the current CEL
+does not by itself constitute recognition of a controlled limit for a particular site; the applicant's site-specific
+certification and Control Narrative are always required.
+DIS-01 Rev 4 — Alleniom DER Interconnection Standard Page 4
+
+DIS-01 Rev 4 · Effective 03/01/2024
+§4 Screening and Study Process
+Applications in DER Program scope proceed through initial technical screening under Interconnection Studies.
+Facilities not passing initial screens may be evaluated under supplemental review per SRP-3 or advance to a system
+impact study. This standard does not restate SRP-3; the daytime minimum-load convention and other screen
+methodologies are prescribed there.
+§5 Protective and Control Equipment
+Protective equipment requirements are stated by category in Table 5-1, keyed to the classes of §3.
+Table 5-1 — Protective equipment by category
+Item Category 1 (< 500 kW) Category 2 (500 kW – 1 MW Category 3 (1 MW – 5 MW
+export sites) export sites)
+Applicable class Residential / small Commercial small-scale Medium-scale
+commercial
+DER-side disconnect Required (customer-owned Required (customer-owned Required (customer-owned
+lockable visible-break) lockable visible-break) lockable visible-break)
+Interconnection protective Provided by certified inverter Provided by certified inverter Dedicated protection relay
+functions (IEEE 1547-2018 and/or dedicated protection required
+clause 4) relay
+DER breaker with protection Not required As specified per site by As specified per site by
+relay scheme (for protection engineering protection engineering
+load/generation-decoupling
+arrangements)
+POI recloser (utility-owned) Not required Category 2 export sites — Required
+POI recloser: not required
+Anti-islanding Certified inverter functions Certified inverter functions per Dedicated relay scheme with
+per IEEE 1547-2018 IEEE 1547-2018; transfer trip where required by
+supplemented by relay scheme protection engineering
+where dedicated relay is
+installed
+Directional-power element Not applicable Set on POI recloser where Set on POI recloser; used to
+(ANSI 32) — pure-generation installed; used to enforce a enforce a §3.6 controlled limit
+sites §3.6 controlled limit where where applicable
+applicable
+Metering Bidirectional revenue meter Bidirectional revenue meter Bidirectional revenue meter,
+primary or secondary as
+feeder configuration requires
+Utility RTU and SCADA Not required Required per TCS-02 (‡500 Required per TCS-02
+telemetry kW)
+Notes to Table 5-1.
+1. Category placement reflects the export configuration prevailing at the site. Where a site's configuration warrants
+requirements differing from the tabular default — including, for example, load/generation-decoupling
+arrangements in which generation is isolated by a DER breaker with a dedicated protection relay scheme —
+protection engineering may specify the applicable requirements through the Engineering Referral Procedure
+(ERP-9 §3, Form ER-11).
+DIS-01 Rev 4 — Alleniom DER Interconnection Standard Page 5
+
+DIS-01 Rev 4 · Effective 03/01/2024
+2. Table 5-1 addresses protective and control equipment. Monitoring and communications requirements are
+established under TCS-02.
+3. Where §3.6 recognition is in effect at a pure-generation site with a utility POI recloser, the ANSI 32
+directional-power element is set to the recognized limit and trips on violation.
+§6 Monitoring and Control
+Facilities at or above the TCS-02 program threshold shall provide real-time monitoring and control integration through
+a utility-owned RTU with SCADA telemetry as prescribed by TCS-02. Live telemetry to the Company system
+operations center is a condition of permission to operate. This standard does not restate TCS-02; refer to TCS-02 §5
+for the telemetry rule and to Alleniom system operations for RTU installation scheduling.
+Site-level control functions required by §3.6 (Power Control System recognition), by Table 5-1 (dedicated protection
+relay schemes, DER breaker arrangements), and by ERP-9 site determinations, together satisfy the
+control-integration expectations of this section as applied to the specific facility.
+§7 Capacity and Point-of-Interconnection Provisions
+Post-execution changes to executed ISA capacity or POI require withdrawal and reapplication; ISA edits are not
+permitted for capacity or POI changes.
+Scope. This section governs changes proposed after an interconnection service agreement has been executed by
+both parties. Prior to execution, ordinary revisions may be handled in the studies and drafting process without
+invoking this section.
+Principal parameters. Facility capacity and point of interconnection are principal parameters of the interconnection
+service agreement. Studies, protective-equipment scoping, and queue position each depend on these parameters as
+executed.
+Required path. A customer or developer seeking to change either the executed capacity or the executed point of
+interconnection after ISA execution shall:
+1. Submit a written request to withdraw the current application and terminate the executed ISA;
+2. File a new application at the desired capacity and, where applicable, the desired point of interconnection; and
+3. Accept the new queue position corresponding to the filing date of the new application.
+The new application is studied on its own facts. The withdrawal-and-reapplication path applies whether the requested
+change is an increase or a decrease in capacity and whether or not the requested change is characterized by the
+applicant as involving new or existing equipment.
+Other post-execution changes. Modifications to protective schemes, telemetry endpoints, equipment models within
+the same nameplate rating, and administrative items that do not alter capacity or POI are handled under the
+change-order provisions of the executed ISA and are not subject to this section.
+Downstream effects. The withdrawal of an executed ISA under this section releases any related utility equipment
+reservations and any related feeder headroom allocations, which are then available to subsequent applications in
+queue order. Studies previously performed at the withdrawn capacity are not carried forward; the new application
+receives a new study appropriate to its filed parameters.
+§8 Records and Compliance
+Interconnection Studies retains the application file, executed ISA, and study record for each in-scope facility for the
+retention period established by Regulatory Affairs. Standards Engineering maintains the current revision of this
+standard, the Certified Equipment List (CEL-2025-Q2 and subsequent editions), and the Engineering Referral
+Procedure (ERP-9) register of per-site determinations.
+DIS-01 Rev 4 — Alleniom DER Interconnection Standard Page 6
+
+DIS-01 Rev 4 · Effective 03/01/2024
+Any conflict between this standard and the APUC-filed tariff is resolved in favor of the tariff. Any conflict between this
+standard and another Alleniom operating standard encountered in screening or study is referred to per-site
+engineering determination under ERP-9 §3.
+End of DIS-01 Rev 4.
+DIS-01 Rev 4 — Alleniom DER Interconnection Standard Page 7

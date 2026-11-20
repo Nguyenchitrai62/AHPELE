@@ -1,0 +1,38 @@
+[Sheet: Register]
+Completed Sites Awaiting Utility Equipment						
+Alleniom Utilities — DER Program Office · 4200 Veldmere Boulevard, Halston, Alleron 01HA · (612) 555-0100 · alleniom.com						
+Doc no. DER-EQP-COMPL  ·  Rev 3  ·  Date 07/14/2025  ·  Owner DER Program Office						
+Register	Completed Sites Awaiting Utility Equipment					
+Maintained by	DER Program Office (der.program@alleniom.com)					
+As of	07/14/2025					
+Scope	In-scope DER interconnection sites (≥500 kW) that have reached construction complete and are awaiting utility-owned RTU and/or POI recloser to permit energization under TCS-02 §5. Standing register — no date prefix; refreshed weekly.					
+Companion report	2025-06_Supplier_Lead_Time_Report.xlsx (Marcus Deele, SCADA/EMS Engineering)					
+Column note	"Requested Priority" reflects customer- or stakeholder-stated priority claims as received in writing; entries are transcribed verbatim from the requesting party's correspondence.					
+Roster						
+Site Name	Site Type	Contracted In-Service or Grant Deadline	Queue Date	Construction Complete Date	Required Devices	Requested Priority
+City of Elmsworth Northside Water Treatment Plant	municipal water treatment		03/18/2024	05/02/2025	RTU + POI recloser	
+Alleron Community Solar Initiative — Rowan Hill (1.05 MW community solar)	grant-funded community solar	09/30/2025 (grant funding)	04/22/2024	06/06/2025	RTU + POI recloser	
+Brookfen North High School Array (720 kW)	school district (Brookfen USD)		06/03/2024	04/18/2025	RTU	HIGH — per school district
+Brookfen West Elementary Array (640 kW)	school district (Brookfen USD)		07/08/2024	05/23/2025	RTU	HIGH — per school district
+Vernand Logistics C&I Rooftop PV (620 kW)	commercial C&I		05/14/2024	03/28/2025	RTU	
+Halstonfield Distribution Center PV (720 kW)	commercial C&I		08/20/2024	06/13/2025	RTU	
+Prairie Corridor Business Park PV (860 kW)	commercial C&I		09/12/2024	06/27/2025	RTU + POI recloser	
+Notes						
+•	All seven sites are past construction complete and are held out of service pending utility-owned equipment installation and SCADA integration. TCS-02 §5 prohibits Permission to Operate absent live telemetry for sites ≥500 kW.					
+•	Utility equipment supply status is tracked in the SCADA/EMS Supplier Lead-Time Report (Marcus Deele, 06/30/2025): two complete RTU + POI recloser sets are scheduled to arrive 08/2025; the next confirmed delivery is 03/2026. Current approved suppliers are Kelvraith Grid Systems, Inc. (RTU) and Norstead Power Controls, LLC (POI recloser), both quoting ~8-month lead times.					
+•	"Requested Priority" entries against the two Brookfen USD school arrays were added to this register on 07/02/2025 following written escalation from Rosa Camarena, Facilities Director, Brookfen Unified School District. No other sites have priority claims on file as of this revision.					
+•	The Alleron Community Solar Initiative — Rowan Hill row carries a contracted grant-funding in-service date of 09/30/2025, recorded in this register at application intake.					
+•	Deployment sequencing of scarce utility equipment is governed by OG-17 (Equipment Deployment Prioritization Guideline, effective 04/07/2025). This register is an inputs roster; it does not itself assign sequencing.					
+•	Register is maintained by the DER Program Office and refreshed on the weekly queue export cycle. Additions and removals are logged against the revision block above.					
+Prepared by: DER Program Office, Alleniom Utilities — 07/14/2025.						
+[Sheet: Column Definitions]
+Column Definitions	
+Register: Completed Sites Awaiting Utility Equipment  ·  Doc DER-EQP-COMPL Rev 3  ·  07/14/2025	
+Column	Definition
+Site Name	Site identifier as recorded in the DER Program queue.
+Site Type	Customer category (municipal essential service, grant-funded community solar, school district, commercial C&I).
+Contracted In-Service or Grant Deadline	Written contracted in-service date or grant-funding milestone, where one exists on file. Blank where no such deadline has been contracted or funded.
+Queue Date	Date the interconnection application received a queue position under the DER Program.
+Construction Complete Date	Date the site's customer-side construction was reported complete by the applicant and confirmed by field inspection. Not the same as PTO.
+Required Devices	Utility-owned equipment outstanding: RTU (per TCS-02 §5) and/or POI recloser (per DPS-07 §4.2 / per applicable Form ER-11 determination).
+Requested Priority	Priority level asserted by the customer or requesting stakeholder in written correspondence. Recorded as received; not a program determination.

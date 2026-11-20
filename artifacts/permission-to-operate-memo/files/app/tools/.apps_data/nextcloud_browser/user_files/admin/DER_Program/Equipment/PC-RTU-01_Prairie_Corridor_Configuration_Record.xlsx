@@ -1,0 +1,54 @@
+[Sheet: Header]
+RTU Configuration Record: PC-RTU-01
+Alleniom Utilities — SCADA/EMS Engineering · 4200 Veldmere Boulevard, Halston, Alleron 01HA · (612) 555-0100 · alleniom.com
+Doc no. SCADA-PC-RTU-CFG-01  ·  Rev 0  ·  Date 07/08/2025  ·  Owner SCADA/EMS Engineering (Marcus Deele)
+Site: Prairie Corridor Business Park PV (PXA-2024-0343), feeder ALN-088. RTU: Kelvraith YOT-8963, firmware 4.12.2.
+The site-specific configuration record of TCS-02 §4.2. Issued ahead of installation. To be loaded to the site's RTU at staging, once a set is allocated under OG-17.
+Sheets: Settings Export (RTU parameters as exported from the configuration tool), Point Table (DNP3 points to SCADA, in index order).
+Prepared: Marcus Deele, SCADA/EMS Engineer, 07/08/2025.
+[Sheet: Settings Export]
+Settings Export
+DNP3_OUTSTATION_ADDRESS = 343  |  DNP3_MASTER_ADDRESS = 1
+TRANSPORT = DNP3 over TCP/IP  |  LINK = utility cellular, approved carrier (TCS-02 §4.1(c))
+SECURE_AUTH = SAv5 enabled  |  UNSOLICITED = classes 1, 2  |  INTEGRITY_POLL = 60 s (master)
+VPN = IPsec IKEv2 to the Alleniom SCADA headend, mutual certificates, 13-month validity (TCS-02 §7.3)
+PORT_1 = cellular modem  |  PORT_2 = plant LAN 192.168.10.5/24  |  PORT_S1 = RS-485, POI-R1 control NPC-38
+MODBUS_CLIENT = enabled, port 2, scan 2 s  |  DEVICE_TABLE = SCADA-PC-RTU-DEV-01
+TIME_SOURCE = RTC  |  NTP_SERVER =  |  OPTION_SLOT_1 = serial expansion  |  OPTION_SLOT_2 =
+DNP3 time synchronisation from master: disabled
+EVENT_BUFFER = 72 h  |  BACKFILL_ON_RESTORE = enabled
+CONFIG_VERSION = PC-RTU-01-R0
+[Sheet: Point Table]
+Point Table
+AI.000  V_POI_A  V  phase A  |  DNP3 serial, slot 1 port 1, POI-R1 control NPC-38, AI 0  |  class 1 event
+AI.001  V_POI_B  V  phase B  |  DNP3 serial, slot 1 port 1, POI-R1 control NPC-38, AI 1  |  class 1 event
+AI.002  V_POI_C  V  phase C  |  DNP3 serial, slot 1 port 1, POI-R1 control NPC-38, AI 2  |  class 1 event
+AI.003  P_EXP  kW  export positive  |  DNP3 serial, slot 1 port 1, POI-R1 control NPC-38, AI 3  |  class 1 event
+AI.004  Q_POI  kVAr  absorbing positive  |  DNP3 serial, slot 1 port 1, POI-R1 control NPC-38, AI 4  |  class 1 event
+AI.005  I_POI_A  A  phase A  |  DNP3 serial, slot 1 port 1, POI-R1 control NPC-38, AI 5  |  class 1 event
+AI.006  I_POI_B  A  phase B  |  DNP3 serial, slot 1 port 1, POI-R1 control NPC-38, AI 6  |  class 1 event
+AI.007  I_POI_C  A  phase C  |  DNP3 serial, slot 1 port 1, POI-R1 control NPC-38, AI 7  |  class 1 event
+AI.008  FREQ_POI  Hz  |  DNP3 serial, slot 1 port 1, POI-R1 control NPC-38, AI 8  |  class 1 event
+AI.009  P_GEN_BLK1  kW  generation positive  |  Modbus TCP 192.168.10.21  holding register 40011  scale 0.1  |  poll 2 s
+AI.010  P_GEN_BLK2  kW  generation positive  |  Modbus TCP 192.168.10.21  holding register 40031  scale 0.1  |  poll 2 s
+AI.011  P_GEN_BLK3  kW  generation positive  |  Modbus TCP 192.168.10.21  holding register 40051  scale 0.1  |  poll 2 s
+AI.012  KWH_DEL  kWh  export positive  |  DNP3 serial, slot 1 port 1, POI-R1 control NPC-38, AI 12  |  class 2 event, 5 min
+AI.013  KWH_REC  kWh  import positive  |  DNP3 serial, slot 1 port 1, POI-R1 control NPC-38, AI 13  |  class 2 event, 5 min
+AI.014  RTU_CAB_TEMP  degC  |  RTU internal sensor  |  class 2 event
+AI.015  CFG_VERSION  |  RTU internal, active configuration identifier  |  integrity
+BI.000  SITE_ONLINE  |  Modbus TCP 192.168.10.21  input status 10001  |  poll 2 s
+BI.001  BLK1_RUN  |  Modbus TCP 192.168.10.21  input status 10011  |  poll 2 s
+BI.002  BLK2_RUN  |  Modbus TCP 192.168.10.21  input status 10031  |  poll 2 s
+BI.003  BLK3_RUN  |  Modbus TCP 192.168.10.21  input status 10051  |  poll 2 s
+BI.004  BLK1_FAULT  |  Modbus TCP 192.168.10.21  input status 10012  |  poll 2 s
+BI.005  BLK2_FAULT  |  Modbus TCP 192.168.10.21  input status 10032  |  poll 2 s
+BI.006  BLK3_FAULT  |  Modbus TCP 192.168.10.21  input status 10052  |  poll 2 s
+BI.007  COMM_HEARTBEAT  |  RTU internal, SCADA link watchdog  |  class 1 event
+BI.008  ALARM_SUMMARY  |  RTU internal, rolled-up device alarms  |  class 1 event
+BI.009  TIME_SYNC_QUAL  |  RTU internal, RTC status  |  class 1 event
+BI.010  R1_CLOSED  |  DNP3 serial, slot 1 port 1, POI-R1 control NPC-38, BI 0  |  class 1 event
+BI.011  R1_LOCKOUT  |  DNP3 serial, slot 1 port 1, POI-R1 control NPC-38, BI 1  |  class 1 event
+BI.012  R1_79_BLOCKED  |  DNP3 serial, slot 1 port 1, POI-R1 control NPC-38, BI 2  |  class 1 event
+BI.013  ENCL_TAMPER  |  RTU digital input DI 1, enclosure door switch  |  class 1 event
+CROB.000  R1_TRIP  |  DNP3 serial, slot 1 port 1, POI-R1 control NPC-38, CROB 0  |  select-before-operate
+CROB.001  R1_CLOSE  |  DNP3 serial, slot 1 port 1, POI-R1 control NPC-38, CROB 1  |  select-before-operate

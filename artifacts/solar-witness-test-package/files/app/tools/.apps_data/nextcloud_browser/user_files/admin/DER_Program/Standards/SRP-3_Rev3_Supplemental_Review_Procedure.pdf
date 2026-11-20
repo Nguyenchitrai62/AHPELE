@@ -1,0 +1,107 @@
+ALLENIOM UTILITIES — STANDARDS ENGINEERING
+SUPPLEMENTAL REVIEW PROCEDURE
+Doc no. Rev Effective date Owner
+SRP-3 Rev 3 02/10/2025 Alleniom Standards Engineering
+Supersedes: SRP-3 Rev 2 (effective 07/22/2022)
+Classification: Technical Standard — Distributed Energy Resource Interconnection
+Distribution: DER Program Office; Interconnection Studies; Distribution Planning; Standards Engineering;
+Regulatory Affairs
+§1 Purpose
+This procedure defines the supplemental review process applied to distributed energy resource (DER)
+interconnection applications that fail one or more of the fast-track technical screens set out in the Alleniom DER
+Interconnection Standard (DIS-01 Rev 4). It establishes the ordered screens, data sources, and documentation to
+be produced by the interconnection engineer conducting supplemental review, and identifies the conditions under
+which a study agreement is required before the application may proceed.
+Supplemental review is intended to allow an application that fails an initial fast-track screen to be evaluated
+against a bounded set of additional technical criteria without incurring the cost and schedule of a full system
+impact study, where that evaluation can be completed from existing feeder data and standard engineering
+judgment.
+Nothing in this procedure alters the substantive interconnection standards contained in DIS-01, the protection
+requirements contained in DPS-07, or the telemetry and communications requirements contained in TCS-02.
+§2 Scope
+This procedure applies to:
+(a) all in-scope DER interconnection applications (‡500 kW) as defined in DIS-01 §3 that have entered
+supplemental review following failure of an initial screen; and
+(b) all DER classes recognized in DIS-01 §3 — commercial small-scale (500 kW – 1 MW) and medium-scale (1
+MW – 5 MW).
+This procedure does not apply to:
+(a) sub-500 kW installations processed under the Simplified Small-Systems Process;
+(b) capacity or point-of-interconnection changes to an executed interconnection service agreement, which are
+governed by DIS-01 §7; or
+(c) domestic rooftop solar, which is out of scope for the DER Program.
+Where a supplemental-review screen result is inconclusive on the record before the engineer, the application shall
+be advanced to a study agreement rather than passed or failed under this procedure.
+§3 Screens
+SRP-3 Rev 3 — Supplemental Review Procedure · Effective 02/10/2025 · Alleniom Utilities — Standards Engineering Page 1
+
+Applications entering supplemental review shall be evaluated under the following screens, in the order given. An
+application that fails any screen shall be considered a candidate for a study agreement; the reviewing engineer
+shall document the failing screen, the underlying data, and the recommended disposition per §6.
+Screen A — Aggregate DER penetration on the feeder. Total nameplate DER (existing plus queued plus
+requested) on the subject feeder shall not exceed the applicable penetration threshold set in DIS-01. Queue
+positions are those on record with the DER Program Office at the date of screen evaluation.
+Screen B — Voltage regulation and flicker. Reviewed against the feeder's most recent planning study or, where
+none is on file for the subject feeder within twenty-four (24) months, against a screening voltage-rise calculation
+performed using conductor and transformer impedance from the distribution planning record.
+Screen C — Short-circuit contribution. DER short-circuit contribution shall not cause any feeder-protective
+device to exceed 87.5% of its interrupting rating, nor cause any downstream protection coordination margin to
+fall below the values specified in DPS-07.
+Screen D — 100%-of-minimum-load screen for solar. Governed by §4.
+Screen E — Reverse power flow at substation. Where the aggregate DER on the subject feeder exceeds the
+substation transformer's certified reverse-power capability, or where reverse-power protective settings are not in
+place, the application shall be routed to study.
+Passing all applicable screens is a necessary but not sufficient condition for interconnection; the application
+remains subject to the balance of the DIS-01 evaluation, including protection and telemetry requirements.
+§4 100%-of-minimum-load screen for solar
+100%-of-minimum-load screen for solar. For solar DER, the minimum load used in this screen shall be the
+minimum load within the daytime window 10:00–16:00, determined from feeder AMI interval data. The absolute
+overnight minimum shall NOT be used. Requested DER capacity must be £ this daytime-window minimum for
+the site to pass the screen.
+The daytime-window minimum shall be computed from feeder AMI interval data covering the most recent
+complete twelve (12) calendar months, aggregated to fifteen-minute intervals aligned to the feeder AMI
+collection cadence, and evaluated only over intervals whose start time falls within 10:00–16:00 local clock time
+on the feeder. Intervals affected by known feeder outages, load transfers, or planned switching shall be excluded
+and the exclusion documented in the reviewer's worksheet. Where fewer than twelve (12) months of AMI interval
+data are available, the reviewer shall use the longest continuous complete period available and note the
+data-window length in the supplemental review memo.
+The daytime-window minimum determined under this section is the sole minimum-load figure used for the solar
+100%-of-minimum-load screen. Feeder minimum-load figures produced for other purposes — planning studies,
+hosting-capacity map inputs, protection coordination — are not substitutes for the value computed under this
+section and shall not be carried into the Screen D determination without recomputation on the AMI record.
+Where a prior supplemental review memo on the same feeder has applied a different minimum-load basis, the
+reviewer shall recompute the value under this section and, if the two disagree, supersede the earlier memo in the
+file.
+§5 Data sources
+The following data sources are authoritative for supplemental review under this procedure:
+SRP-3 Rev 3 — Supplemental Review Procedure · Effective 02/10/2025 · Alleniom Utilities — Standards Engineering Page 2
+
+(a) Feeder AMI interval data — from the Alleniom AMI Data Warehouse, at the meter aggregation level
+published for the subject feeder. AMI interval data is the sole authoritative source for the Screen D
+minimum-load determination described in §4.
+(b) Distribution planning record — most recent feeder planning study, conductor and transformer impedance
+data, and protection coordination settings, held by Distribution Planning.
+(c) DER queue — active-queue and on-hold registers maintained by the DER Program Office as of the screen
+evaluation date. Queue entries not yet reflected in a published hosting-capacity map remain applicable to Screen
+A.
+(d) Certified Equipment List (CEL) — current edition, for verification that proposed inverters and PCS
+equipment are eligible to be considered under the screens.
+(e) Interconnection application record — the applicant's filed capacity, single-line diagram, inverter
+specifications, and control narrative (where controlled-capacity operation is asserted under DIS-01 §3.6).
+Substitution of a source not listed above shall be documented in the memo produced under §6, together with the
+reason for the substitution.
+§6 Documentation
+The reviewing engineer shall produce a supplemental review memo for each application processed under this
+procedure. The memo shall contain, at minimum:
+(a) application identifier, applicant, subject feeder, and requested capacity;
+(b) the screens applied and the pass/fail determination for each;
+(c) for Screen D, the daytime-window minimum load determined per §4, the data window used, the count of
+intervals evaluated, and any interval exclusions with reason;
+(d) the recommended disposition — advance without study agreement, advance to study agreement, or return to
+applicant with specified deficiency;
+(e) reviewer signature and date; and
+(f) the identifiers of any earlier supplemental review memos superseded.
+The memo shall be filed to the interconnection application record within five (5) business days of screen
+completion. Where a memo supersedes an earlier determination on the same application or the same feeder, the
+superseded memo shall be flagged in the file and a cross-reference to the superseding memo added to its cover.
+Alleniom Utilities — DER Program Office · 4200 Veldmere Boulevard, Halston, Alleron 01HA · (612) 555-0100 · alleniom.com
+SRP-3 Rev 3 — Supplemental Review Procedure · Effective 02/10/2025 · Alleniom Utilities — Standards Engineering Page 3

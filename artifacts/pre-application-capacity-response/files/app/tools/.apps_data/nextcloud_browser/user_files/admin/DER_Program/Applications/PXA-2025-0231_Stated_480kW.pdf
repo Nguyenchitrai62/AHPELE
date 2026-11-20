@@ -1,0 +1,171 @@
+ALLENIOM UTILITIES — DER PROGRAM OFFICE
+DER INTERCONNECTION APPLICATION (COMMERCIAL, ≥ 500
+kW)
+Form DIS-APP-01 · governed by DIS-01 Rev 4 · Alleniom DER Interconnection Standard
+Application ID: PXA-2025-0231
+Received (utility use only)
+Application version
+Filing category
+Processing track requested
+Section 1 — Applicant Information
+Applicant / interconnection
+customer
+Entity type
+Customer mailing address
+Customer site contact
+Customer site phone
+Customer site email
+Developer of record (preparer
+& filer)
+Developer mailing address
+Developer primary contact
+Developer phone
+Developer email
+Signing authority for this Emery Traskin, Development Manager, Karsten Solar Development LLC (as
+filing authorized agent of Wexley Distribution Center)
+The Developer of Record certifies that it has been retained by Wexley Distribution Center — the customer
+of record on the retail electric account serving the facility identified in Section 2 — and is authorized to
+submit this Application and to correspond with Alleniom Utilities on the customer's behalf regarding all
+matters of interconnection.
+Section 2 — Site Information
+Facility name
+Service address
+Facility use
+Alleniom Utilities · DER Program Office PXA-2025-0231 | DIS-APP-01 | Page 1
+
+Retail rate class
+Existing electric service
+Existing utility meter
+Site ownership
+Assigned distribution feeder
+(per pre-application review)
+Substation
+Facility peak demand (last 12
+months, billed)
+Facility minimum demand
+(24/7 refrigerated and staging
+load)
+Operating schedule
+Backup generation on site
+Section 3 — Proposed DER
+DER technology
+Project description Behind-the-meter ground-mount PV array with parking-lot carport PV addition,
+serving warehouse load with limited export
+Stated capacity
+Mounting
+Fuel / energy source
+Operating mode requested Parallel operation with utility service; export limited to the Stated Capacity
+above via inverter power-control settings
+Expected export
+Anticipated in-service
+3.1 Capacity Basis Statement (from Applicant)
+The Applicant proposes to operate this DER facility at a Stated Capacity of 480 kW — export-limited
+operation at the point of common coupling. Output is constrained through the on-site inverter fleet's
+programmable power-control settings, which the Developer will configure at commissioning to cap
+real-power delivery at the point of common coupling to the stated 480 kW value under all operating
+conditions. On this basis the Applicant requests the Application be reviewed at the stated 480 kW figure.
+Section 4 — Point of Interconnection
+Point of interconnection New 800 A, 3-phase back-fed breaker in the existing 480 V main distribution
+switchboard (MDS-1) in the warehouse main electrical room
+Distance from PV combiner to
+POI
+Alleniom Utilities · DER Program Office PXA-2025-0231 | DIS-APP-01 | Page 2
+
+Point of common coupling
+Feeder assignment
+Shared POI request (DIS-01
+§3.5)
+4.1 Connection Description
+The proposed PV system ties into the customer-owned side of the site's existing electrical service. Power
+flow from the six commercial three-phase inverters (see the companion inverter datasheets file for per-unit
+ratings) is aggregated at PVC-1, routed through the pad-mount lockable AC disconnect (PVD-1), and
+lands on a new 800 A back-fed breaker in MDS-1. MDS-1 is fed from the plant's existing utility service
+transformer through the site's existing 480 V main service disconnect and the existing utility revenue
+meter.
+The new PV interconnection is behind the existing service meter — the same point of common coupling
+as the site's existing electrical service — on the load side of the utility revenue meter and upstream of the
+warehouse's process and refrigeration load buses.
+No new utility-side equipment, no new service transformer, no new service drop, and no separate revenue
+meter is requested. The Applicant proposes to net the PV generation against warehouse load through the
+existing bidirectional revenue meter of record and to hold export at the point of common coupling to the
+Stated Capacity of 480 kW under all operating conditions.
+Section 5 — Equipment Schedule
+The proposed facility uses a fleet of commercial three-phase string inverters. Individual inverter nameplate
+ratings, model-level specifications, and manufacturer certifications are provided in the companion file
+Inverter Nameplate & Spec Sheets — PXA-2025-0231 (filed with this Application). The equipment
+schedule below is a reference roster and does not restate the per-unit nameplate ratings recorded on
+those datasheets.
+5.1 Inverters
+Item Manufacturer / Model Quantity Nameplate & Certification
+The inverters will be configured at commissioning with fleet-wide export-limit settings to hold aggregate
+real-power delivery at the point of common coupling to the Stated Capacity in Section 3.
+Alleniom Utilities · DER Program Office PXA-2025-0231 | DIS-APP-01 | Page 3
+
+5.2 PV Modules
+Item Manufacturer / Model Quantity STC Rating (per
+module)
+620 W bifacial mono-PERC modules
+(commercial-grade; subset of the ground-mount
+count above; combined DC field)
+5.3 Balance-of-System
+AC combiner
+AC disconnect
+Grounding
+Anti-islanding / trip settings
+Section 6 — Construction and Commissioning Milestones (Applicant Estimate)
+Milestone schedule
+Milestones are applicant estimates and are subject to Alleniom study outcomes, equipment scheduling,
+and construction work-order execution.
+Section 7 — Processing Route and Applicant Notes
+Program route requested Commercial DER Interconnection Application - reviewed at the Stated
+Capacity of 480 kW, export-limited operation
+Rationale for route Stated Capacity below the 500 kW program-scope threshold via inverter
+export-limit configuration; standard commercial rooftop/ground-mount
+configuration; behind-the-meter connection
+The Applicant respectfully requests that this Application be screened at its Stated Capacity of 480 kW.
+Wexley Distribution Center, at 8420 Corley Business Parkway, Halston, is undertaking a behind-the-meter
+ground-mount and carport PV addition to offset a portion of its continuous warehouse and refrigeration
+demand. The Developer of Record, Karsten Solar Development LLC, has been retained to design, permit,
+construct, and file for interconnection. The Applicant notes for the record: no existing DER is installed at
+the service address, and no other DER filing has been made for this site.
+Correspondence regarding this Application should be directed to Emery Traskin, Development Manager,
+Karsten Solar Development LLC, at the phone and email shown in Section 1, with copies to the Facilities
+Manager at Wexley Distribution Center.
+Section 8 — Applicant Certification and Signature
+The undersigned, as authorized Developer of Record for Wexley Distribution Center, certifies that:
+1.The information provided in this Application is true, accurate, and complete to the best of the
+Developer's and Applicant's knowledge as of the filing date.
+Alleniom Utilities · DER Program Office PXA-2025-0231 | DIS-APP-01 | Page 4
+
+2.The Applicant will comply with all applicable Alleniom Utilities interconnection standards, tariff
+provisions, and the National Electrical Code as in effect at the time of interconnection.
+3.The Applicant will not energize the proposed DER in parallel with the utility system prior to receiving
+written Permission to Operate from Alleniom Utilities.
+4.The Applicant will notify Alleniom Utilities of any material change to the equipment, capacity, or point of
+interconnection described in this Application.
+5.The inverter fleet identified in Section 5 will be configured at commissioning to hold aggregate
+real-power delivery at the point of common coupling to the Stated Capacity of 480 kW — export-limited
+operation.
+Applicant
+Signatory Emery Traskin, Development Manager, Karsten Solar Development LLC -
+Authorized Agent for Wexley Distribution Center
+Signature
+Date
+Email
+For DER Program Office Use Only
+Application ID
+Date received
+Intake reviewer
+Feeder of record
+Screening status
+Existing-DER register check
+Notes Filed by Karsten Solar Development LLC on behalf of Wexley Distribution
+Center. Filing declares Stated Capacity of 480 kW — export-limited operation.
+Per-unit inverter nameplate ratings are set out in the companion file Inverter
+Nameplate & Spec Sheets — PXA-2025-0231, filed with this Application.
+Form footer — DER Program scope reference. Alleniom Utilities DER classes (per DIS-01 Rev 4 §3 and tariff §12.2):
+Commercial small-scale 500 kW–1 MW; medium-scale 1 MW–5 MW; program scope ≥500 kW; sub-500 kW DER
+(commercial and residential) is handled under the Simplified Small-Systems Process, outside the DER Program.
+Doc no. PXA-2025-0231 · Rev 0 · 06/09/2025 · Applicant: Wexley Distribution Center (Developer of Record: Karsten Solar
+Development LLC)
+Alleniom Utilities · DER Program Office PXA-2025-0231 | DIS-APP-01 | Page 5

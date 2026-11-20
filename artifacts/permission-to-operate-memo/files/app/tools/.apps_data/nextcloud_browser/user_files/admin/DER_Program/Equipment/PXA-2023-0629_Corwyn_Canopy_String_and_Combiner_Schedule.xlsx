@@ -1,0 +1,34 @@
+[Sheet: Header]
+Canopy String and Combiner Schedule: Corwyn Office Complex PV (PXA-2023-0629)
+Brantley Electric Company · Alleron Electrical Contractor Lic. #EC-12306
+Drawing E-301 Rev C, 06/24/2025. PV strings, combiner boxes and PV output circuits for each canopy: 18 strings of 17 Ardenne AM-550 modules into two combiner boxes, each combiner to one dc input of the canopy's inverter.
+Prepared: K. Osei, Electrical Engineer, Brantley Electric Company, 06/24/2025.
+[Sheet: Module]
+Module	Pmax (W)	Voc (V)	Vmp (V)	Isc (A)	Imp (A)	Voc temperature coefficient (%/°C)	Series fuse (A)
+Ardenne AM-550	550	49.8	41.6	14	13.2	-0.27	25
+[Sheet: Strings]
+Item	Value
+Modules per string	17
+Design low temperature (°C)	-24
+String Voc at the design low (V)	958.6
+String Vmp at 25 °C (V)	707.2
+Inverter MPPT range (V)	600 to 850
+Strings per canopy	18
+DC nameplate per canopy (kW)	168.3
+Rapid shutdown	Module-level rapid shutdown device on every module; transmitter at SWBD-PV, initiator at the SWBD-PV main
+[Sheet: Combiners]
+Combiner	Location	Strings	String fuses (A)	PV output circuit maximum current (A)	Output to
+CB-C1-1	Canopy C1, east half, on the beam	9	25	157.5	INV-C1 dc input 1
+CB-C1-2	Canopy C1, west half, on the beam	9	25	157.5	INV-C1 dc input 2
+CB-C2-1	Canopy C2, east half, on the beam	9	25	157.5	INV-C2 dc input 1
+CB-C2-2	Canopy C2, west half, on the beam	9	25	157.5	INV-C2 dc input 2
+CB-C3-1	Canopy C3, east half, on the beam	9	25	157.5	INV-C3 dc input 1
+CB-C3-2	Canopy C3, west half, on the beam	9	25	157.5	INV-C3 dc input 2
+CB-C4-1	Canopy C4, east half, on the beam	9	25	157.5	INV-C4 dc input 1
+CB-C4-2	Canopy C4, west half, on the beam	9	25	157.5	INV-C4 dc input 2
+CB-C5-1	Canopy C5, east half, on the beam	9	25	157.5	INV-C5 dc input 1
+CB-C5-2	Canopy C5, west half, on the beam	9	25	157.5	INV-C5 dc input 2
+[Sheet: PV Output Circuits]
+Circuit	Conductors	Route	Inverter dc input fuse (A)	Ampacity at 40 °C, 90 °C column (A)
+Each combiner to its inverter dc input	2 x 1/C 4/0 AWG Cu PV wire, 2 kV, and 1/C 4 AWG Cu PV wire, green; PV wire secured to the rungs at 1.2 m	In the north ladder tray along the canopy main beam, then from the tray down the inverter column to the inverter dc inputs in 2 in. rigid steel conduit	200	236.6
+Strings to combiners	10 AWG Cu PV wire, 2 kV	Module leads and home runs along the purlins, cable-tied at 0.3 m, into the north tray	25	—

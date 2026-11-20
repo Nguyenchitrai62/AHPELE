@@ -1,0 +1,134 @@
+ALLENIOM UTILITIES — DISTRIBUTION OPERATIONS
+EQUIPMENT DEPLOYMENT PRIORITIZATION
+GUIDELINE
+4200 Veldmere Boulevard, Halston, Alleron 01HA
+Doc no. Rev Effective Date Owner
+OG-17 Rev 1 04/07/2025 Alleniom Distribution
+Operations
+Document Control
+Supersedes: none (initial issue).
+Review cycle: annual, or on material change to supplier lead times or operating criticality categories.
+Approving authority: VP, Distribution Operations.
+Distribution: DER Program Office; Interconnection Studies; DER Planning Group; System Operations Center
+(SOC); Standards Engineering; Supply Chain — Distribution Equipment.
+§1 SCOPE
+This guideline governs deployment sequencing of constrained utility equipment (RTUs, reclosers) across
+completed sites awaiting energization. It applies to Alleniom-owned devices installed by Distribution
+Operations for the purpose of energizing a construction-complete distributed energy resource (DER) site,
+when supplier lead times or quarterly delivery quantities constrain the number of sites that can be
+equipped in a given deployment window.
+This guideline does NOT apply to application processing. Nondiscriminatory queue-order treatment of
+interconnection applications is governed by Interconnection Tariff §12.7 and by the procedures
+administered by Interconnection Studies; nothing in this guideline modifies, displaces, or supplements
+those procedures. The rankings established under §2 operate solely on sites for which interconnection
+application processing is complete, the interconnection agreement (where required) is executed, and
+construction is certified complete by the customer or its contractor.
+Devices out of scope: customer-owned protective equipment; utility-owned equipment already installed at
+the site; distribution-system reinforcement equipment scheduled under an approved capital work order.
+Program scope for the underlying DER remains as defined in DIS-01 Rev 4 §3 and Interconnection Tariff
+§12.2.
+§2 COMMISSIONING CRITICALITY
+As a general rule, deployment priority for constrained equipment follows interconnection queue order,
+consistent with the nondiscriminatory treatment principles of Interconnection Tariff §12.7.
+A site may be advanced ahead of queue order under certain circumstances — the urgent nature of a
+request, in particular for public infrastructure (schools, hospitals, water/wastewater facilities), or an
+expedited deployment pathway on reasonable customer request — but only where substantiated by the
+site's own recorded attributes (per §3), in order of priority: (1) essential-service function (water/wastewater,
+emergency, health); (2) committed in-service or grant-funding deadline; (3) construction-complete date.
+Among sites of the same critical nature, the deciding factor is interconnection queue order; requests not
+substantiated by these attributes remain in queue order.
+OG-17 Rev 1 — Equipment Deployment Prioritization Guideline Page 1
+
+Factor definitions:
+(cid:127) Essential-service function. A site whose primary served load is a public water or wastewater facility;
+a hospital, emergency-response, or first-responder facility; or a public-health facility for which loss of
+service is treated as an emergency by the responsible jurisdiction. Essential-service status is
+evidenced by the customer's facility classification of record and, where applicable, the served-load
+designation on the interconnection application.
+(cid:127) Committed in-service or grant-funding deadline. A contractually committed in-service date, or a
+date on which grant funding lapses if the site is not in service, established in a fully executed written
+instrument between the customer and a governmental funder, project sponsor, or off-taker. Internal
+customer construction targets, marketing dates, budget-cycle expectations, and school-year,
+fiscal-year, or seasonal preferences do not constitute a committed deadline under this factor.
+(cid:127) Construction-complete date. The calendar date on which the customer's construction of the site
+was certified complete and ready for utility energization steps. Where more than one date is recorded,
+the earlier of (a) the customer's written notice of construction completion and (b) the utility's on-site
+verification, controls.
+(cid:127) Queue date as tiebreaker. The interconnection queue date of the site's underlying application, used
+only to break a tie among sites that rank equally on factors (1), (2), and (3).
+External advocacy, correspondence volume, elected-official inquiries, and stakeholder communications
+received in relation to a site do not enter the ranking. Ranking is determined from the raw attributes above,
+evidenced by the source documents in §3.
+§3 DOCUMENTATION
+For each deployment window the DER Program Office shall assemble a deployment worksheet listing
+every site meeting the eligibility conditions of §1, with the following fields drawn from the identified system
+of record:
+(cid:127) Site name and interconnection application ID (DER Program queue).
+(cid:127) Customer / party of record and site service address (DER Program queue).
+(cid:127) Nameplate capacity and program-scope classification per DIS-01 Rev 4 §3 (application file).
+(cid:127) Devices required to energize (RTU, POI recloser, or both), quantities, and specification references
+(Standards Engineering).
+(cid:127) Construction-complete date and source of certification (project construction file).
+(cid:127) Contracted in-service or grant-funding deadline, if any, with the executed instrument establishing it
+attached by reference (customer submission).
+(cid:127) Essential-service classification, if any, with the customer's facility classification of record attached by
+reference (application file).
+(cid:127) Interconnection queue date (DER Program queue).
+The worksheet shall record the §2 factor on which each ranked site qualifies. Sites that do not qualify at
+ranks (1) or (2) are ranked by (3) with (4) as tiebreaker. The worksheet, the ranked deployment list, and
+the assigned equipment-set identifiers shall be retained in the DER Program equipment-planning file for
+the applicable window and provided to the SOC concurrent with the coordination step described in §5.
+OG-17 Rev 1 — Equipment Deployment Prioritization Guideline Page 2
+
+Amendments to the worksheet arising after issuance — for example, receipt of previously missing
+documentation for a listed site, or arrival of a new site into the waiting population — shall be recorded in an
+addendum bearing its own date; prior ranked lists are not overwritten.
+§4 VENDOR ENGAGEMENT EXPECTATIONS
+Distribution Operations, working through Supply Chain, shall maintain rolling engagement with the current
+approved suppliers of RTUs and POI reclosers with the following expectations:
+(cid:127) Lead-time visibility. A monthly written statement of committed lead times, next scheduled delivery
+date, and delivery quantity per device type, retained in the equipment-planning file. Any change to a
+previously committed date or quantity is to be flagged in writing on receipt.
+(cid:127) Order coverage. Standing purchase orders shall cover no fewer than the number of device sets
+required to satisfy the sites eligible under §1 for the current deployment window plus the next
+scheduled delivery window. Expedite requests shall be pursued where a delivery-date change would
+displace a rank-(1) or rank-(2) site.
+(cid:127) Alternate sourcing. Where committed lead times exceed the interval between deliveries, Supply
+Chain shall document the shortcoming of the current approved suppliers and evaluate qualification of
+additional vendors under Standards Engineering's certification procedures. Qualification effort shall
+not condition or delay deployment decisions for the current window.
+(cid:127) Substitution. Any proposed substitution of device model or configuration relative to the site's
+approved specification is routed to Standards Engineering; substitutions are not accepted on
+schedule pressure alone.
+(cid:127) Escrow / spares. A minimum spare quantity per device type shall be held at the operations
+warehouse, replenished on drawdown, and not consumed to accelerate a lower-ranked site ahead of
+a higher-ranked site whose device set is en route.
+Vendor engagement records are subject to audit by Regulatory Affairs on request.
+§5 COORDINATION WITH THE SYSTEM OPERATIONS CENTER
+The ranked deployment list issued under §3 is transmitted to the SOC concurrent with its issuance.
+Coordination steps are as follows:
+(cid:127) Pre-deployment briefing. For each device set scheduled to arrive in the deployment window, the
+DER Program Office and the SOC Shift Supervisor confirm the receiving site, the anticipated
+field-installation window, the commissioning sequence, and the telemetry integration steps required
+for permission-to-operate (PTO). Nothing in this guideline modifies the SOC's PTO gating criteria;
+TCS-02 §5 requires utility-owned RTU and SCADA telemetry with live telemetry established prior to
+PTO for sites at or above 500 kW, and this guideline does not authorize interim or provisional
+energization ahead of that condition.
+(cid:127) Change control. A change to the ranked list after transmittal to the SOC — for example, arrival of a
+new rank-(1) site, or documented lapse of a committed deadline previously credited at rank (2) — is
+issued by written addendum jointly to Supply Chain and to the SOC. Verbal reprioritization is not to be
+relied upon.
+(cid:127) Field constraints. Where feeder condition, crew availability, or outage-window constraints prevent
+installation at a higher-ranked site within the window, the SOC records the constraint and the DER
+Program Office reissues the deployment assignment for that device set to the next-eligible site; the
+OG-17 Rev 1 — Equipment Deployment Prioritization Guideline Page 3
+
+higher-ranked site retains its rank for the following window.
+(cid:127) Commissioning readiness. The SOC's PTO-hold log continues to govern which completed sites are
+eligible for energization steps; sites without established telemetry remain on the hold log until the
+utility-owned RTU is installed and telemetry is verified in accordance with TCS-02.
+(cid:127) Reporting. A written record of device-set assignments, installation dates, commissioning outcomes,
+and any addenda issued during the window is retained by the DER Program Office and made
+available to Regulatory Affairs and to the SOC on request.
+End of Guideline OG-17.
+OG-17 Rev 1 — Equipment Deployment Prioritization Guideline Page 4

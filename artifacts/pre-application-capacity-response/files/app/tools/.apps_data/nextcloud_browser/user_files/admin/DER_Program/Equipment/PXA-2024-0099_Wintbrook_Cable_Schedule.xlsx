@@ -1,0 +1,29 @@
+[Sheet: Header]
+Cable Schedule: Wintbrook Processing Rooftop (PXA-2024-0099)
+Fenmoor Electric LLC · Alleron Electrical Contractor Lic. #EC-12093
+Drawing E-004 Rev C, 03/21/2025. Strings of 17 Halcrest HC-550M modules: Isc 14.0 A, Imp 13.1 A; string Vmp 712.3 V at 25 degC, 612.6 V at 65 degC cell temperature; maximum Voc 956.3 V at -23 degC.
+DC feeder ampacity: 75 degC rating with a 0.88 ambient correction for 36 to 40 degC, both legs. Warehouse truss space: 40 degC, measured 06/2024. Roof leg: the EMT runs on supports at least 25 mm above the roof, at the ASHRAE 2 percent design dry bulb for Halston, 33 degC. Voltage drop at string Imp and 25 degC string Vmp. String circuits are rated at the rooftop design ambient.
+Prepared: M. Iversen, Electrical Engineer, Fenmoor Electric LLC, 03/21/2025.
+[Sheet: DC Feeders]
+Cable	From	To	Strings	Isc total (A)	Circuit current, 1.25 x Isc (A)	Conductor	Corrected ampacity (A)	Required, 1.25 x circuit current (A)	Overcurrent protection	Equipment grounding conductor	Raceway	Length (ft)	Voltage drop (%)
+DC-1	CB-1 output	INV-1 dc input	9	126	157.5	2 x 1/C 4/0 AWG Cu RHW-2	202.4	196.9	200 A fuse at the inverter dc input	6 AWG Cu	2-1/2 in. EMT with steel set-screw couplings and connectors, on the roof and inside the warehouse to the inverter room	182	0.37
+DC-2	CB-2 output	INV-1 dc input	9	126	157.5	2 x 1/C 4/0 AWG Cu RHW-2	202.4	196.9	200 A fuse at the inverter dc input	6 AWG Cu	2-1/2 in. EMT with steel set-screw couplings and connectors, on the roof and inside the warehouse to the inverter room	214	0.43
+DC-3	CB-3 output	INV-1 dc input	9	126	157.5	2 x 1/C 4/0 AWG Cu RHW-2	202.4	196.9	200 A fuse at the inverter dc input	6 AWG Cu	2-1/2 in. EMT with steel set-screw couplings and connectors, on the roof and inside the warehouse to the inverter room	246	0.5
+DC-4	CB-4 output	INV-1 dc input	8	112	140	2 x 1/C 4/0 AWG Cu RHW-2	202.4	175	200 A fuse at the inverter dc input	6 AWG Cu	2-1/2 in. EMT with steel set-screw couplings and connectors, on the roof and inside the warehouse to the inverter room	278	0.5
+DC-5	CB-5 output	INV-1 dc input	8	112	140	2 x 1/C 4/0 AWG Cu RHW-2	202.4	175	200 A fuse at the inverter dc input	6 AWG Cu	2-1/2 in. EMT with steel set-screw couplings and connectors, on the roof and inside the warehouse to the inverter room	302	0.54
+DC-6	CB-6 output	INV-2 dc input	9	126	157.5	2 x 1/C 4/0 AWG Cu RHW-2	202.4	196.9	200 A fuse at the inverter dc input	6 AWG Cu	2-1/2 in. EMT with steel set-screw couplings and connectors, on the roof and inside the warehouse to the inverter room	176	0.35
+DC-7	CB-7 output	INV-2 dc input	9	126	157.5	2 x 1/C 4/0 AWG Cu RHW-2	202.4	196.9	200 A fuse at the inverter dc input	6 AWG Cu	2-1/2 in. EMT with steel set-screw couplings and connectors, on the roof and inside the warehouse to the inverter room	208	0.42
+DC-8	CB-8 output	INV-2 dc input	9	126	157.5	2 x 1/C 4/0 AWG Cu RHW-2	202.4	196.9	200 A fuse at the inverter dc input	6 AWG Cu	2-1/2 in. EMT with steel set-screw couplings and connectors, on the roof and inside the warehouse to the inverter room	240	0.48
+DC-9	CB-9 output	INV-2 dc input	8	112	140	2 x 1/C 4/0 AWG Cu RHW-2	202.4	175	200 A fuse at the inverter dc input	6 AWG Cu	2-1/2 in. EMT with steel set-screw couplings and connectors, on the roof and inside the warehouse to the inverter room	270	0.48
+DC-10	CB-10 output	INV-2 dc input	8	112	140	2 x 1/C 4/0 AWG Cu RHW-2	202.4	175	200 A fuse at the inverter dc input	6 AWG Cu	2-1/2 in. EMT with steel set-screw couplings and connectors, on the roof and inside the warehouse to the inverter room	296	0.53
+DC-11	CB-11 output	INV-3 dc input	9	126	157.5	2 x 1/C 4/0 AWG Cu RHW-2	202.4	196.9	200 A fuse at the inverter dc input	6 AWG Cu	2-1/2 in. EMT with steel set-screw couplings and connectors, on the roof and inside the warehouse to the inverter room	158	0.32
+DC-12	CB-12 output	INV-3 dc input	9	126	157.5	2 x 1/C 4/0 AWG Cu RHW-2	202.4	196.9	200 A fuse at the inverter dc input	6 AWG Cu	2-1/2 in. EMT with steel set-screw couplings and connectors, on the roof and inside the warehouse to the inverter room	190	0.38
+[Sheet: AC Feeders]
+Cable	From	To	Conductors per phase	Overcurrent protection	Equipment grounding conductor	Raceway
+AC-1	INV-1	SWBD-PV	3 sets of 4/0 AWG Cu XHHW-2	500 A fused disconnect	2 AWG Cu in each raceway	3 x 2-1/2 in. EMT
+AC-2	INV-2	SWBD-PV	3 sets of 4/0 AWG Cu XHHW-2	500 A fused disconnect	2 AWG Cu in each raceway	3 x 2-1/2 in. EMT
+AC-3	INV-3	SWBD-PV	1 set of 4/0 AWG Cu XHHW-2	225 A fused disconnect	4 AWG Cu	2-1/2 in. EMT
+AC-4	T-PV secondary	SWBD-PV main	4 sets, each 3 x 500 kcmil Cu XHHW-2 and a 1/0 Cu XHHW-2 grounded conductor, 3 m	1200 A main breaker at SWBD-PV	1/0 Cu supply-side bonding jumper in each raceway	4 x 3 in. rigid metal conduit
+[Sheet: String Circuits]
+String circuits
+Up to 9 strings per combiner; 10 AWG PV wire, up to 140 ft; string fuse 25 A at each combiner input (module maximum series fuse rating 25 A).

@@ -1,0 +1,62 @@
+[Sheet: Title Block]
+Alleniom Utilities	
+Feeder Hosting Capacity Map Export	
+Publication	Alleniom Utilities Feeder Hosting Capacity Map
+Published	05/15/2024
+Publishing organization	Alleniom Utilities — Distribution Planning
+Author	June Halloway, Distribution Planning Engineer
+Contact	june.halloway@alleniom.com
+Office	DER Program Office · 4200 Veldmere Boulevard, Halston, Alleron 01HA
+Refresh commitment	Quarterly refresh commitment. The map is republished on a quarterly cadence with updated published available capacity values incorporating incremental planning studies and material queue additions since the prior release.
+Refresh prioritization criteria	Refresh prioritization criteria: application date, capacity requested, DER category (net metering vs pure generation). Feeders with the earliest pending pre-application or application date receive priority for re-study, followed by feeders where the requested capacity is largest relative to the currently published available figure, followed by DER category weighting per the net metering vs pure generation distinction (pure-generation queue entries are weighted more heavily against feeder headroom than net-metering behind-the-meter entries at equivalent nameplate).
+Basis	Feeder-level planning study using recorded peak and minimum load, existing interconnected DER of record at the time of the underlying study, and standard thermal / voltage / protection screens per Alleniom Distribution Planning methodology.
+DER Category legend	"Net metering" — behind-the-meter DER netted against customer load at the point of common coupling. "Pure generation" — export-only front-of-the-meter DER. "Mixed" — feeder hosts a combination of net-metering and pure-generation interconnections.
+Voltage class note	Nominal voltages given as feeder primary line-to-line kV.
+Scope	Alleniom distribution system, all substations serving in-scope DER territory. Sub-transmission and transmission-connected resources excluded.
+Applicability	Values are the published available capacity figures as of the publication date shown above. Applicants and pre-application requesters should consult Distribution Planning for confirmation before finalizing project sizing decisions on any feeder shown. Published values do not reflect interconnection queue activity recorded after the publication date; the active-queue register maintained by the DER Program Office is the record of that activity. A pre-application capacity response is prepared against the published value as adjusted for queue entries added since publication.
+Document control	Doc no. HCM-2024-Q2 · Rev 1 · Date 05/15/2024 · Owner June Halloway
+[Sheet: Feeder Capacity]
+Feeder Capacity — Published Available (MW)					
+Publication date: 05/15/2024					
+Feeder ID	Substation	Nominal Voltage	Published Available Capacity (MW)	DER Category	Last Study Date
+ALN-014	Ashborne	12.47 kV	4.6	Net Metering	02/2024
+ALN-023	Ashborne	12.47 kV	2.1	Mixed	01/2024
+ALN-031	Brackenmoor	13.2 kV	5.9	Pure Generation	03/2024
+ALN-042	Brackenmoor	13.2 kV	2.7	Pure Generation	03/2024
+ALN-055	Cindermill	12.47 kV	3.4	Net Metering	11/2023
+ALN-061	Cindermill	12.47 kV	0.6	Net Metering	11/2023
+ALN-074	Downing Cross	12.47 kV	4.2	Mixed	02/2024
+ALN-089	Downing Cross	12.47 kV	2.9	Net Metering	02/2024
+ALN-097	Elderpine	13.2 kV	6.1	Pure Generation	04/2024
+ALN-103	Elderpine	13.2 kV	5.5	Pure Generation	04/2024
+ALN-108	Elderpine	13.2 kV	3	Pure Generation	04/2024
+ALN-116	Fairholm	12.47 kV	4.7	Net Metering	01/2024
+ALN-122	Fairholm	12.47 kV	3.6	Mixed	01/2024
+ALN-130	Grantsford	12.47 kV	2.3	Net Metering	12/2023
+ALN-138	Grantsford	12.47 kV	5.2	Pure Generation	12/2023
+ALN-145	Harleston	13.2 kV	4.4	Mixed	03/2024
+ALN-152	Harleston	13.2 kV	6.8	Pure Generation	03/2024
+ALN-161	Ivywood	12.47 kV	2.5	Net Metering	11/2023
+ALN-168	Ivywood	12.47 kV	3.9	Mixed	11/2023
+ALN-175	Juniper Hollow	12.47 kV	5.7	Pure Generation	02/2024
+ALN-183	Juniper Hollow	12.47 kV	4.1	Net Metering	02/2024
+ALN-190	Kettlebrook	13.2 kV	6.3	Pure Generation	04/2024
+ALN-198	Kettlebrook	13.2 kV	2.8	Mixed	04/2024
+ALN-205	Larkspur Ridge	12.47 kV	3.7	Net Metering	12/2023
+ALN-214	Larkspur Ridge	12.47 kV	4.9	Pure Generation	12/2023
+ALN-221	Merrowfield	12.47 kV	2.2	Mixed	01/2024
+ALN-229	Merrowfield	12.47 kV	5	Pure Generation	01/2024
+ALN-236	Northgate	13.2 kV	6.5	Pure Generation	03/2024
+ALN-244	Northgate	13.2 kV	4.3	Net Metering	03/2024
+ALN-251	Oldyard	12.47 kV	3.2	Mixed	11/2023
+ALN-258	Oldyard	12.47 kV	2.6	Net Metering	11/2023
+ALN-266	Pinesboro	12.47 kV	5.4	Pure Generation	02/2024
+ALN-272	Pinesboro	12.47 kV	4	Net Metering	02/2024
+ALN-280	Quarrymouth	13.2 kV	6.7	Pure Generation	04/2024
+Total (published available)			141.8		
+Row notes					
+ALN-042	Brackenmoor substation. Feeder identified as the point of interconnection for the Harkwell Ridge Solar pre-application dialogue tracked under Distribution Planning correspondence.				
+ALN-108	Elderpine substation. 13.2 kV feeder. Published available capacity 3.0 MW as of the publication date shown in the Title Block tab. Category: pure-generation feeder segment. Last planning study 04/2024.				
+ALN-214	Larkspur Ridge substation. Feeder identified as the point of interconnection for the Bramwick Commons Solar pre-application dialogue tracked under Distribution Planning correspondence.				
+Footer					
+Prepared by: June Halloway, Distribution Planning Engineer, Alleniom Utilities. Distribution Planning maintains this map on the quarterly refresh cadence stated above; feeder-level values reflect the last completed planning study for each feeder as of the publication date. Applicants requesting pre-application feeder guidance should reference the DER Category value and Last Study Date shown alongside the Published Available Capacity when scoping projects.					

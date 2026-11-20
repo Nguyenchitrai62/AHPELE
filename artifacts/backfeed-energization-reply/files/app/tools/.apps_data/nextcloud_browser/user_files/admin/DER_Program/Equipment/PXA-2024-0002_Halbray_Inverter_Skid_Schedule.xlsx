@@ -1,0 +1,24 @@
+[Sheet: Header]
+Inverter Skid Schedule: Halbray Field Solar Site 3 (PXA-2024-0002)
+Tamsworth Electrical Constructors Inc. · Alleron Electrical Contractor Lic. #EC-11847
+Drawing E-301 Rev B, 06/20/2025. Four skids, each with two Nordreem NG-XT-225 and one Nordreem NG-XT-125 string inverters (575 kW ac, 800 V, 3-phase) into ac combiner panel ACP and disconnect AD on the skid.
+Prepared: R. Vance, Electrical Engineer, Tamsworth Electrical Constructors Inc., 06/20/2025.
+[Sheet: Skids]
+Skid	Inverters	AC output (kW)	AC combiner panel	Skid output current (A)	Collection feeder
+SK-1	2 x NG-XT-225, 1 x NG-XT-125	575	ACP-1: 800 V, 600 A bus, NEMA 3R, 65 kA rated; breakers 2 x 225 A, 1 x 125 A	415	C-1 to CSB-1
+SK-2	2 x NG-XT-225, 1 x NG-XT-125	575	ACP-2: 800 V, 600 A bus, NEMA 3R, 65 kA rated; breakers 2 x 225 A, 1 x 125 A	415	C-2 to CSB-1
+SK-3	2 x NG-XT-225, 1 x NG-XT-125	575	ACP-3: 800 V, 600 A bus, NEMA 3R, 65 kA rated; breakers 2 x 225 A, 1 x 125 A	415	C-3 to CSB-1
+SK-4	2 x NG-XT-225, 1 x NG-XT-125	575	ACP-4: 800 V, 600 A bus, NEMA 3R, 65 kA rated; breakers 2 x 225 A, 1 x 125 A	415	C-4 to CSB-1
+[Sheet: Inverter Circuits]
+Circuit	Inverter	Inverter output current (A)	Breaker (A)	Conductors	Equipment grounding conductor	Raceway
+Each NG-XT-225 to its ACP breaker	NG-XT-225	162.4	225	3 x 1/C 4/0 AWG Cu, 2 kV Type USE-2	4 AWG Cu, green	Rigid steel conduit on the skid frame
+Each NG-XT-125 to its ACP breaker	NG-XT-125	90.2	125	3 x 1/C 1 AWG Cu, 2 kV Type USE-2	4 AWG Cu, green	Rigid steel conduit on the skid frame
+[Sheet: Disconnects]
+Item	Rating	Door
+AD-1 to AD-4	600 A, 1000 V ac fused disconnect, NEMA 3R, 600 A fuses, 65 kA interrupting; padlockable handle	Line and load warning labels on each door; each AD marked as the PV system disconnect
+[Sheet: Pads]
+Item	Construction
+Skid pads	Cast-in-place concrete, 300 mm thick, one per skid; skid frame anchored to the pad
+Collection feeder exits	Two 4 in. HDPE duct sweeps per skid, cast into the pad to the collection trench
+Inverter dc inputs	String home runs in 10 AWG PV wire, 2 kV, from the array, through the pad stub-ups to each inverter's dc inputs; dc power source label at each inverter dc input, maximum dc voltage 1,500 V
+Stub-ups	Inverter pad stub-ups: 2 in. PVC-coated rigid steel conduit, through the concrete pad and 600 mm below grade to the trench

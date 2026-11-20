@@ -1,0 +1,47 @@
+ALLENIOM UTILITIES — SCADA/EMS ENGINEERING
+4200 Veldmere Boulevard, Halston, Alleron 01HA · (612) 555-0100 · alleniom.com
+Site-Specific RTU Installation Drawing: PC-RTU-01
+Doc no. Rev Date Owner
+SCADA-PC-RTU-DWG- Rev 0 07/02/2025 SCADA/EMS Engineering (Marcus Deele)
+01
+Site: Prairie Corridor Business Park PV (PXA-2024-0343), 2200 Corridor Parkway, Halston, Alleron 05HA.
+Issued under TCS-02 §3.1 for the customer-furnished items and the utility installation. Construction package
+reference: Prairie Corridor POI civil and electrical package, Rev 2.
+1. Location
+RTU enclosure mounted on the utility equipment pad beside the POI recloser pad, on the utility side of the point
+of interconnection, with 24-hour crew access from Corridor Parkway (DPS-07 §4.2 item 6 for the recloser pad).
+2. Bill of materials
+Item Description Furnished by
+1 RTU, Kelvraith YOT-8963 (TCS-02 §3.2), tag PC-RTU-01 Alleniom Utilities
+2 Enclosure, NEMA 4X stainless, 36 x 30 x 12 in, with thermostatic Customer
+heater; locked and tamper-evident, Alleniom lock core, keys held by
+Alleniom; door switch wired to RTU digital input DI 1 (TCS-02 §7.6)
+3 Station service: dedicated 20 A, 120 V branch circuit from panel LP-2, Customer
+circuit 14, through a 1.5 kVA online UPS, Corvane OL-1500R, rated 4.5
+h at the RTU load (TCS-02 §3.4). The UPS output feeds the RTU (item
+1), the cellular modem (item 4) and the enclosure heater (item 2)
+4 Cellular modem and antenna on the approved carrier, SIM held by Alleniom Utilities
+Alleniom (TCS-02 §4.1(c))
+5 Communications entrance: 1 in conduit from the customer network Customer
+room to the enclosure
+6 Plant network drop: Cat 6 from customer switch SW-1 (plant LAN Customer
+192.168.10.0/24) to RTU port 2
+7 Recloser control link: RS-485 from the POI-R1 control cabinet to the Alleniom Utilities
+RTU serial expansion card
+3. UPS output loads
+Load Draw Source of figure
+RTU, Kelvraith YOT-8963 (item 1) 38 W typical Kelvraith YOT-8963 product data, 24
+V DC supply module
+Cellular modem (item 4) 12 W typical, continuous Approved-carrier modem data,
+SCADA/EMS standard kit
+Enclosure heater (item 2) 60 W, thermostat on Enclosure manufacturer data
+below 5 degC
+4. Notes
+4.1 The RTU configuration (DNP3 addresses, point table, poll settings) is issued separately as
+SCADA-PC-RTU-CFG-01 per TCS-02 §4.2; the plant-side devices it polls are listed in
+SCADA-PC-RTU-DEV-01.
+4.2 IP addressing on the plant side is assigned by Alleniom (TCS-02 §4.4); the customer's integrator, Ridgeway
+Controls, supplied the device list.
+4.3 Installation follows delivery and allocation of the RTU and POI recloser set under OG-17. This drawing does
+not schedule the work.
+Prepared: Marcus Deele, SCADA/EMS Engineer, 07/02/2025.

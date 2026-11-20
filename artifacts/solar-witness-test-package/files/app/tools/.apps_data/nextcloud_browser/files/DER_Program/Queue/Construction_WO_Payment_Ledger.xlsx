@@ -1,0 +1,66 @@
+[Sheet: WO Payment Ledger]
+Alleniom Utilities — DER Program Office							
+Construction Work-Order Payment Ledger							
+As of:	07/14/2025						
+Prepared by:	Sam Petrakis, Finance — Work-Order & Payments						
+Source system:	FIN-GL / WO Subledger						
+Currency:	USD						
+Ledger							
+Project ID	Customer	Invoice Number	Invoice Date	Invoice Amount	Posted Amount	Posted Date	Open Balance
+PXA-2023-0812	Halbrook Data Services LLC	CWO-2025-0412	01/08/2025	21450	21450	01/17/2025	0
+PXA-2023-0834	Sandsmere Property LLC	CWO-2025-0418	01/14/2025	15720	15720	01/23/2025	0
+PXA-2023-0856	Cranfield Utilities Coop	CWO-2025-0426	01/21/2025	17880	17880	01/30/2025	0
+PXA-2023-0871	Kavendale Cold Storage LLC	CWO-2025-0433	04/03/2025	18400	0		18400
+PXA-2023-0893	Millwater Development Corp	CWO-2025-0441	01/27/2025	24150	24150	02/05/2025	0
+PXA-2024-0104	Belhaven Retail Partners	CWO-2025-0448	02/03/2025	19600	19600	02/12/2025	0
+PXA-2025-0909	Wychcombe Realty Group	CWO-2025-0455	02/07/2025	13275	13275	02/17/2025	0
+PXA-2024-0138	Grangeford Foods LLC	CWO-2025-0463	02/12/2025	27900	27900	02/21/2025	0
+PXA-2024-0155	Grantsford Industrial Park LP	CWO-2025-0470	04/09/2025	22750	0		22750
+PXA-2024-0159	Verwick Industries Inc.	CWO-2025-0476	02/18/2025	16880	16880	02/27/2025	0
+PXA-2024-0187	Harborlight Commerce LLC	CWO-2025-0484	02/24/2025	20300	20300	03/05/2025	0
+PXA-2024-0203	Whitfen Regional Medical Ctr	CWO-2025-0492	03/20/2025	14900	0		14900
+PXA-2024-0212	Millbrooke Business Trust	CWO-2025-0498	03/03/2025	18225	18225	03/12/2025	0
+PXA-2024-0234	Kestrel Point Development	CWO-2025-0505	03/07/2025	12540	12540	03/17/2025	0
+PXA-2024-0249	Stonecrest Industrial LLC	CWO-2025-0511	03/11/2025	25610	25610	03/20/2025	0
+PXA-2024-0263	Farthingale Farms LLC	CWO-2025-0517	03/14/2025	11940	11940	03/24/2025	0
+PXA-2024-0278	Aldertown Farms Coop	CWO-2025-0523	03/18/2025	15150	15150	03/27/2025	0
+PXA-2024-0289	Ellmoor Retail Holdings	CWO-2025-0530	03/21/2025	17420	17420	03/31/2025	0
+PXA-2024-0303	Sableridge Realty Group	CWO-2025-0537	03/25/2025	20880	20880	04/03/2025	0
+PXA-2024-0311	Brackenridge Storage LLC	CWO-2025-0544	03/28/2025	13600	13600	04/07/2025	0
+PXA-2024-0325	Northland Storage LLC	CWO-2025-0551	04/01/2025	14780	14780	04/10/2025	0
+PXA-2024-0327	Bramwell Timber Products Inc.	CWO-2025-0558	03/24/2025	26300	0		26300
+PXA-2024-0334	Rushmere Industries Inc.	CWO-2025-0564	04/04/2025	22100	22100	04/14/2025	0
+PXA-2024-0348	Rennwood Industries	CWO-2025-0571	04/08/2025	19900	19900	04/17/2025	0
+PXA-2024-0361	Windercliff Foods Ltd.	CWO-2025-0577	04/11/2025	16720	16720	04/22/2025	0
+PXA-2024-0369	Larchmont Assembly Corp	CWO-2025-0583	04/15/2025	21340	21340	04/24/2025	0
+PXA-2024-0374	Corvyn Distribution LLC	CWO-2025-0589	04/18/2025	23660	23660	04/28/2025	0
+PXA-2024-0385	Fenbrook Property Trust	CWO-2025-0595	04/22/2025	14225	14225	05/01/2025	0
+PXA-2024-0402	Hazelford Property Group	CWO-2025-0601	04/25/2025	15880	15880	05/05/2025	0
+PXA-2024-0416	Fenmark Commerce LLC	CWO-2025-0608	04/29/2025	17145	17145	05/08/2025	0
+PXA-2024-0429	Grandview Retail Partners	CWO-2025-0614	05/02/2025	19470	19470	05/12/2025	0
+PXA-2024-0436	Ravenscombe Manufacturing	CWO-2025-0620	05/05/2025	22880	22880	05/14/2025	0
+PXA-2024-0454	Grantsburg Township	CWO-2025-0627	05/09/2025	13910	13910	05/19/2025	0
+PXA-2024-0458	Elmshire Township	CWO-2025-0633	05/13/2025	18660	18660	05/22/2025	0
+PXA-2024-0468	Sedgewick Township	CWO-2025-0640	05/16/2025	12320	12320	05/27/2025	0
+PXA-2024-0483	Barnsley Manufacturing	CWO-2025-0646	05/20/2025	24780	24780	05/29/2025	0
+PXA-2024-0491	Rockhaven Farms LLC	CWO-2025-0652	05/23/2025	15540	15540	06/02/2025	0
+PXA-2024-0495	Ashendale Retail Partners	CWO-2025-0658	05/27/2025	17880	17880	06/05/2025	0
+PXA-2024-0498	Northmere Data Center Holdings	CWO-2025-0665	04/01/2025	19200	0		19200
+PXA-2024-0509	Kentwood Development LLC	CWO-2025-0671	05/30/2025	20120	20120	06/09/2025	0
+PXA-2024-0517	Bellhaven Foods LLC	CWO-2025-0677	06/03/2025	26410	26410	06/12/2025	0
+PXA-2024-0531	Foxbridge Storage Trust	CWO-2025-0684	06/06/2025	14720	14720	06/16/2025	0
+PXA-2024-0545	Thornmere Storage Trust	CWO-2025-0690	06/10/2025	16540	16540	06/20/2025	0
+PXA-2024-0559	Newmark Distribution Corp	CWO-2025-0697	06/13/2025	22860	22860	06/23/2025	0
+PXA-2024-0562	Kettleford Industrial LLC	CWO-2025-0703	06/17/2025	18340	18340	06/26/2025	0
+PXA-2024-0574	Windmere Farms Coop	CWO-2025-0710	06/20/2025	13780	13780	06/30/2025	0
+PXA-2024-0581	Ambledown Realty LLC	CWO-2025-0716	06/24/2025	15220	15220	07/03/2025	0
+PXA-2025-0004	Rothgate Industrial Group	CWO-2025-0722	06/27/2025	21610	21610	07/07/2025	0
+PXA-2025-0016	Sunderly Retail LLC	CWO-2025-0728	06/30/2025	17940	17940	07/09/2025	0
+PXA-2025-0031	Craigmore Holdings LLC	CWO-2025-0734	07/02/2025	19720	19720	07/11/2025	0
+Totals				932520	830970		101550
+Notes							
+•  Register reflects construction work-order invoices issued to DER program-scope applicants and postings to the WO subledger.							
+•  Invoice Date is the date the invoice was issued from the WO subledger; Posted Date is the date the cash application was posted to the general ledger.							
+•  Open Balance = Invoice Amount − Posted Amount as of the "As of" date above.							
+•  Rows without a Posted Date carry the full invoice amount as Open Balance and remain in the on-hold queue under non-payment status.							
+•  Domestic rooftop projects are outside DER program scope and are not tracked here.							

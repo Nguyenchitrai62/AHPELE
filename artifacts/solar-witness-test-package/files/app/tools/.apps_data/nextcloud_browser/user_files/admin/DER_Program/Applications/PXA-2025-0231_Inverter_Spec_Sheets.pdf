@@ -1,0 +1,256 @@
+PXA-2025-0231 — Inverter Nameplate & Spec Sheets Compiled 06/09/2025 — Karsten Solar Development LLC
+Inverter Nameplate & Spec Sheets
+PXA-2025-0231
+Filed as companion file to Application PXA-2025-0231 — Wexley Distribution Center, Halston Regional
+Cross-Dock
+Compiled by: Karsten Solar Development LLC · Emery Traskin, Development Manager
+Compilation date: 06/09/2025
+Contents: Manufacturer-published product datasheets for the commercial three-phase string inverters listed in
+Section 4.1 of Application PXA-2025-0231.
+Compilation Index
+The following inverter nameplate and certification data are summarized below:
+Item Manufacturer Model Nameplate AC Output Qty
+INV-1 Solmery Power SM-125K-3P 125 kW 1 unit
+INV-2 Solmery Power SM-125K-3P 125 kW 1 unit
+INV-3 Solmery Power SM-125K-3P 125 kW 1 unit
+INV-4 Torvane Electric TE-125K 125 kW 1 unit
+INV-5 Torvane Electric TE-125K 125 kW 1 unit
+INV-6 Torvane Electric TE-125K 125 kW 1 unit
+Aggregate inverter nameplate AC output on PXA-2025-0231: 750 kW (six units of 125 kW nameplate each, as
+recorded on the manufacturer datasheets that follow).
+Two inverter model summary sheets follow - one per inverter model - presenting the nameplate ratings and
+certification-relevant specifications, compiled by the applicant's engineer from manufacturer product
+literature current as of the filing date.
+Page 1 Doc PXA-2025-0231-INV Rev 0
+
+PXA-2025-0231 — Inverter Nameplate & Spec Sheets Compiled 06/09/2025 — Karsten Solar Development LLC
+Datasheet 1 — Solmery Power SM-125K-3P
+Solmery Power, Inc.
+Commercial Three-Phase String Inverter Product Line
+Datasheet Ref. SM-125K-3P · Document DS-SM125-R7 · Publication date 02/2025
+Solmery Power, Inc. · 1900 Highfield Industrial Drive · Aurora, Illinois 60506 · United States
+Product Support: (630) 555-0182 · support@solmerypower.com · solmerypower.com
+Product Description
+The Solmery Power SM-125K-3P is a transformerless, three-phase commercial string inverter engineered for
+behind-the-meter and front-of-the-meter commercial and industrial photovoltaic installations. The unit is intended
+for outdoor pad-mount or wall-mount deployment and is designed for 480 V wye grid interconnection on
+secondary distribution systems.
+Nameplate — AC Output
+Nameplate AC output power (continuous, rated) 125 kW
+Nameplate AC output power (peak, £10 s) 130 kW
+Nominal AC output voltage 480 V, 3-phase, 4-wire (wye) + PE
+AC output voltage operating range 422 V – 528 V (–12 % / +10 %)
+Nominal output frequency 60 Hz
+Output frequency operating range 57.0 – 62.0 Hz (adjustable per utility)
+Nominal AC output current, continuous 150.4 A per phase
+Maximum AC output current 156.4 A per phase
+Power factor at rated power Unity (adjustable 0.80 leading – 0.80 lagging)
+Total harmonic distortion (current, at rated output) < 3 %
+Inrush current < 20 A peak
+Utility interconnection topology Three-phase, four-wire, transformerless
+DC Input
+Maximum recommended PV field DC input power 187.5 kW (1.50× DC/AC)
+Absolute maximum DC input voltage (Voc, cold) 1,100 V DC
+MPPT voltage range, full-power 550 V – 950 V DC
+MPPT voltage range, operating 200 V – 1,000 V DC
+Startup DC voltage 250 V DC
+Number of independent MPP trackers 6
+DC inputs per MPPT 4 (24 total; fused positive and negative)
+Maximum input current per MPPT 40 A
+Maximum short-circuit input current per MPPT 60 A
+Reverse polarity protection Yes (integrated)
+Integrated DC disconnect Yes, load-break rated
+Type II surge protection (DC side) Yes, integrated
+Page 2 Doc PXA-2025-0231-INV Rev 0
+
+PXA-2025-0231 — Inverter Nameplate & Spec Sheets Compiled 06/09/2025 — Karsten Solar Development LLC
+Solmery Power SM-125K-3P (continued)
+Efficiency
+Peak conversion efficiency 98.6 %
+CEC weighted efficiency 98.3 %
+European weighted efficiency 98.2 %
+Efficiency at 25 % of rated output (600 V DC) 97.4 %
+Efficiency at 50 % of rated output (600 V DC) 98.3 %
+Efficiency at 75 % of rated output (600 V DC) 98.5 %
+Efficiency at 100 % of rated output (600 V DC) 98.4 %
+Efficiency curve (nominal, MPP voltage = 600 V DC):
+%
+99 |
+| llllll
+98 | lllllll llll
+| llllll
+97 | llll
+| ll
+96 | ll
+|l
+95 +nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnfi
+0 10 25 50 75 100 % (fraction of nameplate AC output)
+Efficiency curve figures are indicative; the certified efficiency measurement was performed under ISO 17025-accredited
+testing laboratory conditions.
+Grid Support / Interoperability
+Anti-islanding Passive + active; IEEE 1547-2018 § 8.2 compliant
+Volt-VAR / Volt-Watt / Frequency-Watt Supported; utility-configurable
+Communications Modbus TCP, SunSpec Modbus, DNP3 (optional)
+Site controller compatibility Solmery SP-Link (optional plant controller — sold
+separately; not included with unit)
+Page 3 Doc PXA-2025-0231-INV Rev 0
+
+PXA-2025-0231 — Inverter Nameplate & Spec Sheets Compiled 06/09/2025 — Karsten Solar Development LLC
+Solmery Power SM-125K-3P (continued)
+Environmental / Mechanical
+Ambient operating temperature –30 °C to +60 °C (derating above +45 °C)
+Storage temperature –40 °C to +70 °C
+Relative humidity 0 – 100 %, condensing
+Cooling Forced air, temperature-controlled variable-speed
+fans
+Enclosure rating Type 4X (IP66)
+Altitude, no derating Up to 2,000 m; derated above 2,000 m
+Dimensions (H × W × D) 1,050 × 720 × 360 mm
+Weight 92 kg
+Audible noise at 1 m < 65 dB(A)
+Standard Listings & Certifications
+The SM-125K-3P has been evaluated to the following standards. Certification marks reflect the base listings
+currently held by the product family.
+(cid:127) UL 1741-SB — Grid Support Utility Interactive Inverters and Converters (base listing; supplement SB, dated
+09/2021)
+(cid:127) UL 1741 — Standard for Inverters, Converters, Controllers, and Interconnection System Equipment for Use with
+Distributed Energy Resources
+(cid:127) IEEE 1547-2018 — Interconnection and Interoperability of Distributed Energy Resources with Associated
+Electric Power Systems Interfaces
+(cid:127) IEEE 1547.1-2020 — Conformance Test Procedures for Equipment Interconnecting Distributed Energy
+Resources with Electric Power Systems
+(cid:127) CSA C22.2 No. 107.1-16
+(cid:127) FCC Part 15, Class A (emissions)
+(cid:127) IEC 62109-1 and IEC 62109-2 (product safety)
+The base UL 1741-SB listing evaluates the inverter as a grid-support utility-interactive inverter to the requirements
+of Supplement SB (grid-support functions). The base listing does not, in itself, evaluate the unit against
+Supplement SB Power Control System (PCS) mode; the PCS-mode evaluation under Supplement SB is a
+separate, additional certification and is not held by the SM-125K-3P as listed above. The product family has not
+been evaluated to UL 3141 (Power Control Systems).
+Warranty
+10-year standard product warranty on the inverter; 20-year extended warranty available.
+Page 4 Doc PXA-2025-0231-INV Rev 0
+
+PXA-2025-0231 — Inverter Nameplate & Spec Sheets Compiled 06/09/2025 — Karsten Solar Development LLC
+Datasheet 2 — Torvane Electric TE-125K
+Torvane Electric Corporation
+Commercial PV Inverter Division
+Datasheet Ref. TE-125K · Document DTS-TE125-Rev4 · Publication date 11/2024
+Torvane Electric Corporation · 2440 Merlan Way, Building 4 · Beaverton, Oregon 97006 · United States
+Technical Support: (503) 555-0219 · techsupport@torvane-electric.com · torvane-electric.com
+Product Description
+The Torvane Electric TE-125K is a commercial-grade transformerless three-phase string inverter for grid-parallel
+photovoltaic generation. The TE-125K is designed for 480 V wye distribution interconnection and is suitable for
+behind-the-meter industrial and commercial PV plants. The unit is a natural evolution of the TE-100K platform,
+sharing its power stage topology with an uprated output stage.
+Nameplate — AC Output
+Nameplate AC output power (continuous) 125 kW
+Maximum AC output power (short-term, 10 s) 132 kW
+Nominal AC output voltage 480 V, 3-phase, 4-wire (wye + neutral)
+AC voltage operating band 422 V – 528 V
+Nominal AC frequency 60 Hz
+Frequency operating band 57.0 – 62.0 Hz
+Continuous AC output current 150.4 A per phase
+Maximum AC output current 158.8 A per phase
+Power factor Unity nominal; adjustable 0.80 lead / 0.80 lag
+Current THD at rated output < 3.0 %
+Grid connection type Three-phase, four-wire + PE (wye)
+Utility isolation Non-isolated (transformerless)
+Page 5 Doc PXA-2025-0231-INV Rev 0
+
+PXA-2025-0231 — Inverter Nameplate & Spec Sheets Compiled 06/09/2025 — Karsten Solar Development LLC
+DC Input
+Recommended maximum PV field size (DC) 175 kW (up to 1.40× DC/AC recommended; 1.50×
+permitted)
+Absolute maximum DC voltage (open-circuit, cold) 1,100 V DC
+MPPT operating range (full power) 570 V – 950 V DC
+MPPT full range 200 V – 1,000 V DC
+Startup DC voltage 260 V DC
+Number of MPP trackers 8
+DC string inputs per MPPT 3 (24 total)
+Maximum current per MPPT 32 A
+Maximum short-circuit current per MPPT 45 A
+DC input protection Integrated string fusing (positive + negative); polarity
+reverse protection
+Integrated DC load-break disconnect Yes
+DC surge protection Type II, integrated
+Page 6 Doc PXA-2025-0231-INV Rev 0
+
+PXA-2025-0231 — Inverter Nameplate & Spec Sheets Compiled 06/09/2025 — Karsten Solar Development LLC
+Torvane Electric TE-125K (continued)
+Efficiency
+Peak conversion efficiency 98.5 %
+CEC weighted efficiency 98.1 %
+European weighted efficiency 98.0 %
+Efficiency at 20 % of nameplate output 96.9 %
+Efficiency at 50 % of nameplate output 98.2 %
+Efficiency at 75 % of nameplate output 98.4 %
+Efficiency at 100 % of nameplate output 98.3 %
+Efficiency curve (nominal, MPP voltage = 620 V DC):
+%
+99 |
+| lllllll
+98 | lllllll lll
+| llll
+97 | llll
+| ll
+96 |lll
+|l
+95 +nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnfi
+0 10 20 50 75 100 % (fraction of nameplate output)
+Curve values are indicative of nominal operation at 620 V DC input; certified measurement points were recorded under
+accredited test-laboratory conditions.
+Grid Support / Interoperability
+Anti-islanding Active + passive, IEEE 1547-2018 § 8.2 compliant
+Volt-VAR, Volt-Watt, Freq-Watt, Constant PF Supported and utility-programmable
+Communications Modbus RTU (RS-485), Modbus TCP (Ethernet),
+SunSpec
+Optional plant controller Torvane TE-PC-1000 plant controller (external
+accessory, sold separately; not included)
+Page 7 Doc PXA-2025-0231-INV Rev 0
+
+PXA-2025-0231 — Inverter Nameplate & Spec Sheets Compiled 06/09/2025 — Karsten Solar Development LLC
+Torvane Electric TE-125K (continued)
+Environmental / Mechanical
+Operating ambient temperature –25 °C to +60 °C (derating above +50 °C)
+Storage temperature –40 °C to +70 °C
+Relative humidity 0 – 100 % condensing
+Cooling Forced convection, variable-speed fans
+Enclosure rating Type 4X (IP66)
+Altitude (no derating) Up to 2,000 m
+Dimensions (H × W × D) 1,075 × 700 × 370 mm
+Weight 88 kg
+Audible noise at 1 m < 65 dB(A)
+Standard Listings & Certifications
+The TE-125K holds the following standard listings as evaluated by a Nationally Recognized Testing Laboratory
+(NRTL).
+(cid:127) UL 1741-SB — Inverters, Converters, Controllers and Interconnection System Equipment for Use With
+Distributed Energy Resources (base listing to Supplement SB, evaluated to grid-support utility-interactive
+requirements)
+(cid:127) UL 1741 — parent standard
+(cid:127) IEEE 1547-2018 — DER interconnection and interoperability
+(cid:127) IEEE 1547.1-2020 — conformance test procedures
+(cid:127) CSA C22.2 No. 107.1-16
+(cid:127) FCC Part 15, Subpart B, Class A
+(cid:127) IEC 62109-1 / IEC 62109-2 — product safety
+The TE-125K's UL 1741-SB listing evaluates the unit as a grid-support utility-interactive inverter under
+Supplement SB. The base Supplement SB listing does not include an evaluation to Supplement SB's Power
+Control System mode; that mode is a separate, additional evaluation and is not carried by the TE-125K. The
+TE-125K product family is not evaluated to UL 3141.
+Warranty
+Standard 10-year product warranty. Extended 20-year and 25-year warranty tiers available.
+Page 8 Doc PXA-2025-0231-INV Rev 0
+
+PXA-2025-0231 — Inverter Nameplate & Spec Sheets Compiled 06/09/2025 — Karsten Solar Development LLC
+Compilation Footer
+This compilation summarizes nameplate and certification data for the inverter equipment scheduled in
+Section 4.1 of Application PXA-2025-0231, compiled by the applicant from manufacturer product literature.
+(cid:127) Solmery Power SM-125K-3P — 125 kW nameplate AC output (three units on this project)
+(cid:127) Torvane Electric TE-125K — 125 kW nameplate AC output (three units on this project)
+Sum of unit nameplate AC output ratings across the six inverters listed in Section 4.1 of the Application: 125 kW +
+125 kW + 125 kW + 125 kW + 125 kW + 125 kW = 750 kW.
+Filed by: Karsten Solar Development LLC · Emery Traskin, Development Manager · 3115 Larkspur Court, Suite 210, Halston, Alleron
+07HA · (612) 555-1642 · emery.traskin@karstensolar.com
+Doc no. PXA-2025-0231-INV · Rev 0 · 06/09/2025 · Applicant: Wexley Distribution Center (Developer of Record: Karsten Solar
+Development LLC)
+Page 9 Doc PXA-2025-0231-INV Rev 0

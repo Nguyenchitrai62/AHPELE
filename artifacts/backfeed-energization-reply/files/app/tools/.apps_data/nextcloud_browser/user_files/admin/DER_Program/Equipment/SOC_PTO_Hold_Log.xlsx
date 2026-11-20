@@ -1,0 +1,27 @@
+[Sheet: Register]
+SOC PTO-Hold Log	
+Alleniom Utilities — System Operations Center · 4200 Veldmere Boulevard, Halston, Alleron 01HA · (612) 555-0100 · alleniom.com	
+Doc no. DER-EQP-SOC-PTOH · Rev — · Date 07/14/2025 · Owner SOC Shift Supervisor	
+Register	SOC PTO-Hold Log — refusals of Permission to Operate on telemetry grounds
+Maintained by	Lena Kovalchuk, SOC Shift Supervisor (lena.kovalchuk@alleniom.com)
+As of	07/14/2025
+Standing note	
+No PTO without live telemetry — TCS-02 §5 (no interim provision). All entries below are in-scope DER sites (≥500 kW) at which the utility-owned RTU is not physically installed, not commissioned end-to-end per TCS-02 §3.6, and not presenting valid points at the SCADA operator display. PTO is refused under TCS-02 §5 until the telemetry condition is satisfied. This log is refreshed on the SOC shift turnover cycle.	
+SOC Notes	
+1.	All seven sites are construction-complete and are held out of service until utility-owned RTU install, end-to-end commissioning per TCS-02 §3.6, and valid points at SCADA per TCS-02 §6.
+2.	TCS-02 §5 contains no interim provision. Absence of an interim clause is absence, not a stated exception. Requests for early, provisional, partial, or conditional operation are refused on the same basis and returned to the DER Program Office.
+3.	Equipment supply and deployment sequencing are tracked by the DER Program Office (see companion register DER-EQP-COMPL, Completed Sites Awaiting Utility Equipment) and by SCADA/EMS Engineering (Marcus Deele). SOC does not sequence equipment; SOC confirms live telemetry at the moment PTO is requested.
+4.	Requesting-party entries are transcribed from the written PTO request on file. Priority claims received from stakeholders are not tracked in this log; they are captured on DER-EQP-COMPL.
+5.	Rows remain open until telemetry is confirmed live. Closure is logged against the interconnection file with SOC operator initials and timestamp.
+Prepared by: Lena Kovalchuk, SOC Shift Supervisor — 07/14/2025.	
+[Sheet: Entries]
+SOC PTO-Hold Log — Entries				
+Doc no. DER-EQP-SOC-PTOH · As of 07/14/2025				
+Site Name	Requesting Party	Request Date	Reason for Refusal	Standard Citation
+City of Elmsworth Northside Water Treatment Plant	Bill Tran, City of Elmsworth	05/15/2025	RTU/SCADA telemetry not installed	TCS-02 §5
+Alleron Community Solar Initiative — Rowan Hill	Priya Halvorsen, Rowan Hill Community Solar LLC	06/10/2025	RTU/SCADA telemetry not installed	TCS-02 §5
+Brookfen North High School Array	Rosa Camarena, Brookfen USD	05/02/2025	RTU/SCADA telemetry not installed	TCS-02 §5
+Brookfen West Elementary Array	Rosa Camarena, Brookfen USD	06/03/2025	RTU/SCADA telemetry not installed	TCS-02 §5
+Vernand Logistics C&I Rooftop PV	Derrick Muhlbach, Vernand Logistics, Inc.	04/12/2025	RTU/SCADA telemetry not installed	TCS-02 §5
+Halstonfield Distribution Center PV	Owen Talbert-Reyes, Halstonfield Properties LLC	06/20/2025	RTU/SCADA telemetry not installed	TCS-02 §5
+Prairie Corridor Business Park PV	Marisol Kettering, Prairie Corridor Development Partners	07/01/2025	RTU/SCADA telemetry not installed	TCS-02 §5

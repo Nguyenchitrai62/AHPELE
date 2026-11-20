@@ -1,0 +1,79 @@
+NORTHERN GRID SOLAR SERVICES
+Commercial & Industrial Photovoltaic Contracting
+1420 Ironwood Way, Suite 210 · Halston, Alleron 07HA
+Office (612) 555-0733 · Alleron Electrical Contractor Lic. #EC-11847
+DER COMMISSIONING CERTIFICATE
+Document: NGSS-COM-2017-0348
+Issued: 09/28/2017
+Project Identification
+Site Name Merrow Creamery Legacy PV
+Site Address 5800 County Road F, Merrowfield, Alleron 18ME
+Customer Merrow Creamery
+Utility Alleniom Utilities
+Nameplate Capacity 800 kW
+Commissioning Date 09/28/2017
+Contractor of Record Northern Grid Solar Services
+NGSS Project No. NGSS-2017-118
+System Description
+Rooftop-mounted photovoltaic generating facility connected behind the existing customer service meter at the Merrow
+Creamery dairy processing plant. Array totals 800 kW nameplate AC, distributed across the north and south
+production-building roof planes. Three-phase, 480 V output tied into the customer's existing 480 V main distribution
+switchboard via a dedicated PV feeder breaker; no modifications to the utility service entrance conductors or the
+revenue meter. Generation is intended to offset on-site process load; no export-focused equipment installed.
+Modules: 2,580 × 310 W crystalline-silicon PV modules, mounted on ballasted low-tilt racking.
+Inverters: 8 × 100 kW three-phase string inverters (UL 1741 listed; IEEE 1547 anti-islanding).
+AC combining: 800 A PV subpanel feeding a 1,000 A PV feeder breaker in the existing 480 V main switchboard.
+Point of common coupling: Load side of the existing utility service meter.
+Commissioning Checklist
+# Item Result Notes
+1 Module count and layout verified against approved design Pass 2,580 modules installed as drawn
+2 Inverter models verified against approved equipment Pass UL 1741 listed
+schedule
+3 Nameplate rating confirmed at 800 kW AC Pass Aggregate of 8 × 100 kW inverters
+4 DC insulation resistance test (each string) Pass All strings > 1 MW
+5 Polarity and continuity checks (DC combiners) Pass
+6 AC phase rotation and voltage at PV subpanel Pass ABC rotation; 480 V ± 1%
+7 Torque check on AC and DC terminations (sampled) Pass Per manufacturer spec
+8 Anti-islanding trip test (IEEE 1547 / IEEE 1547.1) Pass Trip within 2.0 s on utility loss
+9 Voltage and frequency trip settings verified Pass Per approved settings sheet
+10 Grounding electrode conductor and equipment bonding Pass Per NEC 690 / 250
+11 Ground-fault detection (GFDI) function test Pass All inverters
+
+# Item Result Notes
+12 Utility-required AC disconnect installed and labeled Pass Lockable, visible-blade; located at service
+entrance wall
+13 Placards and warning labels installed Pass Per NEC 690.13, 690.14, 690.17, 690.56
+14 Production monitoring commissioned (customer-side) Pass Owner-side revenue-grade meter at PV
+subpanel; readings to customer EMS
+15 As-built drawings issued to customer and utility Pass Rev. C, dated 09/26/2017
+16 O&M manual and warranty package delivered to customer Pass
+17 Utility inspection and interconnection approval Pass Alleniom Utilities field inspector cleared
+09/27/2017 (insp. tag AU-INSP-17-2214)
+Interconnection
+Interconnection agreement executed with Alleniom Utilities on 08/14/2017 under the utility's small-generator
+interconnection procedures then in effect. System operates in parallel with the utility service behind the existing
+service meter; the facility is not configured for scheduled export operation and no additional utility-owned protective,
+monitoring, or communications equipment is installed at the point of common coupling.
+Applicable Standards (at time of commissioning)
+(cid:127) IEEE 1547 (Standard for Interconnecting Distributed Resources with Electric Power Systems)
+(cid:127) IEEE 1547.1 (Conformance test procedures)
+(cid:127) UL 1741 (Inverters, Converters, Controllers and Interconnection System Equipment)
+(cid:127) National Electrical Code (NFPA 70), 2014 edition — Articles 690, 705
+(cid:127) Alleniom Utilities Small Generator Interconnection Requirements, in effect at time of application
+Certification
+The undersigned certifies that the photovoltaic generating facility described above was installed, tested, and placed
+into service on the date shown, and that the results recorded in the commissioning checklist reflect the observed
+condition of the equipment on that date.
+Contractor of Record Commissioning Field Lead
+Signature: /s/ Douglas R. Vaneri, P.E. Signature: /s/ Michael T. Aabray
+Name: Douglas R. Vaneri, P.E. Name: Michael T. Aabray
+Title: Principal Engineer, Northern Grid Solar Services Title: Senior Commissioning Technician, Northern Grid
+Alleron P.E. License #PE-24118 Solar Services
+Date: 09/28/2017 NABCEP PV Installation Professional #PV-091142
+Date: 09/28/2017
+Customer Acceptance — Merrow Creamery Utility Acknowledgment — Alleniom Utilities
+Signature: /s/ Jonas P. Merrow Signature: /s/ Katrin L. Osterhaus
+Name: Jonas P. Merrow Name: Katrin L. Osterhaus
+Title: Director of Plant Operations, Merrow Creamery Title: Field Interconnection Inspector, Alleniom Utilities
+Date: 09/28/2017 Date: 09/28/2017
+Northern Grid Solar Services · NGSS-COM-2017-0348 · Page 1 of 1

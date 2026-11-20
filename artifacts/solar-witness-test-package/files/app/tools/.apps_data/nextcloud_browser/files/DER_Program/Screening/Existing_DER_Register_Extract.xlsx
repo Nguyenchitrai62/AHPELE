@@ -1,0 +1,43 @@
+[Sheet: Register]
+Existing-DER Register Extract					
+Source:	Interconnection Studies — system extract				
+Extract job:	ICS-REG-EXT / weekly				
+As of:	07/14/2025				
+Scope:	In-service or previously in-service DER sites within Alleniom Utilities service territory at or above the 500 kW reporting floor. Sub-500 kW residential and small-commercial systems are held in the Simplified Small-Systems Register and are not included in this extract.				
+Column definitions					
+Service Address	premise address of record from the customer information system.				
+Customer	customer of record on the service account.				
+Site Name	DER site label as carried in the interconnection master.				
+Nameplate (kW)	as-built AC nameplate at point of interconnection.				
+Commissioned	date of first energization from the commissioning record on file.				
+Current Status	most recent operational / telemetry status of record. Values in this field reflect the state of the site as reported by the SOC or the last commissioning entry; the register does not evaluate suitability for standards retrofit or upgrade. Cells in this column are color-coded per the status key in Notes, item 6.				
+Service Address	Customer	Site Name	Nameplate (kW)	Commissioned	Current Status
+1420 Kettle Ridge Road, Halston, Alleron 07HA	Halston Cold Storage Co.	Kettle Ridge Rooftop PV	640	06/14/2016	telemetry: none — pre-TCS-02
+208 Foundry Street, Cordwyn, Alleron 14CW	Ironwake Metalworks LLC	Foundry Street PV	520	08/02/2016	telemetry: none — pre-TCS-02; site inactive per SOC 03/2024
+4400 Prairie Loop, Halston, Alleron 11HA	Northrail Distribution Inc.	Prairie Loop Rooftop Array	900	11/17/2016	telemetry: none — pre-TCS-02
+71 Riverbend Way, Elmsworth, Alleron 07EL	Elmsworth Community Hospital	Riverbend Hospital PV	1150	04/22/2017	telemetry: legacy analog only — pre-TCS-02
+3300 Old Depot Road, Brookfen, Alleron 12BR	Brookfen Grain Cooperative	Old Depot Grain Elevator PV	720	07/19/2017	telemetry: none — pre-TCS-02
+5800 County Road F, Merrowfield, Alleron 18ME	Merrow Creamery	Merrow Creamery Legacy PV	800	09/28/2017	telemetry: none — pre-TCS-02
+950 Larkspur Avenue, Darnwick, Alleron 21DA	Darnwick Mercantile Group	Larkspur Warehouse PV	550	10/03/2017	telemetry: none — pre-TCS-02
+1780 Cascade Boulevard, Marden Falls, Alleron 75MF	Marden Falls YMCA	Marden Falls Recreation Center PV	610	03/28/2018	telemetry: legacy dial-up only — pre-TCS-02
+12 Elder Grove Lane, Tresbay, Alleron 60TR	Tresbay Regional Airport Authority	Tresbay Airport Hangar PV	780	05/11/2018	telemetry: none — pre-TCS-02
+6600 Sawmill Road, Cravenwood, Alleron 47CR	Cravenwood Timber Products Inc.	Sawmill Road Ground-Mount PV	1450	09/06/2018	telemetry: legacy modem — pre-TCS-02
+220 Vintners Lane, Holcott, Alleron 84HO	Holcott Vineyards LLC	Holcott Vineyards PV	500	11/28/2018	telemetry: none — pre-TCS-02
+15 Waterworks Drive, Lockmere, Alleron 34LO	City of Lockmere (Water Utility)	Lockmere Booster Station PV	560	06/04/2019	telemetry: SCADA (pre-TCS-02 arrangement, city-owned)
+4100 Interstate Access Road, Halston, Alleron 04HA	Draymon Fleet Services	Interstate Fleet Depot PV	970	08/22/2019	operational; telemetry: RTU installed 04/2022 (post-TCS-02 retrofit)
+88 Old Post Road, Merrowfield, Alleron 18ME	Merrowfield Farm Bureau	Farm Bureau Office PV	510	10/17/2019	telemetry: none — pre-TCS-02
+2650 Junction Parkway, Cordwyn, Alleron 16CW	Junction Logistics Partners	Junction Parkway DC PV	1250	02/13/2020	operational; telemetry: RTU (TCS-02 compliant)
+505 Meadow Ridge Drive, Brookfen, Alleron 12BR	Ridgewood Assisted Living LLC	Ridgewood Campus PV	650	07/09/2020	telemetry: none — pre-TCS-02
+3025 Foundry Ridge Road, Halston, Alleron 10HA	Foundry Ridge Data Center LLC	Foundry Ridge DC Rooftop PV	1820	11/20/2020	operational; telemetry: RTU (TCS-02 compliant)
+480 Old Quarry Road, Elmsworth, Alleron 08EL	Old Quarry Aggregates Inc.	Old Quarry Site PV	720	04/16/2021	decommissioned 02/2024 — equipment removed; service inactive
+199 Hillcrest Avenue, Tresbay, Alleron 60TR	Hillcrest Presbyterian Church	Hillcrest Community Solar	540	09/30/2021	operational; telemetry: RTU (TCS-02 compliant)
+7700 Copperline Trail, Marden Falls, Alleron 75MF	Copperline Recycling LLC	Copperline MRF PV	880	05/18/2022	operational; telemetry: RTU (TCS-02 compliant)
+1315 Bramble Court, Darnwick, Alleron 21DA	Bramble Court Business Park LLC	Bramble Court Business Park PV	1030	10/24/2022	operational; telemetry: RTU (TCS-02 compliant)
+[Sheet: Notes]
+Notes	
+1.	Rows are ordered by commissioned date, oldest first, then by service address.
+2.	"Pre-TCS-02" annotations indicate the site was energized before the effective date of the Telemetry & Communications Standard (TCS-02, effective 06/01/2021) and was accepted under the telemetry provisions in force at commissioning. This annotation does not confer a permanent exemption: per TCS-02 §2(d), a pre-TCS-02 site is brought into TCS-02 scope when it is the subject of a new interconnection application. Status values in this column are informational; this register does not independently determine upgrade eligibility or compliance.
+3.	Sites listed as decommissioned or inactive are retained in the register for address-history purposes and are excluded from active-DER counts.
+4.	Address matches are performed on normalized premise address. Multiple DER at a single service address are listed as separate rows.
+5.	Extract does not include applications currently in queue (see Active Queue Report).
+6.	Current Status color key: green = operational with TCS-02-compliant telemetry (utility RTU); amber = in service under a pre-TCS-02 telemetry arrangement (no telemetry or legacy analog/dial-up/modem/SCADA); red = decommissioned or inactive.
