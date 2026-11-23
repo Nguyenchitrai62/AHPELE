@@ -36,8 +36,8 @@ description: How to read engineering project files quickly and reliably - the pr
 
 ## IFC
 - `ifcopenshell.open(p)`; `f.by_type("IfcBuilding")`, property sets via `ifcopenshell.util.element.get_psets(el)`.
-  If ifcopenshell is missing from the default python, look for other interpreters (`which -a python3`, virtualenvs in the
-  project or /opt; `python3 -c "import ifcopenshell"` in each) before writing STEP text by hand.
+  If ifcopenshell is missing from the default python, look for other interpreters (`which -a python3`, other installed
+  environments; `python3 -c "import ifcopenshell"` in each) before writing STEP text by hand.
 
 ## Numbers
 - Record every value with its unit and source (file, page/sheet/cell, clause). Convert units explicitly in code.

@@ -84,13 +84,13 @@ export default function (pi: ExtensionAPI) {
 	let next = 0;
 	let gateSent = !GATE_ON;
 	let gateCheckedAt = 0;
-	pi.on("turn_end", async () => {
+	pi.on("turn_end", async (event) => {
 		if (!gateSent && Date.now() - gateCheckedAt > GATE_EVERY_MS) {
 			gateCheckedAt = Date.now();
 			if (await gateNeeded()) {
 				gateSent = true;
 				console.error("ahpele: phase-guard constraint gate");
-				return {entries: [{type: "custom_message", customType: "ahpele-phase-guard", content: GATE, display: false}]};
+				return {entries: [...event.entries, {type: "custom_message", customType: "ahpele-phase-guard", content: GATE, display: false}]};
 			}
 		}
 		if (!total || next >= MARKS.length) return undefined;
@@ -115,6 +115,6 @@ export default function (pi: ExtensionAPI) {
 			return undefined;
 		}
 		console.error(`ahpele: phase-guard at ${pct}%: ${absent.length ? "missing " + absent.length : "finalise"}`);
-		return {entries: [{type: "custom_message", customType: "ahpele-phase-guard", content: text, display: false}]};
+		return {entries: [...event.entries, {type: "custom_message", customType: "ahpele-phase-guard", content: text, display: false}]};
 	});
 }

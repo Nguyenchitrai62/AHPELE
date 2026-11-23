@@ -15,15 +15,11 @@ description: How an MEP coordinator routes and coordinates services (cable tray,
   ifcopenshell.api placement calls with is_si=True) convert for you; never convert twice.
 
 ## 2. Plan the space before drawing routes
-- Give each service its own elevation band (top of steel/slab down to the lowest allowed point), with gaps between bands
-  at least as large as the clearance rules; a change of band is a vertical segment. Typical order from the top: zone kept
-  clear below sprinkler deflectors, cable tray / busway (separated from each other), then larger pipes; an access-floor
-  plenum is another band when it is allowed.
+- Give each service its own elevation band, ordered by gradient, size, access and clearance, with gaps between bands at
+  least as large as the clearance rules; a change of band is a vertical segment.
 - Route mains along aisles and parallel to the grid, with branches at right angles to the equipment they serve. Keep
   routes out of column lines and away from the tops of racks and equipment that need service access.
-- In a shallow zone (an access-floor plenum, a tight ceiling void) give each service its own lane in plan first, side by
-  side with gaps, rather than stacking runs on top of each other along the same path; draw a section at every point where
-  several services enter or cross the zone to prove the vertical fit.
+- In shallow zones separate services in plan and prove the vertical fit with sections.
 - Avoid routing liquid-carrying piping above electrical equipment and distribution; where unavoidable, provide drip
   protection.
 - Crossing priority when services compete for space: gravity drainage > large ducts and pipes > pressure pipes > cable
@@ -36,9 +32,9 @@ description: How an MEP coordinator routes and coordinates services (cable tray,
   clearances.
 - Sprinkler heads: keep the zone directly below each deflector clear (NFPA 13: 18 in (457 mm) below deflectors, or the
   value the project states, with extra rules for obstructions near heads). Wide obstructions need heads beneath them.
-- Electrical equipment: dedicated space above switchboards, panelboards and PDUs is kept free of foreign systems,
-  notably piping (NEC 110.26: the width and depth of the equipment, up to 6 ft / 1.8 m above it or to the structural
-  ceiling); working space in front stays clear.
+- Electrical equipment: dedicated space above switchboards, switchgear, panelboards and motor control centers is kept
+  free of foreign systems (NEC 110.26(E): the width and depth of the equipment, up to 6 ft / 1.8 m above it or to the
+  structural ceiling); working space in front stays clear.
 - Separate power from data by the distance the project, TIA-569 or the manufacturer requires, and keep the minimum
   headroom below the lowest service.
 
@@ -48,9 +44,8 @@ description: How an MEP coordinator routes and coordinates services (cable tray,
 - Terminate each system at its documented source and loads; if an elevation is not given, state the assumption or raise an
   RFI.
 
-## 5. Model the contract's conventions into the geometry
-- Read how the instruction defines clashes and clearances, and build the solids that way: any covering, envelope,
-  clear zone or extent the contract says to include must be in the modelled solids, or checked with
+## 5. Required envelopes
+- Model insulation, envelopes and clear zones the project requires, or check them as clearances with
   `ahpele_clash.py --clearance CLASS=MM`.
 
 ## 6. Verify on the exported file, iterate to zero
@@ -59,8 +54,7 @@ description: How an MEP coordinator routes and coordinates services (cable tray,
   `python3 /tmp/ahpele/bin/ahpele_clash.py model.ifc --point=<source x,y>` (plan point: each network's distance and
   elevation range there). Resolve hard clashes by moving whole runs to
   their band, then re-run until there are none.
-- Continuity: each system is one connected network from its source, and every load it serves has a connection (drop
-  or tap).
+- Continuity: each system is one connected network from its source, and every load it serves has a connection.
 - After ANY geometry change (a run added, moved or resized, often in response to a review), re-run the whole
   coordination check on the exported file (validation, hard clashes, clearances between systems, continuity): fixing one
   service often breaks another.

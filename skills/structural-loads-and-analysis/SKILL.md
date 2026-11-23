@@ -53,8 +53,8 @@ ASD: (1) D  (2) D + L  (3) D + (Lr or S or R)  (4) D + 0.75L + 0.75(Lr or S or R
   -> E (F for RC IV). Ie: RC I/II 1.0, III 1.25, IV 1.5. Ta = Ct*hn^x (hn ft): steel MRF 0.028, 0.8; concrete MRF
   0.016, 0.9; EBF/BRBF 0.03, 0.75; others 0.02, 0.75; computed T <= Cu*Ta (Cu 1.4 at SD1 >= 0.3 to 1.7 at SD1 <= 0.1).
 - Cs = SDS/(R/Ie) <= SD1/(T*R/Ie) (T <= TL) or SD1*TL/(T^2*R/Ie) (T > TL); Cs >= 0.044*SDS*Ie >= 0.01; S1 >= 0.6 also
-  Cs >= 0.5*S1/(R/Ie). V = Cs*W; W = D + 25 % storage live + partitions (>= 10 psf) + equipment + 20 % flat-roof snow
-  where pf > 30 psf. Fx = V*wx*hx^k/sum(wi*hi^k), k = 1 (T <= 0.5 s), 2 (T >= 2.5 s), linear between.
+  Cs >= 0.5*S1/(R/Ie). V = Cs*W; W = D + 25 % storage live + partitions (>= 10 psf) + equipment + flat-roof snow share
+  (share and threshold by code edition). Fx = V*wx*hx^k/sum(wi*hi^k), k = 1 (T <= 0.5 s), 2 (T >= 2.5 s), linear between.
 - Typical R / Omega0 / Cd (Table 12.2-1; verify system, height limit, SDC): steel SMF 8/3/5.5; OMF 3.5/3/3; SCBF 6/2/5;
   OCBF 3.25/2/3.25; BRBF 8/2.5/5; EBF 8/2/4; special RC shear wall (building frame) 6/2.5/5; wood-panel light-frame
   walls 6.5/3/4; steel not detailed for seismic (SDC A-C) 3/3/3.
@@ -94,7 +94,7 @@ ASD: (1) D  (2) D + L  (3) D + (Lr or S or R)  (4) D + 0.75L + 0.75(Lr or S or R
 - ASCE 41: Tier 1/2/3; BPOE (RC II) Life Safety at BSE-1E, Collapse Prevention at BSE-2E; knowledge factor 0.75-1.0;
   m-factors x expected strength (deformation-controlled), lower-bound strength (force-controlled). Existing capacity
   from as-builts, era code/grades, survey and testing - never assume current-code detailing.
-- Method statement: investigation; old-vs-new load comparison to the foundation (drift against a taller addition, new
+- Alteration work typically covers: investigation; old-vs-new load comparison to the foundation (drift against a taller addition, new
   equipment); temporary works (propping, back-propping, needling, bracing while lateral elements are cut); sequence with
   stability at every stage; new-to-existing connections (post-installed anchors per ACI 355/ICC-ES, movement joint vs
   tied); differential settlement; monitoring, hold points, fire protection, approvals.

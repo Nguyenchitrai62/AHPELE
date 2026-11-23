@@ -1,6 +1,6 @@
 ---
 name: der-interconnection-screening
-description: Utility DER interconnection screens and reports - fast-track and supplemental review screens (15 % of peak, minimum load from AMI interval data), pre-application capacity reports from queue data, certified equipment lists and witness tests. Use for DER/solar/storage interconnection review tasks.
+description: Utility DER interconnection screens and reports - fast-track and supplemental review screens (15 % of peak, minimum load from AMI interval data), pre-application reports, equipment certification and commissioning tests. Use for DER/solar/storage interconnection review tasks.
 ---
 
 # DER interconnection screening, pre-application reports and certified equipment
@@ -46,7 +46,7 @@ facilities study at customer cost), or withdraw. Never "pass" a failing screen b
   excluded and why, and give the result both ways if exclusion changes it.
 - Report: minimum, its timestamp, source, interval count, generation itemised by project, ratio, margin, pass/fail.
 
-## Supplemental review memo of record
+## Supplemental review report
 Contents: application/queue ID, size (AC, DC, storage, export limit), feeder/line section, procedure and edition,
 data used and as-of date, each screen with basis, numbers and result, disposition and applicant's next step,
 assumptions, preparer and reviewer/countersignature blocks.
@@ -66,21 +66,21 @@ approval.
   in study, ISA signed, under construction, awaiting PTO) and in-service; exclude withdrawn, rejected, expired,
   cancelled, duplicates, other feeders and pre-app requests. Use AC nameplate or certified export limit (not DC);
   storage counts at its export capability. Check MW/kW columns.
-- Compare the requested size with the result (exceeds -> likely study/upgrades). Check any figure the requester
-  quotes against the record.
+- Compare the requested size with the result (exceeds -> likely study/upgrades). Compare the request with the
+  record.
 
 ## Certified equipment and witness tests
 - Certification: NRTL listing to UL 1741; SB = IEEE 1547.1-2020 tests for IEEE 1547-2018 (SA: older Rule 21);
   state lists (e.g. CEC grid-support inverters) and the utility's Certified Equipment List.
-- Carriage check per site: check the as-built record of installed equipment (manufacturer, full model number incl.
+- Listing check per site: check the as-built record of installed equipment (manufacturer, full model number incl.
   suffix/rating variant, firmware or software version, certification standard) against the list revision in force on
   the as-of date (delisted, superseded, expired entries do not count).
-- Not carried -> type test / certification, or field verification witnessed by the utility (IEEE 1547-2018 clause 11
+- Not listed -> type test / certification, or field verification witnessed by the utility (IEEE 1547-2018 clause 11
   test & verification, IEEE 1547.1-2020 procedures): unintentional islanding (cease to energize within 2 s),
   voltage/frequency trip and clearing times, ride-through category settings, enter-service / reconnect delay and
   ramp, open-phase response, voltage/reactive and frequency-watt functions, export/power-control limit, disconnect
   and interlock operation, protective relay functional tests if relay-based, applied settings vs utility profile.
-- Customer/installer (often with manufacturer or commissioning agent) performs; utility witnesses. On file first:
+- Customer/installer (often with manufacturer or commissioning agent) performs; utility witnesses. Prerequisites:
   approved application/agreement,
   AHJ final, as-built single-line, site plan, settings file and firmware evidence, test procedure accepted in
   advance, data sheets and certificates, relay settings, test equipment calibration, switching order.

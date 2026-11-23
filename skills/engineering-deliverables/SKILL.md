@@ -1,17 +1,16 @@
 ---
 name: engineering-deliverables
-description: Method for engineering design and calculation packages graded against requirements - document precedence, superseded documents, requirement/constraint registers, hard-constraint checks, unit discipline, optimisation within constraints, and schema-exact deliverable files (CSV, JSON, XLSX, ZIP, IFC). Use for any task that asks for calculations, a design, a plan, a schedule, a register or a structured submission.
+description: Method for engineering design and calculation packages - document precedence, superseded documents, requirement/constraint registers, hard-constraint checks, unit discipline, optimisation within constraints, and schema-exact deliverable files (CSV, JSON, XLSX, ZIP, IFC). Use for any work that asks for calculations, a design, a plan, a schedule, a register or a structured submission.
 ---
 
 # Engineering deliverables
 
-## 1. Know exactly what is graded
+## 1. Know exactly what is asked
 - Copy every deliverable requirement from the instruction into `/tmp/ahpele/checklist.md`: path, file name, format,
-  required columns/keys/tokens (exact spelling), units, row granularity ("one row per X and Y"), and any scoring rule.
-- The instruction is a data contract. Use its column names, token vocabularies and IDs verbatim. Extra columns are
+  required columns, keys and allowed values (exact spelling), units and row granularity.
+- The instruction is a data contract. Use its column names, allowed values and IDs verbatim. Extra columns are
   usually harmless; missing or renamed ones are not.
-- If the instruction states how the work is scored (e.g. hard constraints gate the score, cost objective, recall of a
-  register), let that decide where effort goes: never trade a hard constraint for objective value.
+- If evaluation criteria are stated, read them when setting priorities; never trade a hard constraint for objective value.
 
 ## 2. Document precedence and status
 - Read the governing specification first: it usually lists which standards, revisions and documents apply.
@@ -26,9 +25,8 @@ description: Method for engineering design and calculation packages graded again
 ## 3. Requirements table and register
 - Before designing, list every hard requirement with: id, document, clause/table, requirement, limit value, unit, what
   it binds (which items). Save as `/tmp/ahpele/requirements.csv`.
-- Hard requirements include: safety and code limits, permit/authorisation limits (discharge, noise, setbacks),
-  capacities (power, flow, head, load), resource caps (equipment, crews, water, budget), milestones and deadlines.
-- If a register is a deliverable, build it from this table. Cite real project documents and clauses, not the brief.
+- Hard requirements include: safety and code limits, permit limits, capacities, resource limits, milestones.
+- If a register is a deliverable, build it from this table. Cite the originating document and clause.
   Cite only documents that are in force.
 
 ## 4. Calculations
@@ -40,29 +38,23 @@ description: Method for engineering design and calculation packages graded again
 
 ## 5. Build early, then improve
 - Produce a complete first version of every deliverable early with conservative choices that satisfy all hard
-  requirements, even if it is not optimal. An incomplete or missing file scores nothing.
-- Never write placeholders (TBD, NaN, "to be determined") in a numeric field. If a value is genuinely not applicable,
-  use the not-applicable convention the instruction allows (often blank, N/A or NONE).
+  requirements, even if it is not optimal. Keep a complete valid version on disk.
+- Leave no placeholders; mark not-applicable values as the instruction defines.
 
 ## 6. Verify with code
 - Write `/tmp/ahpele/check.py` that loads your deliverable files exactly as written and tests every requirement row and
-  every checklist item (columns, tokens, units, ranges, cross-file consistency). Run it after every change.
+  every checklist item (columns, allowed values, units, ranges, cross-file consistency). Run it after every change.
 - Run the format checker: `python3 /tmp/ahpele/bin/ahpele_check.py <deliverable paths>`.
 - For CAD/BIM outputs, re-open the file with the standard library you wrote it with and check the entities, property
   sets and attributes the instruction names.
-- IFC written by hand (no BIM library): generate it with a small script, not by typing STEP lines. Copy each entity
-  pattern from the example file the task provides (or from the schema), keep every attribute in order (use `$` for an
-  unset one; an IfcBuildingStorey has 10 attributes, an IfcPropertySet 5, an IfcRelDefinesByProperties 6), write every REAL
-  with a decimal point (`20.` or `20.0`, never `20` and never `4.5.`; coordinates, directions, depths, elevations), and double apostrophes inside strings. Run
-  `python3 /tmp/ahpele/bin/ahpele_ifc.py <file>` until it reports 0 errors, and compare its structure printout
-  (storeys and elevations, property sets, footprints, heights) with what the contract requires. One unreadable
-  entity can make the whole file unreadable.
+- IFC written by hand (no BIM library): generate it with a small script, not by typing STEP lines. Follow the schema:
+  every attribute in order (`$` for an unset one), every REAL with a decimal point (`20.` or `20.0`, never `20`),
+  double apostrophes inside strings. Run `python3 /tmp/ahpele/bin/ahpele_ifc.py <file>` until it reports 0 errors. One
+  unreadable entity can make the whole file unreadable.
 - Placed or routed 3D models (coordination models, MEP routing, layouts): verify the FILE, not your script's variables.
-  `python3 /tmp/ahpele/bin/ahpele_clash.py <file.ifc> --point <entry x,y,z>` re-reads it with ifcopenshell's geometry
-  engine in world coordinates and lists clashing pairs, element classes stacked at one spot, broken runs and the
-  distance from each run to the entry point. Coordinates in `IfcCartesianPoint` are in the project length unit (a
-  millimetre project takes millimetres); library helpers such as `ifcopenshell.api` placement calls take SI metres and
-  convert for you, so do not divide by 1000 by hand as well. Iterate until 0 clashes and one network per service.
+  `python3 /tmp/ahpele/bin/ahpele_clash.py <file.ifc>` re-reads it with ifcopenshell's geometry engine in world
+  coordinates; resolve what it reports. Coordinates in `IfcCartesianPoint` are in the project length unit; library helpers
+  such as `ifcopenshell.api` placement calls take SI metres and convert for you, so do not convert by hand as well.
 
 ## 7. Optimise last
 - Only after all hard checks pass: improve the objective (cost, performance) with a systematic search (enumerate

@@ -37,6 +37,7 @@ import json
 import os
 import pathlib
 import re
+import shlex
 import shutil
 import subprocess
 import tempfile
@@ -146,7 +147,7 @@ NOTE = (
 WORKFLOW = (
     "\n\nWorking method:\n"
     "1. Read the whole instruction first. Write the exact list of deliverables"
-    " (paths, file names, formats, required columns, fields and tokens) and"
+    " (paths, file names, formats, required columns, fields and allowed values) and"
     " any scoring rules it states to /tmp/ahpele/checklist.md, and re-read"
     " that file before you finish.\n"
     "2. Inventory the project documents: note each one's revision and status."
@@ -169,8 +170,8 @@ WORKFLOW = (
     " A design that violates any hard requirement is not acceptable however"
     " good the rest is, so cover the governing documents completely, not a"
     " sample. If the deliverable includes a constraint or requirement"
-    " register, build it from this table; if the register is organised by item"
-    " (circuit, section, element, plant), list for each item every requirement"
+    " register, build it from this table; if the register is organised by item,"
+    " list for each item every requirement"
     " that governs it, with clause and value. One row per requirement; record"
     " each limit as the clause states it, with its unit (a derived value cites"
     " the calculation, catalogue, table or schedule that produced it); include"
@@ -189,21 +190,22 @@ WORKFLOW = (
     " the worst case per limit with its utilisation. Trace both ways: every hard limit the script"
     " tests names its register row (document and clause), and every register row with a limit is"
     " tested; print anything unmatched either way. When the task gives a format"
-    " contract or an example file, the check script must implement every rule"
-    " of the contract and must pass on the example file before you trust it"
+    " specification or sample file, the check script must implement every rule"
+    " it states and must pass on the sample file before you trust it"
     " on yours; read your file back the way the recipient's software would (parse it, do not"
     " eyeball it). Fix every failure. Improve the"
     " objective (cost, performance) only while all hard checks keep passing,"
     " and re-run the checks after every change.\n"
-    "5. Feasibility first. Meeting every hard requirement is usually worth far more than a better objective: a"
-    " feasible but costlier design beats an optimal one that breaks a single limit. When unsure, choose the"
-    " conservative feasible option; when a requirement can be read two ways, satisfy the stricter reading and say"
+    "5. Feasibility first. Meet every hard requirement before optimising cost or performance; a cheaper design that"
+    " breaks one is not acceptable. When unsure, choose the"
+    " conservative feasible option; when a requirement can be read two ways, satisfy the stricter reading (unless the"
+    " documents forbid exceeding the requirement) and say"
     " which reading you applied. Where the documents give no tolerance, keep a margin on hard limits computed"
     " with uncertainty (a value exactly at a limit often fails after rounding, another load case or a stricter"
     " reading), for example utilisation about 0.95 or the next standard size. A margin follows the uncertainty of"
     " the value; it is not a reason for a needlessly costly design.\n"
     "   Optimise like an engineer: for every item, build and price each option the"
-    " documents allow (methods, sizes, routes, shared or separate works) before"
+    " documents allow (for example methods, sizes or routes) before"
     " choosing; never reject an option for all items with one general sentence;"
     " optimise the whole set (shared costs, interactions), not item by item in a"
     " fixed order; and use the time you have.\n"
@@ -368,7 +370,7 @@ async def install_extras(session: taskbridge.Session) -> str:
         text += (
             "\nSkills (professional references). Choose them like an engineer: before planning, pick every skill whose"
             " description fits a part of this work (usually one to three), read each SKILL.md fully with your read tool,"
-            " and note in /tmp/ahpele/checklist.md which you use and for what. If none fits, rely on the working method"
+            " and note in /tmp/ahpele/skills.md which you use and for what. If none fits, say so there and rely on the working method"
             " and the documents. The project documents always prevail over a skill:\n"
             + "".join(
                 f"- {n}: {SKILLS_DST}/{folder}/SKILL.md - {d}\n"
@@ -385,6 +387,12 @@ async def install_extras(session: taskbridge.Session) -> str:
 # violations and misreadings and writes findings; a third session verifies each finding and fixes the deliverables.
 # Engineering practice: the checking engineer is not the designer. AHPELE_CHECKER=0 disables it.
 REVIEW_FILE = "/tmp/ahpele/independent_review.md"
+# RC-0040: back-check. After the fixer has changed the deliverables, a second clean-context check verifies the fixes
+# and the corrected work, as an engineer back-checks revised documents. AHPELE_CHECK_ROUNDS=1 disables it.
+REVIEW_FILE_2 = "/tmp/ahpele/independent_review_2.md"
+MAX_CHECK_ROUNDS = 2
+BACKCHECK_MIN_LEFT_SEC = 60 * 60  # leaves about 35 minutes to fix what the back-check finds
+FIXER_2_MIN_LEFT_SEC = 30 * 60
 CHECKER_MIN_LEFT_SEC = 30 * 60   # run the check-and-fix cycle only with at least this much time left
 CHECKER_SHARE = 0.4              # share of the remaining time the checker may use (capped below)
 CHECKER_MAX_SEC = 75 * 60
@@ -402,9 +410,9 @@ CHECKER_PROMPT = (
     " by line (materials, methods, labels, conditions, not only the calculations); walk every operating state or"
     " stage and ask what is energised, loaded, flowing or exposed and where it goes; check the scope both ways"
     " (nothing out of scope treated as a condition, nothing relevant left out); argue the opposite conclusion;"
-    " check each register value against the clause it cites; recompute totals, ledgers and"
+    " check each cited value against the clause it cites; recompute totals, ledgers and"
     " schedules from the submitted files; check each reported number is physically plausible; and look for a"
-    " feasible option the author dismissed that would score better on the objective.\n\n"
+    " feasible option the author dismissed that would do better on the stated objective.\n\n"
     "Method: (1) read the instruction and list every explicit requirement and every requirement of the governing"
     " documents it points to (use /tmp/ahpele/inventory.md, /tmp/ahpele/req_candidates.md and the documents"
     " themselves; check which revisions govern); (2) open each deliverable and parse it; (3) for each requirement,"
@@ -413,31 +421,49 @@ CHECKER_PROMPT = (
     " written by the author may be wrong or incomplete); check every operating mode, load case, element and period a"
     " requirement covers, the factors it prescribes, the exact file names, formats, fields and units the instruction"
     " asks for, and every claim and conclusion in the text against its source; (4) look for what is missing.\n\n"
-    "Write your findings to " + REVIEW_FILE + " as a numbered list, most serious first. For each: severity"
+    "Write your findings to {review} as a numbered list, most serious first. For each: severity"
     " (BLOCKING = a hard requirement or format rule is violated or a deliverable is missing; MAJOR = wrong value or"
     " conclusion; MINOR), the requirement (document, clause or instruction sentence), what the deliverable has, what"
     " it should be, and the evidence (file, page, your computed value). Create the file within your first 10 minutes"
     " and append each finding as soon as you have verified it (a review left unwritten when time runs out is lost);"
     " run the quick deterministic checks (file formats, required fields, totals) before the slow reading. A finding"
     " quotes the clause it relies on and checks that clause's conditions and exceptions. Check compliance in every"
-    " state the work will be used in; a temporary state does not waive a permanent requirement."
+    " state or stage the work will be in, against the requirements that apply to that state."
     " Report only what you verified; if you find nothing wrong after a real check, say so. Then stop with a one-line"
     " summary.\n\nThe author's final summary was:\n{summary}\n\nThe task instruction given to the author:\n"
 )
 FIXER_PROMPT = (
     "\n\n---\nState of the work: an earlier session already produced the deliverables for this task; they are on"
     " disk, with its working files under /tmp/ahpele (requirements, checks). An independent checking engineer then"
-    " reviewed them and wrote findings to " + REVIEW_FILE + ". Your job now: read the findings, verify each one"
+    " reviewed them and wrote findings to {review}. Your job now: read the findings, verify each one"
     " against the instruction and the source documents (the checker can be wrong too), fix the deliverables in place"
     " for every finding you confirm, re-run the checks, and keep everything that is already correct. Do not start"
     " over. Change a decision or conclusion only on decisive evidence from the documents, never because a finding"
     " calls it contestable; keep existing margins on hard limits unless a finding shows they are wrong;"
     " after a change to the design re-run the optimisation of the affected choices, then every check (hard"
     " limits, geometry, consistency of totals) and update every statement in the deliverables that the change"
-    " affects, so the fix creates no new violation. Note each finding you reject, with the reason, at the end of "
-    + REVIEW_FILE + ". Finish with a complete"
+    " affects, so the fix creates no new violation. Note each finding you reject, with the reason, at the end of {review}. Finish with a complete"
     " final summary of what the deliverables contain and where they are, as the instruction asks.\n\nThe earlier"
     " session's final summary was:\n{summary}\n"
+)
+
+# Added to the checker's prompt in the second round (RC-0040).
+BACKCHECK_PROMPT = (
+    "This is a back-check. An earlier checking engineer reviewed the first version ({earlier}); the author then"
+    " corrected the deliverables and noted at the end of that file which comments were rejected and why. Do two things."
+    " (a) For every earlier comment, check in the files themselves that the correction was really made, that it is"
+    " right, and that the corrected work introduced no new violation; judge each rejected comment on its evidence and"
+    " re-open it if the rejection does not hold. A model or calculation that was rebuilt is new work: check it from the"
+    " source data, not from the response. (b) Then check every hard requirement again on the corrected files. Write"
+    " only what is still open to {review}.\n\n"
+)
+FIXER_2_NOTE = (
+    "\nThis is the second round: {earlier} holds the first review and the reasons given for rejected comments; answer"
+    " those reasons before you change a decision back. Apply one correction at a time and keep every deliverable complete"
+    " and valid after each; do not start a correction you cannot finish and re-check in the time left.\n"
+)
+CHECKER_COUNT_NOTE = (
+    "\n\nEnd {review} with one line in exactly this form: OPEN: <number> blocking, <number> major"
 )
 
 TIME_NOTE = (
@@ -683,57 +709,183 @@ class Run:
       await self.on_event(event)
 
 
-async def independent_check(session, pi_argv, env, work, model, extra_note: str) -> None:
-  """RC-0028: a clean-context checker session writes findings; a fixer session verifies and applies them."""
+_LABEL = re.compile(r"^[\W\d]*(?:(?:finding|severity|[A-Z]{1,2})\b[\W\d]*)?(blocking|major)\b(?!\s*=)"
+                    r"(?!\W*(?:findings?)?\W*(?:none|0)\b)", re.I | re.M)
+_OPEN_LINE = re.compile(r"^\W*OPEN\b(.*)$", re.I | re.M)
+
+
+def count_open(findings: str) -> tuple[int, int]:
+  """(blocking, major) findings still open.
+
+  The last OPEN line counts. A 0/0 line counts only as the last non-empty line and does not hide labelled findings (the
+  file is created early and appended to, so a line written before the findings is stale).
+  """
+  labels = [m.group(1).lower() for m in _LABEL.finditer(findings)]
+  labelled = labels.count("blocking"), labels.count("major")
+  found = []
+  for line in _OPEN_LINE.findall(findings):
+    b = re.search(r"(\d+)\W*blocking", line, re.I)
+    m = re.search(r"(\d+)\W*major", line, re.I)
+    if b or m:
+      found.append((int(b.group(1)) if b else 0, int(m.group(1)) if m else 0))
+  if found and any(found[-1]):
+    return found[-1]
+  if found:
+    return labelled
+  words = len(re.findall(r"\bBLOCKING\b", findings)), len(re.findall(r"\bMAJOR\b", findings))
+  return max(labelled[0], words[0]), max(labelled[1], words[1])
+
+
+async def _exec_ok(session, command: str, timeout_sec: int = 120) -> str | None:
+  """Output of a helper command in the task container, or None when it could not run."""
+  try:
+    res = await session.exec(command, timeout_sec=timeout_sec)
+  except taskbridge.TaskError:
+    return None
+  return str(res.get("output", "")) if res.get("exit_code") == 0 and not res.get("timed_out") else None
+
+
+def _changed_files(session, mark: str) -> str:
+  """Shell command printing (NUL-separated) the files changed since `mark` under the workdir and the named paths' folders.
+
+  The folder of each named file is searched too: a package is often several files side by side.
+  """
+  roots = [session.workdir]
+  for p in deliverable_paths(session.instruction):
+    roots += [p, os.path.dirname(p)] if os.path.dirname(p) not in ("", "/", "/tmp") else [p]
+  quoted = " ".join(shlex.quote(r if r.startswith("/") else os.path.join(session.workdir, r)) for r in dict.fromkeys(roots))
+  skip = " -o ".join(f"-path {p}" for p in ("/proc", "/sys", "/dev", "/run", "/tmp/ahpele", MARK_DIR))
+  return (f"find -H {quoted} \\( {skip} \\) -prune -o -type f"
+          f" \\( -newer {MARK_DIR}/{mark} -o -cnewer {MARK_DIR}/{mark} \\) -print0")
+
+
+MARK_DIR = "/tmp/ahpele_marks"  # outside /tmp/ahpele, so the agent's own clean-ups do not touch it
+SNAPSHOT_MAX_MB = 300
+
+
+async def mark_time(session, mark: str) -> bool:
+  return await _exec_ok(session, f"mkdir -p {MARK_DIR} && touch {MARK_DIR}/{mark}") is not None
+
+
+async def take_snapshot(session) -> bool:
+  """Archives the files changed since the task began, so an unfinished second fix can be undone (RC-0040)."""
+  out = await _exec_ok(
+      session,
+      f"cd / && [ -e {MARK_DIR}/start ] && ({_changed_files(session, 'start')} 2>/dev/null; true) | sort -zu"
+      f" > {MARK_DIR}/list; [ -s {MARK_DIR}/list ] &&"
+      f" [ $(du -cm --files0-from={MARK_DIR}/list 2>/dev/null | tail -n 1 | cut -f1) -le {SNAPSHOT_MAX_MB} ] &&"
+      f" tar cf {MARK_DIR}/snap.tar --null -T {MARK_DIR}/list 2>/dev/null && echo SAVED", 180)
+  return bool(out) and "SAVED" in out
+
+
+async def restore_snapshot(session) -> bool:
+  out = await _exec_ok(session, f"cd / && tar xf {MARK_DIR}/snap.tar 2>/dev/null && echo RESTORED", 60)
+  return bool(out) and "RESTORED" in out
+
+
+async def files_changed_since(session, mark: str) -> bool:
+  """Whether any file under the workdir or a named path changed after `mark` (True when unknown)."""
+  out = await _exec_ok(
+      session, f"cd / && [ -e {MARK_DIR}/{mark} ] && command -v find >/dev/null && echo KNOWN &&"
+      f" ({_changed_files(session, mark)} 2>/dev/null; true) | head -c 1 | wc -c")
+  if out is None or "KNOWN" not in out:
+    return True
+  return out.split()[-1] != "0"
+
+
+def check_rounds() -> int:
+  """How many check-and-fix rounds may run (AHPELE_CHECK_ROUNDS, default MAX_CHECK_ROUNDS)."""
+  try:
+    return max(1, min(int(os.environ.get("AHPELE_CHECK_ROUNDS", MAX_CHECK_ROUNDS)), MAX_CHECK_ROUNDS))
+  except ValueError:
+    return MAX_CHECK_ROUNDS
+
+
+async def check_round(session, pi_argv, env, work, model, extra_note: str, rnd: int) -> bool:
+  """One independent check (clean context) and, if it finds something serious, one fixing session.
+
+  Returns True when the fixer corrected the deliverables and finished, so that another check is worthwhile.
+  """
   left = session.time_left()
-  if left is None or left < CHECKER_MIN_LEFT_SEC:
-    await session.log(f"ahpele: independent check skipped ({int((left or 0) // 60)} min left)")
-    return
-  author_final = session.final_message or ""
+  need = CHECKER_MIN_LEFT_SEC if rnd == 1 else BACKCHECK_MIN_LEFT_SEC
+  if left is None or left < need:
+    await session.log(f"ahpele: independent check round {rnd} skipped ({int((left or 0) // 60)} min left)")
+    return False
+  review = REVIEW_FILE if rnd == 1 else REVIEW_FILE_2
+  before = session.final_message or ""
   cap = min(CHECKER_MAX_SEC, CHECKER_SHARE * left)
   orig_deadline = session.deadline
-  base = [e for e in ("task-tools.ts", "context-guard.ts", "settle-guard.ts")]
-  await session.log(f"ahpele: independent check: {int(cap // 60)} min of {int(left // 60)} min left")
+  base = ["task-tools.ts", "context-guard.ts", "settle-guard.ts"]
+  await session.log(f"ahpele: independent check round {rnd}: {int(cap // 60)} min of {int(left // 60)} min left")
   try:
     session.deadline = min(orig_deadline, time.monotonic() + cap + STOP_BEFORE_SEC)
     cenv = dict(env)
     cenv.update(AHPELE_REVIEW="0", AHPELE_VERIFY="0", AHPELE_COMPLIANCE_GATE="0", AHPELE_REQ_GATE="0",
                 AHPELE_STOP_AT_EPOCH=str(int(time.time() + cap)))
     system = NOTE.format(workdir=session.workdir) + TIME_NOTE.format(minutes=int(cap // 60)) + extra_note
+    prompt = CHECKER_PROMPT.format(summary=before[:3000], review=review)
+    if rnd > 1:
+      prompt = prompt.replace("\n\n", "\n\n" + BACKCHECK_PROMPT.format(earlier=REVIEW_FILE, review=review), 1)
     crun = Run(session, model, keep_final=False)
     await taskbridge.run_process(
         pi_argv(base, system), session, env=cenv, cwd=str(work), on_line=crun.on_line,
-        stdin=(CHECKER_PROMPT.format(summary=author_final[:3000]) + session.instruction).encode(),
+        stdin=(prompt + session.instruction + CHECKER_COUNT_NOTE.format(review=review)).encode(),
         stop_before_sec=STOP_BEFORE_SEC, log_prefix="checker: ")
   finally:
     session.deadline = orig_deadline
-    session.final_message = author_final
+    session.final_message = before
   try:
-    findings = (await session.read_file(REVIEW_FILE)).decode("utf-8", "replace")
+    findings = (await session.read_file(review)).decode("utf-8", "replace")
   except Exception:  # noqa: BLE001
     findings = ""
-  serious = len(re.findall(r"\b(BLOCKING|MAJOR)\b", findings))
-  await session.log(f"ahpele: checker wrote {len(findings)} chars, {serious} blocking/major findings")
+  blocking, major = count_open(findings)
+  await session.log(f"ahpele: checker round {rnd} wrote {len(findings)} chars, {blocking} blocking / {major} major findings")
   left = session.time_left()
-  if not serious or left is None or left < 10 * 60:
-    return
+  need = 10 * 60 if rnd == 1 else FIXER_2_MIN_LEFT_SEC
+  # round 2 is a safety net: only blocking findings justify another change; its major findings are left as they are
+  if left is None or left < need or not (blocking + major if rnd == 1 else blocking):
+    return False
   fenv = dict(env)
-  fenv.update(AHPELE_REVIEW="0", AHPELE_STOP_AT_EPOCH=str(int(time.time() + max(left - STOP_BEFORE_SEC, 0))))
+  fenv.update(AHPELE_REVIEW="0", AHPELE_REQ_GATE="0", AHPELE_START_EPOCH=str(int(time.time())),
+              AHPELE_STOP_AT_EPOCH=str(int(time.time() + max(left - STOP_BEFORE_SEC, 0))))
   exts = list(base) + (["phase-guard.ts"] if flag("PHASES") else [])
   frun = Run(session, model, keep_final=False)
+  if rnd > 1 and not await take_snapshot(session):
+    await session.log("ahpele: no snapshot possible; the second fix is skipped")
+    return False
+  await mark_time(session, f"fix{rnd}")
+  prompt = FIXER_PROMPT.format(summary=before[:3000], review=review)
+  if rnd > 1:
+    prompt += FIXER_2_NOTE.format(earlier=REVIEW_FILE)
+  done = None
   try:
-    await taskbridge.run_process(
+    done = await taskbridge.run_process(
         pi_argv(exts, note(session) + extra_note), session, env=fenv, cwd=str(work), on_line=frun.on_line,
-        stdin=(session.instruction + FIXER_PROMPT.format(summary=author_final[:3000])).encode(),
+        stdin=(session.instruction + prompt).encode(),
         stop_before_sec=STOP_BEFORE_SEC, log_prefix="fixer: ")
   finally:
-    # the fixer's summary replaces the author's once the fixer has written a complete one
+    # the fixer's summary replaces the earlier one once the fixer has written a complete one
     if len(frun.stop_text) >= SUMMARY_MIN_CHARS:
       session.final_message = frun.stop_text
     else:
-      session.final_message = author_final or frun.stop_text or frun.last_text
+      session.final_message = before or frun.stop_text or frun.last_text
       if frun.replies:
-        await session.log("ahpele: fixer did not finish with a summary; keeping the author's final message")
+        await session.log("ahpele: fixer wrote no complete summary; keeping the earlier final message")
+  # a fix is complete when the fixer ended by itself, whatever the length of its closing remark
+  complete = not done.stopped and frun.last_stop == "stop"
+  if rnd > 1 and not complete:
+    ok = await restore_snapshot(session)
+    if ok:
+      session.final_message = before
+    await session.log(f"ahpele: second fix did not finish; undone: {ok}")
+  return complete and await files_changed_since(session, f"fix{rnd}")
+
+
+async def independent_check(session, pi_argv, env, work, model, extra_note: str) -> None:
+  """RC-0028: a clean-context checker writes findings and a fixer applies them; RC-0040: then one back-check round."""
+  for rnd in range(1, check_rounds() + 1):
+    if not await check_round(session, pi_argv, env, work, model, extra_note, rnd):
+      return
 
 
 async def solve(session: taskbridge.Session) -> str:
@@ -764,6 +916,7 @@ async def solve(session: taskbridge.Session) -> str:
         else min(session.deadline, cap_deadline)
     )
     await session.log(f"ahpele: time-boxed probe, {cap_min} min budget")
+  await mark_time(session, "start")
   index_note = await build_index(session)
   extras_note = await install_extras(session)
   with tempfile.TemporaryDirectory(
@@ -813,6 +966,8 @@ async def solve(session: taskbridge.Session) -> str:
       extensions = ["task-tools.ts", "context-guard.ts", "settle-guard.ts"]
       if flag("PHASES"):
         extensions.append("phase-guard.ts")  # AHPELE H3
+      if flag("SKILL_GUARD") and "\nSkills (" in extras_note:
+        extensions.append("skill-guard.ts")  # AHPELE RC-0039
       def pi_argv(exts: list[str], system: str) -> list[str]:
         return [
             PI,

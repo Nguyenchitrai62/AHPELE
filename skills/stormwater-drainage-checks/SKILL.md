@@ -1,6 +1,6 @@
 ---
 name: stormwater-drainage-checks
-description: How a civil reviewer checks site drainage - detention basins and emergency spillways (weir sizing, freeboard, crest/berm/apron, erosion protection, overflow path), rational-method flows, storm-drain Manning/HGL checks, when revisions trigger a drainage-study amendment, and plan-vs-study QA/QC. Use for any stormwater, detention, spillway, storm drain or drainage-report review task.
+description: How a civil reviewer checks site drainage - detention basins and spillways, rational-method flows, storm-drain Manning/HGL checks, and plan-vs-study consistency. Use for any stormwater, detention, storm drain or drainage-report work.
 ---
 
 # Stormwater and drainage review
@@ -27,8 +27,7 @@ description: How a civil reviewer checks site drainage - detention basins and em
   perpendicular to flow; H = head above crest measured upstream. Solve H = (Q / (C L))^(2/3), then
   freeboard = top of berm - (crest + H). Side slopes add flow; conservative practice ignores them, or uses the
   mid-depth width L + z H as an approximation (say which). Sharp-crested C (3.33 US / 1.84 SI) is wrong here.
-- Recompute every number shown with the stated C, L, Q; do not round intermediate values. Report the margin
-  (required vs provided) and which criterion governs.
+- Recompute every number with the stated inputs; carry full precision. Report the margin and which criterion governs.
 - Location: cut the spillway into undisturbed native ground beside the embankment where possible, not in fill;
   keep it away from the outlet structure. Flow over fill needs armour down the full downstream face to the toe.
 - Erosion protection: riprap, turf reinforcement mat, articulated block or concrete across crest, downstream face
@@ -41,7 +40,7 @@ description: How a civil reviewer checks site drainage - detention basins and em
 - Velocity: compute at the chute/toe (critical depth on the crest, supercritical down the face); energy
   dissipation (apron, stilling basin, riprap basin) where the slope flattens or flow re-enters a channel.
 
-## 3. Where the overflow goes
+## 3. Overflow path
 - Trace the path from the crest to a safe receiver: public street, drainage channel, storm-drain system with
   capacity, or natural watercourse - within a drainage easement or right-of-way. It must not cross private lots,
   structures, slopes, septic fields or a neighbour's property without an easement, and must not divert water to a
@@ -66,20 +65,16 @@ description: How a civil reviewer checks site drainage - detention basins and em
 - Worksheet audit: carry the same Q, D, slope, n, length and inverts as the profile; slope = (inv up - inv down)/L;
   a pipe flagged "surcharged" needs the HGL check, not just capacity.
 
-## 5. Does a revision need a study amendment?
-- Usually yes when any of these change relative to the accepted study: drainage area boundaries or tributary
+## 5. Changes against an accepted study
+- An amendment is usually needed when any of these change relative to the accepted study: drainage area boundaries or tributary
   areas, impervious area/runoff coefficient or land use, basin volume or stage-storage, outlet structure (sizes,
   elevations), spillway location/direction, routing or diversion, outfall location, or peak discharge leaving the
   site (any increase over accepted or allowable). Changes that only add detail consistent with the study (dimension
   callouts, notes, armour detail) are typically handled on the plans with a calc package or letter.
-- Decide against the acceptance letter's own wording and agency comments; give one disposition with the reason.
+- Decide against the acceptance letter's own wording and agency comments; state the conclusion and reason.
 
-## 6. Plan-sheet content and QA/QC
-- Spillway detail should show: crest elevation and length, side slopes, design storm and Q (blocked-outlet basis),
-  depth over crest and design WSE, top-of-berm elevation and freeboard dimension, lining type with D50/thickness/
-  filter, apron length/width/thickness, cutoff walls, discharge direction, reference to the study/calc.
-- Basin notes: 100-yr WSE and volume, outlet sizes/elevations, a note keeping the spillway and overflow
-  path clear of obstructions, maintenance responsibility and easement, inspection/certification requirements.
+## 6. Plan content and QA/QC
+- Details should show the dimensions, elevations, design basis and references that a builder and reviewer need.
 - QA/QC habits: same elevation and label on plan, profile, section and detail; north arrow/flow arrows; units;
   notes cite the correct (current) study title/date; revision clouds match the comment response; every agency comment
   closed or answered with a sheet reference. Use drawing-takeoff for reading the sheets themselves.

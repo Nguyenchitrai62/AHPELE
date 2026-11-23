@@ -21,8 +21,8 @@ an invalid entity can make the file unreadable to other tools.
 
 Clashes: ifcopenshell.geom.tree intersection test between every pair of products with a body
 (spaces, openings, annotations and spatial elements are skipped); a pair clashes when one solid
-penetrates the other by more than --tol. Elements meant to touch (segments meeting at a joint, a
-rack standing on the floor) do not count.
+penetrates the other by more than --tol. Elements meant to touch (segments meeting at a joint,
+equipment standing on a slab) do not count.
 
 Connectivity: routed elements (pipe / duct / cable-carrier / cable segments and fittings) are
 grouped by system (IfcRelAssignsToGroup) or else by class + ObjectType; inside each group, elements
@@ -224,8 +224,8 @@ def box_dist(b, p):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("ifc")
-    ap.add_argument("--tol", type=float, default=2.0, help="penetration that counts as a clash, mm; set it to the tolerance the contract states "
-                    "(default 2, a round-off allowance)")
+    ap.add_argument("--tol", type=float, default=1.0, help="penetration that counts as a clash, mm (numerical allowance; "
+                    "set it to the project's clash tolerance)")
     ap.add_argument("--gap", type=float, default=5.0, help="joint gap that still connects two elements, mm")
     ap.add_argument("--ignore", default="", help="comma-separated classes left out of the clash test")
     ap.add_argument("--point", action="append", default=[], help="x,y,z (or plan x,y) in mm: report each network's distance (and elevation range near a plan point)")

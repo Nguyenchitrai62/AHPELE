@@ -1,6 +1,6 @@
 ---
 name: temporary-works-and-sequencing
-description: Temporary works and construction sequencing - scaffolds and access platforms (capacity, planking, ties, guardrails), excavations and trench protection, shoring and reshoring of formwork, stability of partially built structures and work next to existing buildings, with the OSHA 29 CFR 1926 rules engineers check. Use for any method statement, extension, erection, excavation or temporary-structure task.
+description: Temporary works and construction sequencing - access, excavation, formwork support, stability of partial structures. Use for method statements, erection, excavation or temporary structures.
 ---
 
 # Temporary works and sequencing

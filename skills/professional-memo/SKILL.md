@@ -11,19 +11,14 @@ description: How to write an engineering memo, letter, reply, review response or
 - Gather the record: correspondence (emails, letters, RFIs), applications, studies, test reports, standards, contracts,
   tracking data in project applications. Build a dated timeline of relevant events in `/tmp/ahpele/timeline.md`.
 - For each potential issue, find the exact source (document, section, date) and what it requires.
-- For go/no-go questions (approve, issue, energise, accept, pay), do not stop at the first favourable reading. Build a checklist of every condition that applies
-  (agreements, studies, permits, tests, payments, insurance, notices, deadlines, sign-offs, open correspondence) and
-  check each one against the record as of the stated date. Only conclude that nothing blocks the decision after every
-  condition has been checked and cited.
+- For a decision, list every condition that bears on it and check each against the record before concluding either way.
 
 ## Structure
 1. Header: To / From / Date (use the record's "as of" date unless told otherwise) / Subject / project identifiers.
 2. **Answer first**: one or two sentences that directly answer the question (yes / no / not yet, by which date), with
    the decisive reason.
 3. **Basis**: the facts and requirements the answer rests on, each cited to the record (document, section, date).
-4. **Open items** (one per issue): what it is; what requirement it rests on (cite it); what has to be done; who must do
-   it (name the party or role, including the customer/applicant when it is theirs); whether it can be done before the
-   target date and why; consequence if not.
+4. **Open items**: for each, the requirement and its source, the action, the responsible party and the timing.
 5. Items reviewed and found acceptable, briefly, so the reader knows they were checked.
 6. Scope statement: what this memo does not cover, exactly as the request defines it.
 7. Recommendation / next steps with dates.
@@ -36,13 +31,13 @@ description: How to write an engineering memo, letter, reply, review response or
   because <fact with value and unit> (<document, section/sheet, date>)". Then give the working.
 - When the record does not let you decide a question, say exactly what is missing, who must provide it and what the
   decision is meanwhile.
-- Commit to one disposition per question, as engineering requests usually ask.
+- Give one clear conclusion per question.
 - Name the cause, not only the symptom: when something fails or is non-conforming, state why (which input, assumption,
   revision or condition) and what has to change.
 
 ## Scope, states and length
-- Keep a scope ledger: what the request asks, what it excludes, what is under someone else's review. Items under separate
-  review are mentioned, not decided; items that bear on the answer stay in even if raised elsewhere.
+- Keep a scope ledger: what the request asks and what it excludes. Do not decide matters outside the scope; mention them
+  only where they affect the answer.
 - Check the answer in every operating state or stage the request covers (before / during / after an event, normal and
   abnormal), not only the steady case.
 - Length and precision follow the reader: a decision memo is usually 1-3 pages plus attachments; report numbers to the

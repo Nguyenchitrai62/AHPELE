@@ -1,6 +1,6 @@
 ---
 name: drawing-takeoff
-description: How a professional estimator counts and measures items from a drawing set (raster or vector): sheet index, legend first, per-item register with coordinates, match lines and enlarged plans, keyed notes, revision clouds and addenda, location conditions, assemblies from the specification, and the cross-checks before pricing. Use for any quantity takeoff, device/equipment count, schedule check or bill of materials built from drawings.
+description: How a professional estimator counts and measures items from a drawing set (raster or vector) - sheet index, legend first, per-item register with coordinates, match lines and enlarged plans, revisions and addenda, and the cross-checks before pricing. Use for any quantity takeoff, equipment count, schedule check or bill of materials built from drawings.
 ---
 
 # Quantity takeoff from drawings
@@ -14,17 +14,15 @@ description: How a professional estimator counts and measures items from a drawi
 - Dimensions on metric sets are millimetres unless noted; "do not scale" notes mean counts and grid references
   come from the drawing, distances from dimensions or from the grid, not from a ruler. If you must measure,
   calibrate on the graphic scale bar or the grid spacing of THAT sheet (scales differ between sheets).
-- List the addenda, RFIs and bulletins with their dates. A later document governs only for what it describes.
+- List the addenda, RFIs and bulletins with their dates. Read each for the sheets and items it changes.
 
 ## 2. Legend and notes before counting
 - Transcribe the symbol legend into a table: mark, shape (outline, fill, inner bar/letter, dashed vs solid), text.
   Pay attention to pairs that differ only by fill, dashing or an inner mark; those are the common misreads.
-- Read the legend notes, general notes, sheet notes and keynote schedule of EVERY sheet you count. They state:
-  which side of a match line is counted, which areas are shown on enlarged plans (parent drawn empty), how grid
-  bays/locations are written, what to do with symbols not in the legend, and which devices are required but not drawn.
+- Read the legend notes, general notes, sheet notes and keynotes of every sheet you count: they set the counting
+  conventions and can add or exclude items.
 - Resolve a doubtful match by looking at it enlarged; record the decision and the reason.
-- A symbol the legend does not identify: do not guess; list it as an unresolved item or RFI with sheet and
-  location, and treat it as the instruction directs. Never carry a quantity you cannot point to.
+- Raise any symbol the legend does not identify as a query; carry no quantity you cannot trace.
 
 ## 2b. Tools for reading the sheets (`python3 /tmp/ahpele/bin/ahpele_drawing.py ...`)
 - `grid SHEET --cols 4 --rows 3` writes an overview with a labelled grid and one tile per cell: read the sheet cell by
@@ -43,32 +41,25 @@ description: How a professional estimator counts and measures items from a drawi
 - Count symbol by symbol, sheet by sheet; mark what you counted on an overlay image and look at it. Recount any sheet
   where the overlay shows a symbol without a mark or a mark without a symbol. Review low-confidence detections
   individually; do not drop them by threshold alone.
-- Grid bays: derive from the structural grid lines on the sheet (positions of the grid bubbles), following the
-  set's stated convention for letters/numbers; never invent bay labels.
+- Locations: derive them from the structural grid lines on the sheet, following the set's stated convention.
 
 ## 4. Avoid double counting and missing items
 - Match lines: items on the far side are shown for reference (often greyed); count each item on the sheet that
   schedules it. Convert sheet coordinates to a common building grid to check that no item is counted on two sheets.
-- Enlarged plans: the parent plan area is empty; count those items from the enlarged plan only. Enlarged details
-  on one sheet may overlap each other: deduplicate by building-grid position.
+- Count areas shown at larger scale once, from the sheet that governs; deduplicate overlapping details by position.
 - Keyed and general notes can require items that are not drawn: count them as the note says, record the basis
   (what was counted, on which sheet) and add them to the register flagged added-by-note. Where
   drawings and schedules disagree, apply the order of precedence the contract sets and report the discrepancy.
 - Revision clouds/addenda: list every item inside each cloud with coordinates, then apply the deletion/addition
   exactly as described, as explicit operations on the register (delete these rows, add these rows). Check the revision date against the addendum date.
 
-## 5. Conditions and assemblies
-- Location-dependent attributes come from the architectural plans and schedules; apply the rule the documents give
-  for assigning them, and record it in the register. When the rule is geometric,
-  compute it from coordinates by code for every row; never type it by hand.
-- For each (item type, condition) pair, quote the specification sentences that require or forbid components
-  ("required", "shall", "not used", "separate", "in addition", "in one assembly") and pick catalogue items whose
-  listing matches the condition. Check every forbidden component is absent and every required one present.
+## 5. Conditions and components
+- Where an item's accessories depend on location or mounting, take the condition from the plans and the required
+  components from the specification and record both. When a rule is geometric, compute it from coordinates by code.
 
 ## 6. Cross-checks before pricing
 - Sum per sheet = sum per type = sum per condition, for every type.
-- Every legend mark has either a count with register rows or zero with a statement that none was found.
-- Repetitive layouts (rows of cabinets, bays) usually give repetitive counts; investigate outliers.
+- Account for every legend item.
+- Repetitive layouts (typical bays or rooms) usually give repetitive counts; investigate outliers.
 - Narrative (basis of estimate) and tables agree: same sheets, same counts, same exclusions.
-- Price per the contract and price-list rules; keep work quantity and purchase quantity (spares, pack sizes)
-  separate and state the basis of each.
+- Price by the contract's rules and state the basis of each quantity.

@@ -1,6 +1,6 @@
 ---
 name: structural-design-checks
-description: Practical structural engineering knowledge for designing and checking roofs, decks, diaphragms, frames and foundations against project criteria - load paths, snow drift geometry, wind uplift zones, steel deck tables, diaphragm stiffness and collectors, validating your own analysis model, zoning for cost. Use for any structural design, check or optimisation task.
+description: Practical structural engineering knowledge for designing and checking roofs, decks, diaphragms, frames and foundations against project criteria - load paths, snow and wind loads, deck tables, diaphragms and collectors, validating your own analysis model. Use for any structural design or check.
 ---
 
 # Structural design and checking
@@ -11,7 +11,7 @@ description: Practical structural engineering knowledge for designing and checki
 - When the criteria say a value "is taken from" or "is governed by" a standard clause, that clause is the governing
   source: cite the clause that governs, with its value.
 - Never mix design bases: allowable (ASD) tables are checked with service-level combinations, factored resistances (phi)
-  with factored (LRFD) combinations. Resisting dead load in uplift/overturning is factored down (typically 0.9D) and
+  with factored (LRFD) combinations. Resisting dead load in uplift/overturning is factored down (0.9D LRFD, 0.6D ASD) and
   excludes loads that are not permanently attached (hung services, equipment allowances).
 
 ## 2. Snow loads
@@ -21,35 +21,31 @@ description: Practical structural engineering knowledge for designing and checki
   that face (no infinite strips). Evaluate every face for every wind direction the criteria require; take the envelope
   per point unless the criteria say to superimpose.
 - Windward vs leeward drifts use different fetch lengths and factors; truncated drifts (hd > hc) have peak hc*gamma and a
-  different width rule. Parapets are windward-type obstructions measured from their inside face.
-- Seismic weight usually includes a share of the flat-roof snow load above a threshold (ASCE 7: 20 % of pf where pf > 30
-  psf); drifts are normally excluded from seismic weight.
+  different width rule. Follow the code's obstruction definitions.
+- Seismic weight can include a share of the flat-roof snow load above a threshold; share and threshold depend on the
+  code edition in force, so read it there.
 
 ## 3. Wind uplift on roof cladding and deck
 - Components-and-cladding zones: corners carry the highest suction, then the perimeter band, then interior. An
-  attachment zone must satisfy the worst pressure zone it overlaps.
+  element in more than one zone is checked for the highest pressure that applies to it.
 - Fastener uplift capacity per unit area = design tension of one fastener / its tributary area (cover width / number of
   fasteners across it x span). Pull-over usually governs thin sheet; it scales with sheet thickness.
 
 ## 4. Steel roof deck
 - A higher gage number is a THINNER sheet. Price, strength and stiffness all rise with thickness.
-- Typical economical deck design: one base gage and attachment over most of the roof (governed by balanced snow,
-  interior uplift and low shear), with heavier gage or attachment only where drifts, corner/perimeter uplift or high
-  diaphragm shear (near braced frames and boundaries) require it.
+- Vary gage or attachment only where demand requires it.
 - Gravity tables give allowable TOTAL load including self weight for a stated span condition (often 3-span). Deflection
   is checked under live or snow load only. A deck run shorter than the tabulated span condition needs its own capacity.
-- Diaphragm tables vary with gage, support pattern, sidelap type and sidelap count; read the column labels explicitly and,
-  when the manual prints the formula behind the table, recompute every value you use from it. Some sidelap types are not
-  permitted on heavier gages.
-- Deck is not placed over framed openings; zones stop at opening frames, and edges at boundaries and openings usually get
-  a minimum attachment regardless of demand.
+- Read diaphragm table headings and footnotes for limits; when the manual prints the formula behind the table,
+  recompute every value you use from it.
+- Detail boundaries and openings as the criteria require.
 
 ## 5. Diaphragms, chords and collectors
 - Force distributes to vertical elements by relative stiffness (rigid/semi-rigid) or by tributary width (flexible). In
-  a semi-rigid diaphragm the distribution depends on deck stiffness: re-run the analysis with the deck specified.
+  a semi-rigid diaphragm the distribution depends on stiffness; iterate where stiffness depends on the design.
 - Collectors and their connections to the vertical system are designed for overstrength-amplified seismic force (Omega_0)
-  in the higher seismic design categories; chords and the diaphragm itself use the unamplified force. Compare the
-  AMPLIFIED collector force with the collector/splice capacity; the weakest link (often a bolted splice) governs.
+  in the higher seismic design categories; chords and the diaphragm itself use the unamplified force. Check connections
+  as well as members.
 - Hand checks for any diaphragm model: unit shear ~ reaction / diaphragm depth at the support lines; chord force ~ M / d;
   sum of frame reactions = applied force; with accidental torsion, frames on both sides change in opposite senses.
 
@@ -60,12 +56,9 @@ description: Practical structural engineering knowledge for designing and checki
 - When you fix a bug in a model or an input, redo the design selection and the optimisation from scratch: decisions
   made with the wrong model are not valid. Write every reported number from the model output by script.
 
-## 7. Zoning and cost
-- Build a map of the minimum specification each location needs (gravity, deflection, uplift, shear, boundary rules)
-  and zone to that demand map, within any zoning limits the project sets. Compare several layouts.
-- Price each layout completely with the project's cost rules (including any per-zone or set-up costs) and keep the
-  cheapest feasible layout.
-- Recheck all hard limits for every candidate; keep the best feasible layout on disk.
+## 7. Optimise within limits
+- Compare complete priced alternatives that meet all limits, recheck every hard limit for each candidate and keep the
+  best feasible one on disk.
 
 ## 8. Units and models (BIM / CAD)
 - Read IfcUnitAssignment: raw IfcCartesianPoint coordinates are in the file's length unit (often millimetres) and are

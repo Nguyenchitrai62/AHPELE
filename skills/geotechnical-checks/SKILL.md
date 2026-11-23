@@ -48,8 +48,8 @@ boring/lab record nearest the work and say which. Effective stress σ'v = σv - 
 - Primary consolidation per sublayer (H thickness, σ'f = σ'v0 + Δσ, σ'p preconsolidation, OCR = σ'p/σ'v0):
   NC (σ'p ≈ σ'v0): Sc = Cc·H/(1+e0)·log10(σ'f/σ'v0); OC with σ'f ≤ σ'p: Sc = Cr·H/(1+e0)·log10(σ'f/σ'v0);
   OC with σ'f > σ'p: Sc = Cr·H/(1+e0)·log10(σ'p/σ'v0) + Cc·H/(1+e0)·log10(σ'f/σ'p). Alternative Sc = mv·Δσ·H.
-  Typical: Cc ≈ 0.009(LL - 10); Cr ≈ Cc/5 to Cc/10; CR = Cc/(1+e0). Get σ'p by Casagrande from the oedometer;
-  an "OC" assumption the test does not show (OCR ≈ 1) can understate settlement several-fold.
+  Typical: Cc ≈ 0.009(LL - 10); Cr ≈ Cc/5 to Cc/10; CR = Cc/(1+e0). Get σ'p by Casagrande from the oedometer; check
+  the assumed OCR against it.
 - Secondary: Ss = Cα·H/(1+ep)·log10(t2/t1), t1 = end of primary; Cα/Cc ≈ 0.04 ± 0.01 inorganic, 0.05-0.07 organic.
 - Time rate: t = Tv·Hdr²/cv; T50 = 0.197, T90 = 0.848; Hdr = half thickness if drained top and bottom, full thickness
   if one drainage face (check logs for sand seams/impervious base). cv typical 0.3-10 m²/yr NC clay (higher in OC range).
@@ -80,7 +80,6 @@ boring/lab record nearest the work and say which. Effective stress σ'v = σv - 
   Proctor ID, location (grid, elevation, lift). Alternatives: sand cone D1556, drive cylinder D2937.
 - Failed test (density or moisture): rework (scarify, moisture-condition, recompact) and retest at the same location
   and lift, linked to the original test number; failures cannot be averaged out; lifts placed over a failed lift come off.
-- Before building on fill: subgrade stripped and proof-rolled/observed; fill material approved; every lift and area
-  tested with passing results on the correct Proctor; retests closed; final grade verified; report signed by the
-  testing agency's responsible engineer and reviewed by the geotechnical engineer; fill re-tested if softened by rain
-  or frost. Missing testing is "not accepted - incomplete", distinct from failing results.
+- List the records the specification requires before construction proceeds; distinguish missing from failing
+  evidence. Typical records: subgrade observation, material approval, density tests per lift and area on the applicable
+  Proctor, retests closed, agency report.

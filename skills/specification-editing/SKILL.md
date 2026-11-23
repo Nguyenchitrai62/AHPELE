@@ -20,7 +20,7 @@ description: How a specification writer edits and tailors construction specifica
   warranty. PART 2 PRODUCTS: materials, equipment, ratings, factory tests. PART 3 EXECUTION: examination,
   installation, field quality control and tests, closeout.
 - Keep each requirement identifiable; a list in the master stays a list of separate items. Do not merge
-  paragraphs that the master keeps separate (for example REFERENCES and SUBMITTALS are separate paragraphs).
+  paragraphs that the master keeps separate.
 
 ## 3. References
 - REFERENCES lists only the publications actually cited in the section text, by publisher, designation, edition

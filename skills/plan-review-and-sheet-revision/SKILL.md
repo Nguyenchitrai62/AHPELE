@@ -37,7 +37,7 @@ propagate it -> update title/revision blocks and index -> QA/QC -> issue with th
 - Response style: state what was done and where ("Hydrant relocated to sta 12+40; see C-401 delta 2"), or give the
   technical reason and supporting reference when not adopted. Never "Noted" or "Will comply" alone. The response
   must match the drawing exactly (same values, same sheets); answer every comment, including ones needing no change.
-  Flag comments that trigger other submittals (drainage study amendment, permit modification, calc update).
+  Flag comments that trigger other submittals (study, permit or calculation updates).
 
 ## 4. Propagating a change (the step most often missed)
 - For every changed object list where else it appears and update all of them: plan view, profile, sections,

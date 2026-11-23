@@ -53,7 +53,7 @@ for cross-checks only. Constants: g = 9.81 m/s²; water ρ ≈ 998 kg/m³ at 20 
   PV = A0·(1 + e)/(d − e)·[1 − ((1 + e)/(1 + d))^n] (= A0·n when d = e). Check: d 3 %, n 20 → P/A = 14.877.
 - Real vs nominal: (1 + d_nom) = (1 + d_real)·(1 + i); real d with constant prices, nominal d with inflated; never mix.
 - US federal (FEMP, 10 CFR 436, NIST HB 135): real discount rate and energy escalation indices from the current HB 135
-  Annual Supplement (region, sector, fuel); service period ≤ 25 years; constant dollars. Otherwise the owner's rules.
+  Annual Supplement (region, sector, fuel); study period limit of the edition in force; constant dollars. Otherwise the owner's rules.
 - LCC = initial + PV(energy) + PV(water/sewer, chemicals) + PV(O&M) + PV(repair/replacement) − PV(residual).
   Replace each component at the end of its service life within the study period (typical lives: ASHRAE Applications
   ch. 38 or owner data). Residual = replacement cost × remaining life/service life, discounted from the end year. Same

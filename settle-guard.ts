@@ -25,6 +25,14 @@ const CONTINUE =
 	"from where you were. Keep your reasoning brief and act through tools. If the deliverable files the instruction " +
 	"asks for do not exist yet, write a complete first version of them now, then keep improving them.";
 
+// the checker session reviews; it must not be told to write deliverables
+const CONTINUE_CHECKER =
+	"[harness] Your previous response was cut off or empty, so nothing was done in that turn. Continue your review from " +
+	"where you were: keep your reasoning brief, act through tools, and write what you have verified so far to the review file.";
+
+const CHECKER_AFTER_ERROR =
+	"[harness] The model service returned an error and the harness waited before retrying. Continue your review from where you were.";
+
 const CONTINUE_AFTER_ERROR =
 	"[harness] The model service returned an error and the harness waited before retrying. Continue the task from " +
 	"where you were; if the deliverable files do not exist yet, write a complete first version now.";
@@ -55,8 +63,8 @@ function review(minutesLeft: number, pctLeft: number): string {
 		"deadlines, document status) against your numbers with a script; run python3 /tmp/ahpele/bin/ahpele_reqscan.py " +
 			"--check if it exists and resolve every unreviewed candidate; and look for anything you have not examined: " +
 		"documents you skimmed, conditions you assumed were met, conflicts between documents, dates and deadlines, items " +
-		"that need someone to act. If the task asks for a go/no-go decision (approve, issue, energise, accept), check every " +
-		"applicable condition and record before you conclude that nothing blocks it. Fix what you find, improve the weakest part of the " +
+		"that need someone to act. If the task asks for a decision, check every condition and record that bears on it, for and " +
+		"against, before you conclude. Fix what you find, improve the weakest part of the " +
 		"deliverable, re-run your checks, then give your final summary."
 	);
 }
@@ -101,7 +109,7 @@ export default function (pi: ExtensionAPI) {
 			console.error(`ahpele: settle-guard model error, retry ${errorRetries}/${ERROR_RETRIES} after ${Math.round(wait / 1000)} s: ${(last.errorMessage ?? "").slice(0, 120)}`);
 			await sleep(wait);
 			return {
-				entries: [{type: "custom_message", customType: "ahpele-settle-guard", content: CONTINUE_AFTER_ERROR, display: false}],
+				entries: [...event.entries, {type: "custom_message", customType: "ahpele-settle-guard", content: VERIFY_ON ? CONTINUE_AFTER_ERROR : CHECKER_AFTER_ERROR, display: false}],
 				continue: true,
 			};
 		}
@@ -110,7 +118,7 @@ export default function (pi: ExtensionAPI) {
 		let text: string | undefined;
 		const total = STOP_AT_MS > START_MS ? STOP_AT_MS - START_MS : 0;
 		const leftFrac = total ? (STOP_AT_MS - Date.now()) / total : 0;
-		if (truncatedOrEmpty(last)) text = CONTINUE;
+		if (truncatedOrEmpty(last)) text = VERIFY_ON ? CONTINUE : CONTINUE_CHECKER;
 		else if (event.outcome === "completed" && REVIEW_ON && reviews < MAX_REVIEWS && leftFrac > REVIEW_MIN_LEFT) {
 			reviews++;
 			text = review(Math.round((STOP_AT_MS - Date.now()) / 60000), Math.round(leftFrac * 100));
@@ -120,9 +128,9 @@ export default function (pi: ExtensionAPI) {
 		}
 		if (!text) return undefined;
 		nudges++;
-		console.error(`ahpele: settle-guard nudge ${nudges}/${MAX_NUDGES}: ${text === CONTINUE ? "continue" : text === VERIFY ? "verify" : "review"}`);
+		console.error(`ahpele: settle-guard nudge ${nudges}/${MAX_NUDGES}: ${text === CONTINUE || text === CONTINUE_CHECKER ? "continue" : text === VERIFY ? "verify" : "review"}`);
 		return {
-			entries: [{type: "custom_message", customType: "ahpele-settle-guard", content: text, display: false}],
+			entries: [...event.entries, {type: "custom_message", customType: "ahpele-settle-guard", content: text, display: false}],
 			continue: true,
 		};
 	});
