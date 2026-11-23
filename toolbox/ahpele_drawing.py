@@ -12,12 +12,19 @@
       numbered boxes. Scores >= 0.8 are usually the symbol, 0.45-0.8 must be reviewed one by one (crops are written
       for them), lower ones are dropped. Similar symbols (filled vs open, different inner mark) score high on each
       other: search with each legend symbol and assign each place to the best-scoring one.
+  python3 ahpele_drawing.py census SHEET --legend DIR [--page 1] [--dpi D] [--rot 0,90,180,270] [--scales 1]
+                                  [--min 0.6] [--exclude x0,y0,x1,y1] (repeatable) [--out DIR]
+      all legend symbols in one pass: DIR holds one crop per symbol (the symbol only, no legend text), named by its
+      mark (A.png, B.png), cut at the SAME dpi. Every place goes to the mark that fits best; census.csv has one row per
+      place (x, y, mark, score, missing and extra ink, the runner-up, band), plus an overlay and crops to review.
+      "likely" needs a high score, no clear rival and almost the same ink; everything else is REVIEW. Isolated
+      symbol-sized shapes that no mark fits are listed (shapes touching linework are not: read the sheet as well).
   python3 ahpele_drawing.py mark  SHEET --points pts.csv [--page 1] [--dpi D] [--out marked.png]
       draw your own counted items (csv with x,y in px of the same dpi, optional label) to check nothing is missed
       or counted twice.
 
-SHEET can be a PDF (page rendered with PyMuPDF or pdftoppm) or an image (PNG, JPG, TIFF). Needs Pillow; `find`
-needs numpy. Knows nothing about any particular drawing set.
+SHEET can be a PDF (page rendered with PyMuPDF or pdftoppm) or an image (PNG, JPG, TIFF). Needs Pillow; `find` and
+`census` need numpy (and scipy for unmatched shapes). Knows nothing about any particular drawing set.
 """
 import argparse
 import csv
@@ -105,7 +112,7 @@ def cmd_grid(a):
 def parse_box(s, w, h, px):
     v = [float(x) for x in s.split(",")]
     if len(v) != 4:
-        sys.exit("--box needs x0,y0,x1,y1")
+        sys.exit(f"{s}: a box needs x0,y0,x1,y1")
     if not px and max(v) <= 1.0:
         v = [v[0] * w, v[1] * h, v[2] * w, v[3] * h]
     return tuple(int(round(x)) for x in v)
@@ -123,26 +130,105 @@ def cmd_crop(a):
     print(f"crop {box} of {w}x{h} px at {dpi} dpi -> {a.out} ({out.width}x{out.height})")
 
 
-def ncc(gray, tpl):
-    """Normalised cross-correlation of a template over an image (numpy FFT), 'valid' region."""
+def ncc(gray, tpl, cache=None):
+    """Normalised cross-correlation of a template over an image (numpy FFT), 'valid' region. `cache` (a dict) keeps the
+    image transforms between templates of one sheet."""
     import numpy as np
     H, W = gray.shape
     th, tw = tpl.shape
     t = tpl - tpl.mean()
     tnorm = np.sqrt((t ** 2).sum()) or 1.0
-    fshape = (H + th - 1, W + tw - 1)
-    F = np.fft.rfft2(gray, fshape)
+    cache = {} if cache is None else cache
+    if "shape" not in cache or cache["shape"][0] < H + th - 1 or cache["shape"][1] < W + tw - 1:
+        cache["shape"] = tuple(n + (n % 2) for n in (H + (max(th, 256) if H > 512 else th),
+                                                     W + (max(tw, 256) if W > 512 else tw)))
+        cache["F"] = np.fft.rfft2(gray, cache["shape"])
+        cache["c1"] = np.cumsum(np.cumsum(np.pad(gray, ((1, 0), (1, 0))), 0), 1)
+        cache["c2"] = np.cumsum(np.cumsum(np.pad(gray ** 2, ((1, 0), (1, 0))), 0), 1)
+    fshape, F = cache["shape"], cache["F"]
     T = np.fft.rfft2(t[::-1, ::-1], fshape)
     corr = np.fft.irfft2(F * T, fshape)[th - 1:H, tw - 1:W]
-    c1 = np.cumsum(np.cumsum(np.pad(gray, ((1, 0), (1, 0))), 0), 1)
-    c2 = np.cumsum(np.cumsum(np.pad(gray ** 2, ((1, 0), (1, 0))), 0), 1)
 
     def box(c):
         return c[th:, tw:] - c[:-th, tw:] - c[th:, :-tw] + c[:-th, :-tw]
     n = th * tw
-    s1, s2 = box(c1), box(c2)
+    s1, s2 = box(cache["c1"]), box(cache["c2"])
     var = np.maximum(s2 - s1 ** 2 / n, 1e-9)
     return corr / (np.sqrt(var) * tnorm)
+
+
+def shrink(g, k):
+    """Block mean by k in both directions."""
+    h, w = g.shape[0] // k * k, g.shape[1] // k * k
+    return g[:h, :w].reshape(h // k, k, w // k, k).mean((1, 3))
+
+
+CAP = 6000  # candidates scored at full resolution per template and tile
+
+
+def matches(gray, tpl, low, cache):
+    """(score, x, y) of the template's top-left corner wherever it scores >= low: located on a reduced image where the
+    symbol allows it, scored at full resolution; big images are worked in tiles."""
+    import numpy as np
+    th, tw = tpl.shape
+    k = max(1, min(3, min(th, tw) // 12))
+    if k not in cache:
+        cache[k] = (shrink(gray, k) if k > 1 else gray, {})
+    small, subs = cache[k]
+    tsmall = shrink(tpl, k) if k > 1 else tpl
+    if tsmall.std() < 1e-3 or min(small.shape) <= max(tsmall.shape):
+        return []
+    out, m, step = set(), k + 1, 1800
+    keep = small.size <= 9e6  # keep transforms only when they fit comfortably in memory
+    for ty in range(0, small.shape[0], step):
+        for tx in range(0, small.shape[1], step):
+            tile = small[ty:ty + step + tsmall.shape[0], tx:tx + step + tsmall.shape[1]]
+            if tile.shape[0] <= tsmall.shape[0] or tile.shape[1] <= tsmall.shape[1]:
+                continue
+            r = ncc(tile, tsmall, subs.setdefault((ty, tx), {}) if keep else None)
+            pad = np.pad(r, 1, constant_values=-1.0)  # local maxima only
+            peak = np.ones(r.shape, bool)
+            for dy in (-1, 0, 1):
+                for dx in (-1, 0, 1):
+                    peak &= r >= pad[1 + dy:1 + dy + r.shape[0], 1 + dx:1 + dx + r.shape[1]]
+            ys, xs = np.where(peak & (r >= (low if k == 1 else low - 0.25)))
+            if len(ys) > CAP:
+                print(f"  note: {len(ys)} candidates in one part of the sheet, best {CAP} scored (raise --min or --exclude text)")
+            for i in np.argsort(-r[ys, xs])[:CAP]:
+                y0, x0 = (int(ys[i]) + ty) * k, (int(xs[i]) + tx) * k
+                if k == 1:
+                    out.add((round(float(r[ys[i], xs[i]]), 4), x0, y0))
+                    continue
+                y0, x0 = max(0, y0 - m), max(0, x0 - m)
+                win = gray[y0:y0 + th + 2 * m, x0:x0 + tw + 2 * m]
+                if win.shape[0] < th or win.shape[1] < tw:
+                    continue
+                q = ncc(win, tpl)
+                y, x = divmod(int(q.argmax()), q.shape[1])
+                if q[y, x] >= low:
+                    out.add((round(float(q[y, x]), 4), x0 + x, y0 + y))
+    return sorted(out, reverse=True)
+
+
+def ink_diff(gray, tpl, x, y):
+    """(missing, extra): share of the template's ink absent at the place, and ink there that the template lacks, with
+    one pixel of tolerance."""
+    import numpy as np
+    th, tw = tpl.shape
+    win = gray[y:y + th, x:x + tw]
+    if win.shape != tpl.shape:
+        return 1.0, 1.0
+    a, b = tpl < 0.6, win < 0.6
+
+    def grow(z):
+        p = np.pad(z, 1)
+        o = np.zeros(z.shape, bool)
+        for dy in (0, 1, 2):
+            for dx in (0, 1, 2):
+                o |= p[dy:dy + z.shape[0], dx:dx + z.shape[1]]
+        return o
+    n = max(1, int(a.sum()))
+    return float((a & ~grow(b)).sum()) / n, float((b & ~grow(a)).sum()) / n
 
 
 def cmd_find(a):
@@ -205,6 +291,149 @@ def cmd_find(a):
           "(a clear gap between two groups usually separates the symbol from look-alikes)")
 
 
+def cmd_census(a):
+    try:
+        import numpy as np
+    except ImportError:
+        sys.exit("census needs numpy")
+    if not os.path.isdir(a.legend):
+        sys.exit(f"--legend {a.legend}: no such directory")
+    img, dpi = load(a.sheet, a.page, a.dpi)
+    w, h = img.size
+    work = np.asarray(img.convert("L"), dtype=np.float64) / 255.0
+    work = work.copy()
+    for spec in a.exclude:  # legend, title block, tables: not counted
+        try:
+            x0, y0, x1, y1 = parse_box(spec, w, h, a.px)
+        except ValueError:
+            sys.exit(f"--exclude {spec}: expected x0,y0,x1,y1 (fractions of the sheet, or pixels with --px)")
+        work[max(0, min(y0, y1)):max(y0, y1), max(0, min(x0, x1)):max(x0, x1)] = 1.0
+    hits, sizes, cache, marks = [], [], {}, []
+    for n in sorted(os.listdir(a.legend)):
+        if not n.lower().endswith((".png", ".jpg", ".jpeg", ".tif", ".tiff")):
+            continue
+        mark = os.path.splitext(n)[0]
+        try:
+            g = np.asarray(Image.open(os.path.join(a.legend, n)).convert("L"), dtype=np.float64)
+        except OSError:
+            print(f"  {mark}: cannot read {n}, skipped")
+            continue
+        ys, xs = np.where(g < 160)
+        if not len(ys):
+            print(f"  {mark}: crop is blank, skipped")
+            continue
+        g = g[ys.min():ys.max() + 1, xs.min():xs.max() + 1]  # the symbol itself, then a uniform white margin
+        sh, sw = g.shape
+        if max(sh, sw) > 3 * min(sh, sw):
+            print(f"  {mark}: crop is {sw}x{sh} px: check that it holds the symbol only, without legend text")
+        marks.append(mark)
+        sizes.append((sw, sh))
+        tpl_img = Image.fromarray(np.pad(g, 2, constant_values=255).astype("uint8"))
+        seen_t = []
+        for rot in [int(r) for r in a.rot.split(",")]:
+            for sc in [float(v) for v in a.scales.split(",")]:
+                t = tpl_img.rotate(rot, expand=True, fillcolor=255)
+                if sc != 1.0:
+                    t = t.resize((max(3, int(t.width * sc)), max(3, int(t.height * sc))), Image.LANCZOS)
+                tpl = np.asarray(t, dtype=np.float64) / 255.0
+                if tpl.shape[0] >= h or tpl.shape[1] >= w or tpl.std() < 1e-3:
+                    continue
+                if any(o.shape == tpl.shape and np.abs(o - tpl).mean() < 0.01 for o in seen_t):
+                    continue  # symmetric symbol: same picture after rotation
+                seen_t.append(tpl)
+                th, tw = tpl.shape
+                for v, x, y in matches(work, tpl, a.min, cache):
+                    miss, extra = ink_diff(work, tpl, x, y)
+                    hits.append((v - 0.5 * (miss + min(extra, 1.0)), v, x + tw / 2.0, y + th / 2.0, tw, th, rot, mark, miss, extra))
+    if not marks:
+        sys.exit(f"no usable symbol crops in {a.legend}")
+    hits.sort(key=lambda z: -z[0])
+    cells, places = {}, []  # best fit per place; another mark at the same place becomes the runner-up
+    size = max(max(z) for z in sizes) + 4
+    for rank, sc, x, y, tw, th, rot, mark, miss, extra in hits:
+        cx, cy = int(x // size), int(y // size)
+        same = None
+        for i in range(cx - 1, cx + 2):
+            for j in range(cy - 1, cy + 2):
+                for p in cells.get((i, j), []):
+                    if abs(x - p["x"]) < 0.6 * min(tw, p["w"]) and abs(y - p["y"]) < 0.6 * min(th, p["h"]):
+                        ratio = (tw * th) / float(p["w"] * p["h"])
+                        if 0.5 < ratio < 2.0 or mark == p["mark"]:
+                            same = same or p
+                        elif miss <= 0.1:
+                            p["nested"] = True  # a much larger or smaller symbol at the same place: keep both, review
+        if same is None:
+            p = {"x": x, "y": y, "w": tw, "h": th, "rotation": rot, "mark": mark, "score": sc, "rank": rank, "missing": miss,
+                 "extra": extra, "second": "", "second_rank": -9.0, "second_score": 0.0, "nested": False}
+            cells.setdefault((cx, cy), []).append(p)
+            places.append(p)
+        elif mark != same["mark"] and not same["second"]:
+            same["second"], same["second_score"], same["second_rank"] = mark, sc, rank
+    os.makedirs(os.path.join(a.out, "review"), exist_ok=True)
+    ov = img.copy()
+    d = ImageDraw.Draw(ov)
+    rows = []
+    places.sort(key=lambda p: (p["mark"], p["y"], p["x"]))
+    for i, p in enumerate(places, 1):
+        close = bool(p["second"]) and p["rank"] - p["second_rank"] < a.margin
+        good = p["score"] >= 0.8 and p["missing"] <= 0.1 and p["extra"] <= 0.1 and not close and not p["nested"]
+        band = "likely" if good else "REVIEW"
+        col = (0, 170, 0) if good else (255, 120, 0)
+        x0, y0, x1, y1 = p["x"] - p["w"] / 2, p["y"] - p["h"] / 2, p["x"] + p["w"] / 2, p["y"] + p["h"] / 2
+        d.rectangle([x0, y0, x1, y1], outline=col, width=max(2, w // 1500))
+        d.text((x1 + 2, y0), f"{i}:{p['mark']}", fill=col)
+        rows.append({"id": i, "x": round(p["x"]), "y": round(p["y"]), "fx": round(p["x"] / w, 4), "fy": round(p["y"] / h, 4),
+                     "mark": p["mark"], "score": round(p["score"], 3), "missing_ink": round(p["missing"], 2),
+                     "extra_ink": round(p["extra"], 2), "second": p["second"], "second_score": round(p["second_score"], 3),
+                     "rotation": p["rotation"], "band": band})
+        if not good:
+            m = int(1.5 * max(p["w"], p["h"]))
+            c = img.crop((max(0, int(p["x"] - m)), max(0, int(p["y"] - m)), min(w, int(p["x"] + m)), min(h, int(p["y"] + m))))
+            c.resize((c.width * 3, c.height * 3), Image.LANCZOS).save(os.path.join(a.out, "review", f"place_{i:03d}.png"))
+    with open(os.path.join(a.out, "census.csv"), "w", newline="") as fh:
+        wr = csv.DictWriter(fh, fieldnames=["id", "x", "y", "fx", "fy", "mark", "score", "missing_ink", "extra_ink", "second",
+                                            "second_score", "rotation", "band"])
+        wr.writeheader()
+        wr.writerows(rows)
+    ov.save(os.path.join(a.out, "overlay.png"))
+    print(f"{len(rows)} places on {w}x{h} px at {dpi} dpi ({sum(r['band'] == 'REVIEW' for r in rows)} to review)")
+    for mark in marks:
+        mine = [r for r in rows if r["mark"] == mark]
+        rev = [r for r in mine if r["band"] == "REVIEW"]
+        scores = sorted((r["score"] for r in mine), reverse=True)
+        print(f"  {mark:8s} {len(mine) - len(rev):4d} likely  {len(rev):4d} review"
+              + (f"  scores {scores[0]:.2f}..{scores[-1]:.2f}" if scores else "  no place above --min"))
+    odd = unmatched(work, places, sizes)
+    print(f"isolated symbol-sized shapes that match no legend mark: {len(odd)}"
+          + (" (text and dimensions included; first 30)" if len(odd) > 30 else "")
+          + (" (x,y): " + "; ".join(f"{x},{y}" for x, y in odd[:30]) if odd else ""))
+    print(f"files: {a.out}/census.csv, overlay.png, review/. A score is evidence, not a count: look at the overlay and at every"
+          " review crop. Symbols that are not in the legend can look much like one that is: compare outline, fill and"
+          " inner marks.")
+
+
+def unmatched(gray, places, sizes):
+    """Centres of connected dark shapes of symbol size that no place covers (needs scipy; empty without it)."""
+    import numpy as np
+    try:
+        from scipy import ndimage
+    except ImportError:
+        print("(install scipy to list shapes that match no legend mark)")
+        return []
+    lab, _ = ndimage.label(gray < 0.6, structure=np.ones((3, 3)))
+    lo = max(8, 0.7 * min(min(z) for z in sizes))
+    hi = 1.5 * max(max(z) for z in sizes)
+    out = []
+    for sl in ndimage.find_objects(lab):
+        bh, bw = sl[0].stop - sl[0].start, sl[1].stop - sl[1].start
+        if not (lo <= bh <= hi and lo <= bw <= hi):
+            continue
+        x, y = (sl[1].start + sl[1].stop) // 2, (sl[0].start + sl[0].stop) // 2
+        if all(abs(x - p["x"]) > 0.6 * max(p["w"], bw) or abs(y - p["y"]) > 0.6 * max(p["h"], bh) for p in places):
+            out.append((x, y))
+    return out
+
+
 def cmd_mark(a):
     img, dpi = load(a.sheet, a.page, a.dpi)
     d = ImageDraw.Draw(img)
@@ -236,11 +465,17 @@ def main():
     f.add_argument("--dpi", type=int); f.add_argument("--rot", default="0")
     f.add_argument("--scales", default="1.0"); f.add_argument("--min", type=float, default=0.45)
     f.add_argument("--out", default="/tmp/ahpele/find")
+    n = sub.add_parser("census")
+    n.add_argument("sheet"); n.add_argument("--legend", required=True); n.add_argument("--page", type=int, default=1)
+    n.add_argument("--dpi", type=int); n.add_argument("--rot", default="0,90,180,270"); n.add_argument("--scales", default="1.0")
+    n.add_argument("--min", type=float, default=0.6); n.add_argument("--margin", type=float, default=0.08)
+    n.add_argument("--exclude", action="append", default=[]); n.add_argument("--px", action="store_true")
+    n.add_argument("--out", default="/tmp/ahpele/census")
     m = sub.add_parser("mark")
     m.add_argument("sheet"); m.add_argument("--points", required=True); m.add_argument("--page", type=int, default=1)
     m.add_argument("--dpi", type=int); m.add_argument("--out", default="/tmp/ahpele/marked.png")
     a = ap.parse_args()
-    {"grid": cmd_grid, "crop": cmd_crop, "find": cmd_find, "mark": cmd_mark}[a.cmd](a)
+    {"grid": cmd_grid, "crop": cmd_crop, "find": cmd_find, "census": cmd_census, "mark": cmd_mark}[a.cmd](a)
 
 
 if __name__ == "__main__":

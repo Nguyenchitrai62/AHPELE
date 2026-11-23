@@ -25,9 +25,15 @@ penetrates the other by more than --tol. Elements meant to touch (segments meeti
 equipment standing on a slab) do not count.
 
 Connectivity: routed elements (pipe / duct / cable-carrier / cable segments and fittings) are
-grouped by system (IfcRelAssignsToGroup) or else by class + ObjectType; inside each group, elements
-whose bounding boxes touch within --gap form one network. More than one network in a group means a
-break. Each group also lists its classes/PredefinedTypes. Needs ifcopenshell (and numpy); knows nothing about any particular task.
+grouped by system (IfcRelAssignsToGroup) or else by class + ObjectType; inside each group, elements whose
+bounding boxes touch within --gap form one network. Exception: two parallel extruded runs lying side by side
+over a length are not joined to each other, however close they are. More than one network in a group means
+a break (or separate circuits). Each group also lists its classes/PredefinedTypes.
+
+Close gaps: between different networks, and between a network and everything else, pairs nearer than
+--allowance are listed (report only; contact with non-network elements such as supports is left out):
+installation tolerance, hangers, insulation and access need that space. Needs ifcopenshell (and numpy);
+knows nothing about any particular task.
 """
 import argparse
 import collections
@@ -85,65 +91,47 @@ def load(path, threads):
     return f, tree, boxes
 
 
-def _axis(lo, hi):
-    """Centerline of an elongated box (start, end) or None for a compact element (fitting, terminal)."""
-    d = hi - lo
-    k = int(np.argmax(d))
-    rest = sorted(np.delete(d, k))
-    if d[k] < 2.0 * max(rest[-1], 1e-6):
+def sweep(f, eid, scale):
+    """(unit direction, length in mm) of an element whose body is one extruded solid, in world axes; else None."""
+    try:
+        import ifcopenshell.util.placement as up
+        e = f.by_id(eid)
+        items = [x for r in e.Representation.Representations if r.RepresentationIdentifier in (None, "Body")
+                 for x in r.Items]
+        if len(items) != 1:
+            return None
+        it, m = items[0], up.get_local_placement(e.ObjectPlacement)[:3, :3]
+        if it.is_a("IfcMappedItem"):
+            inner = it.MappingSource.MappedRepresentation.Items
+            if len(inner) != 1 or any(getattr(it.MappingTarget, k) for k in ("Axis1", "Axis2", "Axis3") if hasattr(it.MappingTarget, k)):
+                return None
+            it = inner[0]
+        if not it.is_a("IfcExtrudedAreaSolid"):
+            return None
+        pm = up.get_axis2placement(it.Position)[:3, :3] if it.Position else np.eye(3)
+        d = m @ pm @ np.array([float(v) for v in it.ExtrudedDirection.DirectionRatios])
+        return d / np.linalg.norm(d), float(it.Depth) * scale
+    except Exception:  # unusual representation: no direction, the touch test decides
         return None
-    c = (lo + hi) / 2.0
-    a, b = c.copy(), c.copy()
-    a[k], b[k] = lo[k], hi[k]
-    return a, b
 
 
-def _seg_closest(p1, q1, p2, q2):
-    """Closest points of two segments: (distance, s, t) with s, t in [0, 1]."""
-    d1, d2, r = q1 - p1, q2 - p2, p1 - p2
-    a, e, f = d1 @ d1, d2 @ d2, d2 @ r
-    if a < 1e-9 and e < 1e-9:
-        return float(np.linalg.norm(r)), 0.0, 0.0
-    if a < 1e-9:
-        s, t = 0.0, min(max(f / e, 0.0), 1.0)
-    else:
-        c = d1 @ r
-        if e < 1e-9:
-            t, s = 0.0, min(max(-c / a, 0.0), 1.0)
-        else:
-            b = d1 @ d2
-            den = a * e - b * b
-            s = min(max((b * f - c * e) / den, 0.0), 1.0) if den > 1e-9 else 0.0
-            t = (b * s + f) / e
-            if t < 0.0:
-                t, s = 0.0, min(max(-c / a, 0.0), 1.0)
-            elif t > 1.0:
-                t, s = 1.0, min(max((b - c) / a, 0.0), 1.0)
-    return float(np.linalg.norm((p1 + d1 * s) - (p2 + d2 * t))), s, t
-
-
-def _joined(bi, bj, tol):
-    """Centerline joint test: centerlines meet end to end or as a tee (an end on the other run), or a run ends inside a
-    fitting. Runs that only touch side by side or cross each other mid-span are not joined in this sense."""
-    ai, aj = _axis(*bi), _axis(*bj)
-    if ai is None and aj is None:  # two fittings: boxes overlapping or touching
-        return bool(np.all(bi[0] - tol <= bj[1]) and np.all(bj[0] - tol <= bi[1]))
-    if ai is None or aj is None:  # a run ends inside a fitting
-        fit, run = (bi, aj) if ai is None else (bj, ai)
-        return any(bool(np.all(fit[0] - tol <= e) and np.all(e <= fit[1] + tol)) for e in run)
-    dist, si, tj = _seg_closest(ai[0], ai[1], aj[0], aj[1])
-    if dist > tol:  # strict: the two centerlines must actually meet
+def _side_by_side(bi, bj, si, sj):
+    """Two parallel swept runs overlapping along their direction by more than their width, centrelines apart."""
+    if not si or not sj or abs(si[0] @ sj[0]) < 0.999:
         return False
-    hi_ = 0.5 * float(sorted(bi[1] - bi[0])[1])
-    hj_ = 0.5 * float(sorted(bj[1] - bj[0])[1])
-    li, lj = np.linalg.norm(ai[1] - ai[0]), np.linalg.norm(aj[1] - aj[0])
-    # an end may run past the meeting point by about half the other run's width (overlap at the joint)
-    end_i = min(si, 1 - si) * li <= tol + hj_ + hi_
-    end_j = min(tj, 1 - tj) * lj <= tol + hi_ + hj_
-    return end_i or end_j  # both mid-span = a crossing, not a joint
+    d = si[0]
+    ci, cj = (bi[0] + bi[1]) / 2, (bj[0] + bj[1]) / 2
+    off = cj - ci
+    along = float(off @ d)
+    lateral = float(np.linalg.norm(off - along * d))
+    overlap = (si[1] + sj[1]) / 2 - abs(along)
+    # size across the run, from the box corrected for the run's own length (zero-safe for inclined runs)
+    wi, wj = (float(np.sort(np.maximum(b[1] - b[0] - np.abs(d) * x[1], 0))[-1]) for b, x in ((bi, si), (bj, sj)))
+    wn = [float(np.sort(np.maximum(b[1] - b[0] - np.abs(d) * x[1], 0))[-2]) for b, x in ((bi, si), (bj, sj))]
+    return overlap > 1.2 * max(wi, wj, 1.0) and lateral > 0.45 * min(wn + [wi, wj]) and lateral > 1.0
 
 
-def networks(f, boxes, gap, mode="centerline"):
+def networks(f, boxes, gap):
     group_of = {}
     for rel in f.by_type("IfcRelAssignsToGroup"):
         g = rel.RelatingGroup
@@ -154,8 +142,14 @@ def networks(f, boxes, gap, mode="centerline"):
         e = f.by_id(eid)
         if any(e.is_a(k) for k in NETWORK):
             groups[group_of.get(eid) or f"{e.is_a()} [{e.ObjectType or '-'}]"].append(eid)
+    try:
+        import ifcopenshell.util.unit as uu
+        scale = uu.calculate_unit_scale(f) * 1000.0
+    except Exception:
+        scale = 1.0
     out = {}
     for g, ids in sorted(groups.items()):
+        sw = [sweep(f, i, scale) for i in ids]
         lo = np.array([boxes[i][0] for i in ids]) - gap / 2.0  # boxes up to one gap apart touch
         hi = np.array([boxes[i][1] for i in ids]) + gap / 2.0
         parent = list(range(len(ids)))
@@ -168,12 +162,12 @@ def networks(f, boxes, gap, mode="centerline"):
         for i in range(len(ids)):
             touch = np.all((lo[i] <= hi[i + 1:]) & (lo[i + 1:] <= hi[i]), axis=1)
             for j in np.nonzero(touch)[0] + i + 1:
-                if mode == "touch" or _joined(boxes[ids[i]], boxes[ids[int(j)]], gap):
+                if not _side_by_side(boxes[ids[i]], boxes[ids[int(j)]], sw[i], sw[int(j)]):
                     parent[root(i)] = root(int(j))
         comps = collections.defaultdict(list)
         for i in range(len(ids)):
             comps[root(i)].append(ids[i])
-        out[g] = list(comps.values())
+        out[g] = sorted(comps.values(), key=len, reverse=True)
     return out
 
 
@@ -217,6 +211,34 @@ def validate(path, limit):
     return len(msgs)
 
 
+def report_close(tree, elems, net_of, allowance, hard, limit):
+    """Smallest gap per pair of groups (network/network, network/class) that are close without being joined."""
+    runs = [e for e in elems if e.id() in net_of]
+    worst, count, seen = {}, collections.Counter(), set()
+
+    def name(e, n):
+        return f"{n[0]} #{n[1] + 1}" if n else e.is_a() + (f" [{e.ObjectType}]" if getattr(e, "ObjectType", None) else "")
+    for c in tree.clash_clearance_many(runs, elems, allowance / 1000.0, True) if runs else []:
+        x, y, d = c.a, c.b, max(0.0, c.distance * 1000.0)
+        k = tuple(sorted((x.id(), y.id())))
+        nx, ny = net_of.get(x.id()), net_of.get(y.id())
+        if x.id() == y.id() or k in hard or k in seen or (nx and nx == ny):
+            continue
+        if d <= 1.0 and not (nx and ny):  # standing on, hung from or connected to equipment
+            continue
+        seen.add(k)
+        g = tuple(sorted((name(x, nx), name(y, ny))))
+        count[g] += 1
+        if g not in worst or d < worst[g][0]:
+            worst[g] = (d, x.id(), y.id(), (np.array(list(c.p1)) + np.array(list(c.p2))) / 2 * 1000.0)
+    print(f"\nclose gaps (nearer than {allowance:g} mm, report only; set --allowance to the project's value): "
+          f"{len(worst)} pair(s) of groups")
+    for g, (d, i, j, p) in sorted(worst.items(), key=lambda kv: kv[1][0])[:limit]:
+        print(f"  {d:6.1f} mm smallest of {count[g]:3d}  {g[0]}  |  {g[1]}  (#{i}, #{j}) near ({p[0]:.0f}, {p[1]:.0f}, {p[2]:.0f})")
+    if len(worst) > limit:
+        print(f"  ... {len(worst) - limit} more pair(s) of groups with larger gaps (--limit)")
+
+
 def box_dist(b, p):
     return float(np.linalg.norm(np.maximum(0, np.maximum(b[0] - p, p - b[1]))))
 
@@ -226,7 +248,10 @@ def main():
     ap.add_argument("ifc")
     ap.add_argument("--tol", type=float, default=1.0, help="penetration that counts as a clash, mm (numerical allowance; "
                     "set it to the project's clash tolerance)")
-    ap.add_argument("--gap", type=float, default=5.0, help="joint gap that still connects two elements, mm")
+    ap.add_argument("--gap", type=float, default=1.0, help="joint gap that still connects two elements, mm "
+                    "(numerical allowance, like --tol: joints modelled apart by more are reported)")
+    ap.add_argument("--allowance", type=float, default=50.0, help="list pairs of different networks, or a network and other "
+                    "elements, nearer than this, mm (0 = off; a general coordination figure: set it to the project's value)")
     ap.add_argument("--ignore", default="", help="comma-separated classes left out of the clash test")
     ap.add_argument("--point", action="append", default=[], help="x,y,z (or plan x,y) in mm: report each network's distance (and elevation range near a plan point)")
     ap.add_argument("--clearance", action="append", default=[],
@@ -341,18 +366,18 @@ def main():
               " clearance" + (f" (plus {len(same_s)} within one run, its own joints or drops, not counted)" if same_s else ""))
         for d, g, x, y, p in sorted(other, key=lambda r: r[0])[:a.limit]:
             print(f"  {d:7.1f} mm < {g:g} mm  {label(x)}  x  {label(y)}  near ({p[0]:.0f}, {p[1]:.0f}, {p[2]:.0f})")
+    if a.allowance > 0 and net_of:
+        report_close(tree, elems, net_of, a.allowance, {tuple(sorted((r[1].id(), r[2].id()))) for r in rows}, a.limit)
     pts = [np.array([float(v) for v in s.split(",")]) for s in a.point]
     print(f"\nnetworks (elements whose boxes touch within {a.gap:g} mm; grouped by system or class+ObjectType):")
-    nets = networks(f, boxes, a.gap, mode="touch")
     broken = 0
     for g, comps in nets.items():
-        comps.sort(key=len, reverse=True)
         n = sum(len(c) for c in comps)
         types = sorted({f"{f.by_id(i).is_a()}.{getattr(f.by_id(i), 'PredefinedType', None) or '-'}" for c in comps for i in c})
-        print(f"  {g}: {n} elements in {len(comps)} network(s)" + ("" if len(comps) == 1 else "  <- BROKEN")
+        print(f"  {g}: {n} elements in {len(comps)} network(s)" + ("" if len(comps) == 1 else "  <- MORE THAN ONE NETWORK: a break unless separate circuits are intended")
               + f"  [{', '.join(types[:4])}]")
         broken += len(comps) > 1
-        for c in comps[:6]:
+        for n_c, c in enumerate(comps[:6], 1):
             cl = np.array([boxes[i][0] for i in c]).min(0)
             ch = np.array([boxes[i][1] for i in c]).max(0)
             extra = ""
@@ -365,7 +390,7 @@ def main():
                     extra += f"; plan point {k + 1}: {d2:.0f} mm away, {zr}"
                 else:
                     extra += f"; {min(box_dist(boxes[i], p) for i in c):.0f} mm from point {k + 1}"
-            print(f"     {len(c):4d} elements, x {cl[0]:.0f}..{ch[0]:.0f} y {cl[1]:.0f}..{ch[1]:.0f} "
+            print(f"     #{n_c}: {len(c):4d} elements, x {cl[0]:.0f}..{ch[0]:.0f} y {cl[1]:.0f}..{ch[1]:.0f} "
                   f"z {cl[2]:.0f}..{ch[2]:.0f}{extra}")
     nsoft = len([r for r in soft if not (net_of.get(r[2].id()) and net_of.get(r[2].id()) == net_of.get(r[3].id()))]) if a.clearance else 0
     print(f"\nsummary: {n_invalid} validation issue(s), {len(rows)} clashing pairs, "

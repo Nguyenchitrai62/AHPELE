@@ -32,6 +32,9 @@ description: How a professional estimator counts and measures items from a drawi
   cut the template from the legend or from one clear instance on the same sheet at the same dpi. Look at the overlay;
   review every mid-score candidate crop; run it once per similar legend symbol and give each place to the best match.
   Never drop candidates by threshold alone, and never invent counts or locations: every register row points to a place.
+- `census SHEET --legend DIR` does this for all legend symbols in one pass (DIR holds one crop per mark, the symbol
+  only, named by the mark): each place goes to the best-fitting mark with its runner-up, and shapes no mark fits are
+  listed. Start the register from its csv, then review the flagged places and the overlay.
 - `mark SHEET --points register.csv` draws your counted items on the sheet: compare with the sheet for misses and doubles.
 
 ## 3. Count into a per-item register, never into totals
@@ -48,7 +51,8 @@ description: How a professional estimator counts and measures items from a drawi
   schedules it. Convert sheet coordinates to a common building grid to check that no item is counted on two sheets.
 - Count areas shown at larger scale once, from the sheet that governs; deduplicate overlapping details by position.
 - Keyed and general notes can require items that are not drawn: count them as the note says, record the basis
-  (what was counted, on which sheet) and add them to the register flagged added-by-note. Where
+  (what was counted, on which sheet) and add them to the register flagged added-by-note. Count from the
+  document that governs under the order of precedence and compare with any other stated quantity. Where
   drawings and schedules disagree, apply the order of precedence the contract sets and report the discrepancy.
 - Revision clouds/addenda: list every item inside each cloud with coordinates, then apply the deletion/addition
   exactly as described, as explicit operations on the register (delete these rows, add these rows). Check the revision date against the addendum date.

@@ -29,7 +29,8 @@ description: How an MEP coordinator routes and coordinates services (cable tray,
 ## 3. Clearances that count as clashes or code violations
 - Insulation, lagging, flanges and support envelopes are part of the solid that must not clash.
 - Leave a coordination allowance between services for installation tolerance, hangers and insulation, on top of required
-  clearances.
+  clearances. Establish whether the sizes given are bare or overall (insulated, jacketed); if that stays unclear, keep
+  space for the larger, or state the assumption.
 - Sprinkler heads: keep the zone directly below each deflector clear (NFPA 13: 18 in (457 mm) below deflectors, or the
   value the project states, with extra rules for obstructions near heads). Wide obstructions need heads beneath them.
 - Electrical equipment: dedicated space above switchboards, switchgear, panelboards and motor control centers is kept
@@ -54,7 +55,9 @@ description: How an MEP coordinator routes and coordinates services (cable tray,
   `python3 /tmp/ahpele/bin/ahpele_clash.py model.ifc --point=<source x,y>` (plan point: each network's distance and
   elevation range there). Resolve hard clashes by moving whole runs to
   their band, then re-run until there are none.
-- Continuity: each system is one connected network from its source, and every load it serves has a connection.
+- Review the close gaps it lists: every gap smaller than the project's allowance is either moved or accepted for a stated reason.
+- Continuity: each system is one connected network from its source, and every load it serves has a connection. Runs join
+  at an end, a fitting or a tap; running side by side is not a connection, however small the gap.
 - After ANY geometry change (a run added, moved or resized, often in response to a review), re-run the whole
   coordination check on the exported file (validation, hard clashes, clearances between systems, continuity): fixing one
   service often breaks another.
