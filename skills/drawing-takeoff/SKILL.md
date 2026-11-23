@@ -22,8 +22,7 @@ description: How a professional estimator counts and measures items from a drawi
 - Read the legend notes, general notes, sheet notes and keynote schedule of EVERY sheet you count. They state:
   which side of a match line is counted, which areas are shown on enlarged plans (parent drawn empty), how grid
   bays/locations are written, what to do with symbols not in the legend, and which devices are required but not drawn.
-- A symbol that matches a legend entry is that item: count it. Do not reclassify matches as something else unless you have cropped and looked at them and can say why; a doubtful
-  match goes into the register flagged and into the RFI list, not silently to zero.
+- Resolve a doubtful match by looking at it enlarged; record the decision and the reason.
 - A symbol the legend does not identify: do not guess; list it as an unresolved item or RFI with sheet and
   location, and treat it as the instruction directs. Never carry a quantity you cannot point to.
 
@@ -53,16 +52,15 @@ description: How a professional estimator counts and measures items from a drawi
 - Enlarged plans: the parent plan area is empty; count those items from the enlarged plan only. Enlarged details
   on one sheet may overlap each other: deduplicate by building-grid position.
 - Keyed and general notes can require items that are not drawn: count them as the note says, record the basis
-  (what was counted, on which sheet) and add them to the register flagged added-by-note. When a note ties the item
-  to something drawn ("one per unit", "at each door"), count the drawn things on the plans; a schedule or table
-  quantity is a cross-check, and a disagreement between them is reported, not resolved by picking one silently.
+  (what was counted, on which sheet) and add them to the register flagged added-by-note. Where
+  drawings and schedules disagree, apply the order of precedence the contract sets and report the discrepancy.
 - Revision clouds/addenda: list every item inside each cloud with coordinates, then apply the deletion/addition
   exactly as described, as explicit operations on the register (delete these rows, add these rows). Check the revision date against the addendum date.
 
 ## 5. Conditions and assemblies
 - Location-dependent attributes come from the architectural plans and schedules; apply the rule the documents give
-  for assigning them, and record it in the register. When the rule is geometric (distance to a wall, inside a room
-  or zone, above a ceiling type), compute it from coordinates by code for every row; never type it by hand.
+  for assigning them, and record it in the register. When the rule is geometric,
+  compute it from coordinates by code for every row; never type it by hand.
 - For each (item type, condition) pair, quote the specification sentences that require or forbid components
   ("required", "shall", "not used", "separate", "in addition", "in one assembly") and pick catalogue items whose
   listing matches the condition. Check every forbidden component is absent and every required one present.

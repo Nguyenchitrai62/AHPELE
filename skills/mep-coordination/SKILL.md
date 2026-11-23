@@ -24,17 +24,16 @@ description: How an MEP coordinator routes and coordinates services (cable tray,
 - In a shallow zone (an access-floor plenum, a tight ceiling void) give each service its own lane in plan first, side by
   side with gaps, rather than stacking runs on top of each other along the same path; draw a section at every point where
   several services enter or cross the zone to prove the vertical fit.
-- Keep water-carrying pipes (chilled water, condensate, sprinkler, drainage) off the path of busway, cable tray and
-  electrical equipment: cross them at right angles with the pipe below where possible, never run a pipe along over or
-  under a busway or tray for a distance (leaks and condensation drip onto live equipment).
+- Avoid routing liquid-carrying piping above electrical equipment and distribution; where unavoidable, provide drip
+  protection.
 - Crossing priority when services compete for space: gravity drainage > large ducts and pipes > pressure pipes > cable
   tray and busway > small conduit. The more flexible service yields, and changing elevation is preferred to rerouting
   horizontally.
 
 ## 3. Clearances that count as clashes or code violations
 - Insulation, lagging, flanges and support envelopes are part of the solid that must not clash.
-- Leave a coordination allowance between services on top of every required clearance (installation tolerance, hangers,
-  insulation finish), so the layout stays clash-free under any reasonable reading of how envelopes are measured.
+- Leave a coordination allowance between services for installation tolerance, hangers and insulation, on top of required
+  clearances.
 - Sprinkler heads: keep the zone directly below each deflector clear (NFPA 13: 18 in (457 mm) below deflectors, or the
   value the project states, with extra rules for obstructions near heads). Wide obstructions need heads beneath them.
 - Electrical equipment: dedicated space above switchboards, panelboards and PDUs is kept free of foreign systems,
@@ -43,16 +42,11 @@ description: How an MEP coordinator routes and coordinates services (cable tray,
 - Separate power from data by the distance the project, TIA-569 or the manufacturer requires, and keep the minimum
   headroom below the lowest service.
 
-## 4. Model each service as the product it is, from a fixed source
-- Use the IFC class and PredefinedType of the physical product, and keep it when fixing schema errors: busway / busbar
-  trunking = IfcCableSegment BUSBARSEGMENT; cable tray or ladder = IfcCableCarrierSegment CABLETRAYSEGMENT /
-  CABLELADDERSEGMENT (trunking and conduit are enclosures for cables, not busway); pipes = IfcPipeSegment / IfcPipeFitting;
-  ducts = IfcDuctSegment / IfcDuctFitting. Group each service in its own IfcDistributionSystem. Two different services
-  never share one class + PredefinedType.
-- The source or entry of each service (a sleeve, riser, board, plant connection) is a fixed point in 3D located by others:
-  take its elevation from the documents; if none is given, state the assumption and model the vertical riser that takes
-  the service from that point into its band. Services that share a marked entry meet it at one common point. Never check
-  "reaches the entry" with the elevation you chose for the route itself.
+## 4. Model each element as the product it is
+- Choose the IFC class and PredefinedType from the target schema's definition of the physical product (look it up in the
+  schema, do not guess from an error message), and group each service in its own distribution system.
+- Terminate each system at its documented source and loads; if an elevation is not given, state the assumption or raise an
+  RFI.
 
 ## 5. Model the contract's conventions into the geometry
 - Read how the instruction defines clashes and clearances, and build the solids that way: any covering, envelope,
@@ -62,7 +56,7 @@ description: How an MEP coordinator routes and coordinates services (cable tray,
 ## 6. Verify on the exported file, iterate to zero
 - Validate and clash-check the file you will submit, not the lists in your script (a schema or EXPRESS-rule error
   can make the file unreadable, e.g. every IfcShapeRepresentation needs its RepresentationIdentifier such as 'Body'):
-  `python3 /tmp/ahpele/bin/ahpele_clash.py model.ifc --point <entry x,y>` (plan point: each network's distance and
+  `python3 /tmp/ahpele/bin/ahpele_clash.py model.ifc --point=<source x,y>` (plan point: each network's distance and
   elevation range there). Resolve hard clashes by moving whole runs to
   their band, then re-run until there are none.
 - Continuity: each system is one connected network from its source, and every load it serves has a connection (drop

@@ -19,7 +19,7 @@ description: How a specification writer edits and tailors construction specifica
 - PART 1 GENERAL: summary or scope, references, definitions, submittals, quality assurance, delivery and storage,
   warranty. PART 2 PRODUCTS: materials, equipment, ratings, factory tests. PART 3 EXECUTION: examination,
   installation, field quality control and tests, closeout.
-- One requirement per paragraph or subparagraph; a list in the master stays a list of separate items. Do not merge
+- Keep each requirement identifiable; a list in the master stays a list of separate items. Do not merge
   paragraphs that the master keeps separate (for example REFERENCES and SUBMITTALS are separate paragraphs).
 
 ## 3. References
@@ -39,8 +39,7 @@ description: How a specification writer edits and tailors construction specifica
 - Refer to other paragraphs by paragraph title (numbers change when paragraphs are added or deleted) and to other
   sections by number and title; check every referenced section exists in the project manual.
 - Use the project's unit system consistently (SpecsIntact masters carry both; keep the one the project uses).
-- Coordinate with the drawings, schedules and calculations: equipment ratings (voltage, current, interrupting
-  rating), conductor and grounding sizes, voltage-drop limits, fuel or runtime requirements and test values in the
+- Coordinate with the drawings, schedules and calculations: ratings, sizes, capacities, limits and test values in the
   specification must equal the values the design calculations and drawings establish. A conflict is a finding.
 
 ## 6. Scripted final check

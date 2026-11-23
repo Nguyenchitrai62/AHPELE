@@ -9,8 +9,7 @@ description: Practical structural engineering knowledge for designing and checki
 - A project design-criteria document usually modifies the code (drift rules, live-load reductions, deflection limits,
   resistance factors). Apply the project's method exactly as written; use code defaults only where it is silent.
 - When the criteria say a value "is taken from" or "is governed by" a standard clause, that clause is the governing
-  source. In a requirement register, give that standard clause a row of its own (standard, edition, clause number as
-  printed, value), in addition to the criteria row that invokes it, even when the standard is not in the project files.
+  source: cite the clause that governs, with its value.
 - Never mix design bases: allowable (ASD) tables are checked with service-level combinations, factored resistances (phi)
   with factored (LRFD) combinations. Resisting dead load in uplift/overturning is factored down (typically 0.9D) and
   excludes loads that are not permanently attached (hung services, equipment allowances).

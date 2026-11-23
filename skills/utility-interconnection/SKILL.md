@@ -23,15 +23,10 @@ Reviewer's duties:
 - Walk the operating states: before PTO (POI device open), during the requested operation, normal parallel
   operation, after a POI trip or utility outage. In each state ask what is energized, what must remain in
   service, and what must be isolated.
-- Functions that must keep working (telemetry and RTU, protection relays, communications, remote control, metering):
-  trace each one's power supply back to its source (station service, auxiliary transformer, battery/UPS and its
-  autonomy) and check it stays energized in every operating state, including while the POI device is open; a
-  confirmation obtained in one operating state does not prove another.
-- Equipment that will be energized must comply as installed, whatever the generators are doing: generation being
-  disabled does not excuse wiring-method, support, labelling, rating or protection defects in the energized part.
+- For protection, control, metering and communications, check the power supply in each operating state.
+- Work to be energized must meet the adopted code as installed (NEC 110.3, 110.12).
 - Every finding, adverse or favourable, opens and quotes the clause it relies on and checks its conditions and
-  exceptions (a clause that permits the installation removes an apparent violation; a clause not read cannot support
-  "compliant").
+  exceptions.
 - Respect the stated scope; where an out-of-scope item depends on something in scope, review the in-scope part.
 - Review electrical construction records by NEC article (the edition the permit adopts), plus the utility's
   interconnection standards: 110 (equipment ratings vs available fault current, working space, enclosure ratings,

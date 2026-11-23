@@ -53,13 +53,11 @@ description: How to write an engineering memo, letter, reply, review response or
 - Distinguish facts from the record, requirements, and your engineering judgement.
 - Check arithmetic and dates (business days, notice periods, expiry dates) with a script.
 - Do not contradict yourself between the answer and the open items.
-- Claim only actions that were actually taken (a request "has been sent" only if you sent it, with its record);
-  otherwise write what should be done and by whom. Each follow-up becomes its own tracked item (ticket, task,
-  register line with owner and date), not only a sentence inside a closed record.
-- External letters carry no internal matters (internal case numbers, staff deliberations, other customers'
-  correspondence, internal directives); keep those in the internal memo.
-- Before netting a figure against a published baseline (capacity, budget, allowance), check what that baseline
-  already includes and excludes, and say so.
+- Claim only actions that were actually taken;
+  otherwise write what should be done and by whom. Give each follow-up an owner and a date in the
+  tracking system in use.
+- Keep confidential, privileged and third-party information out of external letters.
+- Check the definition of any baseline figure before using it in arithmetic.
 
 ## Producing the file
 - Write DOCX with python-docx when available (`import docx`); otherwise use the word processing MCP tool if the task

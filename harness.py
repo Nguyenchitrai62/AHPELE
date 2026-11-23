@@ -145,10 +145,6 @@ NOTE = (
 # task-specific). Set AHPELE_REQ_WORKFLOW=0 to leave it out (ablations).
 WORKFLOW = (
     "\n\nWorking method:\n"
-    "0. Choose your references like an engineer: from the skills list, pick every skill whose description fits a"
-    " part of this work (usually one to three), read each SKILL.md fully before planning, and note in"
-    " /tmp/ahpele/checklist.md which skills you use and for what. If none fits, rely on this method and the"
-    " documents.\n"
     "1. Read the whole instruction first. Write the exact list of deliverables"
     " (paths, file names, formats, required columns, fields and tokens) and"
     " any scoring rules it states to /tmp/ahpele/checklist.md, and re-read"
@@ -178,17 +174,13 @@ WORKFLOW = (
     " that governs it, with clause and value. One row per requirement; record"
     " each limit as the clause states it, with its unit (a derived value cites"
     " the calculation, catalogue, table or schedule that produced it); include"
-    " the clauses that a cited clause refers to. When a project document invokes a code or"
-    " standard clause, give that clause its own row citing the standard itself (designation,"
-    " edition, clause number as printed) with the clause's value, in addition to the project"
-    " row, even if the standard is not in the project files. Requirements stated in tables,"
-    " schedules and drawing notes count as much as prose. Cite the document where a"
-    " requirement originates; cite the instruction only for requirements it states itself. When"
+    " the clauses that a cited clause refers to. Requirements stated in tables,"
+    " schedules and drawing notes count as much as prose. Cite the source in which a"
+    " requirement originates, and only text you have read. When"
     " a project document restates or interprets a code or standard clause, open"
     " the original clause and apply it as written, or the stricter of the two."
     " python3 /tmp/ahpele/bin/ahpele_reqscan.py --register <register file> checks"
-    " that every value appears in the document it cites (rows citing a standard that is not"
-    " in the project files are fine and are listed as external).\n"
+    " that every value appears in the document it cites.\n"
     "4. Write a check script that recomputes the key numbers from your own"
     " deliverable and tests it against every row of the requirements table and"
     " every schema rule in the checklist. Check each hard limit for every case it"
@@ -208,9 +200,8 @@ WORKFLOW = (
     " conservative feasible option; when a requirement can be read two ways, satisfy the stricter reading and say"
     " which reading you applied. Where the documents give no tolerance, keep a margin on hard limits computed"
     " with uncertainty (a value exactly at a limit often fails after rounding, another load case or a stricter"
-    " reading), for example utilisation about 0.95 or the next standard size. Where the instruction states the"
-    " precision or tolerance of a value (decimals, a +/- band, an allowed overshoot), optimise to exactly that"
-    " precision: rounding further toward conservatism costs objective and adds no compliance.\n"
+    " reading), for example utilisation about 0.95 or the next standard size. A margin follows the uncertainty of"
+    " the value; it is not a reason for a needlessly costly design.\n"
     "   Optimise like an engineer: for every item, build and price each option the"
     " documents allow (methods, sizes, routes, shared or separate works) before"
     " choosing; never reject an option for all items with one general sentence;"
@@ -293,8 +284,8 @@ CHECKER_NOTE = (
     + "/tmp/ahpele/bin/ahpele_clash.py <file.ifc> [--point x,y | x,y,z] rebuilds the"
     " geometry from the FILE with ifcopenshell (world coordinates, as any IFC"
     " viewer does): schema and EXPRESS-rule validation, clashing solids, elements stacked at one spot (a"
-    " placement or unit error), broken runs, the IFC class of each service (warning when it does not match the"
-    " product), each run's distance and elevation range at a source or entry point, and with"
+    " placement or unit error), broken runs, the IFC classes used by each system, each run's distance from a"
+    " given plan or 3D point, and with"
     " --clearance CLASS=MM soft clashes against required clearances or envelopes."
     " A self-check computed from your script's own variables cannot catch these.\n"
     "For drawings (PDF or image sheets) you must read or count from: python3 "
@@ -338,38 +329,6 @@ def deliverable_paths(instruction: str) -> list[str]:
   return seen[:40]
 
 
-SKILL_INLINE_CHARS = 9000     # per skill
-SKILL_MIN_SCORE = 4.0
-SKILL_INLINE_MIN = 15.0       # inline a skill's full text only above this score ...
-SKILL_DOMINANCE = 2.0         # ... and when it scores at least this multiple of the runner-up
-GENERIC_SKILLS = {"engineering-deliverables", "professional-memo", "document-reading", "workplace-apps"}
-_STOP = set("""about above after again against also among another being below between both cannot could
-does doing during each either every from have having into itself more most must other over same should such than
-that their them then there these they this those through under until upon very were what when where which while
-with within without would your yours task tasks work used using uses make makes made need needs file files""".split())
-
-
-def _words(text: str) -> set[str]:
-  return {w for w in re.findall(r"[a-z][a-z0-9-]{3,}", text.lower()) if w not in _STOP}
-
-
-def matching_skills(instruction: str, skills: list[tuple[str, str, str]]) -> list[tuple[float, str, str]]:
-  """Discipline skills ranked by idf-weighted overlap of their name/description words with the instruction.
-
-  Only a hint: the agent chooses its skills itself (working method, step 0)."""
-  import math
-  # process skills apply to every task and are summarised in the working method; rank discipline skills only
-  docs = [(n, folder, _words(n.replace("-", " ") + " " + d)) for n, d, folder in skills if n not in GENERIC_SKILLS]
-  df: dict[str, int] = {}
-  for _, _, ws in docs:
-    for w in ws:
-      df[w] = df.get(w, 0) + 1
-  inst = _words(instruction)
-  scored = sorted(((sum(math.log(1 + len(docs) / df[w]) for w in ws & inst), n, folder) for n, folder, ws in docs),
-                  reverse=True)
-  return [x for x in scored if x[0] >= SKILL_MIN_SCORE]
-
-
 def skill_index() -> list[tuple[str, str, str]]:
   """(name, description, relative SKILL.md path) for each bundled skill."""
   out = []
@@ -407,26 +366,15 @@ async def install_extras(session: taskbridge.Session) -> str:
             await session.write_file(f"{SKILLS_DST}/{rel}", f.read_bytes())
       if skills:
         text += (
-            "\nSkills (expert guidance; read the SKILL.md with your read tool"
-            " when its description matches your task, before you start that"
-            " part of the work):\n"
+            "\nSkills (professional references). Choose them like an engineer: before planning, pick every skill whose"
+            " description fits a part of this work (usually one to three), read each SKILL.md fully with your read tool,"
+            " and note in /tmp/ahpele/checklist.md which you use and for what. If none fits, rely on the working method"
+            " and the documents. The project documents always prevail over a skill:\n"
             + "".join(
                 f"- {n}: {SKILLS_DST}/{folder}/SKILL.md - {d}\n"
                 for n, d, folder in skills
             )
         )
-        # RC-0037: the agent picks its skills (working method, step 0); keyword ranking is only a hint, and a
-        # skill's full text is inlined only when one skill clearly dominates (a wrong inline would mislead)
-        ranked = matching_skills(session.instruction, skills)
-        if ranked:
-          text += ("Skills whose descriptions share the most words with this instruction (a hint only; choose by"
-                   " the work itself): " + ", ".join(n for _, n, _ in ranked[:3]) + "\n")
-          top = ranked[0]
-          second = ranked[1][0] if len(ranked) > 1 else 0.0
-          if top[0] >= SKILL_INLINE_MIN and top[0] >= SKILL_DOMINANCE * second:
-            body = (SKILLS_DIR / top[2] / "SKILL.md").read_text(encoding="utf-8")
-            body = re.sub(r"\A---.*?---\s*", "", body, flags=re.S)
-            text += f"\nSkill loaded because it clearly matches ({top[1]}; follow it where it applies):\n{body[:SKILL_INLINE_CHARS]}\n"
   except Exception as exc:  # noqa: BLE001  pylint: disable=broad-exception-caught
     await session.log(f"ahpele: extras skipped: {type(exc).__name__}: {exc}")
   return text
@@ -470,10 +418,9 @@ CHECKER_PROMPT = (
     " conclusion; MINOR), the requirement (document, clause or instruction sentence), what the deliverable has, what"
     " it should be, and the evidence (file, page, your computed value). Create the file within your first 10 minutes"
     " and append each finding as soon as you have verified it (a review left unwritten when time runs out is lost);"
-    " run the quick deterministic checks (file formats, required fields, totals) before the slow reading. A finding,"
-    " adverse or favourable, quotes the clause it relies on and checks that clause's conditions and exceptions;"
-    " an operating state (equipment switched off, generation disabled) does not excuse a defect in work that will"
-    " be energised, loaded or relied on."
+    " run the quick deterministic checks (file formats, required fields, totals) before the slow reading. A finding"
+    " quotes the clause it relies on and checks that clause's conditions and exceptions. Check compliance in every"
+    " state the work will be used in; a temporary state does not waive a permanent requirement."
     " Report only what you verified; if you find nothing wrong after a real check, say so. Then stop with a one-line"
     " summary.\n\nThe author's final summary was:\n{summary}\n\nThe task instruction given to the author:\n"
 )
@@ -484,8 +431,8 @@ FIXER_PROMPT = (
     " against the instruction and the source documents (the checker can be wrong too), fix the deliverables in place"
     " for every finding you confirm, re-run the checks, and keep everything that is already correct. Do not start"
     " over. Change a decision or conclusion only on decisive evidence from the documents, never because a finding"
-    " calls it contestable; keep any reserve the documents require but add no rounding conservatism beyond the stated"
-    " precision; after a change to the design re-run the optimisation of the affected choices, then every check (hard"
+    " calls it contestable; keep existing margins on hard limits unless a finding shows they are wrong;"
+    " after a change to the design re-run the optimisation of the affected choices, then every check (hard"
     " limits, geometry, consistency of totals) and update every statement in the deliverables that the change"
     " affects, so the fix creates no new violation. Note each finding you reject, with the reason, at the end of "
     + REVIEW_FILE + ". Finish with a complete"
@@ -665,6 +612,9 @@ def configure(
   return name, model
 
 
+SUMMARY_MIN_CHARS = 200  # a final summary is at least this long; shorter closing remarks do not replace one
+
+
 class Run:
   """Tracks JSON stream events from a single Pi subprocess run."""
 
@@ -691,11 +641,13 @@ class Run:
       self.last_stop = message.get("stopReason") or ""
       if text.strip():
         self.last_text = text.strip()
-        if self.last_stop == "stop":
-          self.stop_text = text.strip()
+        # a run cut off mid-work ends on a progress note ("Let me now ..."), and a short closing remark ("nothing
+        # further to do") may follow the real summary; neither replaces it
+        if self.last_stop == "stop" and (len(self.last_text) >= SUMMARY_MIN_CHARS
+                                         or len(self.last_text) >= len(self.stop_text)):
+          self.stop_text = self.last_text
         if self.keep_final:
-          # a run cut off mid-work ends on a progress note ("Let me now ..."); keep the last real summary then
-          self.session.final_message = text.strip() if self.last_stop == "stop" or not self.stop_text else self.stop_text
+          self.session.final_message = self.stop_text or self.last_text
       if message.get("stopReason") == "error":
         await self.session.log(
             f"pi: model error: {message.get('errorMessage')}"
@@ -775,11 +727,11 @@ async def independent_check(session, pi_argv, env, work, model, extra_note: str)
         stdin=(session.instruction + FIXER_PROMPT.format(summary=author_final[:3000])).encode(),
         stop_before_sec=STOP_BEFORE_SEC, log_prefix="fixer: ")
   finally:
-    # the fixer's summary replaces the author's only if the fixer finished normally with a summary
-    if frun.last_stop == "stop" and len(frun.stop_text) >= 200:
+    # the fixer's summary replaces the author's once the fixer has written a complete one
+    if len(frun.stop_text) >= SUMMARY_MIN_CHARS:
       session.final_message = frun.stop_text
     else:
-      session.final_message = author_final
+      session.final_message = author_final or frun.stop_text or frun.last_text
       if frun.replies:
         await session.log("ahpele: fixer did not finish with a summary; keeping the author's final message")
 
