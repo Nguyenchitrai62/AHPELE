@@ -391,12 +391,25 @@ async def install_extras(session: taskbridge.Session) -> str:
 # Engineering practice: the checking engineer is not the designer. AHPELE_CHECKER=0 disables it.
 REVIEW_FILE = "/tmp/ahpele/independent_review.md"
 # RC-0040: back-check. After the fixer has changed the deliverables, a second clean-context check verifies the fixes
-# and the corrected work, as an engineer back-checks revised documents. AHPELE_CHECK_ROUNDS=1 disables it.
+# and the corrected work, as an engineer back-checks revised documents. Off by default (it found more but did not
+# raise the dev scores); AHPELE_CHECK_ROUNDS=2 enables it.
 REVIEW_FILE_2 = "/tmp/ahpele/independent_review_2.md"
 MAX_CHECK_ROUNDS = 2
+DEFAULT_CHECK_ROUNDS = 1
 BACKCHECK_MIN_LEFT_SEC = 60 * 60  # leaves about 35 minutes to fix what the back-check finds
 FIXER_2_MIN_LEFT_SEC = 30 * 60
 CHECKER_MIN_LEFT_SEC = 30 * 60   # run the check-and-fix cycle only with at least this much time left
+# RC-0043: a check cut off before it recorded its result is not a clean check; it is resumed once when time allows.
+CHECKER_RESUME_MIN_LEFT_SEC = 50 * 60
+CHECKER_RESUME_MAX_SEC = 30 * 60
+CHECKER_RESUME_NOTE = (
+    "An earlier session of this same check was stopped by its time limit before it recorded a result. Its review file"
+    " {review}, if any, is yours to complete: keep what is in it and append. Other files under /tmp/ahpele may be the"
+    " author's: they are not evidence, and you confirm on the deliverables and source documents anything you take from"
+    " them. You have {minutes} minutes, so for this session the following order replaces reading everything first:"
+    " in a back-check, the earlier comments; the required files, fields and formats; then the hard requirements; then the rest, largest consequence first."
+    " Write each finding to {review} as soon as you have verified it.\n\n"
+)
 CHECKER_SHARE = 0.4              # share of the remaining time the checker may use (capped below)
 CHECKER_MAX_SEC = 75 * 60
 CHECKER_RESERVE_SHARE = 0.3      # the author's deadline is pulled in by this share of the task time ...
@@ -807,11 +820,24 @@ async def files_changed_since(session, mark: str) -> bool:
 
 
 def check_rounds() -> int:
-  """How many check-and-fix rounds may run (AHPELE_CHECK_ROUNDS, default MAX_CHECK_ROUNDS)."""
+  """How many check-and-fix rounds may run (AHPELE_CHECK_ROUNDS, default DEFAULT_CHECK_ROUNDS)."""
   try:
-    return max(1, min(int(os.environ.get("AHPELE_CHECK_ROUNDS", MAX_CHECK_ROUNDS)), MAX_CHECK_ROUNDS))
+    return max(1, min(int(os.environ.get("AHPELE_CHECK_ROUNDS", DEFAULT_CHECK_ROUNDS)), MAX_CHECK_ROUNDS))
   except ValueError:
-    return MAX_CHECK_ROUNDS
+    return DEFAULT_CHECK_ROUNDS
+
+
+_CLOSING_LINE = re.compile(r"^\W*OPEN\W+\d+\W*(?:blocking|major)\W+\d+\W*(?:blocking|major)\b(?:\W+\d+\W*minor)?\W*$", re.I)
+_ANY_FINDING = re.compile(
+    r"^\W*(?:\d+|[A-Z]{1,2}-?\d+)\b.*\b(?:BLOCKING|MAJOR|MINOR)\b|\bseverity\W+(?:BLOCKING|MAJOR|MINOR)\b", re.I | re.M)
+
+
+def review_unfinished(findings: str, stopped: bool) -> bool:
+  """Whether a check was cut off before it recorded a result: no finding and no closing OPEN line at the end."""
+  lines = [line for line in findings.splitlines() if line.strip()]
+  closed = len(lines) > 1 and bool(_CLOSING_LINE.match(lines[-1].strip()))
+  stripped = re.sub(r"(?im)^\W*no\b.*$", "", findings)  # "No BLOCKING findings so far" is not a finding
+  return stopped and not closed and not _ANY_FINDING.search(stripped) and not _LABEL.search(stripped)
 
 
 async def check_round(session, pi_argv, env, work, model, extra_note: str, rnd: int) -> bool:
@@ -830,27 +856,44 @@ async def check_round(session, pi_argv, env, work, model, extra_note: str, rnd: 
   orig_deadline = session.deadline
   base = ["task-tools.ts", "context-guard.ts", "settle-guard.ts"]
   await session.log(f"ahpele: independent check round {rnd}: {int(cap // 60)} min of {int(left // 60)} min left")
-  try:
-    session.deadline = min(orig_deadline, time.monotonic() + cap + STOP_BEFORE_SEC)
-    cenv = dict(env)
-    cenv.update(AHPELE_REVIEW="0", AHPELE_VERIFY="0", AHPELE_COMPLIANCE_GATE="0", AHPELE_REQ_GATE="0",
-                AHPELE_STOP_AT_EPOCH=str(int(time.time() + cap)))
-    system = NOTE.format(workdir=session.workdir) + TIME_NOTE.format(minutes=int(cap // 60)) + extra_note
-    prompt = CHECKER_PROMPT.format(summary=before[:3000], review=review)
-    if rnd > 1:
-      prompt = prompt.replace("\n\n", "\n\n" + BACKCHECK_PROMPT.format(earlier=REVIEW_FILE, review=review), 1)
-    crun = Run(session, model, keep_final=False)
-    await taskbridge.run_process(
-        pi_argv(base, system), session, env=cenv, cwd=str(work), on_line=crun.on_line,
-        stdin=(prompt + session.instruction + CHECKER_COUNT_NOTE.format(review=review)).encode(),
-        stop_before_sec=STOP_BEFORE_SEC, log_prefix="checker: ")
-  finally:
-    session.deadline = orig_deadline
-    session.final_message = before
-  try:
-    findings = (await session.read_file(review)).decode("utf-8", "replace")
-  except Exception:  # noqa: BLE001
-    findings = ""
+  findings = ""
+  for attempt in range(2):
+    done = None
+    try:
+      session.deadline = min(orig_deadline, time.monotonic() + cap + STOP_BEFORE_SEC)
+      cenv = dict(env)
+      cenv.update(AHPELE_REVIEW="0", AHPELE_VERIFY="0", AHPELE_COMPLIANCE_GATE="0", AHPELE_REQ_GATE="0",
+                  AHPELE_STOP_AT_EPOCH=str(int(time.time() + cap)))
+      system = NOTE.format(workdir=session.workdir) + TIME_NOTE.format(minutes=int(cap // 60)) + extra_note
+      prompt = CHECKER_PROMPT.format(summary=before[:3000], review=review)
+      if rnd > 1:
+        prompt = prompt.replace("\n\n", "\n\n" + BACKCHECK_PROMPT.format(earlier=REVIEW_FILE, review=review), 1)
+      if attempt:
+        prompt = prompt.replace(
+            "\n\n", "\n\n" + CHECKER_RESUME_NOTE.format(review=review, minutes=int(cap // 60)), 1)
+      crun = Run(session, model, keep_final=False)
+      done = await taskbridge.run_process(
+          pi_argv(base, system), session, env=cenv, cwd=str(work), on_line=crun.on_line,
+          stdin=(prompt + session.instruction + CHECKER_COUNT_NOTE.format(review=review)).encode(),
+          stop_before_sec=STOP_BEFORE_SEC, log_prefix="checker: ")
+    finally:
+      session.deadline = orig_deadline
+      session.final_message = before
+    try:
+      findings = (await session.read_file(review)).decode("utf-8", "replace")
+    except Exception:  # noqa: BLE001
+      findings = ""
+    left = session.time_left()
+    if not review_unfinished(findings, done.stopped):
+      break
+    if attempt:
+      await session.log(f"ahpele: checker round {rnd} was cut off without a result again")
+      break
+    if left is None or left < CHECKER_RESUME_MIN_LEFT_SEC:
+      await session.log(f"ahpele: checker round {rnd} was cut off without a result; no time to resume it")
+      break
+    cap = min(CHECKER_RESUME_MAX_SEC, CHECKER_SHARE * left)
+    await session.log(f"ahpele: checker round {rnd} was cut off without a result; resumed for {int(cap // 60)} min")
   blocking, major = count_open(findings)
   await session.log(f"ahpele: checker round {rnd} wrote {len(findings)} chars, {blocking} blocking / {major} major findings")
   left = session.time_left()

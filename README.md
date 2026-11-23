@@ -37,9 +37,11 @@ task (instruction, files, MCP)  ──►  harness.py
   deliverable the way a senior engineer reviews a junior's package: hard requirements first, then whether every
   question is answered directly, then a line-by-line review (operating states, scope, recomputed totals,
   plausibility). The fixer changes a design decision only on decisive evidence.
-- **Back-check.** When the fixer changed files and enough time is left, a second checker with a clean context verifies
-  that each earlier comment is closed and re-checks the hard requirements on the corrected files. Only blocking findings
-  start a second fix; an unfinished second fix is undone. `AHPELE_CHECK_ROUNDS=1` turns the back-check off.
+- **Resumed check.** A check cut off by its time limit before it recorded a result is not read as a clean check: it is
+  resumed once, for a limited time, when enough task time is left.
+- **Back-check (off by default).** `AHPELE_CHECK_ROUNDS=2` lets a second clean-context checker verify that the comments
+  are closed and re-check the hard requirements on the corrected files; only blocking findings start a second fix, and
+  an unfinished second fix is undone. On the dev probes it found further defects but did not raise the scores.
 - **Engineering workflow in the prompt.** Read everything, build a requirement register (one requirement per
   row, value as written, cited clause), design for feasibility first, then optimise, then verify with
   calculations and tools, and answer every question with the fact, its source and a definite conclusion.
