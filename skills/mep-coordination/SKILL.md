@@ -43,15 +43,27 @@ description: How an MEP coordinator routes and coordinates services (cable tray,
 - Separate power from data by the distance the project, TIA-569 or the manufacturer requires, and keep the minimum
   headroom below the lowest service.
 
-## 4. Model the contract's conventions into the geometry
+## 4. Model each service as the product it is, from a fixed source
+- Use the IFC class and PredefinedType of the physical product, and keep it when fixing schema errors: busway / busbar
+  trunking = IfcCableSegment BUSBARSEGMENT; cable tray or ladder = IfcCableCarrierSegment CABLETRAYSEGMENT /
+  CABLELADDERSEGMENT (trunking and conduit are enclosures for cables, not busway); pipes = IfcPipeSegment / IfcPipeFitting;
+  ducts = IfcDuctSegment / IfcDuctFitting. Group each service in its own IfcDistributionSystem. Two different services
+  never share one class + PredefinedType.
+- The source or entry of each service (a sleeve, riser, board, plant connection) is a fixed point in 3D located by others:
+  take its elevation from the documents; if none is given, state the assumption and model the vertical riser that takes
+  the service from that point into its band. Services that share a marked entry meet it at one common point. Never check
+  "reaches the entry" with the elevation you chose for the route itself.
+
+## 5. Model the contract's conventions into the geometry
 - Read how the instruction defines clashes and clearances, and build the solids that way: any covering, envelope,
   clear zone or extent the contract says to include must be in the modelled solids, or checked with
   `ahpele_clash.py --clearance CLASS=MM`.
 
-## 5. Verify on the exported file, iterate to zero
+## 6. Verify on the exported file, iterate to zero
 - Validate and clash-check the file you will submit, not the lists in your script (a schema or EXPRESS-rule error
   can make the file unreadable, e.g. every IfcShapeRepresentation needs its RepresentationIdentifier such as 'Body'):
-  `python3 /tmp/ahpele/bin/ahpele_clash.py model.ifc --point <entry x,y,z>`. Resolve hard clashes by moving whole runs to
+  `python3 /tmp/ahpele/bin/ahpele_clash.py model.ifc --point <entry x,y>` (plan point: each network's distance and
+  elevation range there). Resolve hard clashes by moving whole runs to
   their band, then re-run until there are none.
 - Continuity: each system is one connected network from its source, and every load it serves has a connection (drop
   or tap).

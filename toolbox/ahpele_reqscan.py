@@ -315,14 +315,15 @@ def register_check(path, limit):
         missing = [x for x in nums if not any(any(v in text_of(d) for v in norm_num(x)) for d in cand)]
         if missing:
             notfound.append((n, ", ".join(missing[:4]), src_txt[:80], os.path.basename(cand[0])))
-    print(f"REGISTER rows={len(rows) - 1} notfound={len(notfound)} unmatched={len(unmatched)} multi={len(multi)}")
+    print(f"REGISTER rows={len(rows) - 1} notfound={len(notfound)} external={len(unmatched)} multi={len(multi)}")
     if not src or not val:
         print(f"columns used: source={[head[i] for i in src]} value={[head[i] for i in val]} (name them clearly)")
     for n, miss, s_, d in notfound[:limit]:
         print(f"row {n}: value {miss} not found in the cited document ({d}; cited as: {s_}) - write the number as the"
               " clause states it, or cite the table, catalogue or calculation it comes from")
     for n, s_ in unmatched[:limit]:
-        print(f"row {n}: no indexed document matches the citation '{s_}' - cite the document as it is named")
+        print(f"row {n}: external - cites a document that is not in the project files ('{s_}'); fine for an invoked"
+              " code or standard: keep the row, check the designation, edition, clause number and value")
     for n, s_ in multi[:limit]:
         print(f"row {n}: several clauses in one row ({s_}) - one requirement per row")
     return 1 if notfound or multi else 0

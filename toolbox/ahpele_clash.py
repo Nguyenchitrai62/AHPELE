@@ -4,6 +4,7 @@
   python3 ahpele_clash.py model.ifc                       # validation + clashes + connectivity
   python3 ahpele_clash.py model.ifc --tol T --gap G       # penetration tolerance / joint gap, in millimetres
   python3 ahpele_clash.py model.ifc --point X,Y,Z         # distance from each network to a point (mm, world)
+  python3 ahpele_clash.py model.ifc --point X,Y           # plan point: distance and elevation range of each network there
   python3 ahpele_clash.py model.ifc --ignore IfcSlab,IfcCovering   # leave classes out of the clash test
   python3 ahpele_clash.py model.ifc --clearance CLASS=MM  # soft clash: keep MM around elements of CLASS
                                                           # (insulation, access or code envelopes the contract states)
@@ -25,11 +26,11 @@ rack standing on the floor) do not count.
 
 Connectivity: routed elements (pipe / duct / cable-carrier / cable segments and fittings) are
 grouped by system (IfcRelAssignsToGroup) or else by class + ObjectType; inside each group, elements
-whose bounding boxes touch within --gap form one network; the count of networks whose centerlines
-meet (end to end, tee, or into a fitting) is also shown when it differs. More than one network in a group means a
-break. Needs ifcopenshell (and numpy); knows nothing about any particular task.
+whose bounding boxes touch within --gap form one network. More than one network in a group means a
+break. Each group also lists its classes/PredefinedTypes, with a warning when two services share one. Needs ifcopenshell (and numpy); knows nothing about any particular task.
 """
 import argparse
+import re
 import collections
 import multiprocessing
 import sys
@@ -224,7 +225,7 @@ def main():
                     "(default 2, a round-off allowance)")
     ap.add_argument("--gap", type=float, default=5.0, help="joint gap that still connects two elements, mm")
     ap.add_argument("--ignore", default="", help="comma-separated classes left out of the clash test")
-    ap.add_argument("--point", action="append", default=[], help="x,y,z in mm: report each network's distance")
+    ap.add_argument("--point", action="append", default=[], help="x,y,z (or plan x,y) in mm: report each network's distance (and elevation range near a plan point)")
     ap.add_argument("--clearance", action="append", default=[],
                     help="CLASS=MM: elements of CLASS must stay MM away from every other solid (insulation, envelopes)")
     ap.add_argument("--limit", type=int, default=40)
@@ -332,24 +333,55 @@ def main():
         for d, g, x, y, p in sorted(other, key=lambda r: r[0])[:a.limit]:
             print(f"  {d:7.1f} mm < {g:g} mm  {label(x)}  x  {label(y)}  near ({p[0]:.0f}, {p[1]:.0f}, {p[2]:.0f})")
     pts = [np.array([float(v) for v in s.split(",")]) for s in a.point]
-    print(f"\nnetworks (elements whose boxes touch within {a.gap:g} mm; the centerline-joined count, where runs meet end"
-          " to end or as a tee, is shown when it differs; grouped by system or class+ObjectType):")
-    centre = nets
+    print(f"\nnetworks (elements whose boxes touch within {a.gap:g} mm; grouped by system or class+ObjectType):")
     nets = networks(f, boxes, a.gap, mode="touch")
     broken = 0
+    kinds = {}
     for g, comps in nets.items():
         comps.sort(key=len, reverse=True)
         n = sum(len(c) for c in comps)
-        extra_c = f"  (centerline-joined: {len(centre.get(g, []))} network(s))" if len(centre.get(g, [])) != len(comps) else ""
-        print(f"  {g}: {n} elements in {len(comps)} network(s)" + ("" if len(comps) == 1 else "  <- BROKEN") + extra_c)
+        types = sorted({f"{f.by_id(i).is_a()}.{getattr(f.by_id(i), 'PredefinedType', None) or '-'}" for c in comps for i in c})
+        kinds[g] = set(t for t in types if "Fitting" not in t)
+        print(f"  {g}: {n} elements in {len(comps)} network(s)" + ("" if len(comps) == 1 else "  <- BROKEN")
+              + f"  [{', '.join(types[:4])}]")
         broken += len(comps) > 1
         for c in comps[:6]:
             cl = np.array([boxes[i][0] for i in c]).min(0)
             ch = np.array([boxes[i][1] for i in c]).max(0)
-            extra = "".join(f"; {min(box_dist(boxes[i], p) for i in c):.0f} mm from point {k + 1}"
-                            for k, p in enumerate(pts))
+            extra = ""
+            for k, p in enumerate(pts):
+                if len(p) == 2:  # plan point: distance in plan and the network's elevation range near it
+                    near = [i for i in c if box_dist((boxes[i][0][:2], boxes[i][1][:2]), p) < 1000.0]
+                    d2 = min(box_dist((boxes[i][0][:2], boxes[i][1][:2]), p) for i in c)
+                    zr = (f"z {min(boxes[i][0][2] for i in near):.0f}..{max(boxes[i][1][2] for i in near):.0f} within 1 m"
+                          if near else "nothing within 1 m")
+                    extra += f"; plan point {k + 1}: {d2:.0f} mm away, {zr}"
+                else:
+                    extra += f"; {min(box_dist(boxes[i], p) for i in c):.0f} mm from point {k + 1}"
             print(f"     {len(c):4d} elements, x {cl[0]:.0f}..{ch[0]:.0f} y {cl[1]:.0f}..{ch[1]:.0f} "
                   f"z {cl[2]:.0f}..{ch[2]:.0f}{extra}")
+    # a named system whose name says what product it is must use that product's IFC class (IFC4 semantics)
+    expect = [("busway", r"bus ?way|busbar|bus duct", ("IfcCableSegment.BUSBARSEGMENT",)),
+              ("cable tray", r"\btray\b|ladder", ("IfcCableCarrierSegment.CABLETRAYSEGMENT",
+                                                  "IfcCableCarrierSegment.CABLELADDERSEGMENT")),
+              ("piping", r"pipe|piping|chilled|condenser|water|\bchw\b|\bhw\b|sprinkler|drain", ("IfcPipeSegment",)),
+              ("duct", r"duct(?!ile)|\bair\b", ("IfcDuctSegment",))]
+    for g, ks in kinds.items():
+        if "'" not in g or not ks:
+            continue
+        nm = g.split("'")[1].lower()
+        for what, pat, ok in expect:
+            if re.search(pat, nm) and not any(k.startswith(o) for k in ks for o in ok):
+                print(f"WARNING: {g} is named as a {what} service but its segments are"
+                      f" {', '.join(sorted(ks))}: use the IFC class/PredefinedType of the physical product ({' or '.join(ok)})")
+                break
+    names = list(kinds)
+    for i in range(len(names)):
+        for j in range(i + 1, len(names)):
+            shared = kinds[names[i]] & kinds[names[j]]
+            if shared and "'" in names[i] and "'" in names[j]:  # two named systems/groups, i.e. two services
+                print(f"WARNING: {names[i]} and {names[j]} use the same class/PredefinedType ({', '.join(sorted(shared))}):"
+                      " different services should be modelled as their own product type")
     nsoft = len([r for r in soft if not (net_of.get(r[2].id()) and net_of.get(r[2].id()) == net_of.get(r[3].id()))]) if a.clearance else 0
     print(f"\nsummary: {n_invalid} validation issue(s), {len(rows)} clashing pairs, "
           + (f"{nsoft} clearance violations, " if a.clearance else "") + f"{broken} broken network group(s)")

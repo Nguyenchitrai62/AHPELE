@@ -174,17 +174,25 @@ WORKFLOW = (
     " that governs it, with clause and value. One row per requirement; record"
     " each limit as the clause states it, with its unit (a derived value cites"
     " the calculation, catalogue, table or schedule that produced it); include"
-    " the clauses that a cited clause refers to. When"
+    " the clauses that a cited clause refers to. When a project document invokes a code or"
+    " standard clause, give that clause its own row citing the standard itself (designation,"
+    " edition, clause number as printed) with the clause's value, in addition to the project"
+    " row, even if the standard is not in the project files. Requirements stated in tables,"
+    " schedules and drawing notes count as much as prose. Cite the document where a"
+    " requirement originates; cite the instruction only for requirements it states itself. When"
     " a project document restates or interprets a code or standard clause, open"
     " the original clause and apply it as written, or the stricter of the two."
     " python3 /tmp/ahpele/bin/ahpele_reqscan.py --register <register file> checks"
-    " that every value appears in the document it cites.\n"
+    " that every value appears in the document it cites (rows citing a standard that is not"
+    " in the project files are fine and are listed as external).\n"
     "4. Write a check script that recomputes the key numbers from your own"
     " deliverable and tests it against every row of the requirements table and"
     " every schema rule in the checklist. Check each hard limit for every case it"
     " applies to (each load combination, operating state or stage, and each item,"
     " member, circuit or zone), not only the governing case you expect, and print"
-    " the worst case per limit with its utilisation. When the task gives a format"
+    " the worst case per limit with its utilisation. Trace both ways: every hard limit the script"
+    " tests names its register row (document and clause), and every register row with a limit is"
+    " tested; print anything unmatched either way. When the task gives a format"
     " contract or an example file, the check script must implement every rule"
     " of the contract and must pass on the example file before you trust it"
     " on yours; read your file back the way the recipient's software would (parse it, do not"
@@ -194,11 +202,11 @@ WORKFLOW = (
     "5. Feasibility first. Meeting every hard requirement is usually worth far more than a better objective: a"
     " feasible but costlier design beats an optimal one that breaks a single limit. When unsure, choose the"
     " conservative feasible option; when a requirement can be read two ways, satisfy the stricter reading and say"
-    " which reading you applied. Keep a margin on hard limits: a value exactly at a limit often fails after rounding,"
-    " a different load case or a stricter reading of the clause, so design to a visible reserve (for example"
-    " utilisation about 0.95 or less, or the next standard size) unless the instruction rewards hitting the limit"
-    " exactly; the reserve follows the tolerance the documents give and is not"
-    " an excuse for a costlier design where cost or performance is scored.\n"
+    " which reading you applied. Where the documents give no tolerance, keep a margin on hard limits computed"
+    " with uncertainty (a value exactly at a limit often fails after rounding, another load case or a stricter"
+    " reading), for example utilisation about 0.95 or the next standard size. Where the instruction states the"
+    " precision or tolerance of a value (decimals, a +/- band, an allowed overshoot), optimise to exactly that"
+    " precision: rounding further toward conservatism costs objective and adds no compliance.\n"
     "   Optimise like an engineer: for every item, build and price each option the"
     " documents allow (methods, sizes, routes, shared or separate works) before"
     " choosing; never reject an option for all items with one general sentence;"
@@ -278,10 +286,11 @@ CHECKER_NOTE = (
     " structure, storey elevations, property sets and footprint polygons."
     " Software that cannot read one entity may reject the whole file.\n"
     "For 3D models (IFC) with placed elements or routed services: python3 "
-    + "/tmp/ahpele/bin/ahpele_clash.py <file.ifc> [--point x,y,z] rebuilds the"
+    + "/tmp/ahpele/bin/ahpele_clash.py <file.ifc> [--point x,y | x,y,z] rebuilds the"
     " geometry from the FILE with ifcopenshell (world coordinates, as any IFC"
     " viewer does): schema and EXPRESS-rule validation, clashing solids, elements stacked at one spot (a"
-    " placement or unit error), broken runs, each run's distance to a point, and with"
+    " placement or unit error), broken runs, the IFC class of each service (warning when it does not match the"
+    " product), each run's distance and elevation range at a source or entry point, and with"
     " --clearance CLASS=MM soft clashes against required clearances or envelopes."
     " A self-check computed from your script's own variables cannot catch these.\n"
     "For drawings (PDF or image sheets) you must read or count from: python3 "
@@ -328,6 +337,7 @@ def deliverable_paths(instruction: str) -> list[str]:
 SKILL_INLINE_MAX = 2          # skills whose full text goes into the system prompt
 SKILL_INLINE_CHARS = 9000     # per skill
 SKILL_MIN_SCORE = 4.0
+SKILL_SECOND_RATIO = 0.6
 GENERIC_SKILLS = {"engineering-deliverables", "professional-memo", "document-reading", "workplace-apps"}
 _STOP = set("""about above after again against also among another being below between both cannot could
 does doing during each either every from have having into itself more most must other over same should such than
@@ -354,7 +364,11 @@ def matching_skills(instruction: str, skills: list[tuple[str, str, str]]) -> lis
     score = sum(math.log(1 + len(docs) / df[w]) for w in ws & inst)
     scored.append((score, n, folder))
   scored.sort(reverse=True)
-  return [(n, folder) for score, n, folder in scored[:SKILL_INLINE_MAX] if score >= SKILL_MIN_SCORE]
+  if not scored or scored[0][0] < SKILL_MIN_SCORE:
+    return []
+  top = scored[0][0]
+  # a second skill only when it is nearly as relevant as the first (RC-0037: off-topic second skills)
+  return [(n, folder) for score, n, folder in scored[:SKILL_INLINE_MAX] if score >= max(SKILL_MIN_SCORE, SKILL_SECOND_RATIO * top)]
 
 
 def skill_index() -> list[tuple[str, str, str]]:
@@ -464,7 +478,8 @@ FIXER_PROMPT = (
     " against the instruction and the source documents (the checker can be wrong too), fix the deliverables in place"
     " for every finding you confirm, re-run the checks, and keep everything that is already correct. Do not start"
     " over. Change a decision or conclusion only on decisive evidence from the documents, never because a finding"
-    " calls it contestable; never remove the reserve on a hard limit; after every change re-run every check (hard"
+    " calls it contestable; keep any reserve the documents require but add no rounding conservatism beyond the stated"
+    " precision; after a change to the design re-run the optimisation of the affected choices, then every check (hard"
     " limits, geometry, consistency of totals) and update every statement in the deliverables that the change"
     " affects, so the fix creates no new violation. Note each finding you reject, with the reason, at the end of "
     + REVIEW_FILE + ". Finish with a complete"
