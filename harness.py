@@ -145,6 +145,10 @@ NOTE = (
 # task-specific). Set AHPELE_REQ_WORKFLOW=0 to leave it out (ablations).
 WORKFLOW = (
     "\n\nWorking method:\n"
+    "0. Choose your references like an engineer: from the skills list, pick every skill whose description fits a"
+    " part of this work (usually one to three), read each SKILL.md fully before planning, and note in"
+    " /tmp/ahpele/checklist.md which skills you use and for what. If none fits, rely on this method and the"
+    " documents.\n"
     "1. Read the whole instruction first. Write the exact list of deliverables"
     " (paths, file names, formats, required columns, fields and tokens) and"
     " any scoring rules it states to /tmp/ahpele/checklist.md, and re-read"
@@ -334,10 +338,10 @@ def deliverable_paths(instruction: str) -> list[str]:
   return seen[:40]
 
 
-SKILL_INLINE_MAX = 2          # skills whose full text goes into the system prompt
 SKILL_INLINE_CHARS = 9000     # per skill
 SKILL_MIN_SCORE = 4.0
-SKILL_SECOND_RATIO = 0.6
+SKILL_INLINE_MIN = 15.0       # inline a skill's full text only above this score ...
+SKILL_DOMINANCE = 2.0         # ... and when it scores at least this multiple of the runner-up
 GENERIC_SKILLS = {"engineering-deliverables", "professional-memo", "document-reading", "workplace-apps"}
 _STOP = set("""about above after again against also among another being below between both cannot could
 does doing during each either every from have having into itself more most must other over same should such than
@@ -349,26 +353,21 @@ def _words(text: str) -> set[str]:
   return {w for w in re.findall(r"[a-z][a-z0-9-]{3,}", text.lower()) if w not in _STOP}
 
 
-def matching_skills(instruction: str, skills: list[tuple[str, str, str]]) -> list[tuple[str, str]]:
-  """Skills whose name/description words best match the instruction (generic retrieval, idf-weighted)."""
+def matching_skills(instruction: str, skills: list[tuple[str, str, str]]) -> list[tuple[float, str, str]]:
+  """Discipline skills ranked by idf-weighted overlap of their name/description words with the instruction.
+
+  Only a hint: the agent chooses its skills itself (working method, step 0)."""
   import math
-  # process skills apply to every task and are summarised in the working method; inline discipline skills only
+  # process skills apply to every task and are summarised in the working method; rank discipline skills only
   docs = [(n, folder, _words(n.replace("-", " ") + " " + d)) for n, d, folder in skills if n not in GENERIC_SKILLS]
   df: dict[str, int] = {}
   for _, _, ws in docs:
     for w in ws:
       df[w] = df.get(w, 0) + 1
   inst = _words(instruction)
-  scored = []
-  for n, folder, ws in docs:
-    score = sum(math.log(1 + len(docs) / df[w]) for w in ws & inst)
-    scored.append((score, n, folder))
-  scored.sort(reverse=True)
-  if not scored or scored[0][0] < SKILL_MIN_SCORE:
-    return []
-  top = scored[0][0]
-  # a second skill only when it is nearly as relevant as the first (RC-0037: off-topic second skills)
-  return [(n, folder) for score, n, folder in scored[:SKILL_INLINE_MAX] if score >= max(SKILL_MIN_SCORE, SKILL_SECOND_RATIO * top)]
+  scored = sorted(((sum(math.log(1 + len(docs) / df[w]) for w in ws & inst), n, folder) for n, folder, ws in docs),
+                  reverse=True)
+  return [x for x in scored if x[0] >= SKILL_MIN_SCORE]
 
 
 def skill_index() -> list[tuple[str, str, str]]:
@@ -416,11 +415,18 @@ async def install_extras(session: taskbridge.Session) -> str:
                 for n, d, folder in skills
             )
         )
-        # RC-0035: agents often never open a skill; load the best-matching ones (by the instruction's words) up front
-        for n, folder in matching_skills(session.instruction, skills):
-          body = (SKILLS_DIR / folder / "SKILL.md").read_text(encoding="utf-8")
-          body = re.sub(r"\A---.*?---\s*", "", body, flags=re.S)
-          text += f"\nSkill loaded for this task ({n}; follow it where it applies):\n{body[:SKILL_INLINE_CHARS]}\n"
+        # RC-0037: the agent picks its skills (working method, step 0); keyword ranking is only a hint, and a
+        # skill's full text is inlined only when one skill clearly dominates (a wrong inline would mislead)
+        ranked = matching_skills(session.instruction, skills)
+        if ranked:
+          text += ("Skills whose descriptions share the most words with this instruction (a hint only; choose by"
+                   " the work itself): " + ", ".join(n for _, n, _ in ranked[:3]) + "\n")
+          top = ranked[0]
+          second = ranked[1][0] if len(ranked) > 1 else 0.0
+          if top[0] >= SKILL_INLINE_MIN and top[0] >= SKILL_DOMINANCE * second:
+            body = (SKILLS_DIR / top[2] / "SKILL.md").read_text(encoding="utf-8")
+            body = re.sub(r"\A---.*?---\s*", "", body, flags=re.S)
+            text += f"\nSkill loaded because it clearly matches ({top[1]}; follow it where it applies):\n{body[:SKILL_INLINE_CHARS]}\n"
   except Exception as exc:  # noqa: BLE001  pylint: disable=broad-exception-caught
     await session.log(f"ahpele: extras skipped: {type(exc).__name__}: {exc}")
   return text
