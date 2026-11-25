@@ -31,12 +31,6 @@ description: How an MEP coordinator routes and coordinates services (cable tray,
 - Leave a coordination allowance between services for installation tolerance, hangers and insulation, on top of required
   clearances. Establish whether the sizes given are bare or overall (insulated, jacketed); if that stays unclear, keep
   space for the larger, or state the assumption.
-  When a requirement says an envelope counts but not whether it is already in the drawn size, keep the envelope as a
-  gap around the run as well where space allows; `--clearance CLASS=MM` lists what is closer (the end connection to the
-  equipment served is expected there).
-- Where a run passes a floor, wall or roof, provide a real opening larger than the run with its envelope (sleeve and
-  fire-stopping where required, agreed with the structural engineer), and prefer places that are open anyway. If the
-  acceptance check is not known to subtract openings, build the host in pieces around the penetration where allowed.
 - Sprinkler heads: keep the zone directly below each deflector clear (NFPA 13: 18 in (457 mm) below deflectors, or the
   value the project states, with extra rules for obstructions near heads). Wide obstructions need heads beneath them.
 - Electrical equipment: dedicated space above switchboards, switchgear, panelboards and motor control centers is kept
