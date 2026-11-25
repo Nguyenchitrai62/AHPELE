@@ -32,7 +32,10 @@ a break (or separate circuits). Each group also lists its classes/PredefinedType
 
 Close gaps: between different networks, and between a network and everything else, pairs nearer than
 --allowance are listed (report only; contact with non-network elements such as supports is left out):
-installation tolerance, hangers, insulation and access need that space. Needs ifcopenshell (and numpy);
+installation tolerance, hangers, insulation and access need that space. 
+
+Through openings: runs inside the box of an element with openings (report only; not every kind of void is recognised).
+Needs ifcopenshell (and numpy);
 knows nothing about any particular task.
 """
 import argparse
@@ -239,6 +242,46 @@ def report_close(tree, elems, net_of, allowance, hard, limit):
         print(f"  ... {len(worst) - limit} more pair(s) of groups with larger gaps (--limit)")
 
 
+def has_voids(f, eid):
+    """True when the element's body has openings or a profile with voids."""
+    e = f.by_id(eid)
+    if getattr(e, "HasOpenings", None):
+        return True
+    try:
+        for r in e.Representation.Representations:
+            for x in r.Items:
+                inner = x.MappingSource.MappedRepresentation.Items if x.is_a("IfcMappedItem") else [x]
+                for it in inner:
+                    if it.is_a("IfcBooleanResult") or (it.is_a("IfcSweptAreaSolid")
+                                                       and it.SweptArea.is_a("IfcArbitraryProfileDefWithVoids")):
+                        return True
+    except AttributeError:
+        pass
+    return False
+
+
+def report_through_voids(f, elems, boxes, net_of, hard, tol, limit):
+    """Routed elements inside the box of an element with openings: clear only if the reader subtracts the opening."""
+    hosts = [e for e in elems if e.id() not in net_of and has_voids(f, e.id())]
+    runs = [e for e in elems if e.id() in net_of]
+    out = []
+    if hosts and runs:
+        lo = np.array([boxes[e.id()][0] for e in runs])
+        hi = np.array([boxes[e.id()][1] for e in runs])
+        for h in hosts:
+            depth = (np.minimum(hi, boxes[h.id()][1]) - np.maximum(lo, boxes[h.id()][0])).min(1)
+            out += [(float(depth[k]), h, runs[k]) for k in np.nonzero(depth > tol)[0]
+                    if tuple(sorted((h.id(), runs[k].id()))) not in hard]
+    if out:
+        print(f"\nthrough openings (report only, bounding boxes, so check each): {len(out)} pair(s) where a run lies inside"
+              " the box of an element with openings or voids. Confirm each has an opening larger than the run with its"
+              " envelope; such a pair is clear only for a check that subtracts the opening")
+        for d, h, e in sorted(out, key=lambda r: -r[0])[:limit]:
+            print(f"  {d:7.1f} mm  {label(e)}  in  {label(h)}")
+        if len(out) > limit:
+            print(f"  ... {len(out) - limit} more pair(s) (--limit)")
+
+
 def box_dist(b, p):
     return float(np.linalg.norm(np.maximum(0, np.maximum(b[0] - p, p - b[1]))))
 
@@ -325,6 +368,8 @@ def main():
                 cpt = (np.maximum(lo[k], lo[k + 1 + j]) + np.minimum(hi[k], hi[k + 1 + j])) / 2
                 rows.append((float(depth[j]), f.by_id(i1), f.by_id(i2), cpt))
     rows.sort(key=lambda r: -r[0])
+    nets = networks(f, boxes, a.gap)
+    net_of = {i: (g, k) for g, comps in nets.items() for k, c in enumerate(comps) for i in c}  # one connected run
     soft = []
     for spec in a.clearance:
         cls, _, mm = spec.partition("=")
@@ -346,8 +391,6 @@ def main():
             seen.add(k)
             p = (np.array(list(c.p1)) + np.array(list(c.p2))) / 2 * 1000.0
             soft.append((c.distance * 1000.0, gap_mm, x, y, p))
-    nets = networks(f, boxes, a.gap)
-    net_of = {i: (g, k) for g, comps in nets.items() for k, c in enumerate(comps) for i in c}  # one connected run
     same = [r for r in rows if net_of.get(r[1].id()) and net_of.get(r[1].id()) == net_of.get(r[2].id())]
     by_cls = collections.Counter(tuple(sorted((r[1].is_a(), r[2].is_a()))) for r in rows)
     print(f"\nclashes (penetration > {a.tol:g} mm): {len(rows)} element pairs")
@@ -366,6 +409,7 @@ def main():
               " clearance" + (f" (plus {len(same_s)} within one run, its own joints or drops, not counted)" if same_s else ""))
         for d, g, x, y, p in sorted(other, key=lambda r: r[0])[:a.limit]:
             print(f"  {d:7.1f} mm < {g:g} mm  {label(x)}  x  {label(y)}  near ({p[0]:.0f}, {p[1]:.0f}, {p[2]:.0f})")
+    report_through_voids(f, elems, boxes, net_of, {tuple(sorted((r[1].id(), r[2].id()))) for r in rows}, a.tol, a.limit)
     if a.allowance > 0 and net_of:
         report_close(tree, elems, net_of, a.allowance, {tuple(sorted((r[1].id(), r[2].id()))) for r in rows}, a.limit)
     pts = [np.array([float(v) for v in s.split(",")]) for s in a.point]
